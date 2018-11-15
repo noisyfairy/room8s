@@ -7,5 +7,11 @@ export {default as Navbar} from './navbar'
 export {default as UserHome} from './user-home'
 export {Login, Signup} from './auth-form'
 
+export {default as Main } from './Main'
+export {default as MapView } from './MapView'
+export {default as Questions } from './Questions'
+export {default as AllMatchUsers } from './AllMatchUsers'
+export {default as SingleUser } from './SingleUser'
+export {default as FavoriteUsers } from './FavoriteUsers'
+
 // export {default as } from './'
-export {default as Main} from './Main'
