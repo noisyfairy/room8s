@@ -16,6 +16,29 @@ const User = db.define('user', {
       return () => this.getDataValue('password')
     }
   },
+  firstName: {
+    type: Sequelize.STRING
+  },
+  lastName: {
+    type: Sequelize.STRING
+  },
+  sex: {
+    type: Sequelize.ENUM('M', 'F')
+  },
+  age: {
+    type: Sequelize.INTEGER
+  },
+  introvert: {
+    type: Sequelize.ENUM('introvert', 'extrovert')
+  },
+  // how often do you have guests?
+  guest: {
+    type: Sequelize.ENUM('0', '1', '2', '3', '4', '5')
+  },
+  // time of day
+  tod: {
+    type: Sequelize.ENUM('Morning', 'Night')
+  },
   salt: {
     type: Sequelize.STRING,
     // Making `.salt` act like a function hides it when serializing to JSON.
