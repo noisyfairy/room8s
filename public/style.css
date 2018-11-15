@@ -19,3 +19,28 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+/* D3 styling */
+
+path {
+
+  stroke:#fff;
+  stroke-width: .5;
+  /* stroke-dasharray: 1; */
+  fill: gray;
+  
+}
+
+#neighborhoodPopover { 
+  position: absolute;     
+  text-align: center;         
+  padding: 2px;       
+  font: 12px sans-serif;    
+  background: #fff; 
+  border: 0px;    
+  border-radius: 8px;     
+  pointer-events: none;
+  opacity: 0;     
+}
+
+/* D3 styling */
