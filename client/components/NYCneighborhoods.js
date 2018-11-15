@@ -47,6 +47,7 @@ class NYCNeighborhoods extends Component {
           .select(this)
           .style('stroke-width', 1.5)
           .style('stroke-dasharray', 0)
+          .style('fill', 'black')
 
         d3
           .select('#neighborhoodPopover')
@@ -56,17 +57,17 @@ class NYCNeighborhoods extends Component {
           .style('top', d3.event.pageY + 'px')
           .text(d.properties.neighborhood)
       })
-      .on('mouseleave', function(d) {
-        d3
-          .select(this)
-          .style('stroke-width', 0.25)
-          .style('stroke-dasharray', 1)
+    // .on('mouseleave', function(d) {
+    //   d3
+    //     .select(this)
+    //     .style('stroke-width', 0.25)
+    //     .style('stroke-dasharray', 1)
 
-        d3
-          .select('#cneighborhoodPopoverountyText')
-          .transition()
-          .style('opacity', 0)
-      })
+    //   d3
+    //     .select('#cneighborhoodPopoverountyText')
+    //     .transition()
+    //     .style('opacity', 0)
+    // })
   }
 
   render() {
