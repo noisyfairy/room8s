@@ -33,7 +33,7 @@ const User = db.define('user', {
   },
   // how often do you have guests?
   guest: {
-    type: Sequelize.ENUM(0, 1, 2, 3, 4, 5)
+    type: Sequelize.ENUM('0', '1', '2', '3', '4', '5')
   },
   // time of day
   tod: {
