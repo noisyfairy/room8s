@@ -23,21 +23,25 @@ const User = db.define('user', {
     type: Sequelize.STRING
   },
   sex: {
-    type: Sequelize.ENUM('M', 'F')
+    type: Sequelize.ENUM,
+    values: ['M', 'F']
   },
   age: {
     type: Sequelize.INTEGER
   },
   introvert: {
-    type: Sequelize.ENUM('introvert', 'extrovert')
+    type: Sequelize.ENUM,
+    values: ['introvert', 'extrovert']
   },
   // how often do you have guests?
   guest: {
-    type: Sequelize.ENUM(0, 1, 2, 3, 4, 5)
+    type: Sequelize.ENUM,
+    values: ['0', '1', '2', '3', '4', '5']
   },
   // time of day
   tod: {
-    type: Sequelize.ENUM('Morning', 'Night')
+    type: Sequelize.ENUM,
+    values: ['Morning', 'Night']
   },
   salt: {
     type: Sequelize.STRING,
