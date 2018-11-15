@@ -6,20 +6,16 @@ router.get('/', async (req, res, next) => {
   try {
     const answer = await Questions.findAll()
     res.json(answer)
-  } catch (err) {
-    next(err)
   }
+  catch (err) { next(err) }
 })
 
 router.get('/:id', async (req, res, next) => {
   try {
     const answer = await Questions.findOne({
-      where: {
-        userId: req.params.id
-      }
+      where: { userId: req.params.id }
     })
     res.json(answer)
-  } catch (err) {
-    next(err)
   }
+  catch (err) { next(err) }
 })
