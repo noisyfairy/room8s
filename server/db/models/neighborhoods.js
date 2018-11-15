@@ -9,7 +9,7 @@ const Nbhd = db.define('nbhd', {
     type: Sequelize.ENUM('Queens', 'Manhattan', 'SI', 'Brooklyn', 'Bronx')
   },
   coordinates: {
-    type: Sequelize.NUMBER
+    type: Sequelize.FLOAT
   }
 })
 
