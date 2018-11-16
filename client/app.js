@@ -10,8 +10,8 @@ const App = () => {
       <Navbar />
       <Routes />
       <div className="App">
-        <svg width="960" height="720">
-          <NYCNeighborhoods width={960} height={720} />
+        <svg width="650" height="720">
+          <NYCNeighborhoods width={650} height={720} />
         </svg>
       </div>
     </div>
