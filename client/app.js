@@ -1,7 +1,6 @@
-import React, {Component, Fragment} from 'react'
+import React, { Fragment } from 'react'
 // import {Navbar} from './components'
 import Routes from './routes'
-
 // import NYCNeighborhoods from './components/NYCneighborhoods'
 import {CssBaseline} from '@material-ui/core/'
 
