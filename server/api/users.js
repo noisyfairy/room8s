@@ -1,5 +1,10 @@
 const router = require('express').Router()
+<<<<<<< HEAD
+const {User} = require('../db/models')
+const {Questions} = require('../db/models')
+=======
 const {User, Questions} = require('../db/models')
+>>>>>>> master
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -19,7 +24,8 @@ router.get('/', async (req, res, next) => {
         'guest',
         'tod',
         'googleId'
-      ]
+      ],
+      include: [{all: true}]
     })
     res.json(users)
   }
