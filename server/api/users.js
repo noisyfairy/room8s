@@ -1,10 +1,5 @@
 const router = require('express').Router()
-<<<<<<< HEAD
-const {User} = require('../db/models')
-const {Questions} = require('../db/models')
-=======
 const {User, Questions} = require('../db/models')
->>>>>>> master
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -28,16 +23,18 @@ router.get('/', async (req, res, next) => {
       include: [{all: true}]
     })
     res.json(users)
+  } catch (err) {
+    next(err)
   }
-  catch (err) { next(err) }
 })
 
 router.get('/:id', async (req, res, next) => {
   try {
-    const user = await User.findById(req.params.id, { include: [
-      {model: Questions, where: { userId: req.params.id}}
-    ]})
+    const user = await User.findById(req.params.id, {
+      include: [{model: Questions, where: {userId: req.params.id}}]
+    })
     res.json(user)
+  } catch (err) {
+    next(err)
   }
-  catch (err) { next(err) }
 })
