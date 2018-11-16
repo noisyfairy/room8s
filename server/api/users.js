@@ -19,19 +19,22 @@ router.get('/', async (req, res, next) => {
         'guest',
         'tod',
         'googleId'
-      ]
+      ],
+      include: [{all: true}]
     })
     res.json(users)
+  } catch (err) {
+    next(err)
   }
-  catch (err) { next(err) }
 })
 
 router.get('/:id', async (req, res, next) => {
   try {
-    const user = await User.findById(req.params.id, { include: [
-      {model: Questions, where: { userId: req.params.id}}
-    ]})
+    const user = await User.findById(req.params.id, {
+      include: [{model: Questions, where: {userId: req.params.id}}]
+    })
     res.json(user)
+  } catch (err) {
+    next(err)
   }
-  catch (err) { next(err) }
 })
