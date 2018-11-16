@@ -1,50 +1,23 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import FormGroup from '@material-ui/core/FormGroup'
+import {Radio} from '@material-ui/core'
+import RadioFields from './radioFields'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Checkbox from '@material-ui/core/Checkbox'
 
 class QuestionsForm extends React.Component {
   state = {
-    budgetRange: {
-      checked1: false,
-      checked2: false,
-      checked3: false,
-      checked4: false,
-      checked5: false
-    },
+    userId: 1,
     budgetMin: 0,
     budgetMax: 0,
-    budgetPrior: 0,
-    budgetPriorRange: {
-      checkedRange1: false,
-      checkedRange2: false,
-      checkedRange3: false,
-      checkedRange4: false,
-      checkedRange5: false
-    }
+    budgetPrior: 0
   }
 
-  handleChange = (
-    name,
-    fieldKey,
-    rangeKey1,
-    rangeKey2 = null,
-    rangeItr = null
-  ) => event => {
-    const checkBoxes = {...this.state[fieldKey]}
-    const checkBoxKeys = Object.keys(checkBoxes)
-    checkBoxKeys.map(elem => {
-      if (elem === name) {
-        checkBoxes[elem] = event.target.checked
-      } else checkBoxes[elem] = false
-    })
-
+  handleChange = (fieldKey1, fieldKey2 = null, rangeitr = null) => event => {
     this.setState({
-      [fieldKey]: {...checkBoxes},
-      [rangeKey1]: event.target.value,
-      [rangeKey2]: event.target.value + rangeItr
+      [fieldKey1]: event.target.value,
+      [fieldKey2]: Number(event.target.value) + Number(rangeitr)
     })
+    console.log(this.state)
   }
 
   render() {
@@ -52,174 +25,51 @@ class QuestionsForm extends React.Component {
       <div>
         Budget:
         <FormGroup row>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={this.state.checkedRange1}
-                onChange={this.handleChange(
-                  'checkedRange1',
-                  'budgetRange',
-                  'budgetMin',
-                  'budgetMax',
-                  499
-                )}
-                value={501}
-              />
-            }
-            label="$501 - $1000"
-          />
-
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={this.state.checkedRange2}
-                onChange={this.handleChange(
-                  'checkedRange2',
-                  'budgetRange',
-                  'budgetMin',
-                  'budgetMax',
-                  499
-                )}
-                value={1001}
-              />
-            }
-            label="$1001 - $1500"
-          />
-
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={this.state.checkedRange3}
-                onChange={this.handleChange(
-                  'checkedRange3',
-                  'budgetRange',
-                  'budgetMin',
-                  'budgetMax',
-                  499
-                )}
-                value={1501}
-              />
-            }
-            label="$1501 - $2000"
-          />
-
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={this.state.checkedRange4}
-                onChange={this.handleChange(
-                  'checkedRange4',
-                  'budgetRange',
-                  'budgetMin',
-                  'budgetMax',
-                  499
-                )}
-                value={2001}
-              />
-            }
-            label="$1501 - $2000"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={this.state.checkedRange5}
-                onChange={this.handleChange(
-                  'checkedRange5',
-                  'budgetRange',
-                  'budgetMin',
-                  'budgetMax',
-                  499
-                )}
-                value={2001}
-              />
-            }
-            label="$2001 - $2500"
+          <RadioFields
+            field={{
+              501: '$501 - $1000',
+              1001: '$1001 - $1500',
+              1501: '$1501 - $2000',
+              2001: '$2001 - $2500',
+              2501: '$2501 - $3000'
+            }}
+            fieldKey1="budgetMin"
+            fieldKey2="budgetMax"
+            rangeitr={499}
+            handleChange={this.handleChange.bind(this)}
+            state={this.state}
           />
         </FormGroup>
-        BudgetPriority:
         <FormGroup row>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={this.state.budgetRange.checked1}
-                onChange={this.handleChange(
-                  'checkedRange1',
-                  'budgetRange',
-                  'budgetMin',
-                  'budgetMax',
-                  499
-                )}
-                value={501}
-              />
-            }
-            label="$501 - $1000"
+          <RadioFields
+            field={{
+              501: '$501 - $1000',
+              1001: '$1001 - $1500',
+              1501: '$1501 - $2000',
+              2001: '$2001 - $2500',
+              2501: '$2501 - $3000'
+            }}
+            fieldKey1="budgetMin"
+            fieldKey2="budgetMax"
+            rangeitr={499}
+            handleChange={this.handleChange.bind(this)}
+            state={this.state}
           />
-
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={this.state.checkedRange2}
-                onChange={this.handleChange(
-                  'checkedRange2',
-                  'budgetRange',
-                  'budgetMin',
-                  'budgetMax',
-                  499
-                )}
-                value={1001}
-              />
-            }
-            label="$1001 - $1500"
-          />
-
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={this.state.checkedRange3}
-                onChange={this.handleChange(
-                  'checkedRange3',
-                  'budgetRange',
-                  'budgetMin',
-                  'budgetMax',
-                  499
-                )}
-                value={1501}
-              />
-            }
-            label="$1501 - $2000"
-          />
-
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={this.state.checkedRange4}
-                onChange={this.handleChange(
-                  'checkedRange4',
-                  'budgetRange',
-                  'budgetMin',
-                  'budgetMax',
-                  499
-                )}
-                value={2001}
-              />
-            }
-            label="$1501 - $2000"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={this.state.checkedRange5}
-                onChange={this.handleChange(
-                  'checkedRange5',
-                  'budgetRange',
-                  'budgetMin',
-                  'budgetMax',
-                  499
-                )}
-                value={2001}
-              />
-            }
-            label="$2001 - $2500"
+        </FormGroup>
+        <FormGroup row>
+          <RadioFields
+            field={{
+              501: '$501 - $1000',
+              1001: '$1001 - $1500',
+              1501: '$1501 - $2000',
+              2001: '$2001 - $2500',
+              2501: '$2501 - $3000'
+            }}
+            fieldKey1="budgetMin"
+            fieldKey2="budgetMax"
+            rangeitr={499}
+            handleChange={this.handleChange.bind(this)}
+            state={this.state}
           />
         </FormGroup>
       </div>
@@ -227,8 +77,8 @@ class QuestionsForm extends React.Component {
   }
 }
 
-CheckboxLabels.propTypes = {
-  classes: PropTypes.object.isRequired
-}
+// CheckboxLabels.propTypes = {
+//   classes: PropTypes.object.isRequired
+// }
 
 export default QuestionsForm
