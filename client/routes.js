@@ -1,8 +1,19 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {withRouter, Route, Switch} from 'react-router-dom'
+import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome} from './components'
+import {
+  Login,
+  Signup,
+  UserHome,
+
+  Main,
+  MapView,
+  Questions,
+  AllMatchUsers,
+  SingleUser,
+  FavoriteUsers,
+} from './components'
 import {me} from './store'
 
 /**
@@ -18,17 +29,28 @@ class Routes extends Component {
 
     return (
       <Switch>
-        {/* Routes placed here are available to all visitors */}
+        <Route path="/main" component={ Main } />
+        <Route path="/mapview" component={ MapView } />      {/* // then a link to Main view */}
+        <Route path="/home" component={ UserHome } />          {/* // personal info & link to {questions,AllMatchUsers, FavoriteUsers}  view */}
+        <Route path="/questions" component={ Questions } />  {/* // should prepopulate with answers upon signIn; empy upon signUp, & link to AllMatchUsers view */}
+
+        <Route exact path="/users" component={ AllMatchUsers } />
+        <Route exact path="/users/favoriteUsers" component={ FavoriteUsers } />
+        <Route path="/users/:userId" component={ SingleUser } />
+
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
+
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
           </Switch>
         )}
-        {/* Displays our Login component as a fallback */}
-        <Route component={Login} />
+
+        {/* Displays our main {Login} component as a fallback */}
+        {/* <Route component={Login} /> */}
+        <Redirect to="/main" />
       </Switch>
     )
   }
