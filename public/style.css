@@ -24,10 +24,10 @@ form div {
 
 path {
 
-  stroke:#fff;
+  stroke:#A9A9A9;
   stroke-width: .5;
   /* stroke-dasharray: 1; */
-  fill: gray;
+  /* fill: white; */
   
 }
 
