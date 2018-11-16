@@ -10,9 +10,12 @@ import {
   Main,
   MapView,
   Questions,
-  AllMatchUsers,
-  SingleUser,
+  NYCNeighborhoods,
+
+  Users,
+  MatchUsers,
   FavoriteUsers,
+  SingleUser,
 } from './components'
 import {me} from './store'
 
@@ -34,9 +37,12 @@ class Routes extends Component {
         <Route path="/home" component={ UserHome } />          {/* // personal info & link to {questions,AllMatchUsers, FavoriteUsers}  view */}
         <Route path="/questions" component={ Questions } />  {/* // should prepopulate with answers upon signIn; empy upon signUp, & link to AllMatchUsers view */}
 
-        <Route exact path="/users" component={ AllMatchUsers } />
-        <Route exact path="/users/favoriteUsers" component={ FavoriteUsers } />
+        <Route exact path="/users" component={ Users } />
+        <Route path="/matchUsers" component={ MatchUsers } />
+        <Route path="/favoriteUsers" component={ FavoriteUsers } />
         <Route path="/users/:userId" component={ SingleUser } />
+
+        <Route path="/neighborhoods" component={ NYCNeighborhoods } />
 
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
