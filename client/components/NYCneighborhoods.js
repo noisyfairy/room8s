@@ -84,6 +84,7 @@ class NYCNeighborhoods extends Component {
   render() {
     const nycmap = this.state.nycmap
     console.log(`NYC MAP:`, this.state.nycmap)
+    this.setObjectByPath(['nycmap'])
 
     if (!nycmap) {
       return null
