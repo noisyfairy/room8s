@@ -23,3 +23,12 @@ router.get('/:id', async (req, res, next) => {
     next(err)
   }
 })
+
+router.post('/:id', async (req, res, next) => {
+  try {
+    const answer = await Questions.create(req.body)
+    res.json(answer)
+  } catch (err) {
+    next(err)
+  }
+})

@@ -1,12 +1,12 @@
 import React from 'react'
 import FormGroup from '@material-ui/core/FormGroup'
-import {Radio} from '@material-ui/core'
 import RadioFields from './radioFields'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
+import {connect} from 'react-redux'
+import Axios from 'axios'
 
 class QuestionsForm extends React.Component {
   state = {
-    userId: 1,
+    userId: 0,
     budgetMin: 0,
     budgetMax: 0,
     budgetPrior: 0,
@@ -34,6 +34,10 @@ class QuestionsForm extends React.Component {
     todPrior: 0
   }
 
+  componentDidMount() {
+    this.setState({userId: this.props.userId})
+  }
+
   handleChange = (fieldKey1, fieldKey2 = null, rangeitr = null) => event => {
     this.setState({
       [fieldKey1]: event.target.value,
@@ -42,9 +46,20 @@ class QuestionsForm extends React.Component {
     console.log(this.state)
   }
 
+  handleSubmit = async event => {
+    event.preventDefault()
+    await Axios.post(`./${this.props.userId}`, this.state)
+    this.routeChange()
+  }
+
+  routeChange() {
+    let path = `/`
+    this.props.history.push(path)
+  }
+
   render() {
     return (
-      <div>
+      <form onSubmit={this.handleSubmit}>
         Location Priority:
         <FormGroup row>
           <RadioFields
@@ -365,13 +380,18 @@ class QuestionsForm extends React.Component {
             state={this.state}
           />
         </FormGroup>
-      </div>
+        <Button variant="contained" className={classes.button} type="submit">
+          Submit
+        </Button>
+      </form>
     )
   }
 }
 
-// CheckboxLabels.propTypes = {
-//   classes: PropTypes.object.isRequired
-// }
+const mapStateToProps = state => {
+  return {
+    userId: state.user.userId
+  }
+}
 
-export default QuestionsForm
+export default connect(mapStateToProps)(QuestionsForm)
