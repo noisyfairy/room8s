@@ -17,5 +17,6 @@ export {default as SingleUser} from './SingleUser'
 
 // export {default as MapView } from './MapView'
 export {default as NYCNeighborhoods} from './NYCNeighborhoods'
+export {default as MapAndQuestions} from './MapAndQuestions'
 
 // export {default as } from './'
