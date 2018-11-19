@@ -5,7 +5,23 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import map from './map'
 
-const reducer = combineReducers({user, map})
+import users from './users'
+import matchUsers from './matchUsers'
+import favoriteUsers from './favoriteUsers'
+import singleUser from './singleUser'
+
+
+const reducer = combineReducers({
+  user,
+  users,
+  matchUsers,
+  favoriteUsers,
+  singleUser,
+  map
+})
+
+
+
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
@@ -13,4 +29,9 @@ const store = createStore(reducer, middleware)
 
 export default store
 export * from './user'
+export * from './users'
+export * from './matchUsers'
+export * from './favoriteUsers'
+export * from './singleUser'
 export * from './map'
+
