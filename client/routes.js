@@ -6,15 +6,14 @@ import {
   Login,
   Signup,
   UserHome,
-
   Main,
   MapView,
   Questions,
   AllMatchUsers,
   SingleUser,
-  FavoriteUsers,
+  FavoriteUsers
 } from './components'
-import {me} from './store'
+import {me, getMapData} from './store'
 
 /**
  * COMPONENT
@@ -29,25 +28,24 @@ class Routes extends Component {
 
     return (
       <Switch>
-        <Route path="/main" component={ Main } />
-        <Route path="/mapview" component={ MapView } />      {/* // then a link to Main view */}
-        <Route path="/home" component={ UserHome } />          {/* // personal info & link to {questions,AllMatchUsers, FavoriteUsers}  view */}
-        <Route path="/questions" component={ Questions } />  {/* // should prepopulate with answers upon signIn; empy upon signUp, & link to AllMatchUsers view */}
-
-        <Route exact path="/users" component={ AllMatchUsers } />
-        <Route exact path="/users/favoriteUsers" component={ FavoriteUsers } />
-        <Route path="/users/:userId" component={ SingleUser } />
-
+        <Route path="/main" component={Main} />
+        <Route path="/mapview" component={MapView} />{' '}
+        {/* // then a link to Main view */}
+        <Route path="/home" component={UserHome} />{' '}
+        {/* // personal info & link to {questions,AllMatchUsers, FavoriteUsers}  view */}
+        <Route path="/questions" component={Questions} />{' '}
+        {/* // should prepopulate with answers upon signIn; empy upon signUp, & link to AllMatchUsers view */}
+        <Route exact path="/users" component={AllMatchUsers} />
+        <Route exact path="/users/favoriteUsers" component={FavoriteUsers} />
+        <Route path="/users/:userId" component={SingleUser} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
           </Switch>
         )}
-
         {/* Displays our main {Login} component as a fallback */}
         {/* <Route component={Login} /> */}
         <Redirect to="/main" />
@@ -71,6 +69,7 @@ const mapDispatch = dispatch => {
   return {
     loadInitialData() {
       dispatch(me())
+      dispatch(getMapData())
     }
   }
 }
