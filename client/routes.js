@@ -12,7 +12,6 @@ import {
   MatchUsers,
   FavoriteUsers,
   SingleUser,
-  FavoriteUsers,
   ConnectedMapWrapper
 } from './components'
 import {me, getMapData} from './store'
@@ -52,7 +51,7 @@ class Routes extends Component {
         )}
         {/* Displays our main {Login} component as a fallback */}
         {/* <Route component={Login} /> */}
-        <Redirect to="/main" />
+        {/* <Redirect to="/main" /> */}
       </Switch>
     )
   }
