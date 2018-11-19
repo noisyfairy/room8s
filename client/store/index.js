@@ -10,7 +10,6 @@ import matchUsers from './matchUsers'
 import favoriteUsers from './favoriteUsers'
 import singleUser from './singleUser'
 
-
 const reducer = combineReducers({
   user,
   users,
@@ -19,8 +18,6 @@ const reducer = combineReducers({
   singleUser,
   map
 })
-
-
 
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
@@ -34,4 +31,3 @@ export * from './matchUsers'
 export * from './favoriteUsers'
 export * from './singleUser'
 export * from './map'
-

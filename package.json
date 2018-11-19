@@ -13,7 +13,7 @@
     "heroku-token": "script/encrypt-heroku-auth-token",
     "lint": "eslint ./ --ignore-path .gitignore",
     "lint-fix": "npm run lint -- --fix",
-    "precommit": "# lint-staged # un-comment to enable",
+    "precommit": " lint-staged # un-comment to enable",
     "prepare": "if [ -d .git ]; then npm-merge-driver install; fi",
     "prettify": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\"",
     "postinstall": "touch secrets.js",
@@ -38,8 +38,6 @@
   "license": "MIT",
   "dependencies": {
     "@material-ui/core": "^3.5.1",
-    "@material-ui/icons": "^3.0.1",
-    "@material/icon-button": "^0.41.0",
     "axios": "^0.15.3",
     "compression": "^1.7.3",
     "connect-session-sequelize": "^4.1.0",

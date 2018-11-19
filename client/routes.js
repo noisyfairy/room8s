@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import PropTypes from 'prop-types'
+import {default as QuestionsForm} from './components/questionsForm'
+import {default as UserInfoForm} from './components/userInfoForm'
 import {
   Login,
   Signup,
@@ -26,7 +28,6 @@ class Routes extends Component {
 
   render() {
     const {isLoggedIn} = this.props
-
     return (
       <Switch>
         <Route exact path="/" component={Main} />
@@ -45,7 +46,8 @@ class Routes extends Component {
             <Route exact path="/matchUsers" component={MatchUsers} />
             <Route exact path="/favoriteUsers" component={FavoriteUsers} />
             <Route exact path="/users/:userId" component={SingleUser} />
-
+            <Route exact path="/questionform" component={QuestionsForm} />
+            <Route exact path="/userinfoform" component={UserInfoForm} />
             <Route path="/home" component={UserHome} />
           </Switch>
         )}
