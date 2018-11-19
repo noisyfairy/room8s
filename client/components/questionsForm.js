@@ -1,8 +1,11 @@
 import React from 'react'
 import FormGroup from '@material-ui/core/FormGroup'
+import Button from '@material-ui/core/Button'
 import RadioFields from './radioFields'
 import {connect} from 'react-redux'
-import Axios from 'axios'
+
+import PropTypes from 'prop-types'
+import {withStyles} from '@material-ui/core/styles'
 
 class QuestionsForm extends React.Component {
   state = {
@@ -48,7 +51,7 @@ class QuestionsForm extends React.Component {
 
   handleSubmit = async event => {
     event.preventDefault()
-    await Axios.post(`./${this.props.userId}`, this.state)
+    await Axios.post(`./questions/${this.props.userId}`, this.state)
     this.routeChange()
   }
 
@@ -58,6 +61,7 @@ class QuestionsForm extends React.Component {
   }
 
   render() {
+    const {classes} = this.props
     return (
       <form onSubmit={this.handleSubmit}>
         Location Priority:
@@ -394,4 +398,8 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(QuestionsForm)
+QuestionsForm.propTypes = {
+  classes: PropTypes.object.isRequired
+}
+
+export default connect(mapStateToProps)(withStyles(null)(QuestionsForm))

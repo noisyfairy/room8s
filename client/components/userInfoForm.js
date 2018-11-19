@@ -1,129 +1,187 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {withStyles} from '@material-ui/core/styles'
-import green from '@material-ui/core/colors/green'
-import FormGroup from '@material-ui/core/FormGroup'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Checkbox from '@material-ui/core/Checkbox'
-import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank'
-import CheckBoxIcon from '@material-ui/icons/CheckBox'
-import Favorite from '@material-ui/icons/Favorite'
-import FavoriteBorder from '@material-ui/icons/FavoriteBorder'
+import TextField from '@material-ui/core/TextField'
+import MenuItem from '@material-ui/core/MenuItem'
+import Button from '@material-ui/core/Button'
+import Axios from 'axios'
 
-const styles = {
-  root: {
-    color: green[600],
-    '&$checked': {
-      color: green[500]
-    }
+const styles = theme => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap'
   },
-  checked: {}
-}
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    display: 'flex',
+    flexWrap: 'wrap'
+  },
+  dense: {
+    marginTop: 16
+  },
+  menu: {
+    width: 200
+  }
+})
 
 class UserInfoForm extends React.Component {
   state = {
-    checkedA: true,
-    checkedB: true,
-    checkedF: true,
-    checkedG: true
+    firstName: '',
+    lastName: '',
+    sex: '',
+    age: '',
+    introvert: '',
+    guest: '',
+    tod: ''
   }
 
   handleChange = name => event => {
-    this.setState({[name]: event.target.checked})
+    this.setState({[name]: event.target.value})
+    console.log(this.state)
+  }
+
+  handleSubmit = async event => {
+    event.preventDefault()
+    await Axios.post(`./users/${this.props.userId}`, this.state)
+    this.routeChange()
   }
 
   render() {
     const {classes} = this.props
 
     return (
-      <FormGroup row>
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={this.state.checkedA}
-              onChange={this.handleChange('checkedA')}
-              value="checkedA"
-            />
-          }
-          label="Secondary"
+      <form
+        className={classes.container}
+        autoComplete="off"
+        onSubmit={this.handleSubmit}
+      >
+        <TextField
+          id="firstName input"
+          label="First Name"
+          className={classes.textField}
+          margin="normal"
+          helperText="Required"
+          value={this.state.firstName}
+          onChange={this.handleChange('firstName')}
         />
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={this.state.checkedB}
-              onChange={this.handleChange('checkedB')}
-              value="checkedB"
-              color="primary"
-            />
-          }
-          label="Primary"
+
+        <TextField
+          id="last name input"
+          label="Last Name"
+          className={classes.textField}
+          margin="normal"
+          helperText="Required"
+          value={this.state.lastName}
+          onChange={this.handleChange('lastName')}
         />
-        <FormControlLabel
-          control={<Checkbox value="checkedC" />}
-          label="Uncontrolled"
+
+        <TextField
+          id="Age input"
+          label="Age"
+          className={classes.textField}
+          margin="normal"
+          helperText="Required"
+          value={this.state.age}
+          onChange={this.handleChange('age')}
         />
-        <FormControlLabel
-          disabled
-          control={<Checkbox value="checkedD" />}
-          label="Disabled"
-        />
-        <FormControlLabel
-          disabled
-          control={<Checkbox checked value="checkedE" />}
-          label="Disabled"
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={this.state.checkedF}
-              onChange={this.handleChange('checkedF')}
-              value="checkedF"
-              indeterminate
-            />
-          }
-          label="Indeterminate"
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={this.state.checkedG}
-              onChange={this.handleChange('checkedG')}
-              value="checkedG"
-              classes={{
-                root: classes.root,
-                checked: classes.checked
-              }}
-            />
-          }
-          label="Custom color"
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              icon={<FavoriteBorder />}
-              checkedIcon={<Favorite />}
-              value="checkedH"
-            />
-          }
-          label="Custom icon"
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              icon={<CheckBoxOutlineBlankIcon fontSize="small" />}
-              checkedIcon={<CheckBoxIcon fontSize="small" />}
-              value="checkedI"
-            />
-          }
-          label="Custom size"
-        />
-      </FormGroup>
+
+        <TextField
+          id="sex input"
+          select
+          label="Select"
+          className={classes.textField}
+          value={this.state.sex}
+          onChange={this.handleChange('sex')}
+          SelectProps={{
+            MenuProps: {
+              className: classes.menu
+            }
+          }}
+          helperText="Please select sex"
+          margin="normal"
+        >
+          <MenuItem value="M">Male</MenuItem>
+          <MenuItem value="F">Female</MenuItem>
+        </TextField>
+
+        <TextField
+          id="introvert input"
+          select
+          label="Select"
+          className={classes.textField}
+          value={this.state.introvert}
+          onChange={this.handleChange('introvert')}
+          SelectProps={{
+            MenuProps: {
+              className: classes.menu
+            }
+          }}
+          helperText="Please select sex"
+          margin="normal"
+        >
+          <MenuItem value="introvert">introvert</MenuItem>
+          <MenuItem value="extrovert">extrovert</MenuItem>
+        </TextField>
+
+        <TextField
+          id="guest input"
+          select
+          label="Select"
+          className={classes.textField}
+          value={this.state.guest}
+          onChange={this.handleChange('guest')}
+          SelectProps={{
+            MenuProps: {
+              className: classes.menu
+            }
+          }}
+          helperText="Please select how often you have quests over"
+          margin="normal"
+        >
+          <MenuItem value={1}>Never</MenuItem>
+          <MenuItem value={2}>Rarely</MenuItem>
+          <MenuItem value={3}>Sometimes</MenuItem>
+          <MenuItem value={4}>Often</MenuItem>
+          <MenuItem value={5}>very Often</MenuItem>
+        </TextField>
+
+        <TextField
+          id="tod input"
+          select
+          label="Select"
+          className={classes.textField}
+          value={this.state.tod}
+          onChange={this.handleChange('tod')}
+          SelectProps={{
+            MenuProps: {
+              className: classes.menu
+            }
+          }}
+          helperText="Are you a morning or night person"
+          margin="normal"
+        >
+          <MenuItem value="Morning">Morning</MenuItem>
+          <MenuItem value="Night">Night</MenuItem>
+        </TextField>
+
+        <Button variant="contained" className={classes.button} type="submit">
+          Submit
+        </Button>
+      </form>
     )
   }
 }
 
-CheckboxLabels.propTypes = {
+const mapStateToProps = state => {
+  return {
+    userId: state.user.userId
+  }
+}
+
+UserInfoForm.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(UserInfoForm)
+export default connect(mapStateToProps)(withStyles(styles)(UserInfoForm))

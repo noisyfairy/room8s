@@ -37,3 +37,19 @@ router.get('/:id', async (req, res, next) => {
     next(err)
   }
 })
+
+router.put('/:id', async (req, res, next) => {
+  try {
+    const userInfo = await User.update(
+      {
+        ...req.body
+      },
+      (where = {
+        id: req.params.id
+      })
+    )
+    res.json(userInfo)
+  } catch (err) {
+    next(err)
+  }
+})
