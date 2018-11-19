@@ -44,7 +44,7 @@ class UserInfoForm extends React.Component {
 
   handleSubmit = async event => {
     event.preventDefault()
-    await Axios.put(`./api/users/3`, this.state)
+    await Axios.put(`./api/users/${this.state.userId}`, this.state)
     this.routeChange()
   }
 
@@ -181,7 +181,7 @@ class UserInfoForm extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    userId: state.user.userId
+    userId: state.user.id
   }
 }
 

@@ -6,6 +6,8 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {withStyles} from '@material-ui/core/styles'
 import Axios from 'axios'
+import {me} from '../store/user'
+import {getUsers} from '../store/users'
 
 const styles = {
   root: {},
@@ -14,7 +16,7 @@ const styles = {
 
 class QuestionsForm extends React.Component {
   state = {
-    userId: 3,
+    userId: 0,
     budgetMin: 0,
     budgetMax: 0,
     budgetPrior: 0,
@@ -42,9 +44,9 @@ class QuestionsForm extends React.Component {
     todPrior: 0
   }
 
-  // componentDidMount() {
-  //   this.setState({ userId: this.props.userId })
-  // }
+  componentDidMount() {
+    this.setState({userId: this.props.userId})
+  }
 
   handleChange = (fieldKey1, fieldKey2 = null, rangeitr = null) => event => {
     this.setState({
@@ -401,7 +403,7 @@ class QuestionsForm extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    userId: state.user.userId
+    userId: state.user.id
   }
 }
 
