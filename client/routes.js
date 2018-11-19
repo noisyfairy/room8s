@@ -14,7 +14,11 @@ import {
   MatchUsers,
   FavoriteUsers,
   SingleUser,
+<<<<<<< HEAD
   ConnectedMapWrapper
+=======
+  MapAndQuestions
+>>>>>>> a33f3b35e2561e27bdc70b4be11692e6c9ff7548
 } from './components'
 import {me, getMapData} from './store'
 
@@ -32,9 +36,10 @@ class Routes extends Component {
       <Switch>
         <Route exact path="/" component={Main} />
         <Route exact path="/main" component={Main} />
-        <Route exact path="/home" component={UserHome} />{' '}
+        <Route exact path="/home" component={UserHome} />
+        <Route exact path="/map" component={MapAndQuestions} />
         {/* // personal info & link to {questions,AllMatchUsers, FavoriteUsers}  view */}
-        <Route exact path="/questions" component={Questions} />{' '}
+        <Route exact path="/questions" component={Questions} />
         {/* // should prepopulate with answers upon signIn; empy upon signUp, & link to AllMatchUsers view */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
