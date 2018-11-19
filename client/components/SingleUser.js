@@ -3,17 +3,16 @@ import {connect} from 'react-redux'
 // import {fetchSingleUser} from '../store/singleUser'
 // import {me} from '../store/user'
 
-
 const mapStateToProps = state => {
   return {
-    user: state.singleUser.user,
+    user: state.singleUser.user
     // user: state.user,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    getSingleUser: userId => dispatch(fetchSingleUser(userId)),
+    getSingleUser: userId => dispatch(fetchSingleUser(userId))
     // getUser: () => dispatch(me()),
   }
 }
@@ -33,6 +32,8 @@ class SingleUser extends Component {
   }
 }
 
-const ConnectedSingleUser = connect(mapStateToProps, mapDispatchToProps)(SingleUser)
+const ConnectedSingleUser = connect(mapStateToProps, mapDispatchToProps)(
+  SingleUser
+)
 
 export default ConnectedSingleUser

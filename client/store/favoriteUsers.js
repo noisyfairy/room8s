@@ -6,41 +6,37 @@ const GET_FAVORITE_USERS = 'GET_FAVORITE_USERS'
 
 // Initial State
 const defaultFavoriteUsersList = {
-  favoriteUsers : []
+  favoriteUsers: []
 }
 
 // Action creator
-export const getFavoriteUsers = favoriteUsers => (
-  {
-    type: GET_FAVORITE_USERS,
-    favoriteUsers
-  }
-)
+export const getFavoriteUsers = favoriteUsers => ({
+  type: GET_FAVORITE_USERS,
+  favoriteUsers
+})
 
 //Thunk creator
 export const fetchFavoriteUsers = () => {
-  return async (dispatch) => {
-      try {
-          const response = await axios.get('/api/users/favoriteUsers')
-          const favoriteUsers = response.data
-          dispatch(getFavoriteUsers(favoriteUsers))
-      }
-      catch (err) { console.log(err) }
+  return async dispatch => {
+    try {
+      const response = await axios.get('/api/users/favoriteUsers')
+      const favoriteUsers = response.data
+      dispatch(getFavoriteUsers(favoriteUsers))
+    } catch (err) {
+      console.log(err)
+    }
   }
 }
 
 // Reducer
- const favoriteUsersReducer = (state = defaultFavoriteUsersList, action) => {
-   switch(action.type) {
-     case GET_FAVORITE_USERS:
-        return { ...state, favoriteUsers: action.favoriteUsers}
+const favoriteUsersReducer = (state = defaultFavoriteUsersList, action) => {
+  switch (action.type) {
+    case GET_FAVORITE_USERS:
+      return {...state, favoriteUsers: action.favoriteUsers}
 
-     default:
-        return state
-   }
- }
+    default:
+      return state
+  }
+}
 
- export default favoriteUsersReducer
-
-
-
+export default favoriteUsersReducer

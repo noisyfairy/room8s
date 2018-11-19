@@ -5,11 +5,11 @@ body {
 }
 
 html {
-  overflow: hidden;
+  overflow: 'auto';
 }
 
 .material-icons.orange600 {
-	color: #eb7c14;
+  color: #eb7c14;
 }
 
 a {
@@ -33,12 +33,10 @@ form div {
 /* D3 styling */
 
 path {
-
-  stroke:#A9A9A9;
-  stroke-width: .5;
+  stroke: #a9a9a9;
+  stroke-width: 0.5;
   /* stroke-dasharray: 1; */
   /* fill: white; */
-
 }
 
 #neighborhoodPopover {

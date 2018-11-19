@@ -7,15 +7,15 @@ export {default as Navbar} from './Navbar'
 export {default as UserHome} from './user-home'
 export {Login, Signup} from './auth-form'
 
-export {default as Main } from './Main'
-export {default as Questions } from './Questions'
+export {default as Main} from './Main'
+export {default as Questions} from './Questions'
 
-export {default as Users } from './Users'
-export {default as MatchUsers } from './MatchUsers'
-export {default as FavoriteUsers } from './FavoriteUsers'
-export {default as SingleUser } from './SingleUser'
+export {default as Users} from './Users'
+export {default as MatchUsers} from './MatchUsers'
+export {default as FavoriteUsers} from './FavoriteUsers'
+export {default as SingleUser} from './SingleUser'
 
 // export {default as MapView } from './MapView'
-export {default as NYCNeighborhoods } from './NYCNeighborhoods'
+export {default as NYCNeighborhoods} from './NYCNeighborhoods'
 
 // export {default as } from './'

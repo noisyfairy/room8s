@@ -10,12 +10,10 @@ const defaultSingleUser = {
 }
 
 // Action creator
-export const getSingleUser = user => (
-  {
+export const getSingleUser = user => ({
   type: GET_USER,
   user
-  }
-)
+})
 
 //Thunk creator
 export const fetchSingleUser = userId => {
