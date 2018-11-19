@@ -3,10 +3,11 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
+import {updateMapScore} from '../store/index'
 
-const Navbar = ({handleClick, isLoggedIn}) => (
+const Navbar = ({handleClick, isLoggedIn, increment}) => (
   <div>
-    <h1>BOILERMAKER</h1>
+    <h1> Room8s </h1>
     <nav>
       {isLoggedIn ? (
         <div>
@@ -19,8 +20,9 @@ const Navbar = ({handleClick, isLoggedIn}) => (
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
+          <Link to="/login">Log in</Link>
           <Link to="/signup">Sign Up</Link>
+          <button onClick={increment}> increment </button>
         </div>
       )}
     </nav>
@@ -41,7 +43,8 @@ const mapDispatch = dispatch => {
   return {
     handleClick() {
       dispatch(logout())
-    }
+    },
+    increment: () => dispatch(updateMapScore(0))
   }
 }
 

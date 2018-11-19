@@ -1,10 +1,21 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {withRouter, Route, Switch} from 'react-router-dom'
+import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome} from './components'
-import {default as QuestionsForm} from './components/questionsForm'
-import {me} from './store'
+import {
+  Login,
+  Signup,
+  UserHome,
+  Main,
+  MapView,
+  Questions,
+  // NYCNeighborhoods,
+  Users,
+  MatchUsers,
+  FavoriteUsers,
+  SingleUser
+} from './components'
+import {me, getMapData} from './store'
 
 /**
  * COMPONENT
@@ -19,18 +30,29 @@ class Routes extends Component {
 
     return (
       <Switch>
-        {/* Routes placed here are available to all visitors */}
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component={Signup} />
-        <Route exact path="/form" component={QuestionsForm} />
+        <Route exact path="/" component={Main} />
+        <Route exact path="/main" component={Main} />
+        <Route exact path="/home" component={UserHome} />{' '}
+        {/* // personal info & link to {questions,AllMatchUsers, FavoriteUsers}  view */}
+        <Route exact path="/questions" component={Questions} />{' '}
+        {/* // should prepopulate with answers upon signIn; empy upon signUp, & link to AllMatchUsers view */}
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} />
+        {/* // <Route exact path="/neighborhoods" component={ NYCNeighborhoods } /> */}
         {isLoggedIn && (
           <Switch>
-            {/* Routes placed here are only available after logging in */}
+            {/* {/* Routes placed here are only available after logging in */}
+            <Route exact path="/users" component={Users} />
+            <Route exact path="/matchUsers" component={MatchUsers} />
+            <Route exact path="/favoriteUsers" component={FavoriteUsers} />
+            <Route exact path="/users/:userId" component={SingleUser} />
+
             <Route path="/home" component={UserHome} />
           </Switch>
         )}
-        {/* Displays our Login component as a fallback */}
-        <Route component={Login} />
+        {/* Displays our main {Login} component as a fallback */}
+        {/* <Route component={Login} /> */}
+        <Redirect to="/main" />
       </Switch>
     )
   }
@@ -51,6 +73,7 @@ const mapDispatch = dispatch => {
   return {
     loadInitialData() {
       dispatch(me())
+      dispatch(getMapData())
     }
   }
 }
