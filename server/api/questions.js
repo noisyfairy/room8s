@@ -14,9 +14,7 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try {
     const answer = await Questions.findOne({
-      where: {
-        userId: req.params.id
-      }
+      where: {userId: req.params.id}
     })
     res.json(answer)
   } catch (err) {

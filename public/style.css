@@ -1,5 +1,15 @@
 body {
+  margin: 0;
+  padding: 0;
   font-family: sans-serif;
+}
+
+html {
+  overflow: hidden;
+}
+
+.material-icons.orange600 {
+  color: #eb7c14;
 }
 
 a {
@@ -19,3 +29,26 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+/* D3 styling */
+
+path {
+  stroke: #a9a9a9;
+  stroke-width: 0.5;
+  /* stroke-dasharray: 1; */
+  /* fill: white; */
+}
+
+#neighborhoodPopover {
+  position: absolute;
+  text-align: center;
+  padding: 2px;
+  font: 12px sans-serif;
+  background: #fff;
+  border: 0px;
+  border-radius: 8px;
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* D3 styling */
