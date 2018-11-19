@@ -6,18 +6,17 @@ import {
   Login,
   Signup,
   UserHome,
-
   Main,
   MapView,
   Questions,
-  NYCNeighborhoods,
+  // NYCNeighborhoods,
 
   Users,
   MatchUsers,
   FavoriteUsers,
   SingleUser,
 } from './components'
-import {me} from './store'
+import {me, getMapData} from './store'
 
 /**
  * COMPONENT
@@ -39,12 +38,11 @@ class Routes extends Component {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
 
-        <Route exact path="/neighborhoods" component={ NYCNeighborhoods } />
-        {/* <Route path="/mapview" component={ MapView } />      // then a link to Main view */}
+        {/* // <Route exact path="/neighborhoods" component={ NYCNeighborhoods } /> */}
 
-        {isLoggedIn && (
+       {isLoggedIn && (
           <Switch>
-            {/* Routes placed here are only available after logging in */}
+           {/* {/* Routes placed here are only available after logging in */}
             <Route exact path="/users" component={ Users } />
             <Route exact path="/matchUsers" component={ MatchUsers } />
             <Route exact path="/favoriteUsers" component={ FavoriteUsers } />
@@ -53,7 +51,6 @@ class Routes extends Component {
             <Route path="/home" component={UserHome} />
           </Switch>
         )}
-
         {/* Displays our main {Login} component as a fallback */}
         {/* <Route component={Login} /> */}
         <Redirect to="/main" />
@@ -77,6 +74,7 @@ const mapDispatch = dispatch => {
   return {
     loadInitialData() {
       dispatch(me())
+      dispatch(getMapData())
     }
   }
 }

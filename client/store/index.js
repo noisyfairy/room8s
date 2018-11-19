@@ -3,6 +3,7 @@ import createLogger from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
+import map from './map'
 
 import users from './users'
 import matchUsers from './matchUsers'
@@ -16,7 +17,7 @@ const reducer = combineReducers({
   matchUsers,
   favoriteUsers,
   singleUser,
-
+  map
 })
 
 
@@ -32,6 +33,5 @@ export * from './users'
 export * from './matchUsers'
 export * from './favoriteUsers'
 export * from './singleUser'
-
-// export * from './'
+export * from './map'
 
