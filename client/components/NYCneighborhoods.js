@@ -12,7 +12,7 @@ export default class NYCNeighborhoods extends Component {
       .domain([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
       .range([
         '#ffffff',
-        '#f2f2f2',
+        'black',
         '#e6e6e6',
         '#d9d9d9',
         '#cccccc',

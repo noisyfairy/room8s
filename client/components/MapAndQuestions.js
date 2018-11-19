@@ -1,12 +1,12 @@
 import React, {Component} from 'react'
 import ConnectedMapWrapper from './MapWrapper'
-import MapQuestionnaire from './MapQuestionnaire'
+import ConnectedMapQuestionnaire from './MapQuestionnaire'
 
 class MapAndQuestions extends Component {
   render() {
     return (
       <div>
-        <MapQuestionnaire />
+        <ConnectedMapQuestionnaire />
         <ConnectedMapWrapper />
       </div>
     )
