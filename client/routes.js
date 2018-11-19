@@ -14,11 +14,7 @@ import {
   MatchUsers,
   FavoriteUsers,
   SingleUser,
-<<<<<<< HEAD
   ConnectedMapWrapper
-=======
-  MapAndQuestions
->>>>>>> a33f3b35e2561e27bdc70b4be11692e6c9ff7548
 } from './components'
 import {me, getMapData} from './store'
 

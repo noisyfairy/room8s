@@ -22,10 +22,6 @@ const Navbar = ({handleClick, isLoggedIn, increment, updateRender}) => (
           {/* The navbar will show these links before you log in */}
           <Link to="/login">Log in</Link>
           <Link to="/signup">Sign Up</Link>
-<<<<<<< HEAD
-          <Link to="/map"> MAP</Link>
-          <button onClick={increment}> increment </button>
-=======
           <Link to="/map">Map</Link>
           <button
             onClick={function(event) {
@@ -34,7 +30,6 @@ const Navbar = ({handleClick, isLoggedIn, increment, updateRender}) => (
           >
             increment
           </button>
->>>>>>> a33f3b35e2561e27bdc70b4be11692e6c9ff7548
         </div>
       )}
     </nav>
