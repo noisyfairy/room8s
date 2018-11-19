@@ -3,17 +3,16 @@ import {connect} from 'react-redux'
 // import {fetchQuestions} from '../store/questions'
 // import {me} from '../store/user'
 
-
 const mapStateToProps = state => {
   return {
-    questions: state.questions,
+    questions: state.questions
     // user: state.user,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    getQuestions: userId => dispatch(fetchQuestions(userId)),
+    getQuestions: userId => dispatch(fetchQuestions(userId))
     // getUser: () => dispatch(me()),
   }
 }
@@ -33,6 +32,8 @@ class Questions extends Component {
   }
 }
 
-const ConnectedQuestions = connect(mapStateToProps, mapDispatchToProps)(Questions)
+const ConnectedQuestions = connect(mapStateToProps, mapDispatchToProps)(
+  Questions
+)
 
 export default ConnectedQuestions
