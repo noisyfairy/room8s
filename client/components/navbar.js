@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
-import {updateMapScore} from '../store/index'
+import {updateMapScore, updateMapRender} from '../store/index'
 
-const Navbar = ({handleClick, isLoggedIn, increment}) => (
+const Navbar = ({handleClick, isLoggedIn, increment, updateRender}) => (
   <div>
     <h1> Room8s </h1>
     <nav>
@@ -23,7 +23,13 @@ const Navbar = ({handleClick, isLoggedIn, increment}) => (
           <Link to="/login">Log in</Link>
           <Link to="/signup">Sign Up</Link>
           <Link to="/map">Map</Link>
-          <button onClick={increment}> increment </button>
+          <button
+            onClick={function(event) {
+              increment(), updateRender()
+            }}
+          >
+            increment
+          </button>
         </div>
       )}
     </nav>
@@ -45,7 +51,8 @@ const mapDispatch = dispatch => {
     handleClick() {
       dispatch(logout())
     },
-    increment: () => dispatch(updateMapScore(0))
+    increment: () => dispatch(updateMapScore(0)),
+    updateRender: () => dispatch(updateMapRender())
   }
 }
 
