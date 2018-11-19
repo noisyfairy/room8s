@@ -5,6 +5,7 @@ import RadioFields from './radioFields'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {withStyles} from '@material-ui/core/styles'
+import Axios from 'axios'
 
 const styles = {
   root: {},
@@ -13,12 +14,12 @@ const styles = {
 
 class QuestionsForm extends React.Component {
   state = {
-    userId: 0,
+    userId: 3,
     budgetMin: 0,
     budgetMax: 0,
     budgetPrior: 0,
     locationPrior: 0,
-    moveInTime: 0,
+    moveInTime: '2018-12-24T05:00:00.000Z',
     moveInPrior: 0,
     duration: 0,
     duraPrior: 0,
@@ -29,7 +30,7 @@ class QuestionsForm extends React.Component {
     introvert: '',
     introPrior: 0,
     sex: '',
-    sexPirior: 0,
+    sexPrior: 0,
     ageMin: 0,
     ageMax: 0,
     agePrior: 0,
@@ -41,9 +42,9 @@ class QuestionsForm extends React.Component {
     todPrior: 0
   }
 
-  componentDidMount() {
-    this.setState({userId: this.props.userId})
-  }
+  // componentDidMount() {
+  //   this.setState({ userId: this.props.userId })
+  // }
 
   handleChange = (fieldKey1, fieldKey2 = null, rangeitr = null) => event => {
     this.setState({
@@ -55,7 +56,7 @@ class QuestionsForm extends React.Component {
 
   handleSubmit = async event => {
     event.preventDefault()
-    await Axios.post(`./questions/${this.props.userId}`, this.state)
+    await Axios.post(`./api/questions`, this.state)
     this.routeChange()
   }
 
@@ -277,7 +278,7 @@ class QuestionsForm extends React.Component {
                 16: '16 - 20',
                 21: '21 - 25',
                 26: '26 - 30',
-                31: '31- 35',
+                31: '31 - 35',
                 36: '36 - 40'
               }}
               fieldKey1="ageMin"

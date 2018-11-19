@@ -44,8 +44,13 @@ class UserInfoForm extends React.Component {
 
   handleSubmit = async event => {
     event.preventDefault()
-    await Axios.post(`./users/${this.props.userId}`, this.state)
+    await Axios.put(`./api/users/3`, this.state)
     this.routeChange()
+  }
+
+  routeChange() {
+    let path = `/`
+    this.props.history.push(path)
   }
 
   render() {

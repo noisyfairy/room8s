@@ -45,9 +45,11 @@ router.put('/:id', async (req, res, next) => {
       {
         ...req.body
       },
-      (where = {
-        id: req.params.id
-      })
+      {
+        where: {
+          id: req.params.id
+        }
+      }
     )
     res.json(userInfo)
   } catch (err) {

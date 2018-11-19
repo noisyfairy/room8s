@@ -22,7 +22,7 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-router.post('/:id', async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
     const answer = await Questions.create(req.body)
     res.json(answer)

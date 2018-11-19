@@ -6,12 +6,10 @@ import {CssBaseline} from '@material-ui/core/'
 
 const App = () => {
   return (
-    <Fragment>
-      <CssBaseline />
+    <div>
       <Navbar />
       <Routes />
-      <ConnectedMapWrapper />
-    </Fragment>
+    </div>
   )
 }
 
