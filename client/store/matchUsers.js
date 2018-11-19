@@ -6,41 +6,37 @@ const GET_MATCH_USERS = 'GET_MATCH_USERS'
 
 // Initial State
 const defaultMatchUsersList = {
-  matchUsers : []
+  matchUsers: []
 }
 
 // Action creator
-export const getMatchUsers = matchUsers => (
-  {
-    type: GET_MATCH_USERS,
-    matchUsers
-  }
-)
+export const getMatchUsers = matchUsers => ({
+  type: GET_MATCH_USERS,
+  matchUsers
+})
 
 //Thunk creator
-export const fetchMatchUsers = (userId) => {
-  return async (dispatch) => {
-      try {
-          const response = await axios.get(`/api/users/${userId}/matchUsers`)
-          const matchUsers = response.data
-          dispatch(getMatchUsers(matchUsers))
-      }
-      catch (err) { console.log(err) }
+export const fetchMatchUsers = userId => {
+  return async dispatch => {
+    try {
+      const response = await axios.get(`/api/users/${userId}/matchUsers`)
+      const matchUsers = response.data
+      dispatch(getMatchUsers(matchUsers))
+    } catch (err) {
+      console.log(err)
+    }
   }
 }
 
 // Reducer
- const matchUsersReducer = (state = defaultMatchUsersList, action) => {
-   switch(action.type) {
-     case GET_MATCH_USERS:
-        return { ...state, matchUsers: action.matchUsers}
+const matchUsersReducer = (state = defaultMatchUsersList, action) => {
+  switch (action.type) {
+    case GET_MATCH_USERS:
+      return {...state, matchUsers: action.matchUsers}
 
-     default:
-        return state
-   }
- }
+    default:
+      return state
+  }
+}
 
- export default matchUsersReducer
-
-
-
+export default matchUsersReducer

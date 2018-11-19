@@ -1,26 +1,25 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import Logout from './Logout';
-import Routes from '../routes';
-import history from '../history';
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
+import Logout from './Logout'
+import Routes from '../routes'
+import history from '../history'
 
-import { withStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
+import {withStyles} from '@material-ui/core/styles'
+import Drawer from '@material-ui/core/Drawer'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import List from '@material-ui/core/List'
+import Typography from '@material-ui/core/Typography'
+import Divider from '@material-ui/core/Divider'
+import IconButton from '@material-ui/core/IconButton'
+import MenuIcon from '@material-ui/icons/Menu'
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
+import ChevronRightIcon from '@material-ui/icons/ChevronRight'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
 
-
-const drawerWidth = 240;
+const drawerWidth = 240
 
 const styles = theme => ({
   root: {
@@ -108,11 +107,11 @@ const styles = theme => ({
   'contentShift-right': {
     marginRight: 0
   }
-});
+})
 
 class NavBar extends React.Component {
   constructor(props) {
-    super();
+    super()
     this.state = {
       open: false,
       anchor: 'left',
@@ -121,22 +120,22 @@ class NavBar extends React.Component {
       bg: history.location.pathname.includes('map/')
         ? "url('/NYCview.jpg')"
         : "url('/roommates.jpg')"
-    };
+    }
   }
 
   handleDrawerOpen = () => {
-    this.setState({ open: true });
-  };
+    this.setState({open: true})
+  }
 
   handleDrawerClose = () => {
-    this.setState({ open: false });
-  };
+    this.setState({open: false})
+  }
 
   handleChangeAnchor = event => {
     this.setState({
       anchor: event.target.value
-    });
-  };
+    })
+  }
 
   changeBackground = () => {
     history.listen((location, action) => {
@@ -144,18 +143,18 @@ class NavBar extends React.Component {
         bg: location.pathname.includes('map/')
           ? "url('/roommates.jpg')"
           : "url('/NYCview.jpg')"
-      });
-    });
-  };
+      })
+    })
+  }
 
   render() {
-    const { classes, theme } = this.props;
-    const { anchor, open } = this.state;
-    console.log('NavBar history', history);
-    this.changeBackground();
+    const {classes, theme} = this.props
+    const {anchor, open} = this.state
+    console.log('NavBar history', history)
+    this.changeBackground()
     const drawer = (
       <Drawer
-        style={{ height: '100%' }}
+        style={{height: '100%'}}
         variant="persistent"
         anchor={anchor}
         open={open}
@@ -180,26 +179,32 @@ class NavBar extends React.Component {
           <ListItem button onClick={() => history.push('/map')}>
             <ListItemText primary="Map" />
           </ListItem>
-          <ListItem button onClick={() => history.push('/users')} >
+          <ListItem button onClick={() => history.push('/users')}>
             <ListItemText primary="Users" />
           </ListItem>
-          <ListItem button onClick={() => history.push('/users/:userId/matchUsers')} >
+          <ListItem
+            button
+            onClick={() => history.push('/users/:userId/matchUsers')}
+          >
             <ListItemText primary="Match Users" />
           </ListItem>
-          <ListItem button onClick={() => history.push('/users/:userId/FavoriteUsers')} >
+          <ListItem
+            button
+            onClick={() => history.push('/users/:userId/FavoriteUsers')}
+          >
             <ListItemText primary="Favorite Users" />
           </ListItem>
         </List>
       </Drawer>
-    );
+    )
 
-    let before = null;
-    let after = null;
+    let before = null
+    let after = null
 
     if (anchor === 'left') {
-      before = drawer;
+      before = drawer
     } else {
-      after = drawer;
+      after = drawer
     }
 
     return (
@@ -250,79 +255,13 @@ class NavBar extends React.Component {
           {after}
         </div>
       </div>
-    );
+    )
   }
 }
 
 NavBar.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired
-};
+}
 
-export default withStyles(styles, { withTheme: true })(NavBar);
-
-
-
-
-
-
-
-// import React from 'react'
-// import PropTypes from 'prop-types'
-// import {connect} from 'react-redux'
-// import {Link} from 'react-router-dom'
-// import {logout} from '../store'
-// import {updateMapScore} from '../store/index'
-
-// const Navbar = ({handleClick, isLoggedIn, increment}) => (
-//   <div>
-//     <h1> Room8s </h1>
-//     <nav>
-//       {isLoggedIn ? (
-//         <div>
-//           {/* The navbar will show these links after you log in */}
-//           <Link to="/home">Home</Link>
-//           <a href="#" onClick={handleClick}>
-//             Logout
-//           </a>
-//         </div>
-//       ) : (
-//         <div>
-//           {/* The navbar will show these links before you log in */}
-//           <Link to="/login">Log in</Link>
-//           <Link to="/signup">Sign Up</Link>
-//           <button onClick={increment}> increment </button>
-//         </div>
-//       )}
-//     </nav>
-//     <hr />
-//   </div>
-// )
-
-// /**
-//  * CONTAINER
-//  */
-// const mapState = state => {
-//   return {
-//     isLoggedIn: !!state.user.id
-//   }
-// }
-
-// const mapDispatch = dispatch => {
-//   return {
-//     handleClick() {
-//       dispatch(logout())
-//     },
-//     increment: () => dispatch(updateMapScore(0))
-//   }
-// }
-
-// export default connect(mapState, mapDispatch)(Navbar)
-
-// /**
-//  * PROP TYPES
-//  */
-// Navbar.propTypes = {
-//   handleClick: PropTypes.func.isRequired,
-//   isLoggedIn: PropTypes.bool.isRequired
-// }
+export default withStyles(styles, {withTheme: true})(NavBar)

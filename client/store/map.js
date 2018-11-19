@@ -5,17 +5,22 @@ import produce from 'immer'
  */
 const GET_MAP = 'GET_MAP'
 const UPDATE_MAP = 'UPDATE_MAP'
+const UPDATE_RENDER = 'UPDATE_RENDER'
 
 /**
  * INITIAL STATE
  */
-const defaultState = null
+const defaultState = {
+  mapData: null,
+  shouldRender: false
+}
 
 /**
  * ACTION CREATORS
  */
 const getMap = mapData => ({type: GET_MAP, mapData})
 const updateMap = idx => ({type: UPDATE_MAP, idx})
+const updateRender = () => ({type: UPDATE_RENDER})
 
 /**
  * THUNK CREATORS
@@ -45,6 +50,14 @@ export const updateMapScore = idx => dispatch => {
   }
 }
 
+export const updateMapRender = () => dispatch => {
+  try {
+    dispatch(updateRender())
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 /**
  * REDUCER
  */
@@ -52,10 +65,12 @@ export default function(state = defaultState, action) {
   return produce(state, draft => {
     switch (action.type) {
       case GET_MAP:
-        return action.mapData
+        return {...state, mapData: action.mapData}
       case UPDATE_MAP:
-        draft.features[action.idx].properties.score++
+        draft.mapData.features[action.idx].properties.score++
         break
+      case UPDATE_RENDER:
+        return {...state, shouldRender: !state.shouldRender}
     }
   })
 }
