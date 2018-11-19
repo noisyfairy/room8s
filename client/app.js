@@ -5,11 +5,10 @@ import Routes from './routes'
 
 const App = () => {
   return (
-    <Fragment>
-      {/* <CssBaseline /> */}
+    <div>
       <Navbar />
       <Routes />
-    </Fragment>
+    </div>
   )
 }
 
