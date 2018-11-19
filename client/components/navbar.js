@@ -7,7 +7,7 @@ import {updateMapScore} from '../store/index'
 
 const Navbar = ({handleClick, isLoggedIn, increment}) => (
   <div>
-    <h1>room8</h1>
+    <h1> Room8s </h1>
     <nav>
       {isLoggedIn ? (
         <div>
@@ -20,7 +20,7 @@ const Navbar = ({handleClick, isLoggedIn, increment}) => (
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
+          <Link to="/login">Log in</Link>
           <Link to="/signup">Sign Up</Link>
           <button onClick={increment}> increment </button>
         </div>
