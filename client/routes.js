@@ -7,11 +7,11 @@ import {
   Signup,
   UserHome,
   Main,
-  MapView,
   Questions,
   AllMatchUsers,
   SingleUser,
-  FavoriteUsers
+  FavoriteUsers,
+  ConnectedMapWrapper
 } from './components'
 import {me, getMapData} from './store'
 
@@ -29,7 +29,7 @@ class Routes extends Component {
     return (
       <Switch>
         <Route path="/main" component={Main} />
-        <Route path="/mapview" component={MapView} />{' '}
+        <Route path="/mapview" component={ConnectedMapWrapper} />{' '}
         {/* // then a link to Main view */}
         <Route path="/home" component={UserHome} />{' '}
         {/* // personal info & link to {questions,AllMatchUsers, FavoriteUsers}  view */}
