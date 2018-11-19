@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react'
 import {Navbar} from './components'
 import Routes from './routes'
+import ConnectedMapWrapper from './components/MapWrapper'
 // <<<<<<< HEAD
 // <<<<<<< HEAD
 // import {CssBaseline} from '@material-ui/core/'
@@ -32,7 +33,7 @@ import Routes from './routes'
 //   )
 // >>>>>>> origin/master
 // =======
-import ConnectedNYCNeighborhoods from './components/NYCneighborhoods'
+// import ConnectedNYCNeighborhoods from './components/NYCneighborhoods'
 import {CssBaseline} from '@material-ui/core/'
 
 const App = () => {
@@ -41,11 +42,7 @@ const App = () => {
       <CssBaseline />
       <Navbar />
       <Routes />
-      <div className="App">
-        <svg width="960" height="720">
-          <ConnectedNYCNeighborhoods width={960} height={720} />
-        </svg>
-      </div>
+      <ConnectedMapWrapper />
     </Fragment>
   )
 }

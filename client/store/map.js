@@ -9,7 +9,7 @@ const UPDATE_MAP = 'UPDATE_MAP'
 /**
  * INITIAL STATE
  */
-const defaultState = {}
+const defaultState = null
 
 /**
  * ACTION CREATORS
@@ -55,6 +55,7 @@ export default function(state = defaultState, action) {
         return action.mapData
       case UPDATE_MAP:
         draft.features[action.idx].properties.score++
+        break
     }
   })
 }
