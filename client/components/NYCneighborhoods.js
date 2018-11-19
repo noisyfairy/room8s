@@ -1,30 +1,9 @@
 import React, {Component} from 'react'
-// import * as topojson from 'topojson'
 import * as d3 from 'd3'
-// import queue from 'queue'
+import {connect} from 'react-redux'
+import {updateMapScore} from '../store/index'
 
 class NYCNeighborhoods extends Component {
-  constructor() {
-    super()
-    this.state = {
-      nycmap: []
-    }
-  }
-
-  async componentDidMount() {
-    d3.json(
-      ' http://data.beta.nyc//dataset/0ff93d2d-90ba-457c-9f7e-39e47bf2ac5f/resource/35dd04fb-81b3-479b-a074-a27a37888ce7/download/d085e2f8d0b54d4590b1e7d1f35594c1pediacitiesnycneighborhoods.geojson',
-      (error, nycmap) => {
-        if (error) throw error
-        console.log(nycmap)
-        for (let location of nycmap.features) {
-          location.properties.score = 0
-        }
-        this.setState({nycmap})
-      }
-    )
-  }
-
   componentDidUpdate() {
     const color = d3
       .scaleThreshold()
@@ -42,7 +21,7 @@ class NYCNeighborhoods extends Component {
         '#8c8c8c '
       ])
 
-    const nyc = this.state.nycmap
+    const nyc = this.props.mapData
     const svg = d3.select(this.refs.anchor),
       width = this.props.width,
       height = this.props.height
@@ -54,13 +33,15 @@ class NYCNeighborhoods extends Component {
 
     const path = d3.geoPath().projection(projection)
 
+    console.log(nyc.features)
     svg
       .selectAll('path')
-      .data(nyc.features) //nyc.features returns an array of neighborhood object
+      .data(nyc.features)
       .enter()
       .append('path')
       .attr('d', path)
       .style('fill', function(d) {
+        console.log(color(d.properties.score))
         return d.properties ? color(d.properties.score) : 'black'
       })
       .on('click', function(d) {
@@ -82,9 +63,7 @@ class NYCNeighborhoods extends Component {
   }
 
   render() {
-    const nycmap = this.state.nycmap
-    // console.log(`NYC MAP:`, this.state.nycmap)
-    // this.setObjectByPath(['nycmap'])
+    const nycmap = this.props.mapData
 
     if (!nycmap) {
       return null
@@ -94,4 +73,10 @@ class NYCNeighborhoods extends Component {
   }
 }
 
-export default NYCNeighborhoods
+const mapStateToProps = state => ({
+  mapData: state.map
+})
+
+const ConnectedNYCNeighborhoods = connect(mapStateToProps)(NYCNeighborhoods)
+
+export default ConnectedNYCNeighborhoods

@@ -32,7 +32,7 @@ import Routes from './routes'
 //   )
 // >>>>>>> origin/master
 // =======
-import NYCNeighborhoods from './components/NYCneighborhoods'
+import ConnectedNYCNeighborhoods from './components/NYCneighborhoods'
 import {CssBaseline} from '@material-ui/core/'
 
 const App = () => {
@@ -43,7 +43,7 @@ const App = () => {
       <Routes />
       <div className="App">
         <svg width="960" height="720">
-          <NYCNeighborhoods width={960} height={720} />
+          <ConnectedNYCNeighborhoods width={960} height={720} />
         </svg>
       </div>
     </Fragment>
