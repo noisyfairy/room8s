@@ -3,9 +3,13 @@ import FormGroup from '@material-ui/core/FormGroup'
 import Button from '@material-ui/core/Button'
 import RadioFields from './radioFields'
 import {connect} from 'react-redux'
-
 import PropTypes from 'prop-types'
 import {withStyles} from '@material-ui/core/styles'
+
+const styles = {
+  root: {},
+  checked: {}
+}
 
 class QuestionsForm extends React.Component {
   state = {
@@ -63,331 +67,333 @@ class QuestionsForm extends React.Component {
   render() {
     const {classes} = this.props
     return (
-      <form onSubmit={this.handleSubmit}>
-        Location Priority:
-        <FormGroup row>
-          <RadioFields
-            field={{
-              1: 'Very Low',
-              2: 'Low',
-              3: 'Average',
-              4: 'High',
-              5: 'Very High'
-            }}
-            fieldKey1="locationPrior"
-            handleChange={this.handleChange.bind(this)}
-            state={this.state}
-          />
-        </FormGroup>
-        Budget:
-        <FormGroup row>
-          <RadioFields
-            field={{
-              501: '$501 - $1000',
-              1001: '$1001 - $1500',
-              1501: '$1501 - $2000',
-              2001: '$2001 - $2500',
-              2501: '$2501 - $3000'
-            }}
-            fieldKey1="budgetMin"
-            fieldKey2="budgetMax"
-            rangeitr={499}
-            handleChange={this.handleChange.bind(this)}
-            state={this.state}
-          />
-        </FormGroup>
-        Buget Priority:
-        <FormGroup row>
-          <RadioFields
-            field={{
-              1: 'Very Low',
-              2: 'Low',
-              3: 'Average',
-              4: 'High',
-              5: 'Very High'
-            }}
-            fieldKey1="budgetPrior"
-            handleChange={this.handleChange.bind(this)}
-            state={this.state}
-          />
-        </FormGroup>
-        <FormGroup row>Move In Date:</FormGroup>
-        Move In Priority:
-        <FormGroup row>
-          <RadioFields
-            field={{
-              1: 'Very Low',
-              2: 'Low',
-              3: 'Average',
-              4: 'High',
-              5: 'Very High'
-            }}
-            fieldKey1="moveInPrior"
-            handleChange={this.handleChange.bind(this)}
-            state={this.state}
-          />
-        </FormGroup>
-        Stay Duration:
-        <FormGroup row>
-          <RadioFields
-            field={{
-              8: '8 months',
-              9: '9 months',
-              10: '10 months',
-              11: '11 months',
-              12: '12 months'
-            }}
-            fieldKey1="duration"
-            handleChange={this.handleChange.bind(this)}
-            state={this.state}
-          />
-        </FormGroup>
-        Duration Priority:
-        <FormGroup row>
-          <RadioFields
-            field={{
-              1: 'Very Low',
-              2: 'Low',
-              3: 'Average',
-              4: 'High',
-              5: 'Very High'
-            }}
-            fieldKey1="duraPrior"
-            handleChange={this.handleChange.bind(this)}
-            state={this.state}
-          />
-        </FormGroup>
-        Okay with Pet? :
-        <FormGroup row>
-          <RadioFields
-            field={{
-              false: 'Not okay with pets',
-              true: 'Okay with pets'
-            }}
-            fieldKey1="pet"
-            handleChange={this.handleChange.bind(this)}
-            state={this.state}
-          />
-        </FormGroup>
-        Pet Priority:
-        <FormGroup row>
-          <RadioFields
-            field={{
-              1: 'Very Low',
-              2: 'Low',
-              3: 'Average',
-              4: 'High',
-              5: 'Very High'
-            }}
-            fieldKey1="petPrior"
-            handleChange={this.handleChange.bind(this)}
-            state={this.state}
-          />
-        </FormGroup>
-        Okay with Smoking? :
-        <FormGroup row>
-          <RadioFields
-            field={{
-              false: 'Not okay with smoking',
-              true: 'Okay with smoking'
-            }}
-            fieldKey1="smoke"
-            handleChange={this.handleChange.bind(this)}
-            state={this.state}
-          />
-        </FormGroup>
-        Smoke Priority:
-        <FormGroup row>
-          <RadioFields
-            field={{
-              1: 'Very Low',
-              2: 'Low',
-              3: 'Average',
-              4: 'High',
-              5: 'Very High'
-            }}
-            fieldKey1="smokePrior"
-            handleChange={this.handleChange.bind(this)}
-            state={this.state}
-          />
-        </FormGroup>
-        Are you introverted? :
-        <FormGroup row>
-          <RadioFields
-            field={{
-              extrovert: 'No',
-              introvert: 'Yes'
-            }}
-            fieldKey1="introvert"
-            handleChange={this.handleChange.bind(this)}
-            state={this.state}
-          />
-        </FormGroup>
-        extrovert Priority:
-        <FormGroup row>
-          <RadioFields
-            field={{
-              1: 'Very Low',
-              2: 'Low',
-              3: 'Average',
-              4: 'High',
-              5: 'Very High'
-            }}
-            fieldKey1="introPrior"
-            handleChange={this.handleChange.bind(this)}
-            state={this.state}
-          />
-        </FormGroup>
-        Prefer to live with Male or Female? :
-        <FormGroup row>
-          <RadioFields
-            field={{
-              M: 'Male',
-              F: 'Female'
-            }}
-            fieldKey1="sex"
-            handleChange={this.handleChange.bind(this)}
-            state={this.state}
-          />
-        </FormGroup>
-        Roommate sex Priority:
-        <FormGroup row>
-          <RadioFields
-            field={{
-              1: 'Very Low',
-              2: 'Low',
-              3: 'Average',
-              4: 'High',
-              5: 'Very High'
-            }}
-            fieldKey1="sexPrior"
-            handleChange={this.handleChange.bind(this)}
-            state={this.state}
-          />
-        </FormGroup>
-        Prefered Age range of roommate:
-        <FormGroup row>
-          <RadioFields
-            field={{
-              16: '16 - 20',
-              21: '21 - 25',
-              26: '26 - 30',
-              31: '31- 35',
-              36: '36 - 40'
-            }}
-            fieldKey1="ageMin"
-            fieldKey2="ageMax"
-            rangeitr={5}
-            handleChange={this.handleChange.bind(this)}
-            state={this.state}
-          />
-        </FormGroup>
-        Age Priority:
-        <FormGroup row>
-          <RadioFields
-            field={{
-              1: 'Very Low',
-              2: 'Low',
-              3: 'Average',
-              4: 'High',
-              5: 'Very High'
-            }}
-            fieldKey1="agePrior"
-            handleChange={this.handleChange.bind(this)}
-            state={this.state}
-          />
-        </FormGroup>
-        How Often Do you clean dishes every week?:
-        <FormGroup row>
-          <RadioFields
-            field={{
-              1: 'never',
-              2: 'Rarely',
-              3: 'Sometimes',
-              4: 'Often',
-              5: 'Very Often'
-            }}
-            fieldKey1="clean"
-            handleChange={this.handleChange.bind(this)}
-            state={this.state}
-          />
-        </FormGroup>
-        Dishes Priority:
-        <FormGroup row>
-          <RadioFields
-            field={{
-              1: 'Very Low',
-              2: 'Low',
-              3: 'Average',
-              4: 'High',
-              5: 'Very High'
-            }}
-            fieldKey1="cleanPrior"
-            handleChange={this.handleChange.bind(this)}
-            state={this.state}
-          />
-        </FormGroup>
-        How Often Do you bring Guests home?:
-        <FormGroup row>
-          <RadioFields
-            field={{
-              1: 'never',
-              2: 'Rarely',
-              3: 'Sometimes',
-              4: 'Often',
-              5: 'Very Often'
-            }}
-            fieldKey1="guests"
-            handleChange={this.handleChange.bind(this)}
-            state={this.state}
-          />
-        </FormGroup>
-        Dishes Priority:
-        <FormGroup row>
-          <RadioFields
-            field={{
-              1: 'Very Low',
-              2: 'Low',
-              3: 'Average',
-              4: 'High',
-              5: 'Very High'
-            }}
-            fieldKey1="guestPrior"
-            handleChange={this.handleChange.bind(this)}
-            state={this.state}
-          />
-        </FormGroup>
-        Prefer your roommate to be a morning or night person? :
-        <FormGroup row>
-          <RadioFields
-            field={{
-              morning: 'Morning',
-              night: 'Night'
-            }}
-            fieldKey1="tod"
-            handleChange={this.handleChange.bind(this)}
-            state={this.state}
-          />
-        </FormGroup>
-        Roommate schedule Priority:
-        <FormGroup row>
-          <RadioFields
-            field={{
-              1: 'Very Low',
-              2: 'Low',
-              3: 'Average',
-              4: 'High',
-              5: 'Very High'
-            }}
-            fieldKey1="todPrior"
-            handleChange={this.handleChange.bind(this)}
-            state={this.state}
-          />
-        </FormGroup>
-        <Button variant="contained" className={classes.button} type="submit">
-          Submit
-        </Button>
-      </form>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          Location Priority:
+          <FormGroup row>
+            <RadioFields
+              field={{
+                1: 'Very Low',
+                2: 'Low',
+                3: 'Average',
+                4: 'High',
+                5: 'Very High'
+              }}
+              fieldKey1="locationPrior"
+              handleChange={this.handleChange.bind(this)}
+              state={this.state}
+            />
+          </FormGroup>
+          Budget:
+          <FormGroup row>
+            <RadioFields
+              field={{
+                501: '$501 - $1000',
+                1001: '$1001 - $1500',
+                1501: '$1501 - $2000',
+                2001: '$2001 - $2500',
+                2501: '$2501 - $3000'
+              }}
+              fieldKey1="budgetMin"
+              fieldKey2="budgetMax"
+              rangeitr={499}
+              handleChange={this.handleChange.bind(this)}
+              state={this.state}
+            />
+          </FormGroup>
+          Buget Priority:
+          <FormGroup row>
+            <RadioFields
+              field={{
+                1: 'Very Low',
+                2: 'Low',
+                3: 'Average',
+                4: 'High',
+                5: 'Very High'
+              }}
+              fieldKey1="budgetPrior"
+              handleChange={this.handleChange.bind(this)}
+              state={this.state}
+            />
+          </FormGroup>
+          <FormGroup row>Move In Date:</FormGroup>
+          Move In Priority:
+          <FormGroup row>
+            <RadioFields
+              field={{
+                1: 'Very Low',
+                2: 'Low',
+                3: 'Average',
+                4: 'High',
+                5: 'Very High'
+              }}
+              fieldKey1="moveInPrior"
+              handleChange={this.handleChange.bind(this)}
+              state={this.state}
+            />
+          </FormGroup>
+          Stay Duration:
+          <FormGroup row>
+            <RadioFields
+              field={{
+                8: '8 months',
+                9: '9 months',
+                10: '10 months',
+                11: '11 months',
+                12: '12 months'
+              }}
+              fieldKey1="duration"
+              handleChange={this.handleChange.bind(this)}
+              state={this.state}
+            />
+          </FormGroup>
+          Duration Priority:
+          <FormGroup row>
+            <RadioFields
+              field={{
+                1: 'Very Low',
+                2: 'Low',
+                3: 'Average',
+                4: 'High',
+                5: 'Very High'
+              }}
+              fieldKey1="duraPrior"
+              handleChange={this.handleChange.bind(this)}
+              state={this.state}
+            />
+          </FormGroup>
+          Okay with Pet? :
+          <FormGroup row>
+            <RadioFields
+              field={{
+                false: 'Not okay with pets',
+                true: 'Okay with pets'
+              }}
+              fieldKey1="pet"
+              handleChange={this.handleChange.bind(this)}
+              state={this.state}
+            />
+          </FormGroup>
+          Pet Priority:
+          <FormGroup row>
+            <RadioFields
+              field={{
+                1: 'Very Low',
+                2: 'Low',
+                3: 'Average',
+                4: 'High',
+                5: 'Very High'
+              }}
+              fieldKey1="petPrior"
+              handleChange={this.handleChange.bind(this)}
+              state={this.state}
+            />
+          </FormGroup>
+          Okay with Smoking? :
+          <FormGroup row>
+            <RadioFields
+              field={{
+                false: 'Not okay with smoking',
+                true: 'Okay with smoking'
+              }}
+              fieldKey1="smoke"
+              handleChange={this.handleChange.bind(this)}
+              state={this.state}
+            />
+          </FormGroup>
+          Smoke Priority:
+          <FormGroup row>
+            <RadioFields
+              field={{
+                1: 'Very Low',
+                2: 'Low',
+                3: 'Average',
+                4: 'High',
+                5: 'Very High'
+              }}
+              fieldKey1="smokePrior"
+              handleChange={this.handleChange.bind(this)}
+              state={this.state}
+            />
+          </FormGroup>
+          Are you introverted? :
+          <FormGroup row>
+            <RadioFields
+              field={{
+                extrovert: 'No',
+                introvert: 'Yes'
+              }}
+              fieldKey1="introvert"
+              handleChange={this.handleChange.bind(this)}
+              state={this.state}
+            />
+          </FormGroup>
+          extrovert Priority:
+          <FormGroup row>
+            <RadioFields
+              field={{
+                1: 'Very Low',
+                2: 'Low',
+                3: 'Average',
+                4: 'High',
+                5: 'Very High'
+              }}
+              fieldKey1="introPrior"
+              handleChange={this.handleChange.bind(this)}
+              state={this.state}
+            />
+          </FormGroup>
+          Prefer to live with Male or Female? :
+          <FormGroup row>
+            <RadioFields
+              field={{
+                M: 'Male',
+                F: 'Female'
+              }}
+              fieldKey1="sex"
+              handleChange={this.handleChange.bind(this)}
+              state={this.state}
+            />
+          </FormGroup>
+          Roommate sex Priority:
+          <FormGroup row>
+            <RadioFields
+              field={{
+                1: 'Very Low',
+                2: 'Low',
+                3: 'Average',
+                4: 'High',
+                5: 'Very High'
+              }}
+              fieldKey1="sexPrior"
+              handleChange={this.handleChange.bind(this)}
+              state={this.state}
+            />
+          </FormGroup>
+          Prefered Age range of roommate:
+          <FormGroup row>
+            <RadioFields
+              field={{
+                16: '16 - 20',
+                21: '21 - 25',
+                26: '26 - 30',
+                31: '31- 35',
+                36: '36 - 40'
+              }}
+              fieldKey1="ageMin"
+              fieldKey2="ageMax"
+              rangeitr={5}
+              handleChange={this.handleChange.bind(this)}
+              state={this.state}
+            />
+          </FormGroup>
+          Age Priority:
+          <FormGroup row>
+            <RadioFields
+              field={{
+                1: 'Very Low',
+                2: 'Low',
+                3: 'Average',
+                4: 'High',
+                5: 'Very High'
+              }}
+              fieldKey1="agePrior"
+              handleChange={this.handleChange.bind(this)}
+              state={this.state}
+            />
+          </FormGroup>
+          How Often Do you clean dishes every week?:
+          <FormGroup row>
+            <RadioFields
+              field={{
+                1: 'never',
+                2: 'Rarely',
+                3: 'Sometimes',
+                4: 'Often',
+                5: 'Very Often'
+              }}
+              fieldKey1="clean"
+              handleChange={this.handleChange.bind(this)}
+              state={this.state}
+            />
+          </FormGroup>
+          Dishes Priority:
+          <FormGroup row>
+            <RadioFields
+              field={{
+                1: 'Very Low',
+                2: 'Low',
+                3: 'Average',
+                4: 'High',
+                5: 'Very High'
+              }}
+              fieldKey1="cleanPrior"
+              handleChange={this.handleChange.bind(this)}
+              state={this.state}
+            />
+          </FormGroup>
+          How Often Do you bring Guests home?:
+          <FormGroup row>
+            <RadioFields
+              field={{
+                1: 'never',
+                2: 'Rarely',
+                3: 'Sometimes',
+                4: 'Often',
+                5: 'Very Often'
+              }}
+              fieldKey1="guests"
+              handleChange={this.handleChange.bind(this)}
+              state={this.state}
+            />
+          </FormGroup>
+          Dishes Priority:
+          <FormGroup row>
+            <RadioFields
+              field={{
+                1: 'Very Low',
+                2: 'Low',
+                3: 'Average',
+                4: 'High',
+                5: 'Very High'
+              }}
+              fieldKey1="guestPrior"
+              handleChange={this.handleChange.bind(this)}
+              state={this.state}
+            />
+          </FormGroup>
+          Prefer your roommate to be a morning or night person? :
+          <FormGroup row>
+            <RadioFields
+              field={{
+                morning: 'Morning',
+                night: 'Night'
+              }}
+              fieldKey1="tod"
+              handleChange={this.handleChange.bind(this)}
+              state={this.state}
+            />
+          </FormGroup>
+          Roommate schedule Priority:
+          <FormGroup row>
+            <RadioFields
+              field={{
+                1: 'Very Low',
+                2: 'Low',
+                3: 'Average',
+                4: 'High',
+                5: 'Very High'
+              }}
+              fieldKey1="todPrior"
+              handleChange={this.handleChange.bind(this)}
+              state={this.state}
+            />
+          </FormGroup>
+          <Button variant="contained" className={classes.button} type="submit">
+            Submit
+          </Button>
+        </form>
+      </div>
     )
   }
 }
@@ -402,4 +408,4 @@ QuestionsForm.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default connect(mapStateToProps)(withStyles(null)(QuestionsForm))
+export default connect(mapStateToProps)(withStyles(styles)(QuestionsForm))
