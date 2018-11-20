@@ -49,12 +49,11 @@ class MapQuestionnaire extends React.Component {
       }
     }
 
-    if (this.props.mapData.features) {
+    if (this.props.mapData !== null) {
       neighborhoodIdxLookUp(this.props.mapData.features)
     }
+    console.log(this.state)
     /////////
-    console.log(`state here: `, this.state)
-    console.log(`props here: `, this.props)
     return (
       <div className={classes.root}>
         <form
