@@ -5,40 +5,6 @@ import Logout from './Logout'
 import Routes from '../routes'
 import history from '../history'
 
-<<<<<<< HEAD
-const Navbar = ({handleClick, isLoggedIn, increment, updateRender}) => (
-  <div>
-    <h1> Room8s </h1>
-    <nav>
-      {isLoggedIn ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <Link to="/questionform"> Questions?</Link>
-          <Link to="/map">Map</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-          <button
-            type="button"
-            onClick={function(event) {
-              increment(), updateRender()
-            }}
-          >
-            increment
-          </button>
-        </div>
-      ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/login">Log in</Link>
-          <Link to="/signup">Sign Up</Link>
-          <Link to="/map">Map</Link>
-          <button
-            type="button"
-            onClick={function(event) {
-              increment(), updateRender()
-=======
 import {withStyles} from '@material-ui/core/styles'
 import Drawer from '@material-ui/core/Drawer'
 import AppBar from '@material-ui/core/AppBar'
@@ -281,7 +247,6 @@ class NavBar extends React.Component {
             linear-gradient(to bottom, rgba(89, 155, 163, 0.65) 0%, rgba(89, 155, 163, 0.65) 30%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0) 100%), ${
               this.state.bg
             }`
->>>>>>> master
             }}
           >
             <div className={classes.drawerHeader} />
