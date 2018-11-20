@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import NYCNeighborhoods from './NYCneighborhoods'
+import NYCNeighborhoods from './NYCNeighborhoods'
 
 class MapWrapper extends Component {
   render() {
