@@ -150,9 +150,8 @@ class NavBar extends React.Component {
   render() {
     const {classes, theme} = this.props
     const {anchor, open} = this.state
-    console.log('NavBar history', history)
+    // console.log('NavBar history', history)
     this.changeBackground()
-
     const drawer = (
       <Drawer
         style={{height: '100%'}}
@@ -253,7 +252,7 @@ class NavBar extends React.Component {
             <div className={classes.drawerHeader} />
             <Routes style={styles.drawerPaper} />
           </main>
-          {/* {after} */}
+          {after}
         </div>
       </div>
     )
