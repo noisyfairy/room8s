@@ -1,11 +1,12 @@
 import React from 'react'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import {withStyles} from '@material-ui/core/styles'
+import { withStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
 import Button from '@material-ui/core/Button'
 import Axios from 'axios'
+import { fetchSingleUser } from '../store';
 
 const styles = theme => ({
   container: {
@@ -37,11 +38,21 @@ class UserInfoForm extends React.Component {
     tod: ''
   }
 
+  componentDidMount() {
+    this.props.getUserInfo()
+    this.setState({
+      firstName: this.props.userInfo.firstName,
+      lastName: this.props.userInfo.lastName,
+      sex: this.props.userInfo.sex,
+      age: this.props.userInfo.age,
+      introvert: this.props.userInfo.introvert,
+      guest: this.props.userInfo.guest,
+      tod: this.props.userInfo.tod
+    })
+  }
+
   handleChange = name => event => {
-    // if(name === 'age'){
-    //   this.setState({[name]: Number(event.target.value)})
-    // }
-    this.setState({[name]: event.target.value})
+    this.setState({ [name]: event.target.value })
     console.log(this.state)
   }
 
@@ -57,7 +68,7 @@ class UserInfoForm extends React.Component {
   }
 
   render() {
-    const {classes} = this.props
+    const { classes } = this.props
 
     return (
       <form
@@ -185,7 +196,14 @@ class UserInfoForm extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    userId: state.user.id
+    userId: state.user.id,
+    userInfo: state.singleUser.user
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getUserInfo: (userId) => { dispatch(fetchSingleUser(userId)) }
   }
 }
 
@@ -193,4 +211,4 @@ UserInfoForm.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(UserInfoForm))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(UserInfoForm))

@@ -383,16 +383,15 @@ class Algo extends React.Component {
   }
 }
 
-mapStateToProps = state => {
+const mapStateToProps = state => {
   return{
-    userPref: state.singleUser.state.user.question
+    userPref: state.singleUser.user.question
   }
 }
 
-mapDispatchToProps = dispatch => {
+const mapDispatchToProps = dispatch => {
   return {
     getMatchUsers: (matchedUser) => dispatch(getMatchUsers(matchedUser))
-
     }
 }
 
