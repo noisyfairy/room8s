@@ -150,7 +150,6 @@ class NavBar extends React.Component {
   render() {
     const {classes, theme} = this.props
     const {anchor, open} = this.state
-    console.log('NavBar history', history)
     this.changeBackground()
     const drawer = (
       <Drawer
@@ -173,27 +172,24 @@ class NavBar extends React.Component {
         </div>
         <Divider />
         <List>
-          <ListItem button onClick={() => history.push('/users/:userId')}>
+          <ListItem button onClick={() => history.push('profile')}>
             <ListItemText primary="Profile" />
           </ListItem>
           <ListItem button onClick={() => history.push('/map')}>
             <ListItemText primary="Map" />
           </ListItem>
+          <ListItem button onClick={() => history.push('/knowledge-map')}>
+            <ListItemText primary="Knowledge Map" />
+          </ListItem>
           <ListItem button onClick={() => history.push('/users')}>
             <ListItemText primary="Users" />
           </ListItem>
-          <ListItem
-            button
-            onClick={() => history.push('/users/:userId/matchUsers')}
-          >
+          <ListItem button onClick={() => history.push('/matchUsers')}>
             <ListItemText primary="Match Users" />
           </ListItem>
-          <ListItem
-            button
-            onClick={() => history.push('/users/:userId/FavoriteUsers')}
-          >
+          {/* <ListItem button onClick={() => history.push('/FavoriteUsers')}>
             <ListItemText primary="Favorite Users" />
-          </ListItem>
+          </ListItem> */}
         </List>
       </Drawer>
     )
