@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import NYCNeighborhoods from './NYCNeighborhoods'
 import {getMapData, getSubwayData} from '../store/map'
+import history from '../history'
 
 class MapWrapper extends Component {
   handleClick = async () => {
