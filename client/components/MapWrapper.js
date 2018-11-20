@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import {connect} from 'react-redux'
 import NYCNeighborhoods from './NYCNeighborhoods'
 import {getMapData, getSubwayData} from '../store/map'
 import history from '../history'
@@ -10,58 +9,36 @@ class MapWrapper extends Component {
     await this.props.getSubwayData(this.props.mapData)
   }
   render() {
-    if (this.props.mapData === null) return null
-    if (this.props.mapData.features && this.props.shouldRender === true) {
-      return (
-        <div>
-          <button type="submit" onClick={this.handleClick}>
-            SUBWAY DATA
-          </button>
+    const data = this.props.data
+    const color = this.props.color
+    console.log(data)
+    if (data === null) {
+      return null
+    } else {
+      if (data.features && this.props.shouldRender === true) {
+        return (
           <svg key="first" width="960" height="720">
             <NYCNeighborhoods
               width={720}
               height={720}
-              mapData={this.props.mapData}
-              getMapData={this.props.getMapData}
-              getSubwayData={this.props.getSubwayData}
+              mapData={data}
+              color={color}
             />
           </svg>
-        </div>
-      )
-    }
-    return (
-      <div>
-        <button type="submit" onClick={this.handleClick}>
-          SUBWAY DATA
-        </button>
+        )
+      }
+      return (
         <svg key="second" width="960" height="720">
           <NYCNeighborhoods
             width={720}
             height={720}
-            mapData={this.props.mapData}
-            getMapData={this.props.getMapData}
-            getSubwayData={this.props.getSubwayData}
+            mapData={data}
+            color={color}
           />
         </svg>
-      </div>
-    )
+      )
+    }
   }
 }
 
-const mapStateToProps = state => ({
-  mapData: state.map.mapData,
-  shouldRender: state.map.shouldRender
-})
-
-const mapDispatchToProps = dispatch => {
-  return {
-    getMapData: () => dispatch(getMapData()),
-    getSubwayData: state => dispatch(getSubwayData(state))
-  }
-}
-
-const ConnectedMapWrapper = connect(mapStateToProps, mapDispatchToProps)(
-  MapWrapper
-)
-
-export default ConnectedMapWrapper
+export default MapWrapper
