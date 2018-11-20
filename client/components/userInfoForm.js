@@ -38,13 +38,16 @@ class UserInfoForm extends React.Component {
   }
 
   handleChange = name => event => {
+    // if(name === 'age'){
+    //   this.setState({[name]: Number(event.target.value)})
+    // }
     this.setState({[name]: event.target.value})
     console.log(this.state)
   }
 
   handleSubmit = async event => {
     event.preventDefault()
-    await Axios.put(`./api/users/${this.state.userId}`, this.state)
+    await Axios.put(`./api/users/${this.props.userId}`, this.state)
     this.routeChange()
   }
 
@@ -84,6 +87,7 @@ class UserInfoForm extends React.Component {
 
         <TextField
           id="Age input"
+          type='number'
           label="Age"
           className={classes.textField}
           margin="normal"
