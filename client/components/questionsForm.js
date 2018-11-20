@@ -6,8 +6,6 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {withStyles} from '@material-ui/core/styles'
 import Axios from 'axios'
-import {me} from '../store/user'
-import {getUsers} from '../store/users'
 
 const styles = {
   root: {},

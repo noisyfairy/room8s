@@ -87,7 +87,7 @@ class UserInfoForm extends React.Component {
 
         <TextField
           id="Age input"
-          type='number'
+          type="number"
           label="Age"
           className={classes.textField}
           margin="normal"
