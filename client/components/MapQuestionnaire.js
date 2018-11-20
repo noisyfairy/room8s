@@ -49,58 +49,60 @@ class MapQuestionnaire extends React.Component {
       }
     }
 
-    if (this.props.mapData.features) {
+    if (this.props.mapData !== null) {
       neighborhoodIdxLookUp(this.props.mapData.features)
     }
     /////////
     console.log(`state here: `, this.state)
     console.log(`props here: `, this.props)
     return (
-      <div className={classes.root}>
-        <form
-          onSubmit={evt => {
-            evt.preventDefault()
-            this.props.updateMapScore(Number(this.state.value))
-            this.props.updateMapRender()
-          }}
-        >
-          <FormControl component="fieldset" className={classes.formControl}>
-            <FormLabel component="legend">
-              Where would you like to live?
-            </FormLabel>
-            <RadioGroup
-              aria-label="location"
-              name="location"
-              className={classes.group}
-              value={this.state.value}
-              onChange={this.handleChange}
-            >
-              <FormControlLabel
-                label="East Village"
-                control={<Radio />}
-                value={neighborhoodIdxObj['East Village']}
-              />
-              <FormControlLabel
-                label="Financial District"
-                control={<Radio />}
-                value={neighborhoodIdxObj['Financial District']}
-              />
-              <FormControlLabel
-                label="Upper East Side"
-                control={<Radio />}
-                value={neighborhoodIdxObj['Upper East Side']}
-              />
-            </RadioGroup>
-            <Button
-              variant="contained"
-              className={classes.button}
-              type="submit"
-            >
-              Submit
-            </Button>
-          </FormControl>
-        </form>
-      </div>
+      this.props.mapData !== null && (
+        <div className={classes.root}>
+          <form
+            onSubmit={evt => {
+              evt.preventDefault()
+              this.props.updateMapScore(Number(this.state.value))
+              this.props.updateMapRender()
+            }}
+          >
+            <FormControl component="fieldset" className={classes.formControl}>
+              <FormLabel component="legend">
+                Where would you like to live?
+              </FormLabel>
+              <RadioGroup
+                aria-label="location"
+                name="location"
+                className={classes.group}
+                value={this.state.value}
+                onChange={this.handleChange}
+              >
+                <FormControlLabel
+                  label="East Village"
+                  control={<Radio />}
+                  value={neighborhoodIdxObj['East Village']}
+                />
+                <FormControlLabel
+                  label="Financial District"
+                  control={<Radio />}
+                  value={neighborhoodIdxObj['Financial District']}
+                />
+                <FormControlLabel
+                  label="Upper East Side"
+                  control={<Radio />}
+                  value={neighborhoodIdxObj['Upper East Side']}
+                />
+              </RadioGroup>
+              <Button
+                variant="contained"
+                className={classes.button}
+                type="submit"
+              >
+                Submit
+              </Button>
+            </FormControl>
+          </form>
+        </div>
+      )
     )
   }
 }
