@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
-import ConnectedMapWrapper from './MapWrapper'
+import {connect} from 'react-redux'
+import MapWrapper from './MapWrapper'
 import ConnectedMapQuestionnaire from './MapQuestionnaire'
 
 class MapAndQuestions extends Component {
@@ -7,10 +8,20 @@ class MapAndQuestions extends Component {
     return (
       <div>
         <ConnectedMapQuestionnaire />
-        <ConnectedMapWrapper />
+        <MapWrapper
+          data={this.props.data}
+          shouldRender={this.props.shouldRender}
+        />
       </div>
     )
   }
 }
 
-export default MapAndQuestions
+const mapStateToProps = state => ({
+  data: state.map.mapData,
+  shouldRender: state.map.shouldRender
+})
+
+const connectedMapAndQuestions = connect(mapStateToProps)(MapAndQuestions)
+
+export default connectedMapAndQuestions
