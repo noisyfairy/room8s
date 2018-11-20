@@ -7,21 +7,10 @@ class MapAndQuestions extends Component {
   render() {
     const color = d3
       .scaleThreshold()
-      .domain([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-      .range([
-        '#ffffff',
-        'black',
-        '#e6e6e6',
-        '#d9d9d9',
-        '#cccccc',
-        '#bfbfbf',
-        '#b3b3b3',
-        '#a6a6a6',
-        '#999999',
-        '#8c8c8c '
-      ])
+      .domain([1, 2, 3, 4])
+      .range(['white', 'yellow', 'orange', 'red'])
     return (
-      <div>
+      <div className="mapAndQuestions">
         <ConnectedMapQuestionnaire />
         <MapWrapper
           data={this.props.data}

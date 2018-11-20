@@ -1,4 +1,5 @@
 import React from 'react'
+import history from '../history'
 
 //material UI
 import PropTypes from 'prop-types'
@@ -57,6 +58,7 @@ class MapQuestionnaire extends React.Component {
     return (
       <div className={classes.root}>
         <form
+          className="questionBox"
           onSubmit={evt => {
             evt.preventDefault()
             this.props.updateMapScore(Number(this.state.value))

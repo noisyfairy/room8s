@@ -35,8 +35,6 @@ form div {
 path {
   stroke: #a9a9a9;
   stroke-width: 0.5;
-  /* stroke-dasharray: 1; */
-  /* fill: white; */
 }
 
 #neighborhoodPopover {
@@ -52,3 +50,11 @@ path {
 }
 
 /* D3 styling */
+
+.mapAndQuestions {
+  display: flex;
+}
+
+.questionBox {
+  min-width: 200px;
+}

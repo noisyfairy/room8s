@@ -10,7 +10,7 @@ class MapWrapper extends Component {
   render() {
     const data = this.props.data
     const color = this.props.color
-    console.log(data)
+    console.log(this.props)
     if (data === null) {
       return null
     } else {
