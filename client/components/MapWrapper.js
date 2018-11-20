@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
-import {connect} from 'react-redux'
 import NYCNeighborhoods from './NYCNeighborhoods'
 
 class MapWrapper extends Component {
   render() {
     const data = this.props.data
+    const color = this.props.color
     console.log(data)
     if (data === null) {
       return null
@@ -12,13 +12,23 @@ class MapWrapper extends Component {
       if (data.features && this.props.shouldRender === true) {
         return (
           <svg key="first" width="960" height="720">
-            <NYCNeighborhoods width={720} height={720} mapData={data} />
+            <NYCNeighborhoods
+              width={720}
+              height={720}
+              mapData={data}
+              color={color}
+            />
           </svg>
         )
       }
       return (
         <svg key="second" width="960" height="720">
-          <NYCNeighborhoods width={720} height={720} mapData={data} />
+          <NYCNeighborhoods
+            width={720}
+            height={720}
+            mapData={data}
+            color={color}
+          />
         </svg>
       )
     }
