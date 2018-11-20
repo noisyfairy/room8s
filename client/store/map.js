@@ -15,7 +15,7 @@ const UPDATE_RENDER = 'UPDATE_RENDER'
 const defaultState = {
   mapData: null,
   shouldRender: false,
-  subwayData: null
+  subwayMapData: null
 }
 
 /**
@@ -65,6 +65,7 @@ export const getSubwayData = (state = defaultState) => async dispatch => {
   try {
     const subwayInfo = await axios.get('/api/subway')
     const subwayData = subwayInfo.data
+
     state.features.forEach((nbhd, idx) => {
       subwayData.map(coord => {
         if (inside(coord, nbhd.geometry.coordinates[0])) {
@@ -84,13 +85,14 @@ export default function(state = defaultState, action) {
   return produce(state, draft => {
     switch (action.type) {
       case GET_MAP:
-        console.log(action.mapData.features[0].geometry.coordinates)
         return {...state, mapData: action.mapData}
       case UPDATE_MAP:
         draft.mapData.features[action.idx].properties.score++
         break
       case UPDATE_RENDER:
         return {...state, shouldRender: !state.shouldRender}
+      default:
+        return state
     }
   })
 }

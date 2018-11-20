@@ -4,6 +4,7 @@ import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import map from './map'
+import addedMap from './addedMapData'
 
 import users from './users'
 import matchUsers from './matchUsers'
@@ -16,7 +17,8 @@ const reducer = combineReducers({
   matchUsers,
   favoriteUsers,
   singleUser,
-  map
+  map,
+  addedMap
 })
 
 const middleware = composeWithDevTools(

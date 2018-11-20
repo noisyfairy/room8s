@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import NYCNeighborhoods from './NYCNeighborhoods'
 import {getMapData, getSubwayData} from '../store/map'
+import history from '../history'
 
 class MapWrapper extends Component {
   handleClick = async () => {
