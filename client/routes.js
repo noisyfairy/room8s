@@ -2,8 +2,6 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {default as QuestionsForm} from './components/questionsForm'
-import {default as UserInfoForm} from './components/userInfoForm'
 import {
   Login,
   Signup,
@@ -14,7 +12,9 @@ import {
   MatchUsers,
   FavoriteUsers,
   SingleUser,
-  MapAndQuestions
+  MapAndQuestions,
+  UserInfoForm,
+  QuestionsForm
 } from './components'
 import {me, getMapData} from './store'
 
