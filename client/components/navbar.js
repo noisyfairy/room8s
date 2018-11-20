@@ -25,7 +25,7 @@ const Navbar = ({handleClick, isLoggedIn, increment, updateRender}) => (
           <Link to="/map">Map</Link>
           <button
             onClick={function(event) {
-              increment(), updateRender()
+              return increment(), updateRender()
             }}
           >
             increment
