@@ -16,10 +16,10 @@ export {default as FavoriteUsers} from './FavoriteUsers'
 export {default as SingleUser} from './SingleUser'
 
 //Forms
-export { default as QuestionsForm } from "./questionsForm";
-export { default as UserInfoForm } from "./userInfoForm";
+export {default as QuestionsForm} from './questionsForm'
+export {default as UserInfoForm} from './userInfoForm'
 
-export { default as Algo } from "./algo";
+export {default as Algo} from './algo'
 
 // export {default as MapView } from './MapView'
 export {default as NYCNeighborhoods} from './NYCNeighborhoods'

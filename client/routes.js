@@ -14,7 +14,7 @@ import {
   SingleUser,
   MapAndQuestions,
   UserInfoForm,
-  QuestionsForm,
+  QuestionsForm
 } from './components'
 import {me, getMapData} from './store'
 
