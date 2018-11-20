@@ -16,10 +16,10 @@ export const getMatchUsers = matchUsers => ({
 })
 
 //Thunk creator
-export const fetchMatchUsers = () => {
+export const fetchMatchUsers = userId => {
   return async dispatch => {
     try {
-      const response = await axios.get('/api/users/matchUsers')
+      const response = await axios.get(`/api/users/${userId}/matchUsers`)
       const matchUsers = response.data
       dispatch(getMatchUsers(matchUsers))
     } catch (err) {
