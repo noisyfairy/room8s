@@ -2,10 +2,11 @@ import React, {Component} from 'react'
 import * as d3 from 'd3'
 
 export default class NYCNeighborhoods extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
   }
-  componentDidMount(props) {
+  async componentDidMount(props) {
+    // await this.props.getSubwayData(this.props.mapData)
     const node = this.node
     const color = this.props.color
     const nyc = this.props.mapData

@@ -1,7 +1,12 @@
 import React, {Component} from 'react'
 import NYCNeighborhoods from './NYCNeighborhoods'
+import {getMapData, getSubwayData} from '../store/map'
 
 class MapWrapper extends Component {
+  handleClick = async () => {
+    console.log('working')
+    await this.props.getSubwayData(this.props.mapData)
+  }
   render() {
     const data = this.props.data
     const color = this.props.color

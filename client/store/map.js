@@ -1,4 +1,6 @@
 import produce from 'immer'
+import inside from 'point-in-polygon'
+import axios from 'axios'
 
 /**
  * ACTION TYPES
@@ -12,7 +14,8 @@ const UPDATE_RENDER = 'UPDATE_RENDER'
  */
 const defaultState = {
   mapData: null,
-  shouldRender: false
+  shouldRender: false,
+  subwayData: null
 }
 
 /**
@@ -58,6 +61,22 @@ export const updateMapRender = () => dispatch => {
   }
 }
 
+export const getSubwayData = (state = defaultState) => async dispatch => {
+  try {
+    const subwayInfo = await axios.get('/api/subway')
+    const subwayData = subwayInfo.data
+    state.features.forEach((nbhd, idx) => {
+      subwayData.map(coord => {
+        if (inside(coord, nbhd.geometry.coordinates[0])) {
+          dispatch(updateMapScore(idx))
+        }
+      })
+    })
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 /**
  * REDUCER
  */
@@ -65,6 +84,7 @@ export default function(state = defaultState, action) {
   return produce(state, draft => {
     switch (action.type) {
       case GET_MAP:
+        console.log(action.mapData.features[0].geometry.coordinates)
         return {...state, mapData: action.mapData}
       case UPDATE_MAP:
         draft.mapData.features[action.idx].properties.score++
