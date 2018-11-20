@@ -16,10 +16,10 @@ export const getFavoriteUsers = favoriteUsers => ({
 })
 
 //Thunk creator
-export const fetchFavoriteUsers = () => {
+export const fetchFavoriteUsers = userId => {
   return async dispatch => {
     try {
-      const response = await axios.get('/api/users/favoriteUsers')
+      const response = await axios.get(`/api/users/${userId}/favoriteUsers`)
       const favoriteUsers = response.data
       dispatch(getFavoriteUsers(favoriteUsers))
     } catch (err) {
