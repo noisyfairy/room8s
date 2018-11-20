@@ -17,8 +17,8 @@ const mapDispatchToProps = dispatch => ({
 
 class Users extends Component {
   async componentDidMount() {
-    // await this.props.getUser()
     await this.props.fetchUsers()
+    // await this.props.getUser()
   }
 
   render() {
