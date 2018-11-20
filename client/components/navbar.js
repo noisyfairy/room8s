@@ -18,6 +18,14 @@ const Navbar = ({handleClick, isLoggedIn, increment, updateRender}) => (
           <a href="#" onClick={handleClick}>
             Logout
           </a>
+          <button
+            type="button"
+            onClick={function(event) {
+              increment(), updateRender()
+            }}
+          >
+            increment
+          </button>
         </div>
       ) : (
         <div>
@@ -26,6 +34,7 @@ const Navbar = ({handleClick, isLoggedIn, increment, updateRender}) => (
           <Link to="/signup">Sign Up</Link>
           <Link to="/map">Map</Link>
           <button
+            type="button"
             onClick={function(event) {
               increment(), updateRender()
             }}
