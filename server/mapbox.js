@@ -8,5 +8,5 @@ geocodingClient
   })
   .send()
   .then(response => {
-    const match = response.body
+    // const match = response.body
   })
