@@ -37,19 +37,27 @@ class Routes extends Component {
         {/* // personal info & link to {questions,AllMatchUsers, FavoriteUsers}  view */}
         <Route exact path="/questions" component={Questions} />
         {/* // should prepopulate with answers upon signIn; empy upon signUp, & link to AllMatchUsers view */}
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} />
         {/* // <Route exact path="/neighborhoods" component={ NYCNeighborhoods } /> */}
         {isLoggedIn && (
           <Switch>
             {/* {/* Routes placed here are only available after logging in */}
             <Route exact path="/users" component={Users} />
-            <Route exact path="/matchUsers" component={MatchUsers} />
-            <Route exact path="/favoriteUsers" component={FavoriteUsers} />
+            <Route
+              exact
+              path="/users/:userId/matchUsers"
+              component={MatchUsers}
+            />
+            <Route
+              exact
+              path="/users/:userId/favoriteUsers"
+              component={FavoriteUsers}
+            />
             <Route exact path="/users/:userId" component={SingleUser} />
             <Route exact path="/questionform" component={QuestionsForm} />
             <Route exact path="/userinfoform" component={UserInfoForm} />
-            <Route path="/home" component={UserHome} />
+            <Route exact path="/home" component={UserHome} />
           </Switch>
         )}
         {/* Displays our main {Login} component as a fallback */}
