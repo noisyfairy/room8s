@@ -1,20 +1,42 @@
 const questionList = {
   1: {
-    question: 'Where would you like to live?',
-    answers: ['East Village', 'Financial District', 'Upper East Side']
+    question: 'Do you like trees',
+    answers: [
+      {
+        displayedAnswer: 'Love it!',
+        neighborhood: 'East Village'
+      },
+      {
+        displayedAnswer: 'Hate it!',
+        neighborhood: 'Financial District'
+      }
+    ]
   },
   2: {
-    question: 'Where do you not want to live?',
+    question: 'Do you like crimes',
     answers: [
-      'West Village',
-      'Upper West Side',
-      'Lower East Side',
-      'East Village'
+      {
+        displayedAnswer: 'Love it!',
+        neighborhood: 'East Village'
+      },
+      {
+        displayedAnswer: 'Hate it!',
+        neighborhood: 'Financial District'
+      }
     ]
   },
   3: {
     question: 'Literally cannot believe I got this far',
-    answers: ['Greenwich Village', "Hell's Kitchen", 'East Village']
+    answers: [
+      {
+        displayedAnswer: 'Love it!',
+        neighborhood: 'East Village'
+      },
+      {
+        displayedAnswer: 'Hate it!',
+        neighborhood: 'Financial District'
+      }
+    ]
   }
 }
 

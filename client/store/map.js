@@ -91,8 +91,6 @@ export default function(state = defaultState, action) {
         break
       case UPDATE_RENDER:
         return {...state, shouldRender: !state.shouldRender}
-      default:
-        return state
     }
   })
 }

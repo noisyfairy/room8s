@@ -25,7 +25,7 @@ const getSubway = subwayData => ({
 export const getSubwayMapData = () => async dispatch => {
   try {
     const {data} = await axios.get('/api/subway')
-    const allSubwayData = data
+    const subwayData = data
     d3.json(
       ' http://data.beta.nyc//dataset/0ff93d2d-90ba-457c-9f7e-39e47bf2ac5f/resource/35dd04fb-81b3-479b-a074-a27a37888ce7/download/d085e2f8d0b54d4590b1e7d1f35594c1pediacitiesnycneighborhoods.geojson',
       mapData => {
@@ -52,8 +52,6 @@ export default function(state = initialState, action) {
     switch (action.type) {
       case GET_SUBWAY:
         return {...state, subwayMapData: action.subwayData}
-      default:
-        return state
     }
   })
 }
