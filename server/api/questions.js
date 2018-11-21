@@ -32,8 +32,16 @@ router.put('/:id', async (req, res, next) => {
     })
 
     if (!answer[1]) {
-      const updatedAnswers = await Questions.create(req.body)
+      const updatedAnswers = await Questions.update(
+        {...req.body},
+        {
+          where: {
+            userId: req.params.id
+          }
+        }
+      )
     }
+
     res.json(answer)
   } catch (err) {
     next(err)
