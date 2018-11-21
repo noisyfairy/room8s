@@ -40,9 +40,7 @@ class MapQuestionnaire extends React.Component {
 
   handleSubmit = evt => {
     evt.preventDefault()
-    for (let location of this.state.value) {
-      this.props.updateMapScore(Number(location))
-    }
+    this.props.updateMapScore(Number(this.state.value))
     this.props.updateMapRender()
 
     if (this.state.question === Math.max(...Object.keys(questionList))) {
