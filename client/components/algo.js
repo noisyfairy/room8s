@@ -19,8 +19,8 @@ class Algo extends React.Component {
   compBudget = (user, roomie) => {
     let matchScore = 0
     let maxScore = 10
-    console.log(user)
-    console.log(roomie)
+    // console.log(user)
+    // console.log(roomie)
     const budget1 = user.question.budgetMin
     const budget2 = roomie.question.budgetMin
     if (budget1 === budget2) {
@@ -305,7 +305,7 @@ class Algo extends React.Component {
 
     const userListData = await Axios.get('./api/users')
     const userList = userListData.data
-    console.log(userList)
+    // console.log(userList)
     const userInfoData = await Axios.get(`./api/users/${userId}`)
     const userInfo = userInfoData.data
 
@@ -372,6 +372,7 @@ class Algo extends React.Component {
   }
 
   render() {
+    console.log('this.state for algo', this.state.top3)
     return (
       <div>
         <h1>bestMatch Id: {this.state.bestMatch}</h1>

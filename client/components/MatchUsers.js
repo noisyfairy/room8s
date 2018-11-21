@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import UserForm from './UserForm'
+import {fetchSingleUser} from '../store/singleUser'
 import Algo from './algo'
 // import {me} from '../store/user'
 // import {fetchMatchUsers} from '../store/matchUsers'       // to be activated
@@ -12,18 +12,22 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchMatchUsers: () => dispatch(fetchMatchUsers())
+  getSingleUser: userId => dispatch(fetchSingleUser(userId))
   // getUser: () => dispatch(me()),
 })
 
 class MatchUsers extends Component {
   // async componentDidMount() {
-  //   // await this.props.getUser()
-  //   await this.props.fetchMatchUsers()
-  // }
+  //   const [ user1Id, user2Id, user3Id ] = this.props.matchUsers;
+  //   await this.props.getSingleUser(user1Id)
+  //   await this.props.getSingleUser(user2Id)
+  //   await this.props.getSingleUser(user3Id)
+  // //   // await this.props.getUser()
+  // //   await this.props.fetchMatchUsers()
+  //  }
 
   render() {
-    const {matchUsers} = this.props
+    // const {matchUsers} = this.props || []
 
     return (
       <div>
