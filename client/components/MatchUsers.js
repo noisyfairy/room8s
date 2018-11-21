@@ -28,7 +28,7 @@ class MatchUsers extends Component {
 
   render() {
     // const {matchUsers} = this.props || []
-
+    console.log('Check')
     return (
       <div>
         <h1> Your initial match room8s: </h1>
