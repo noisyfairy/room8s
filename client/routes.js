@@ -16,7 +16,7 @@ import {
   UserInfoForm,
   QuestionsForm
 } from './components'
-import {me, getMapData} from './store'
+import {me, getMapData, getSubwayMapData} from './store'
 
 /**
  * COMPONENT
@@ -76,6 +76,7 @@ const mapDispatch = dispatch => {
     loadInitialData() {
       dispatch(me())
       dispatch(getMapData())
+      dispatch(getSubwayMapData())
     }
   }
 }

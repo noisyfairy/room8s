@@ -40,11 +40,15 @@ class MapQuestionnaire extends React.Component {
 
   handleSubmit = evt => {
     evt.preventDefault()
-    this.props.updateMapScore(Number(this.state.value))
+    for (let location of this.state.value) {
+      this.props.updateMapScore(Number(location))
+    }
     this.props.updateMapRender()
 
     if (this.state.question === Math.max(...Object.keys(questionList))) {
-      setTimeout(history.push('/home'), 3000)
+      setTimeout(function() {
+        history.push('/home')
+      }, 2000)
     } else {
       this.setState({value: '', question: this.state.question + 1})
     }
@@ -85,9 +89,9 @@ class MapQuestionnaire extends React.Component {
             >
               {questionList[this.state.question].answers.map(answer => (
                 <FormControlLabel
-                  label={answer}
+                  label={answer.displayedAnswer}
                   control={<Radio />}
-                  value={neighborhoodIdxObj[answer]}
+                  value={neighborhoodIdxObj[answer.neighborhood]}
                   key={questionList[this.state.question].answers.indexOf(
                     answer
                   )}
