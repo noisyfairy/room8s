@@ -16,7 +16,7 @@ import {
   UserInfoForm,
   QuestionsForm
 } from './components'
-import {me, getMapData} from './store'
+import {me, getMapData, getSubwayMapData} from './store'
 
 /**
  * COMPONENT
@@ -28,6 +28,7 @@ class Routes extends Component {
 
   render() {
     const {isLoggedIn} = this.props
+    console.log(isLoggedIn)
     return (
       <Switch>
         <Route exact path="/" component={Main} />
@@ -53,7 +54,7 @@ class Routes extends Component {
           </Switch>
         )}
         {/* Displays our main {Login} component as a fallback */}
-        {/* <Route component={Main} /> */}
+        <Route component={Main} />
         <Redirect to="/main" />
       </Switch>
     )
@@ -76,6 +77,7 @@ const mapDispatch = dispatch => {
     loadInitialData() {
       dispatch(me())
       dispatch(getMapData())
+      dispatch(getSubwayMapData())
     }
   }
 }
