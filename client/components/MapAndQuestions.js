@@ -11,12 +11,12 @@ class MapAndQuestions extends Component {
       .range(['white', 'yellow', 'orange', 'red'])
     return (
       <div className="mapAndQuestions">
-        <ConnectedMapQuestionnaire />
         <MapWrapper
           data={this.props.data}
           shouldRender={this.props.shouldRender}
           color={color}
         />
+        <ConnectedMapQuestionnaire />
       </div>
     )
   }

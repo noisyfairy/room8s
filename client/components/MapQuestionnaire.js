@@ -1,5 +1,6 @@
 import React from 'react'
 import history from '../history'
+import questionList from '../MapQuestionsObject'
 
 //material UI
 import PropTypes from 'prop-types'
@@ -29,7 +30,8 @@ const styles = theme => ({
 
 class MapQuestionnaire extends React.Component {
   state = {
-    value: ''
+    value: '',
+    question: 1
   }
 
   handleChange = event => {
@@ -63,11 +65,13 @@ class MapQuestionnaire extends React.Component {
             evt.preventDefault()
             this.props.updateMapScore(Number(this.state.value))
             this.props.updateMapRender()
+            this.setState({question: this.state.question + 1})
+            console.log(this.state)
           }}
         >
           <FormControl component="fieldset" className={classes.formControl}>
             <FormLabel component="legend">
-              Where would you like to live?
+              {questionList[this.state.question].question}
             </FormLabel>
             <RadioGroup
               aria-label="location"
@@ -76,21 +80,17 @@ class MapQuestionnaire extends React.Component {
               value={this.state.value}
               onChange={this.handleChange}
             >
-              <FormControlLabel
-                label="East Village"
-                control={<Radio />}
-                value={neighborhoodIdxObj['East Village']}
-              />
-              <FormControlLabel
-                label="Financial District"
-                control={<Radio />}
-                value={neighborhoodIdxObj['Financial District']}
-              />
-              <FormControlLabel
-                label="Upper East Side"
-                control={<Radio />}
-                value={neighborhoodIdxObj['Upper East Side']}
-              />
+              {questionList[this.state.question].answers.map(answer => (
+                <FormControlLabel
+                  label={answer}
+                  control={<Radio />}
+                  value={neighborhoodIdxObj[answer]}
+                  key={questionList[this.state.question].answers.indexOf(
+                    answer
+                  )}
+                />
+              ))}
+              )}
             </RadioGroup>
             <Button
               variant="contained"

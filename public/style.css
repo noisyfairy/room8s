@@ -53,8 +53,10 @@ path {
 
 .mapAndQuestions {
   display: flex;
+  padding: 50px auto;
 }
 
 .questionBox {
   min-width: 200px;
+  padding: 100px auto;
 }
