@@ -13,7 +13,7 @@ const Main = () => {
         <h4> New to NYC and want to know where you should live? </h4>
         <h4> Want to know more about each neighborgood </h4>
         <h4>
-          <i> Find out more here </i> <Link to="neighborhoods"> Map </Link>
+          <i> Find out more here </i> <Link to="map"> Map </Link>
         </h4>
       </div>
     </div>

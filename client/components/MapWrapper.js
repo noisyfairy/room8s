@@ -11,13 +11,13 @@ class MapWrapper extends Component {
   render() {
     const data = this.props.data
     const color = this.props.color
-    console.log(data)
+    console.log(this.props)
     if (data === null) {
       return null
     } else {
       if (data.features && this.props.shouldRender === true) {
         return (
-          <svg key="first" width="960" height="720">
+          <svg key="first" width="720" height="720">
             <NYCNeighborhoods
               width={720}
               height={720}
@@ -28,7 +28,7 @@ class MapWrapper extends Component {
         )
       }
       return (
-        <svg key="second" width="960" height="720">
+        <svg key="second" width="720" height="720">
           <NYCNeighborhoods
             width={720}
             height={720}
