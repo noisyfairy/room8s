@@ -16,7 +16,7 @@ import {
   UserInfoForm,
   QuestionsForm
 } from './components'
-import {me, getMapData} from './store'
+import {me, getMapData, getSubwayMapData} from './store'
 
 /**
  * COMPONENT
@@ -54,7 +54,7 @@ class Routes extends Component {
         )}
         {/* Displays our main {Login} component as a fallback */}
         {/* <Route component={Main} /> */}
-        <Redirect to="/main" />
+        {/* <Redirect to="/main" /> */}
       </Switch>
     )
   }
@@ -76,6 +76,7 @@ const mapDispatch = dispatch => {
     loadInitialData() {
       dispatch(me())
       dispatch(getMapData())
+      dispatch(getSubwayMapData())
     }
   }
 }
