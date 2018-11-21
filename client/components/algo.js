@@ -1,6 +1,6 @@
 import Axios from 'axios'
 import React from 'react'
-import { getMatchUsers } from '../store';
+import {getMatchUsers} from '../store'
 import {connect} from 'react-redux'
 
 class Algo extends React.Component {
@@ -384,15 +384,15 @@ class Algo extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return{
+  return {
     userPref: state.singleUser.user.question
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    getMatchUsers: (matchedUser) => dispatch(getMatchUsers(matchedUser))
-    }
+    getMatchUsers: matchedUser => dispatch(getMatchUsers(matchedUser))
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Algo)

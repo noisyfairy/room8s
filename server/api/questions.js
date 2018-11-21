@@ -22,9 +22,18 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
+router.put('/:id', async (req, res, next) => {
   try {
-    const answer = await Questions.create(req.body)
+    const answer = await Questions.findOrCreate({
+      where: {userId: req.params.id},
+      defaults: {
+        ...req.body
+      }
+    })
+
+    if (!answer[1]) {
+      const updatedAnswers = await Questions.create(req.body)
+    }
     res.json(answer)
   } catch (err) {
     next(err)

@@ -2,7 +2,7 @@ import axios from 'axios'
 // import history from '../history'
 
 // Actions
-const GET_USER = 'GET_USER'
+const GET_SINGLEUSER = 'GET_SINGLEUSER'
 const ADD_TO_FAVORITE = 'ADD_TO_FAVORITE'
 // Initial State
 const defaultSingleUser = {
@@ -11,17 +11,18 @@ const defaultSingleUser = {
 
 // Action creator
 export const getSingleUser = user => ({
-  type: GET_USER,
+  type: GET_SINGLEUSER,
   user
 })
 
 //Thunk creator
-export const fetchSingleUser = userId => {
+export const fetchSingleUser = async userId => {
   return async dispatch => {
     try {
-      const response = await axios.get('/api/users/' + userId)
+      const response = await axios.get(`/api/users/${userId}`)
       const user = response.data
-      dispatch(getSingleUser(user))
+      console.log('user,', user)
+      await dispatch(getSingleUser(user))
     } catch (err) {
       console.log(err)
     }
@@ -31,7 +32,7 @@ export const fetchSingleUser = userId => {
 // Reducer
 const singleUserReducer = (state = defaultSingleUser, action) => {
   switch (action.type) {
-    case GET_USER:
+    case GET_SINGLEUSER:
       return {...state, user: action.user}
 
     default:
