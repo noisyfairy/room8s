@@ -38,6 +38,18 @@ class MapQuestionnaire extends React.Component {
     this.setState({value: event.target.value})
   }
 
+  handleSubmit = evt => {
+    evt.preventDefault()
+    this.props.updateMapScore(Number(this.state.value))
+    this.props.updateMapRender()
+
+    if (this.state.question === Math.max(...Object.keys(questionList))) {
+      setTimeout(history.push('/home'), 3000)
+    } else {
+      this.setState({value: '', question: this.state.question + 1})
+    }
+  }
+
   render() {
     const {classes} = this.props
 
@@ -59,16 +71,7 @@ class MapQuestionnaire extends React.Component {
     /////////
     return (
       <div className={classes.root}>
-        <form
-          className="questionBox"
-          onSubmit={evt => {
-            evt.preventDefault()
-            this.props.updateMapScore(Number(this.state.value))
-            this.props.updateMapRender()
-            this.setState({question: this.state.question + 1})
-            console.log(this.state)
-          }}
-        >
+        <form className="questionBox" onSubmit={this.handleSubmit}>
           <FormControl component="fieldset" className={classes.formControl}>
             <FormLabel component="legend">
               {questionList[this.state.question].question}
