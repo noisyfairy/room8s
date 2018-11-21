@@ -1,10 +1,13 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import {Login} from './auth-form'
 
 const Main = () => {
   return (
     <div>
-      <Link to="login"> Login </Link>
+      <div>
+        <Login />
+      </div>
 
       <div>
         <h4> New to NYC and want to know where you should live? </h4>
