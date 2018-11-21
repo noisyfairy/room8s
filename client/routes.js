@@ -41,7 +41,6 @@ class Routes extends Component {
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         {/* // <Route exact path="/neighborhoods" component={ NYCNeighborhoods } /> */}
-        <Route exact path="/users" component={Users} />
         {isLoggedIn && (
           <Switch>
             {/* {/* Routes placed here are only available after logging in */}
@@ -51,10 +50,12 @@ class Routes extends Component {
             <Route exact path="/questionform" component={QuestionsForm} />
             <Route exact path="/userinfoform" component={UserInfoForm} />
             <Route exact path="/home" component={UserHome} />
+
+            <Route exact path="/users" component={Users} />
           </Switch>
         )}
         {/* Displays our main {Login} component as a fallback */}
-        <Route component={Main} />
+        {/* <Route component={Main} /> */}
         <Redirect to="/main" />
       </Switch>
     )
@@ -74,8 +75,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    loadInitialData() {
-      dispatch(me())
+    async loadInitialData() {
+      await dispatch(me())
       dispatch(getMapData())
       dispatch(getSubwayMapData())
     }
