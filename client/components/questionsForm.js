@@ -90,6 +90,7 @@ class QuestionsForm extends React.Component {
   handleSubmit = async event => {
     event.preventDefault()
     console.log('updating')
+    console.log(this.props.userId)
     await Axios.put(`./api/questions/${this.props.userId}`, this.state)
     this.routeChange()
   }
