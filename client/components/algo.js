@@ -1,7 +1,9 @@
 import Axios from 'axios'
 import React from 'react'
+import {getMatchUsers} from '../store'
+import {connect} from 'react-redux'
 
-export default class Algo extends React.Component {
+class Algo extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -292,13 +294,11 @@ export default class Algo extends React.Component {
           this.allCompFx()
         )
       }
-    }
-    )
+    })
     return results
   }
 
-  bestmatches = async (userId) => {
-
+  bestmatches = async userId => {
     let top3results = {}
     let bestResultId = 0
     let bestResuiltScore = 0
@@ -308,7 +308,6 @@ export default class Algo extends React.Component {
     console.log(userList)
     const userInfoData = await Axios.get(`./api/users/${userId}`)
     const userInfo = userInfoData.data
-
 
     const userMatchScores = this.matchRoommate(userList, userId)
 
@@ -337,7 +336,7 @@ export default class Algo extends React.Component {
       userInfo,
       this.allCompFx()
     )
-  
+
     top3results[top3roomieId[0]] =
       (top3results[top3roomieId[0]] + counterMatch1) / 2
 
@@ -369,16 +368,31 @@ export default class Algo extends React.Component {
       bestMatch: bestResultId,
       top3: top3roomieId
     })
+    this.props.getMatchUsers(top3roomieId)
   }
 
   render() {
     return (
       <div>
         <h1>bestMatch Id: {this.state.bestMatch}</h1>
-        <h1>1st Id:  {this.state.top3[0]}</h1>
-        <h1>2nd Id:  {this.state.top3[1]}</h1>
-        <h1>3rd Id:  {this.state.top3[2]}</h1>
+        <h1>1st Id: {this.state.top3[0]}</h1>
+        <h1>2nd Id: {this.state.top3[1]}</h1>
+        <h1>3rd Id: {this.state.top3[2]}</h1>
       </div>
     )
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    userPref: state.singleUser.user.question
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getMatchUsers: matchedUser => dispatch(getMatchUsers(matchedUser))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Algo)

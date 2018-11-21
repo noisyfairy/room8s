@@ -3,11 +3,10 @@ import FormGroup from '@material-ui/core/FormGroup'
 import Button from '@material-ui/core/Button'
 import RadioFields from './radioFields'
 import {connect} from 'react-redux'
-import PropTypes from 'prop-types'
+import PropTypes, {string} from 'prop-types'
 import {withStyles} from '@material-ui/core/styles'
 import Axios from 'axios'
-import {me} from '../store/user'
-import {getUsers} from '../store/users'
+import {fetchSingleUser} from '../store'
 
 const styles = {
   root: {},
@@ -44,8 +43,40 @@ class QuestionsForm extends React.Component {
     todPrior: 0
   }
 
-  componentDidMount() {
-    this.setState({userId: this.props.userId})
+  async componentDidMount() {
+    const {data} = await Axios.get(`./api/questions/${this.props.userId}`)
+    const userPref = data
+    if (userPref) {
+      this.setState({
+        userId: userPref.userId,
+        budgetMin: `${userPref.budgetMin}`,
+        budgetMax: `${userPref.budgetMax}`,
+        budgetPrior: `${userPref.budgetPrior}`,
+        locationPrior: `${userPref.locationPrior}`,
+        moveInTime: '2018-12-24T05:00:00.000Z',
+        moveInPrior: `${userPref.moveInPrior}`,
+        duration: `${userPref.duration}`,
+        duraPrior: `${userPref.duraPrior}`,
+        pet: userPref.pet,
+        petPrior: `${userPref.petPrior}`,
+        smoke: userPref.smoke,
+        smokePrior: `${userPref.smokePrior}`,
+        introvert: userPref.introvert,
+        introPrior: `${userPref.introPrior}`,
+        sex: userPref.sex,
+        sexPrior: `${userPref.sexPrior}`,
+        ageMin: `${userPref.ageMin}`,
+        ageMax: `${userPref.ageMax}`,
+        agePrior: `${userPref.agePrior}`,
+        clean: `${userPref.clean}`,
+        cleanPrior: `${userPref.cleanPrior}`,
+        guest: `${userPref.guest}`,
+        guestPrior: `${userPref.guestPrior}`,
+        tod: userPref.tod,
+        todPrior: `${userPref.todPrior}`
+      })
+    }
+    console.log(this.state)
   }
 
   handleChange = (fieldKey1, fieldKey2 = null, rangeitr = null) => event => {
@@ -58,7 +89,7 @@ class QuestionsForm extends React.Component {
 
   handleSubmit = async event => {
     event.preventDefault()
-    await Axios.post(`./api/questions`, this.state)
+    await Axios.put(`./api/questions/${this.state.userId}`, this.state)
     this.routeChange()
   }
 
@@ -68,6 +99,7 @@ class QuestionsForm extends React.Component {
   }
 
   render() {
+    console.log(this.state)
     const {classes} = this.props
     return (
       <div>
@@ -403,7 +435,17 @@ class QuestionsForm extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    userId: state.user.id
+    userId: state.user.id,
+    userInfo: state.singleUser.user
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getUserInfo: async userId => {
+      dispatch(await fetchSingleUser(userId))
+      // dispatch(fetchSingleUser(userId))
+    }
   }
 }
 
@@ -411,4 +453,6 @@ QuestionsForm.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(QuestionsForm))
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withStyles(styles)(QuestionsForm)
+)
