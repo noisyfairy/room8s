@@ -53,8 +53,7 @@ class Routes extends Component {
           </Switch>
         )}
         {/* Displays our main {Login} component as a fallback */}
-        {/* <Route component={Main} /> */}
-        <Redirect to="/main" />
+        <Route component={Main} />
       </Switch>
     )
   }
