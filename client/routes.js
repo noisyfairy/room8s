@@ -12,7 +12,7 @@ import {
   MatchUsers,
   FavoriteUsers,
   SingleUser,
-  MapAndQuestions,
+  ConnectedMapAndQuestions,
   UserInfoForm,
   QuestionsForm
 } from './components'
@@ -33,7 +33,7 @@ class Routes extends Component {
         <Route exact path="/" component={Main} />
         <Route exact path="/main" component={Main} />
         <Route exact path="/home" component={UserHome} />
-        <Route exact path="/map" component={MapAndQuestions} />
+        <Route exact path="/map" component={ConnectedMapAndQuestions} />
         {/* // personal info & link to {questions,AllMatchUsers, FavoriteUsers}  view */}
         <Route exact path="/questions" component={Questions} />
         {/* // should prepopulate with answers upon signIn; empy upon signUp, & link to AllMatchUsers view */}
