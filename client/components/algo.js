@@ -305,7 +305,6 @@ class Algo extends React.Component {
 
     const userListData = await Axios.get('./api/users')
     const userList = userListData.data
-    // console.log(userList)
     const userInfoData = await Axios.get(`./api/users/${userId}`)
     const userInfo = userInfoData.data
 
