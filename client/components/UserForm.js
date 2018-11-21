@@ -1,10 +1,10 @@
 import React from 'react'
 
 const UserForm = props => {
-  const {score, firstName, lastName, email} = props
+  const {firstName, lastName, email} = props
   return (
     <div>
-      {score} | {firstName} {lastName} | {email}
+      {firstName} {lastName} | {email}
     </div>
   )
 }
