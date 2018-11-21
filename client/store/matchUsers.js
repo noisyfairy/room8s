@@ -15,6 +15,19 @@ export const getMatchUsers = matchUsers => ({
   matchUsers
 })
 
+//Thunk creator
+export const fetchMatchUsers = userId => {
+  return async dispatch => {
+    try {
+      const response = await axios.get(`/api/users/${userId}/matchUsers`)
+      const matchUsers = response.data
+      dispatch(getMatchUsers(matchUsers))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
 // Reducer
 const matchUsersReducer = (state = defaultMatchUsersList, action) => {
   switch (action.type) {

@@ -1,38 +1,44 @@
 import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import NYCNeighborhoods from './NYCneighborhoods'
+import NYCNeighborhoods from './NYCNeighborhoods'
+import {getMapData, getSubwayData} from '../store/map'
+import history from '../history'
 
 class MapWrapper extends Component {
+  handleClick = async () => {
+    console.log('working')
+    await this.props.getSubwayData(this.props.mapData)
+  }
   render() {
-    if (this.props.mapData === null) return null
-    if (this.props.mapData.features && this.props.shouldRender === true) {
+    const data = this.props.data
+    const color = this.props.color
+    console.log(data)
+    if (data === null) {
+      return null
+    } else {
+      if (data.features && this.props.shouldRender === true) {
+        return (
+          <svg key="first" width="960" height="720">
+            <NYCNeighborhoods
+              width={720}
+              height={720}
+              mapData={data}
+              color={color}
+            />
+          </svg>
+        )
+      }
       return (
-        <svg key="first" width="960" height="720">
+        <svg key="second" width="960" height="720">
           <NYCNeighborhoods
             width={720}
             height={720}
-            mapData={this.props.mapData}
+            mapData={data}
+            color={color}
           />
         </svg>
       )
     }
-    return (
-      <svg key="second" width="960" height="720">
-        <NYCNeighborhoods
-          width={720}
-          height={720}
-          mapData={this.props.mapData}
-        />
-      </svg>
-    )
   }
 }
 
-const mapStateToProps = state => ({
-  mapData: state.map.mapData,
-  shouldRender: state.map.shouldRender
-})
-
-const ConnectedMapWrapper = connect(mapStateToProps)(MapWrapper)
-
-export default ConnectedMapWrapper
+export default MapWrapper

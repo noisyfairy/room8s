@@ -56,6 +56,7 @@ async function seed() {
   ])
 
   console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${questions.length} questions`)
   console.log(`seeded successfully`)
 }
 
