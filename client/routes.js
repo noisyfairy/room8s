@@ -40,20 +40,12 @@ class Routes extends Component {
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         {/* // <Route exact path="/neighborhoods" component={ NYCNeighborhoods } /> */}
+        <Route exact path="/users" component={Users} />
         {isLoggedIn && (
           <Switch>
             {/* {/* Routes placed here are only available after logging in */}
-            <Route exact path="/users" component={Users} />
-            <Route
-              exact
-              path="/users/:userId/matchUsers"
-              component={MatchUsers}
-            />
-            <Route
-              exact
-              path="/users/:userId/favoriteUsers"
-              component={FavoriteUsers}
-            />
+            <Route exact path="/matchUsers" component={MatchUsers} />
+            <Route exact path="/favoriteUsers" component={FavoriteUsers} />
             <Route exact path="/users/:userId" component={SingleUser} />
             <Route exact path="/questionform" component={QuestionsForm} />
             <Route exact path="/userinfoform" component={UserInfoForm} />
@@ -61,7 +53,8 @@ class Routes extends Component {
           </Switch>
         )}
         {/* Displays our main {Login} component as a fallback */}
-        <Route component={Main} />
+        {/* <Route component={Main} /> */}
+        <Redirect to="/main" />
       </Switch>
     )
   }

@@ -52,3 +52,84 @@ path {
 }
 
 /* D3 styling */
+#users {
+  max-width: 90%;
+  max-height: 90%;
+  margin: 10px;
+  padding: 10px;
+  /* border: 2px dashed green; */
+  text-align: left;
+}
+
+#usersHeadline {
+  margin-left: 30px;
+}
+.userContainer {
+  margin: 10px;
+  padding: 10px;
+  position: relative;
+  display: flex;
+  /* border: 5px solid red; */
+
+  width: 100vw;
+  height: 500px;
+  flex-direction: column;
+
+  text-align: left;
+}
+
+.userHeader {
+  margin: 10px;
+  padding: 10px;
+  /* position: absolute; */
+  font-size: 20px;
+  border: 2px solid yellow;
+  border-radius: 10px;
+  text-align: left;
+
+  text-align: left;
+  background-color: white;
+  color: black;
+  width: 500px;
+}
+
+.userList {
+  margin: 10px;
+  padding: 10px;
+  /* position: absolute; */
+  font-size: 20px;
+  border: 2px solid yellow;
+  border-radius: 10px;
+
+  text-align: left;
+  background-color: lightgreen;
+  color: black;
+  width: 500px;
+}
+
+.userList:hover {
+  /* text-decoration: underline; */
+  cursor: pointer;
+  background-color: rgb(139, 0, 107);
+  color: white;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 8px;
+  width: 200px;
+}
+
+tr:nth-child(even) {
+  background-color: blue;
+}
+
+th {
+  color: black;
+}

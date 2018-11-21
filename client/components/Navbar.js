@@ -150,7 +150,6 @@ class NavBar extends React.Component {
   render() {
     const {classes, theme} = this.props
     const {anchor, open} = this.state
-    // console.log('NavBar history', history)
     this.changeBackground()
     const drawer = (
       <Drawer
