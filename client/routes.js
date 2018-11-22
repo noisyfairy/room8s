@@ -4,7 +4,7 @@ import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {
   Login,
-  Signup,
+  SignupPage,
   UserHome,
   Main,
   Questions,
@@ -29,33 +29,29 @@ class Routes extends Component {
   render() {
     const {isLoggedIn} = this.props
     console.log(isLoggedIn)
+    console.log('routes hit')
     return (
       <Switch>
         <Route exact path="/" component={Main} />
-        <Route exact path="/main" component={Main} />
+        <Route exact path="/signup" component={SignupPage} />
+        {/* <Route exact path="/main" component={Main} /> */}
         <Route exact path="/home" component={UserHome} />
         <Route exact path="/map" component={ConnectedMapAndQuestions} />
-        {/* // personal info & link to {questions,AllMatchUsers, FavoriteUsers}  view */}
         <Route exact path="/questions" component={Questions} />
-        {/* // should prepopulate with answers upon signIn; empy upon signUp, & link to AllMatchUsers view */}
         <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component={Signup} />
-        {/* // <Route exact path="/neighborhoods" component={ NYCNeighborhoods } /> */}
         <Route exact path="/users" component={Users} />
         {isLoggedIn && (
           <Switch>
-            {/* {/* Routes placed here are only available after logging in */}
             <Route exact path="/matchUsers" component={MatchUsers} />
-            <Route exact path="/favoriteUsers" component={FavoriteUsers} />
             <Route exact path="/users/:userId" component={SingleUser} />
             <Route exact path="/questionform" component={QuestionsForm} />
             <Route exact path="/userinfoform" component={UserInfoForm} />
             <Route exact path="/home" component={UserHome} />
+            {/* <Route exact path="/favoriteUsers" component={FavoriteUsers} /> */}
           </Switch>
         )}
-        {/* Displays our main {Login} component as a fallback */}
         <Route component={Main} />
-        <Redirect to="/main" />
+        {/* <Redirect to="/main" /> */}
       </Switch>
     )
   }

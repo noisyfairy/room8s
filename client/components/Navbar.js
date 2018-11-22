@@ -181,9 +181,9 @@ class NavBar extends React.Component {
           <ListItem button onClick={() => history.push('/knowledge-map')}>
             <ListItemText primary="Knowledge Map" />
           </ListItem>
-          <ListItem button onClick={() => history.push('/users')}>
+          {/* <ListItem button onClick={() => history.push('/users')}>
             <ListItemText primary="Users" />
-          </ListItem>
+          </ListItem> */}
           <ListItem button onClick={() => history.push('/matchUsers')}>
             <ListItemText primary="Match Users" />
           </ListItem>
