@@ -7,6 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import Button from '@material-ui/core/Button'
 import Axios from 'axios'
 import {fetchSingleUser} from '../store'
+import IntegrationAutosuggest from './searchfield'
 
 const styles = theme => ({
   container: {
@@ -84,6 +85,10 @@ class UserInfoForm extends React.Component {
           value={this.state.firstName}
           onChange={this.handleChange('firstName')}
         />
+
+        <IntegrationAutosuggest label="1st Location Preference" />
+
+        <IntegrationAutosuggest label="2nd Location Preference" />
 
         <TextField
           id="last name input"

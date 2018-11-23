@@ -7,7 +7,6 @@ import parse from 'autosuggest-highlight/parse'
 import TextField from '@material-ui/core/TextField'
 import Paper from '@material-ui/core/Paper'
 import MenuItem from '@material-ui/core/MenuItem'
-import Popper from '@material-ui/core/Popper'
 import {withStyles} from '@material-ui/core/styles'
 
 const suggestions = [
@@ -429,8 +428,7 @@ const styles = theme => ({
 
 class IntegrationAutosuggest extends React.Component {
   state = {
-    single: '',
-    popper: '',
+    neighbourhood: '',
     suggestions: []
   }
 
@@ -454,7 +452,6 @@ class IntegrationAutosuggest extends React.Component {
 
   render() {
     const {classes} = this.props
-
     const autosuggestProps = {
       renderInputComponent,
       suggestions: this.state.suggestions,
@@ -465,62 +462,27 @@ class IntegrationAutosuggest extends React.Component {
     }
 
     return (
-      <div className={classes.root}>
-        <Autosuggest
-          {...autosuggestProps}
-          inputProps={{
-            classes,
-            placeholder: 'Search a country (start with a)',
-            value: this.state.single,
-            onChange: this.handleChange('single')
-          }}
-          theme={{
-            container: classes.container,
-            suggestionsContainerOpen: classes.suggestionsContainerOpen,
-            suggestionsList: classes.suggestionsList,
-            suggestion: classes.suggestion
-          }}
-          renderSuggestionsContainer={options => (
-            <Paper {...options.containerProps} square>
-              {options.children}
-            </Paper>
-          )}
-        />
-        <div className={classes.divider} />
-        <Autosuggest
-          {...autosuggestProps}
-          inputProps={{
-            classes,
-            label: 'Label',
-            placeholder: 'With Popper',
-            value: this.state.popper,
-            onChange: this.handleChange('popper'),
-            inputRef: node => {
-              this.popperNode = node
-            },
-            InputLabelProps: {
-              shrink: true
-            }
-          }}
-          theme={{
-            suggestionsList: classes.suggestionsList,
-            suggestion: classes.suggestion
-          }}
-          renderSuggestionsContainer={options => (
-            <Popper anchorEl={this.popperNode} open={Boolean(options.children)}>
-              <Paper
-                square
-                {...options.containerProps}
-                style={{
-                  width: this.popperNode ? this.popperNode.clientWidth : null
-                }}
-              >
-                {options.children}
-              </Paper>
-            </Popper>
-          )}
-        />
-      </div>
+      <Autosuggest
+        {...autosuggestProps}
+        inputProps={{
+          label: this.props.label,
+          classes,
+          placeholder: 'Search for a neighbourhood',
+          value: this.state.neighbourhood,
+          onChange: this.handleChange('single')
+        }}
+        theme={{
+          container: classes.container,
+          suggestionsContainerOpen: classes.suggestionsContainerOpen,
+          suggestionsList: classes.suggestionsList,
+          suggestion: classes.suggestion
+        }}
+        renderSuggestionsContainer={options => (
+          <Paper {...options.containerProps} square>
+            {options.children}
+          </Paper>
+        )}
+      />
     )
   }
 }
