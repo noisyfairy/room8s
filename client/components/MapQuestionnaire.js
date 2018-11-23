@@ -40,7 +40,14 @@ class MapQuestionnaire extends React.Component {
 
   handleSubmit = evt => {
     evt.preventDefault()
-    this.props.updateMapScore(Number(this.state.value))
+
+    const neighborhoodsArray = this.props.subwayMapData[
+      Number(this.state.value)
+    ]
+    for (let neighborhood of neighborhoodsArray) {
+      let idx = this.props.idx[neighborhood]
+      this.props.updateMapScore(Number(idx))
+    }
     this.props.updateMapRender()
 
     if (this.state.question === Math.max(...Object.keys(questionList))) {
@@ -55,23 +62,7 @@ class MapQuestionnaire extends React.Component {
   render() {
     const {classes} = this.props
 
-    ///////// The following code creates an object with neighborhood name as key, and the index of the neighborhood inside the data as value
-    const neighborhoodIdxObj = {}
-
-    const neighborhoodIdxLookUp = function(data) {
-      for (let neighborhood of data) {
-        neighborhoodIdxObj[neighborhood.properties.neighborhood] = data
-          .indexOf(neighborhood)
-          .toString()
-      }
-    }
-
-    if (this.props.mapData !== null) {
-      neighborhoodIdxLookUp(this.props.mapData.features)
-    }
-    console.log(this.state)
-    console.log(this.props.idx)
-    /////////
+    console.log(`PROPS HERE: `, this.props)
     return (
       <div className={classes.root}>
         <form className="questionBox" onSubmit={this.handleSubmit}>
@@ -90,7 +81,7 @@ class MapQuestionnaire extends React.Component {
                 <FormControlLabel
                   label={answer.displayedAnswer}
                   control={<Radio />}
-                  value={neighborhoodIdxObj[answer.neighborhood]}
+                  value={answer.neighborhoods}
                   key={questionList[this.state.question].answers.indexOf(
                     answer
                   )}
@@ -118,7 +109,8 @@ MapQuestionnaire.propTypes = {
 
 const mapStateToProps = state => ({
   mapData: state.map.mapData,
-  idx: state.map.neighborhoodIdxObj
+  idx: state.map.neighborhoodIdxObj,
+  subwayMapData: state.addedMap.getSubwayScore
 })
 
 const mapDispatchToProps = dispatch => {

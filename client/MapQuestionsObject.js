@@ -4,43 +4,70 @@ const questionList = {
     answers: [
       {
         displayedAnswer: 'Love NYC subway - best in the world',
-        neighborhood: 'Midtown'
+        neighborhoods: '1'
       },
       {
         displayedAnswer:
           'Sometimes, but dont expect to take it very frequently',
-        neighborhood: 'Astoria'
+        neighborhoods: '2'
       },
       {
         displayedAnswer: 'Nah, driving is my thing',
-        neighborhood: 'Kew Gardens'
+        neighborhoods: '3'
       }
     ]
   },
   2: {
-    question:
-      'Do you like to eat out/grab take out or do you prefer cooking at home?',
+    question: 'Do you get around by subway?',
     answers: [
       {
-        displayedAnswer: 'Love it!',
-        neighborhood: 'East Village'
+        displayedAnswer: 'Love NYC subway - best in the world',
+        neighborhoods: '1'
       },
       {
-        displayedAnswer: 'Hate it!',
-        neighborhood: 'Financial District'
+        displayedAnswer:
+          'Sometimes, but dont expect to take it very frequently',
+        neighborhoods: '2'
+      },
+      {
+        displayedAnswer: 'Nah, driving is my thing',
+        neighborhoods: '3'
       }
     ]
   },
   3: {
-    question: 'Literally cannot believe I got this far',
+    question: 'Do you get around by subway?',
     answers: [
       {
-        displayedAnswer: 'Love it!',
-        neighborhood: 'East Village'
+        displayedAnswer: 'Love NYC subway - best in the world',
+        neighborhoods: '1'
       },
       {
-        displayedAnswer: 'Hate it!',
-        neighborhood: 'Financial District'
+        displayedAnswer:
+          'Sometimes, but dont expect to take it very frequently',
+        neighborhoods: '2'
+      },
+      {
+        displayedAnswer: 'Nah, driving is my thing',
+        neighborhoods: '3'
+      }
+    ]
+  },
+  4: {
+    question: 'Do you get around by subway?',
+    answers: [
+      {
+        displayedAnswer: 'Love NYC subway - best in the world',
+        neighborhoods: '1'
+      },
+      {
+        displayedAnswer:
+          'Sometimes, but dont expect to take it very frequently',
+        neighborhoods: '2'
+      },
+      {
+        displayedAnswer: 'Nah, driving is my thing',
+        neighborhoods: '3'
       }
     ]
   }

@@ -8,7 +8,7 @@ class MapAndQuestions extends Component {
     const color = d3
       .scaleThreshold()
       .domain([1, 2, 3, 4])
-      .range(['white', 'yellow', 'orange', 'red'])
+      .range(['white', '#D1F2EB', '#76D7C4', '#17A589'])
     return (
       <div className="mapAndQuestions">
         <MapWrapper
