@@ -36,7 +36,9 @@ class UserInfoForm extends React.Component {
     age: '',
     introvert: '',
     guest: '',
-    tod: ''
+    tod: '',
+    location1: '',
+    location2: ''
   }
 
   async componentDidMount() {
@@ -53,6 +55,11 @@ class UserInfoForm extends React.Component {
 
   handleChange = name => event => {
     this.setState({[name]: event.target.value})
+    console.log(this.state)
+  }
+
+  handleChangeComponent = (name, value) => {
+    this.setState({[name]: value})
     console.log(this.state)
   }
 
@@ -86,9 +93,19 @@ class UserInfoForm extends React.Component {
           onChange={this.handleChange('firstName')}
         />
 
-        <IntegrationAutosuggest label="1st Location Preference" />
+        <IntegrationAutosuggest
+          label="1st Location Preference"
+          handleChangeComponent={this.handleChangeComponent.bind(this)}
+          state={this.state}
+          fieldKey="location1"
+        />
 
-        <IntegrationAutosuggest label="2nd Location Preference" />
+        <IntegrationAutosuggest
+          label="2nd Location Preference"
+          handleChangeComponent={this.handleChangeComponent.bind(this)}
+          state={this.state}
+          fieldKey="location2"
+        />
 
         <TextField
           id="last name input"

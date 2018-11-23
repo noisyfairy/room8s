@@ -448,6 +448,7 @@ class IntegrationAutosuggest extends React.Component {
     this.setState({
       [name]: newValue
     })
+    this.props.handleChangeComponent(this.props.fieldKey, newValue)
   }
 
   render() {
@@ -469,7 +470,7 @@ class IntegrationAutosuggest extends React.Component {
           classes,
           placeholder: 'Search for a neighbourhood',
           value: this.state.neighbourhood,
-          onChange: this.handleChange('single')
+          onChange: this.handleChange('neighbourhood')
         }}
         theme={{
           container: classes.container,
