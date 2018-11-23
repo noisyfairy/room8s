@@ -72,6 +72,7 @@ export const getArrestMapData = () => async dispatch => {
             }
           })
         }
+        dispatch(getArrest(mapData))
       }
     )
   } catch (err) {
