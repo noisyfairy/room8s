@@ -48,7 +48,6 @@ class QuestionsForm extends React.Component {
     const userPref = data
     if (userPref) {
       this.setState({
-        userId: this.props.userId,
         budgetMin: `${userPref.budgetMin}`,
         budgetMax: `${userPref.budgetMax}`,
         budgetPrior: `${userPref.budgetPrior}`,
@@ -76,6 +75,9 @@ class QuestionsForm extends React.Component {
         todPrior: `${userPref.todPrior}`
       })
     }
+    this.setState({
+      userId: this.props.userId
+    })
     console.log(this.state)
   }
 
@@ -91,6 +93,7 @@ class QuestionsForm extends React.Component {
     event.preventDefault()
     console.log('updating')
     console.log(this.props.userId)
+    console.log(this.state)
     await Axios.put(`./api/questions/${this.props.userId}`, this.state)
     this.routeChange()
   }
