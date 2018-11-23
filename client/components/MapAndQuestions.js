@@ -24,7 +24,8 @@ class MapAndQuestions extends Component {
 
 const mapStateToProps = state => ({
   data: state.map.mapData,
-  shouldRender: state.map.shouldRender
+  shouldRender: state.map.shouldRender,
+  subwayData: state.addedMap.subwayMapData
 })
 
 const connectedMapAndQuestions = connect(mapStateToProps)(MapAndQuestions)

@@ -70,6 +70,7 @@ class MapQuestionnaire extends React.Component {
       neighborhoodIdxLookUp(this.props.mapData.features)
     }
     console.log(this.state)
+    console.log(this.props.idx)
     /////////
     return (
       <div className={classes.root}>
@@ -116,7 +117,8 @@ MapQuestionnaire.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  mapData: state.map.mapData
+  mapData: state.map.mapData,
+  idx: state.map.neighborhoodIdxObj
 })
 
 const mapDispatchToProps = dispatch => {
