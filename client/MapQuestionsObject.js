@@ -18,19 +18,18 @@ const questionList = {
     ]
   },
   2: {
-    question: 'Do you get around by subway?',
+    question: 'Is Safety a huge concern to you?',
     answers: [
       {
-        displayedAnswer: 'Love NYC subway - best in the world',
+        displayedAnswer: 'Yes! I want to live in a neighborhood with no crime',
         neighborhoods: '1'
       },
       {
-        displayedAnswer:
-          'Sometimes, but dont expect to take it very frequently',
+        displayedAnswer: 'I am concern but not my top priority',
         neighborhoods: '2'
       },
       {
-        displayedAnswer: 'Nah, driving is my thing',
+        displayedAnswer: 'I am safe everywhere I go',
         neighborhoods: '3'
       }
     ]
