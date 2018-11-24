@@ -52,11 +52,12 @@ class MapQuestionnaire extends React.Component {
 
     if (this.state.question === Math.max(...Object.keys(questionList))) {
       setTimeout(function() {
-        history.push('/home')
+        history.push('/answer')
       }, 2000)
     } else {
       this.setState({value: '', question: this.state.question + 1})
     }
+    console.log(this.props.mapData)
   }
 
   render() {

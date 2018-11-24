@@ -14,7 +14,8 @@ import {
   SingleUser,
   ConnectedMapAndQuestions,
   UserInfoForm,
-  QuestionsForm
+  QuestionsForm,
+  ConnectedMapQuestionnaireAnswer
 } from './components'
 import {me, getMapData, getSubwayMapData} from './store'
 
@@ -40,6 +41,11 @@ class Routes extends Component {
         {/* // should prepopulate with answers upon signIn; empy upon signUp, & link to AllMatchUsers view */}
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
+        <Route
+          exact
+          path="/answer"
+          component={ConnectedMapQuestionnaireAnswer}
+        />
         {/* // <Route exact path="/neighborhoods" component={ NYCNeighborhoods } /> */}
         {isLoggedIn && (
           <Switch>
