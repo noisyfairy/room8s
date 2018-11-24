@@ -4,6 +4,7 @@ import classNames from 'classnames'
 import Logout from './Logout'
 import Routes from '../routes'
 import history from '../history'
+import {connect} from 'react-redux'
 
 import {withStyles} from '@material-ui/core/styles'
 import Drawer from '@material-ui/core/Drawer'
@@ -148,7 +149,7 @@ class NavBar extends React.Component {
   }
 
   render() {
-    const {classes, theme} = this.props
+    const {classes, theme, isLoggedIn} = this.props
     const {anchor, open} = this.state
     this.changeBackground()
     const drawer = (
@@ -172,9 +173,11 @@ class NavBar extends React.Component {
         </div>
         <Divider />
         <List>
-          <ListItem button onClick={() => history.push('profile')}>
-            <ListItemText primary="Profile" />
-          </ListItem>
+          {isLoggedIn && (
+            <ListItem button onClick={() => history.push('profile')}>
+              <ListItemText primary="Profile" />
+            </ListItem>
+          )}
           <ListItem button onClick={() => history.push('/map')}>
             <ListItemText primary="Map" />
           </ListItem>
@@ -184,9 +187,11 @@ class NavBar extends React.Component {
           {/* <ListItem button onClick={() => history.push('/users')}>
             <ListItemText primary="Users" />
           </ListItem> */}
-          <ListItem button onClick={() => history.push('/matchUsers')}>
-            <ListItemText primary="Match Users" />
-          </ListItem>
+          {isLoggedIn && (
+            <ListItem button onClick={() => history.push('/matchUsers')}>
+              <ListItemText primary="Match Users" />
+            </ListItem>
+          )}
           {/* <ListItem button onClick={() => history.push('/FavoriteUsers')}>
             <ListItemText primary="Favorite Users" />
           </ListItem> */}
@@ -260,4 +265,10 @@ NavBar.propTypes = {
   theme: PropTypes.object.isRequired
 }
 
-export default withStyles(styles, {withTheme: true})(NavBar)
+const mapState = state => ({
+  isLoggedIn: !!state.user.id
+})
+
+export default withStyles(styles, {withTheme: true})(
+  connect(mapState, null)(NavBar)
+)
