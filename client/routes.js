@@ -8,9 +8,9 @@ import {
   UserHome,
   Main,
   Questions,
+  Profile,
   Users,
   MatchUsers,
-  FavoriteUsers,
   SingleUser,
   ConnectedMapAndQuestions,
   UserInfoForm,
@@ -35,18 +35,19 @@ class Routes extends Component {
         <Route exact path="/" component={Main} />
         <Route exact path="/signup" component={SignupPage} />
         {/* <Route exact path="/main" component={Main} /> */}
-        <Route exact path="/home" component={UserHome} />
+        {/* <Route exact path="/home" component={UserHome} /> */}
         <Route exact path="/map" component={ConnectedMapAndQuestions} />
         <Route exact path="/questions" component={Questions} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/users" component={Users} />
         {isLoggedIn && (
           <Switch>
+            <Route exact path="/home" component={UserHome} />
+            <Route exact path="/profile" component={Profile} />
             <Route exact path="/matchUsers" component={MatchUsers} />
+            {/* <Route exact path="/users" component={Users} /> */}
             <Route exact path="/users/:userId" component={SingleUser} />
             <Route exact path="/questionform" component={QuestionsForm} />
             <Route exact path="/userinfoform" component={UserInfoForm} />
-            <Route exact path="/home" component={UserHome} />
             {/* <Route exact path="/favoriteUsers" component={FavoriteUsers} /> */}
           </Switch>
         )}
