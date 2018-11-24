@@ -21,7 +21,8 @@ const questionList = {
     question: 'Is Safety a huge concern to you?',
     answers: [
       {
-        displayedAnswer: 'Yes! I want to live in a neighborhood with no crime',
+        displayedAnswer:
+          'Yes! Safety is the most important consideration when it comes to neighborhood',
         neighborhoods: '1'
       },
       {
@@ -29,25 +30,25 @@ const questionList = {
         neighborhoods: '2'
       },
       {
-        displayedAnswer: 'I am safe everywhere I go',
+        displayedAnswer: 'I am safe everywhere I go - does not matter to me',
         neighborhoods: '3'
       }
     ]
   },
   3: {
-    question: 'Do you get around by subway?',
+    question: 'Do you prefer eating out or cooking at home?',
     answers: [
       {
-        displayedAnswer: 'Love NYC subway - best in the world',
+        displayedAnswer: 'Cooking? What is that',
         neighborhoods: '1'
       },
       {
-        displayedAnswer:
-          'Sometimes, but dont expect to take it very frequently',
+        displayedAnswer: 'I like going out, but do cook sometimes',
         neighborhoods: '2'
       },
       {
-        displayedAnswer: 'Nah, driving is my thing',
+        displayedAnswer:
+          'The more restaurant around me the more critters there are - I am ok with eating homecook food',
         neighborhoods: '3'
       }
     ]
