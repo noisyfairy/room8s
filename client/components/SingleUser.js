@@ -1,21 +1,17 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-// import {fetchSingleUser} from '../store/singleUser'
+import {fetchSingleUser} from '../store/singleUser'
 // import {me} from '../store/user'
 
-const mapStateToProps = state => {
-  return {
-    user: state.singleUser.user
-    // user: state.user,
-  }
-}
+const mapStateToProps = state => ({
+  user: state.singleUser.user
+  // user: state.user,
+})
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getSingleUser: userId => dispatch(fetchSingleUser(userId))
-    // getUser: () => dispatch(me()),
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  getSingleUser: userId => dispatch(fetchSingleUser(userId))
+  // getUser: () => dispatch(me()),
+})
 
 class SingleUser extends Component {
   async componentDidMount() {
@@ -24,9 +20,10 @@ class SingleUser extends Component {
   }
 
   render() {
+    const {user} = this.props || {}
     return (
       <div>
-        <h4> To be filled</h4>
+        <h4> Single User Information </h4>
       </div>
     )
   }

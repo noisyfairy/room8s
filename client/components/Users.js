@@ -28,13 +28,14 @@ class Users extends Component {
     return (
       <div id="users">
         <h1 id="usersHeadline"> List of all users </h1>
-        <Grid
+        {/* <Grid
           container
           direction="column"
           justify="left"
           alignItem="center"
           className="userContainer"
-        >
+        > */}
+        <div className="userContainer">
           <table>
             <div className="userHeader">
               <tr>
@@ -46,14 +47,15 @@ class Users extends Component {
             </div>
             {users.map(user => {
               return (
-                <Grid
-                  key={user.id}
-                  xs={12}
-                  sm={12}
-                  lg={6}
-                  xl={6}
-                  className="userList"
-                >
+                // <Grid
+                //   key={user.id}
+                //   xs={12}
+                //   sm={12}
+                //   lg={6}
+                //   xl={6}
+                //   className="userList"
+                // >
+                <div key={user.id} className="userList">
                   <Link to={`users/${user.id}`}>
                     <tr>
                       <td>{user.firstName}</td>
@@ -62,11 +64,13 @@ class Users extends Component {
                       <td>100</td>
                     </tr>
                   </Link>
-                </Grid>
+                </div>
+                // </Grid>
               )
             })}
           </table>
-        </Grid>
+        </div>
+        {/* </Grid> */}
       </div>
     )
   }
