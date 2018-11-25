@@ -29,3 +29,5 @@ export {
 } from './MapQuestionnaireAnswer'
 
 // export {default as } from './'
+
+export {default as MapWithData} from './MapWithData'

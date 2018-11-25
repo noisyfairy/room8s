@@ -15,9 +15,10 @@ import {
   ConnectedMapAndQuestions,
   UserInfoForm,
   QuestionsForm,
-  ConnectedMapQuestionnaireAnswer
+  ConnectedMapQuestionnaireAnswer,
+  MapWithData
 } from './components'
-import {me, getMapData, getSubwayMapData} from './store'
+import {me, getMapData, getSubwayMapData, getArrestMapData} from './store'
 
 /**
  * COMPONENT
@@ -47,6 +48,10 @@ class Routes extends Component {
           component={ConnectedMapQuestionnaireAnswer}
         />
         {/* // <Route exact path="/neighborhoods" component={ NYCNeighborhoods } /> */}
+        <Route exact path="/knowledge-map" component={MapWithData} />
+        {/* // <Route exact path="/neighborhoods" component={ NYCNeighborhoods } /> */}
+
+        <Route exact path="/users" component={Users} />
         {isLoggedIn && (
           <Switch>
             {/* {/* Routes placed here are only available after logging in */}
@@ -85,6 +90,7 @@ const mapDispatch = dispatch => {
       await dispatch(me())
       dispatch(getMapData())
       dispatch(getSubwayMapData())
+      dispatch(getArrestMapData())
     }
   }
 }
