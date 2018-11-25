@@ -26,3 +26,5 @@ export {default as NYCNeighborhoods} from './NYCNeighborhoods'
 export {default as ConnectedMapAndQuestions} from './MapAndQuestions'
 
 // export {default as } from './'
+
+export {default as MapWithData} from './MapWithData'

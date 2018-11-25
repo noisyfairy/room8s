@@ -14,9 +14,10 @@ import {
   SingleUser,
   ConnectedMapAndQuestions,
   UserInfoForm,
-  QuestionsForm
+  QuestionsForm,
+  MapWithData
 } from './components'
-import {me, getMapData, getSubwayMapData} from './store'
+import {me, getMapData, getSubwayMapData, getArrestMapData} from './store'
 
 /**
  * COMPONENT
@@ -40,7 +41,9 @@ class Routes extends Component {
         {/* // should prepopulate with answers upon signIn; empy upon signUp, & link to AllMatchUsers view */}
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
+        <Route exact path="/knowledge-map" component={MapWithData} />
         {/* // <Route exact path="/neighborhoods" component={ NYCNeighborhoods } /> */}
+
         <Route exact path="/users" component={Users} />
         {isLoggedIn && (
           <Switch>
@@ -74,10 +77,11 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    loadInitialData() {
-      dispatch(me())
+    async loadInitialData() {
+      await dispatch(me())
       dispatch(getMapData())
       dispatch(getSubwayMapData())
+      dispatch(getArrestMapData())
     }
   }
 }
