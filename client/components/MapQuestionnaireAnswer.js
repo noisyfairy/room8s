@@ -3,33 +3,37 @@ import {connect} from 'react-redux'
 import history from '../history'
 
 class MapQuestionnaireAnswer extends Component {
-  constructor() {
-    super()
-    this.state = {
-      liveHere: []
-    }
+  state = {
+    whereYouShouldLive: null
   }
 
   componentDidMount() {
-    let neighborhoods = this.props.mapData.features
-    console.log(`NEIGHBORHOODS HERE: `, neighborhoods)
-    let mapScore = {}
-    for (let neighborhood of neighborhoods) {
-      console.log(neighborhood.properties.score)
-      if (mapScore[neighborhood.properties.score]) {
-        mapScore[neighborhood.properties.score].push(
-          neighborhood.properties.neighborhood
-        )
-      } else {
-        mapScore[neighborhood.properties.score] = [
-          neighborhood.properties.neighborhood
-        ]
+    if (this.props.mapData) {
+      let neighborhoods = this.props.mapData.features
+      let mapScore = {}
+      for (let neighborhood of neighborhoods) {
+        if (mapScore[neighborhood.properties.score]) {
+          mapScore[neighborhood.properties.score].push(neighborhood.properties)
+        } else {
+          mapScore[neighborhood.properties.score] = [neighborhood.properties]
+        }
       }
+      const MaxScore = Math.max(...Object.keys(mapScore))
+      // console.log(mapScore[MaxScore])
+      const neighborhoodForYou = mapScore[MaxScore]
+      this.setState({
+        whereYouShouldLive: neighborhoodForYou
+      })
     }
   }
 
   render() {
-    return <div>"oh hai, looks like you should live here!"</div>
+    return (
+      <div>
+        "oh hai, looks like you should live here!"<br />
+        {/* <div>{this.neighborhoodForYou}</div> */}
+      </div>
+    )
   }
 }
 
