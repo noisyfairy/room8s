@@ -20,6 +20,7 @@ export default class NYCNeighborhoods extends Component {
       .fitSize([width, height], nyc)
 
     const path = d3.geoPath().projection(projection)
+
     svg
       .selectAll('path')
       .data(nyc.features)
@@ -34,14 +35,31 @@ export default class NYCNeighborhoods extends Component {
       .style('fill', function(d) {
         return d.properties ? color(d.properties.score) : 'black'
       })
-      .on('click', function(d) {
-        console.log(d)
+      .on('mouseenter', function(d) {
         d3
           .select(this)
           .style('stroke-width', 1.5)
           .style('stroke-dasharray', 0)
-          .style('fill', 'black')
+        d3
+          .select('#neighborhoodPopover')
+          .transition()
+          .style('opacity', 1)
+          .style('left', d3.event.pageX + 'px')
+          .style('top', d3.event.pageY + 'px')
+          .text(d.properties.neighborhood)
       })
+      .on('mouseleave', function(d) {
+        d3.select(this).style('stroke-width', 0.5)
+      })
+
+    // .on('click', function(d) {
+    //   d3
+    //     .select(this)
+    //     .style('stroke-width', 1.5)
+    //     .style('stroke-dasharray', 0)
+    //     .style('fill', 'black')
+    //   console.log(d)
+    // })
   }
 
   render() {

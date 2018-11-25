@@ -15,6 +15,7 @@ import {
   ConnectedMapAndQuestions,
   UserInfoForm,
   QuestionsForm,
+  ConnectedMapQuestionnaireAnswer,
   MapWithData
 } from './components'
 import {me, getMapData, getSubwayMapData, getArrestMapData} from './store'
@@ -41,6 +42,12 @@ class Routes extends Component {
         {/* // should prepopulate with answers upon signIn; empy upon signUp, & link to AllMatchUsers view */}
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
+        <Route
+          exact
+          path="/answer"
+          component={ConnectedMapQuestionnaireAnswer}
+        />
+        {/* // <Route exact path="/neighborhoods" component={ NYCNeighborhoods } /> */}
         <Route exact path="/knowledge-map" component={MapWithData} />
         {/* // <Route exact path="/neighborhoods" component={ NYCNeighborhoods } /> */}
 
@@ -54,10 +61,12 @@ class Routes extends Component {
             <Route exact path="/questionform" component={QuestionsForm} />
             <Route exact path="/userinfoform" component={UserInfoForm} />
             <Route exact path="/home" component={UserHome} />
+
+            <Route exact path="/users" component={Users} />
           </Switch>
         )}
         {/* Displays our main {Login} component as a fallback */}
-        <Route component={Main} />
+        {/* <Route component={Main} /> */}
         <Redirect to="/main" />
       </Switch>
     )
