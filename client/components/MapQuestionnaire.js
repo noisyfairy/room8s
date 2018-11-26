@@ -40,35 +40,30 @@ class MapQuestionnaire extends React.Component {
 
   handleSubmit = evt => {
     evt.preventDefault()
-    this.props.updateMapScore(Number(this.state.value))
+
+    const neighborhoodsArray = this.props.subwayMapData[
+      Number(this.state.value)
+    ]
+    for (let neighborhood of neighborhoodsArray) {
+      let idx = this.props.idx[neighborhood]
+      this.props.updateMapScore(Number(idx))
+    }
     this.props.updateMapRender()
 
     if (this.state.question === Math.max(...Object.keys(questionList))) {
-      setTimeout(history.push('/home'), 3000)
+      setTimeout(function() {
+        history.push('/answer')
+      }, 2000)
     } else {
       this.setState({value: '', question: this.state.question + 1})
     }
+    console.log(this.props.mapData)
   }
 
   render() {
     const {classes} = this.props
 
-    ///////// The following code creates an object with neighborhood name as key, and the index of the neighborhood inside the data as value
-    const neighborhoodIdxObj = {}
-
-    const neighborhoodIdxLookUp = function(data) {
-      for (let neighborhood of data) {
-        neighborhoodIdxObj[neighborhood.properties.neighborhood] = data
-          .indexOf(neighborhood)
-          .toString()
-      }
-    }
-
-    if (this.props.mapData !== null) {
-      neighborhoodIdxLookUp(this.props.mapData.features)
-    }
-    console.log(this.state)
-    /////////
+    console.log(`PROPS HERE: `, this.props)
     return (
       <div className={classes.root}>
         <form className="questionBox" onSubmit={this.handleSubmit}>
@@ -85,9 +80,9 @@ class MapQuestionnaire extends React.Component {
             >
               {questionList[this.state.question].answers.map(answer => (
                 <FormControlLabel
-                  label={answer}
+                  label={answer.displayedAnswer}
                   control={<Radio />}
-                  value={neighborhoodIdxObj[answer]}
+                  value={answer.neighborhoods}
                   key={questionList[this.state.question].answers.indexOf(
                     answer
                   )}
@@ -114,7 +109,9 @@ MapQuestionnaire.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  mapData: state.map.mapData
+  mapData: state.map.mapData,
+  idx: state.map.neighborhoodIdxObj,
+  subwayMapData: state.addedMap.getSubwayScore
 })
 
 const mapDispatchToProps = dispatch => {

@@ -47,6 +47,8 @@ path {
   border-radius: 8px;
   pointer-events: none;
   opacity: 0;
+  z-index: 0;
+  /* position: relative; */
 }
 
 /* D3 styling */
