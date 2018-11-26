@@ -52,6 +52,11 @@ const User = db.define('user', {
     type: Sequelize.STRING,
     defaultValue: ''
   },
+  imgUrl: {
+    type: Sequelize.STRING,
+    defaultValue:
+      'https://www.qualiscare.com/wp-content/uploads/2017/08/default-user.png'
+  },
   salt: {
     type: Sequelize.STRING,
     // Making `.salt` act like a function hides it when serializing to JSON.

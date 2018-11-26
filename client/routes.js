@@ -10,7 +10,8 @@ import {
   Questions,
   Profile,
   Users,
-  MatchUsers,
+  Algo,
+  FavoriteUsers,
   SingleUser,
   ConnectedMapAndQuestions,
   UserInfoForm,
@@ -54,15 +55,16 @@ class Routes extends Component {
         <Route exact path="/users" component={Users} />
         {isLoggedIn && (
           <Switch>
+            {/* {/* Routes placed here are only available after logging in */}
+            <Route exact path="/matchUsers" component={Algo} />
             <Route exact path="/home" component={UserHome} />
             <Route exact path="/profile" component={Profile} />
-            <Route exact path="/matchUsers" component={MatchUsers} />
-            {/* <Route exact path="/users" component={Users} /> */}
             <Route exact path="/users/:userId" component={SingleUser} />
             <Route exact path="/preference" component={QuestionsForm} />
             <Route exact path="/userinfo" component={UserInfoForm} />
             <Route exact path="/home" component={UserHome} />
             {/* <Route exact path="/favoriteUsers" component={FavoriteUsers} /> */}
+
             <Route exact path="/users" component={Users} />
           </Switch>
         )}
