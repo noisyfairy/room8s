@@ -58,7 +58,7 @@ class Routes extends Component {
             <Route exact path="/matchUsers" component={MatchUsers} />
             <Route exact path="/favoriteUsers" component={FavoriteUsers} />
             <Route exact path="/users/:userId" component={SingleUser} />
-            <Route exact path="/room8pref" component={QuestionsForm} />
+            <Route exact path="/preference" component={QuestionsForm} />
             <Route exact path="/userinfo" component={UserInfoForm} />
             <Route exact path="/home" component={UserHome} />
 
