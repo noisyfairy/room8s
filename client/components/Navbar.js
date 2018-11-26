@@ -269,6 +269,4 @@ const mapState = state => ({
   isLoggedIn: !!state.user.id
 })
 
-export default withStyles(styles, {withTheme: true})(
-  connect(mapState, null)(NavBar)
-)
+export default withStyles(styles, {withTheme: true})(NavBar)
