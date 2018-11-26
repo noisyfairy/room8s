@@ -14,9 +14,11 @@ import {
   SingleUser,
   ConnectedMapAndQuestions,
   UserInfoForm,
-  QuestionsForm
+  QuestionsForm,
+  ConnectedMapQuestionnaireAnswer,
+  MapWithData
 } from './components'
-import {me, getMapData} from './store'
+import {me, getMapData, getSubwayMapData, getArrestMapData} from './store'
 
 /**
  * COMPONENT
@@ -28,6 +30,7 @@ class Routes extends Component {
 
   render() {
     const {isLoggedIn} = this.props
+    console.log(isLoggedIn)
     return (
       <Switch>
         <Route exact path="/" component={Main} />
@@ -39,7 +42,15 @@ class Routes extends Component {
         {/* // should prepopulate with answers upon signIn; empy upon signUp, & link to AllMatchUsers view */}
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
+        <Route
+          exact
+          path="/answer"
+          component={ConnectedMapQuestionnaireAnswer}
+        />
         {/* // <Route exact path="/neighborhoods" component={ NYCNeighborhoods } /> */}
+        <Route exact path="/knowledge-map" component={MapWithData} />
+        {/* // <Route exact path="/neighborhoods" component={ NYCNeighborhoods } /> */}
+
         <Route exact path="/users" component={Users} />
         {isLoggedIn && (
           <Switch>
@@ -50,6 +61,8 @@ class Routes extends Component {
             <Route exact path="/preference" component={QuestionsForm} />
             <Route exact path="/userinfo" component={UserInfoForm} />
             <Route exact path="/home" component={UserHome} />
+
+            <Route exact path="/users" component={Users} />
           </Switch>
         )}
         {/* Displays our main {Login} component as a fallback */}
@@ -73,9 +86,11 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    loadInitialData() {
-      dispatch(me())
+    async loadInitialData() {
+      await dispatch(me())
       dispatch(getMapData())
+      dispatch(getSubwayMapData())
+      dispatch(getArrestMapData())
     }
   }
 }

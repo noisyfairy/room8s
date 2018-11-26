@@ -17,7 +17,9 @@ class Algo extends React.Component {
 
   compBudget = (user, roomie) => {
     let matchScore = 0
+
     const maxScore = Math.pow(2, Number(user.question.budgetPrior) + 1)
+
     const budget1 = user.question.budgetMin
     const budget2 = roomie.question.budgetMin
     if (budget1 === budget2) {
@@ -331,6 +333,7 @@ class Algo extends React.Component {
   }
 
   render() {
+    console.log('this.state for algo', this.state.top3)
     return (
       <div>
         {this.state.top3.length > 0 ? (
