@@ -18,7 +18,6 @@ export {default as SingleUser} from './SingleUser'
 //Forms
 export {default as QuestionsForm} from './questionsForm'
 export {default as UserInfoForm} from './userInfoForm'
-
 export {default as Algo} from './algo'
 
 // export {default as MapView } from './MapView'

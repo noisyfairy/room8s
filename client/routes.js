@@ -9,7 +9,7 @@ import {
   Main,
   Questions,
   Users,
-  MatchUsers,
+  Algo,
   FavoriteUsers,
   SingleUser,
   ConnectedMapAndQuestions,
@@ -30,7 +30,6 @@ class Routes extends Component {
 
   render() {
     const {isLoggedIn} = this.props
-    console.log(isLoggedIn)
     return (
       <Switch>
         <Route exact path="/" component={Main} />
@@ -55,13 +54,12 @@ class Routes extends Component {
         {isLoggedIn && (
           <Switch>
             {/* {/* Routes placed here are only available after logging in */}
-            <Route exact path="/matchUsers" component={MatchUsers} />
+            <Route exact path="/matchUsers" component={Algo} />
             <Route exact path="/favoriteUsers" component={FavoriteUsers} />
             <Route exact path="/users/:userId" component={SingleUser} />
             <Route exact path="/preference" component={QuestionsForm} />
             <Route exact path="/userinfo" component={UserInfoForm} />
             <Route exact path="/home" component={UserHome} />
-
             <Route exact path="/users" component={Users} />
           </Switch>
         )}

@@ -21,7 +21,8 @@ router.get('/', async (req, res, next) => {
         'location',
         'googleId',
         'moveInTime',
-        'duration'
+        'duration',
+        'imgUrl'
       ],
       include: [{all: true}]
     })
