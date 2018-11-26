@@ -49,7 +49,7 @@ class Profile extends Component {
             Personal Information{' '}
             <span className="edit">
               {' '}
-              <Link to="/userinfoform"> Edit </Link>{' '}
+              <Link to="/userinfo"> Edit </Link>{' '}
             </span>{' '}
           </h4>
           <hr />
@@ -76,7 +76,7 @@ class Profile extends Component {
             Preferences{' '}
             <span className="edit">
               {' '}
-              <Link to="/questionform"> Edit </Link>{' '}
+              <Link to="/preference"> Edit </Link>{' '}
             </span>{' '}
           </h4>
           <hr />
