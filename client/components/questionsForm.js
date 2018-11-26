@@ -98,7 +98,7 @@ class QuestionsForm extends React.Component {
   }
 
   routeChange() {
-    let path = `/`
+    let path = `/profile`
     this.props.history.push(path)
   }
 
