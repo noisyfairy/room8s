@@ -39,7 +39,7 @@ export const getSubwayMapData = () => async dispatch => {
   try {
     const {data} = await axios.get('/api/subway')
     const subwayData = data
-    d3.json('subwaymap.geojson', mapData => {
+    d3.json('nycmap.geojson', mapData => {
       let subwayObjScore = {1: [], 2: [], 3: []}
       for (let location of mapData.features) {
         location.properties.score = 0
@@ -78,20 +78,17 @@ export const getArrestMapData = () => async dispatch => {
       return [obj.longitude, obj.latitude]
     })
 
-    d3.json(
-      'http://data.beta.nyc//dataset/0ff93d2d-90ba-457c-9f7e-39e47bf2ac5f/resource/35dd04fb-81b3-479b-a074-a27a37888ce7/download/d085e2f8d0b54d4590b1e7d1f35594c1pediacitiesnycneighborhoods.geojson',
-      mapData => {
-        for (let location of mapData.features) {
-          location.properties.score = 0
-          arrestData.map(coord => {
-            if (inside(coord, location.geometry.coordinates[0])) {
-              location.properties.score++
-            }
-          })
-        }
-        dispatch(getArrest(mapData))
+    d3.json('nycmap.geojson', mapData => {
+      for (let location of mapData.features) {
+        location.properties.score = 0
+        arrestData.map(coord => {
+          if (inside(coord, location.geometry.coordinates[0])) {
+            location.properties.score++
+          }
+        })
       }
-    )
+      dispatch(getArrest(mapData))
+    })
   } catch (err) {
     console.error(err)
   }
