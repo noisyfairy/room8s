@@ -41,7 +41,7 @@ class Routes extends Component {
         <Route exact path="/map" component={ConnectedMapAndQuestions} />
         <Route exact path="/questions" component={Questions} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component={Signup} />
+        {/* <Route exact path="/signup" component={Signup} /> */}
         <Route
           exact
           path="/answer"
@@ -62,7 +62,7 @@ class Routes extends Component {
             <Route exact path="/preference" component={QuestionsForm} />
             <Route exact path="/userinfo" component={UserInfoForm} />
             <Route exact path="/home" component={UserHome} />
-{/* <Route exact path="/favoriteUsers" component={FavoriteUsers} /> */}
+            {/* <Route exact path="/favoriteUsers" component={FavoriteUsers} /> */}
             <Route exact path="/users" component={Users} />
           </Switch>
         )}
