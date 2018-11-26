@@ -19,8 +19,8 @@ class MapQuestionnaireAnswer extends Component {
         }
       }
       const MaxScore = Math.max(...Object.keys(mapScore))
-      // console.log(mapScore[MaxScore])
       const neighborhoodForYou = mapScore[MaxScore]
+      console.log(neighborhoodForYou)
       this.setState({
         whereYouShouldLive: neighborhoodForYou
       })
@@ -28,11 +28,20 @@ class MapQuestionnaireAnswer extends Component {
   }
 
   render() {
+    const answer = this.state.whereYouShouldLive
     return (
-      <div>
-        "oh hai, looks like you should live here!"<br />
-        {/* <div>{this.neighborhoodForYou}</div> */}
-      </div>
+      this.state.whereYouShouldLive !== null && (
+        <div>
+          "based on your preferences, looks like you should considering living
+          in the following areas!"
+          {answer.map(neighborhood => (
+            <div key={answer.indexOf(neighborhood)}>
+              {neighborhood.neighborhood},&nbsp;
+              {neighborhood.borough}
+            </div>
+          ))}
+        </div>
+      )
     )
   }
 }
