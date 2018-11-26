@@ -20,23 +20,48 @@ export default class NYCNeighborhoods extends Component {
       .fitSize([width, height], nyc)
 
     const path = d3.geoPath().projection(projection)
+
     svg
       .selectAll('path')
       .data(nyc.features)
       .enter()
       .append('path')
       .attr('d', path)
+      .style('fill-opacity', d => {
+        if (d.properties.score >= 1) return d.properties.score / 50 + 0.5
+        else return 1
+      })
+      .style('stroke', 'black')
       .style('fill', function(d) {
         return d.properties ? color(d.properties.score) : 'black'
       })
-      .on('click', function(d) {
-        console.log(d)
+      .on('mouseenter', function(d) {
         d3
           .select(this)
           .style('stroke-width', 1.5)
           .style('stroke-dasharray', 0)
-          .style('fill', 'black')
+        d3
+          .select('#neighborhoodPopover')
+          .style('display', 'block')
+          .style('opacity', 1)
+          .style('z-index', 2)
+          .style('left', d3.event.pageX + 'px')
+          .style('top', d3.event.pageY + 'px')
+          .text(d.properties.neighborhood)
       })
+      .on('mouseleave', function(d) {
+        d3.select(this).style('stroke-width', 0.5)
+        d3.select('#neighborhoodPopover').style('display', 'none')
+      })
+
+    // .on('click', function(d) {
+    //   d3
+    //     .select(this)
+    //     .style('stroke-width', 1.5)
+    //     .style('stroke-dasharray', 0)
+    //     .style('fill', 'black')
+    //   console.log(d)
+    // })
   }
 
   render() {

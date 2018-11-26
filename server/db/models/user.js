@@ -22,6 +22,12 @@ const User = db.define('user', {
   lastName: {
     type: Sequelize.STRING
   },
+  location: {
+    type: Sequelize.STRING
+  },
+  duration: {
+    type: Sequelize.INTEGER
+  },
   sex: {
     type: Sequelize.ENUM('M', 'F')
   },
@@ -31,6 +37,9 @@ const User = db.define('user', {
   introvert: {
     type: Sequelize.ENUM('introvert', 'extrovert')
   },
+  moveInTime: {
+    type: Sequelize.STRING
+  },
   // how often do you have guests?
   guest: {
     type: Sequelize.INTEGER
@@ -38,6 +47,10 @@ const User = db.define('user', {
   // time of day
   tod: {
     type: Sequelize.ENUM('Morning', 'Night')
+  },
+  location: {
+    type: Sequelize.STRING,
+    defaultValue: ''
   },
   salt: {
     type: Sequelize.STRING,

@@ -26,5 +26,10 @@ export {default as Algo} from './algo'
 // export {default as MapView } from './MapView'
 export {default as NYCNeighborhoods} from './NYCNeighborhoods'
 export {default as ConnectedMapAndQuestions} from './MapAndQuestions'
+export {
+  default as ConnectedMapQuestionnaireAnswer
+} from './MapQuestionnaireAnswer'
 
 // export {default as } from './'
+
+export {default as MapWithData} from './MapWithData'

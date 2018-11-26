@@ -8,6 +8,7 @@ import axios from 'axios'
 const GET_MAP = 'GET_MAP'
 const UPDATE_MAP = 'UPDATE_MAP'
 const UPDATE_RENDER = 'UPDATE_RENDER'
+const GET_IDX = 'GET_IDX'
 
 /**
  * INITIAL STATE
@@ -15,7 +16,8 @@ const UPDATE_RENDER = 'UPDATE_RENDER'
 const defaultState = {
   mapData: null,
   shouldRender: false,
-  subwayMapData: null
+  subwayMapData: null,
+  neighborhoodIdxObj: null
 }
 
 /**
@@ -24,6 +26,7 @@ const defaultState = {
 const getMap = mapData => ({type: GET_MAP, mapData})
 const updateMap = idx => ({type: UPDATE_MAP, idx})
 const updateRender = () => ({type: UPDATE_RENDER})
+const getNeighborhoodIdx = obj => ({type: GET_IDX, obj})
 
 /**
  * THUNK CREATORS
@@ -31,15 +34,19 @@ const updateRender = () => ({type: UPDATE_RENDER})
 
 export const getMapData = () => dispatch => {
   try {
-    d3.json(
-      ' http://data.beta.nyc//dataset/0ff93d2d-90ba-457c-9f7e-39e47bf2ac5f/resource/35dd04fb-81b3-479b-a074-a27a37888ce7/download/d085e2f8d0b54d4590b1e7d1f35594c1pediacitiesnycneighborhoods.geojson',
-      mapData => {
-        for (let location of mapData.features) {
-          location.properties.score = 0
-        }
-        dispatch(getMap(mapData))
+    const neighborhoodIdxObj = {}
+    d3.json('nycmap.geojson', mapData => {
+      for (let location of mapData.features) {
+        location.properties.score = 0
       }
-    )
+      for (let location of mapData.features) {
+        neighborhoodIdxObj[
+          location.properties.neighborhood
+        ] = mapData.features.indexOf(location).toString()
+      }
+      dispatch(getMap(mapData))
+      dispatch(getNeighborhoodIdx(neighborhoodIdxObj))
+    })
   } catch (error) {
     console.error(error)
   }
@@ -89,6 +96,8 @@ export default function(state = defaultState, action) {
       case UPDATE_MAP:
         draft.mapData.features[action.idx].properties.score++
         break
+      case GET_IDX:
+        return {...state, neighborhoodIdxObj: action.obj}
       case UPDATE_RENDER:
         return {...state, shouldRender: !state.shouldRender}
     }

@@ -26,7 +26,7 @@ const styles = theme => ({
   root: {
     flexGrow: 1,
     height: '100vh',
-    backgroundColor: '#ffccbc',
+    backgroundColor: 'white',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover'
   },
@@ -243,12 +243,12 @@ class NavBar extends React.Component {
                 [classes[`contentShift-${anchor}`]]: open
               }
             )}
-            style={{
-              backgroundImage: `
-            linear-gradient(to bottom, rgba(89, 155, 163, 0.65) 0%, rgba(89, 155, 163, 0.65) 30%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0) 100%), ${
-              this.state.bg
-            }`
-            }}
+            // style={{
+            //   backgroundImage: `
+            // linear-gradient(to bottom, rgba(89, 155, 163, 0.65) 0%, rgba(89, 155, 163, 0.65) 30%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0) 100%), ${
+            //   this.state.bg
+            // }`
+            // }}
           >
             <div className={classes.drawerHeader} />
             <Routes style={styles.drawerPaper} />

@@ -14,9 +14,11 @@ import {
   SingleUser,
   ConnectedMapAndQuestions,
   UserInfoForm,
-  QuestionsForm
+  QuestionsForm,
+  ConnectedMapQuestionnaireAnswer,
+  MapWithData
 } from './components'
-import {me, getMapData, getSubwayMapData} from './store'
+import {me, getMapData, getSubwayMapData, getArrestMapData} from './store'
 
 /**
  * COMPONENT
@@ -39,6 +41,17 @@ class Routes extends Component {
         <Route exact path="/map" component={ConnectedMapAndQuestions} />
         <Route exact path="/questions" component={Questions} />
         <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} />
+        <Route
+          exact
+          path="/answer"
+          component={ConnectedMapQuestionnaireAnswer}
+        />
+        {/* // <Route exact path="/neighborhoods" component={ NYCNeighborhoods } /> */}
+        <Route exact path="/knowledge-map" component={MapWithData} />
+        {/* // <Route exact path="/neighborhoods" component={ NYCNeighborhoods } /> */}
+
+        <Route exact path="/users" component={Users} />
         {isLoggedIn && (
           <Switch>
             <Route exact path="/home" component={UserHome} />
@@ -46,9 +59,11 @@ class Routes extends Component {
             <Route exact path="/matchUsers" component={MatchUsers} />
             {/* <Route exact path="/users" component={Users} /> */}
             <Route exact path="/users/:userId" component={SingleUser} />
-            <Route exact path="/questionform" component={QuestionsForm} />
-            <Route exact path="/userinfoform" component={UserInfoForm} />
-            {/* <Route exact path="/favoriteUsers" component={FavoriteUsers} /> */}
+            <Route exact path="/preference" component={QuestionsForm} />
+            <Route exact path="/userinfo" component={UserInfoForm} />
+            <Route exact path="/home" component={UserHome} />
+{/* <Route exact path="/favoriteUsers" component={FavoriteUsers} /> */}
+            <Route exact path="/users" component={Users} />
           </Switch>
         )}
         <Route component={Main} />
@@ -71,10 +86,11 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    loadInitialData() {
-      dispatch(me())
+    async loadInitialData() {
+      await dispatch(me())
       dispatch(getMapData())
       dispatch(getSubwayMapData())
+      dispatch(getArrestMapData())
     }
   }
 }

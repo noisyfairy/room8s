@@ -18,7 +18,10 @@ router.get('/', async (req, res, next) => {
         'introvert',
         'guest',
         'tod',
-        'googleId'
+        'location',
+        'googleId',
+        'moveInTime',
+        'duration'
       ],
       include: [{all: true}]
     })

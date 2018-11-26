@@ -7,6 +7,8 @@ import MenuItem from '@material-ui/core/MenuItem'
 import Button from '@material-ui/core/Button'
 import Axios from 'axios'
 import {fetchSingleUser} from '../store'
+import IntegrationAutosuggest from './searchfield'
+import Divider from '@material-ui/core/Divider'
 
 const styles = theme => ({
   container: {
@@ -28,17 +30,23 @@ const styles = theme => ({
 })
 
 class UserInfoForm extends React.Component {
-  state = {
-    firstName: '',
-    lastName: '',
-    sex: '',
-    age: '',
-    introvert: '',
-    guest: '',
-    tod: ''
+  constructor(props) {
+    super(props)
+    this.state = {
+      firstName: '',
+      lastName: '',
+      sex: '',
+      age: '',
+      introvert: '',
+      guest: '',
+      tod: '',
+      location: 'Chelsea',
+      moveInTime: '',
+      duration: ''
+    }
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     this.setState({
       firstName: this.props.userInfo.firstName,
       lastName: this.props.userInfo.lastName,
@@ -46,12 +54,25 @@ class UserInfoForm extends React.Component {
       age: this.props.userInfo.age,
       introvert: this.props.userInfo.introvert,
       guest: this.props.userInfo.guest,
-      tod: this.props.userInfo.tod
+      tod: this.props.userInfo.tod,
+      moveInTime: this.props.userInfo.moveInTime,
+      duration: this.props.userInfo.duration
     })
+
+    if (this.props.userInfo.location !== null) {
+      this.setState({
+        location: this.props.userInfo.location
+      })
+    }
   }
 
   handleChange = name => event => {
     this.setState({[name]: event.target.value})
+    console.log(this.state)
+  }
+
+  handleChangeComponent = (name, value) => {
+    this.setState({[name]: value})
     console.log(this.state)
   }
 
@@ -70,125 +91,190 @@ class UserInfoForm extends React.Component {
     const {classes} = this.props
 
     return (
-      <form
-        className={classes.container}
-        autoComplete="off"
-        onSubmit={this.handleSubmit}
-      >
-        <TextField
-          id="firstName input"
-          label="First Name"
-          className={classes.textField}
-          margin="normal"
-          helperText="Required"
-          value={this.state.firstName}
-          onChange={this.handleChange('firstName')}
-        />
+      <div>
+        {console.log(this.state)}
+        {Object.keys(this.props.userInfo).length > 0 ? (
+          <form
+            className={classes.container}
+            autoComplete="off"
+            onSubmit={this.handleSubmit}
+          >
+            <div>
+              <TextField
+                id="firstName input"
+                label="First Name"
+                className={classes.textField}
+                margin="normal"
+                helperText="Required"
+                value={this.state.firstName}
+                onChange={this.handleChange('firstName')}
+              />
 
-        <TextField
-          id="last name input"
-          label="Last Name"
-          className={classes.textField}
-          margin="normal"
-          helperText="Required"
-          value={this.state.lastName}
-          onChange={this.handleChange('lastName')}
-        />
+              <TextField
+                id="last name input"
+                label="Last Name"
+                className={classes.textField}
+                margin="normal"
+                helperText="Required"
+                value={this.state.lastName}
+                onChange={this.handleChange('lastName')}
+              />
 
-        <TextField
-          id="Age input"
-          type="number"
-          label="Age"
-          className={classes.textField}
-          margin="normal"
-          helperText="Required"
-          value={this.state.age}
-          onChange={this.handleChange('age')}
-        />
+              <TextField
+                id="Age input"
+                type="number"
+                label="Age"
+                className={classes.textField}
+                margin="normal"
+                helperText="Required"
+                value={this.state.age}
+                onChange={this.handleChange('age')}
+              />
 
-        <TextField
-          id="sex input"
-          select
-          label="Select"
-          className={classes.textField}
-          value={this.state.sex}
-          onChange={this.handleChange('sex')}
-          SelectProps={{
-            MenuProps: {
-              className: classes.menu
-            }
-          }}
-          helperText="Please select sex"
-          margin="normal"
-        >
-          <MenuItem value="M">Male</MenuItem>
-          <MenuItem value="F">Female</MenuItem>
-        </TextField>
+              <TextField
+                id="sex input"
+                select
+                label="Select"
+                className={classes.textField}
+                value={this.state.sex}
+                onChange={this.handleChange('sex')}
+                SelectProps={{
+                  MenuProps: {
+                    className: classes.menu
+                  }
+                }}
+                helperText="Please select sex"
+                margin="normal"
+              >
+                <MenuItem value="M">Male</MenuItem>
+                <MenuItem value="F">Female</MenuItem>
+              </TextField>
 
-        <TextField
-          id="introvert input"
-          select
-          label="Select"
-          className={classes.textField}
-          value={this.state.introvert}
-          onChange={this.handleChange('introvert')}
-          SelectProps={{
-            MenuProps: {
-              className: classes.menu
-            }
-          }}
-          helperText="Please select sex"
-          margin="normal"
-        >
-          <MenuItem value="introvert">introvert</MenuItem>
-          <MenuItem value="extrovert">extrovert</MenuItem>
-        </TextField>
+              <TextField
+                id="introvert input"
+                select
+                label="Select"
+                className={classes.textField}
+                value={this.state.introvert}
+                onChange={this.handleChange('introvert')}
+                SelectProps={{
+                  MenuProps: {
+                    className: classes.menu
+                  }
+                }}
+                helperText="Please select sex"
+                margin="normal"
+              >
+                <MenuItem value="introvert">introvert</MenuItem>
+                <MenuItem value="extrovert">extrovert</MenuItem>
+              </TextField>
 
-        <TextField
-          id="guest input"
-          select
-          label="Select"
-          className={classes.textField}
-          value={this.state.guest}
-          onChange={this.handleChange('guest')}
-          SelectProps={{
-            MenuProps: {
-              className: classes.menu
-            }
-          }}
-          helperText="Please select how often you have quests over"
-          margin="normal"
-        >
-          <MenuItem value={1}>Never</MenuItem>
-          <MenuItem value={2}>Rarely</MenuItem>
-          <MenuItem value={3}>Sometimes</MenuItem>
-          <MenuItem value={4}>Often</MenuItem>
-          <MenuItem value={5}>very Often</MenuItem>
-        </TextField>
+              <TextField
+                id="guest input"
+                select
+                label="Select"
+                className={classes.textField}
+                value={this.state.guest}
+                onChange={this.handleChange('guest')}
+                SelectProps={{
+                  MenuProps: {
+                    className: classes.menu
+                  }
+                }}
+                helperText="Please select how often you have quests over"
+                margin="normal"
+              >
+                <MenuItem value={1}>Never</MenuItem>
+                <MenuItem value={2}>Rarely</MenuItem>
+                <MenuItem value={3}>Sometimes</MenuItem>
+                <MenuItem value={4}>Often</MenuItem>
+                <MenuItem value={5}>very Often</MenuItem>
+              </TextField>
 
-        <TextField
-          id="tod input"
-          select
-          label="Select"
-          className={classes.textField}
-          value={this.state.tod}
-          onChange={this.handleChange('tod')}
-          SelectProps={{
-            MenuProps: {
-              className: classes.menu
-            }
-          }}
-          helperText="Are you a morning or night person"
-          margin="normal"
-        >
-          <MenuItem value="Morning">Morning</MenuItem>
-          <MenuItem value="Night">Night</MenuItem>
-        </TextField>
+              <TextField
+                id="tod input"
+                select
+                label="Select"
+                className={classes.textField}
+                value={this.state.tod}
+                onChange={this.handleChange('tod')}
+                SelectProps={{
+                  MenuProps: {
+                    className: classes.menu
+                  }
+                }}
+                helperText="Are you a morning or night person"
+                margin="normal"
+              >
+                <MenuItem value="Morning">Morning</MenuItem>
+                <MenuItem value="Night">Night</MenuItem>
+              </TextField>
 
-        <Button variant="contained" className={classes.button} type="submit">
-          Submit
-        </Button>
-      </form>
+              <TextField
+                id="MoveIn input "
+                label="Move in date"
+                className={classes.textField}
+                type="date"
+                margin="normal"
+                helperText="Required"
+                value={this.state.moveInTime}
+                onChange={this.handleChange('moveInTime')}
+                InputLabelProps={{shrink: true}}
+              />
+            </div>
+
+            <div>
+              <IntegrationAutosuggest
+                label="Location Preference"
+                handleChangeComponent={this.handleChangeComponent.bind(this)}
+                location={this.state.location}
+                fieldKey="location"
+              />
+
+              <TextField
+                id="duration input"
+                select
+                label="Select"
+                className={classes.textField}
+                value={this.state.duration}
+                onChange={this.handleChange('duration')}
+                SelectProps={{
+                  MenuProps: {
+                    className: classes.menu
+                  }
+                }}
+                helperText="Please select how often you have quests over"
+                margin="normal"
+              >
+                <MenuItem value={1}>1 Month</MenuItem>
+                <MenuItem value={2}>2 Months</MenuItem>
+                <MenuItem value={3}>3 Months</MenuItem>
+                <MenuItem value={4}>4 Months</MenuItem>
+                <MenuItem value={5}>5 Months</MenuItem>
+                <MenuItem value={6}>6 Months</MenuItem>
+                <MenuItem value={7}>7 Months</MenuItem>
+                <MenuItem value={8}>8 Months</MenuItem>
+                <MenuItem value={9}>9 Months</MenuItem>
+                <MenuItem value={10}>10 Months</MenuItem>
+                <MenuItem value={11}>11 Months</MenuItem>
+                <MenuItem value={12}>12 Months</MenuItem>
+                <MenuItem value={13}>12+ Months</MenuItem>
+              </TextField>
+            </div>
+            <div>
+              <Button
+                variant="contained"
+                className={classes.button}
+                type="submit"
+              >
+                Submit
+              </Button>
+            </div>
+          </form>
+        ) : (
+          <div />
+        )}
+      </div>
     )
   }
 }

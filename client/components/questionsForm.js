@@ -14,33 +14,34 @@ const styles = {
 }
 
 class QuestionsForm extends React.Component {
-  state = {
-    userId: 0,
-    budgetMin: 0,
-    budgetMax: 0,
-    budgetPrior: 0,
-    locationPrior: 0,
-    moveInTime: '2018-12-24T05:00:00.000Z',
-    moveInPrior: 0,
-    duration: 0,
-    duraPrior: 0,
-    pet: false,
-    petPrior: 0,
-    smoke: false,
-    smokePrior: 0,
-    introvert: '',
-    introPrior: 0,
-    sex: '',
-    sexPrior: 0,
-    ageMin: 0,
-    ageMax: 0,
-    agePrior: 0,
-    clean: 0,
-    cleanPrior: 0,
-    guest: 0,
-    guestPrior: 0,
-    tod: '',
-    todPrior: 0
+  constructor(props) {
+    super(props)
+    this.state = {
+      userId: 0,
+      budgetMin: 0,
+      budgetMax: 0,
+      budgetPrior: 0,
+      locationPrior: 0,
+      moveInPrior: 0,
+      duraPrior: 0,
+      pet: false,
+      petPrior: 0,
+      smoke: false,
+      smokePrior: 0,
+      introvert: '',
+      introPrior: 0,
+      sex: '',
+      sexPrior: 0,
+      ageMin: 0,
+      ageMax: 0,
+      agePrior: 0,
+      clean: 0,
+      cleanPrior: 0,
+      guest: 0,
+      guestPrior: 0,
+      tod: '',
+      todPrior: 0
+    }
   }
 
   async componentDidMount() {
@@ -48,12 +49,10 @@ class QuestionsForm extends React.Component {
     const userPref = data
     if (userPref) {
       this.setState({
-        userId: this.props.userId,
         budgetMin: `${userPref.budgetMin}`,
         budgetMax: `${userPref.budgetMax}`,
         budgetPrior: `${userPref.budgetPrior}`,
         locationPrior: `${userPref.locationPrior}`,
-        moveInTime: '2018-12-24T05:00:00.000Z',
         moveInPrior: `${userPref.moveInPrior}`,
         duration: `${userPref.duration}`,
         duraPrior: `${userPref.duraPrior}`,
@@ -76,7 +75,9 @@ class QuestionsForm extends React.Component {
         todPrior: `${userPref.todPrior}`
       })
     }
-    console.log(this.state)
+    this.setState({
+      userId: this.props.userId
+    })
   }
 
   handleChange = (fieldKey1, fieldKey2 = null, rangeitr = null) => event => {
@@ -91,6 +92,7 @@ class QuestionsForm extends React.Component {
     event.preventDefault()
     console.log('updating')
     console.log(this.props.userId)
+    console.log(this.state)
     await Axios.put(`./api/questions/${this.props.userId}`, this.state)
     this.routeChange()
   }
@@ -101,7 +103,6 @@ class QuestionsForm extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     const {classes} = this.props
     return (
       <div>
@@ -153,8 +154,7 @@ class QuestionsForm extends React.Component {
               state={this.state}
             />
           </FormGroup>
-          <FormGroup row>Move In Date:</FormGroup>
-          Move In Priority:
+          Move In Date Priority:
           <FormGroup row>
             <RadioFields
               field={{
