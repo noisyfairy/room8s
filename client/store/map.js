@@ -9,6 +9,7 @@ const GET_MAP = 'GET_MAP'
 const UPDATE_MAP = 'UPDATE_MAP'
 const UPDATE_RENDER = 'UPDATE_RENDER'
 const GET_IDX = 'GET_IDX'
+const PREFERRED_NEIGHBORHOOD = 'REFERRED_NEIGHBORHOOD'
 
 /**
  * INITIAL STATE
@@ -17,7 +18,8 @@ const defaultState = {
   mapData: null,
   shouldRender: false,
   subwayMapData: null,
-  neighborhoodIdxObj: null
+  neighborhoodIdxObj: null,
+  preferredNeighborhood: null
 }
 
 /**
@@ -27,6 +29,10 @@ const getMap = mapData => ({type: GET_MAP, mapData})
 const updateMap = idx => ({type: UPDATE_MAP, idx})
 const updateRender = () => ({type: UPDATE_RENDER})
 const getNeighborhoodIdx = obj => ({type: GET_IDX, obj})
+const setPreferredNeighborhood = neighborhood => ({
+  type: PREFERRED_NEIGHBORHOOD,
+  neighborhood
+})
 
 /**
  * THUNK CREATORS
@@ -85,6 +91,14 @@ export const getSubwayData = (state = defaultState) => async dispatch => {
   }
 }
 
+export const selectPreferredNeighborhood = neighborhood => dispatch => {
+  try {
+    dispatch(setPreferredNeighborhood(neighborhood))
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 /**
  * REDUCER
  */
@@ -100,6 +114,8 @@ export default function(state = defaultState, action) {
         return {...state, neighborhoodIdxObj: action.obj}
       case UPDATE_RENDER:
         return {...state, shouldRender: !state.shouldRender}
+      case PREFERRED_NEIGHBORHOOD:
+        return {...state, preferredNeighborhood: action.neighborhood}
     }
   })
 }

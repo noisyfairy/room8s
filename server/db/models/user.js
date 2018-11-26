@@ -22,9 +22,6 @@ const User = db.define('user', {
   lastName: {
     type: Sequelize.STRING
   },
-  location: {
-    type: Sequelize.STRING
-  },
   duration: {
     type: Sequelize.INTEGER
   },

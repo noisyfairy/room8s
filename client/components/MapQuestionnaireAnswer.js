@@ -1,10 +1,14 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import history from '../history'
+import selectPreferredNeighborhood from '../store/index'
 
 class MapQuestionnaireAnswer extends Component {
-  state = {
-    whereYouShouldLive: null
+  constructor() {
+    super()
+    this.state = {
+      whereYouShouldLive: null
+    }
   }
 
   componentDidMount() {
@@ -32,12 +36,22 @@ class MapQuestionnaireAnswer extends Component {
     return (
       this.state.whereYouShouldLive !== null && (
         <div>
-          "based on your preferences, looks like you should considering living
-          in the following areas!"
+          "Based on your answers, you should considering living in the following
+          areas:"
           {answer.map(neighborhood => (
             <div key={answer.indexOf(neighborhood)}>
               {neighborhood.neighborhood},&nbsp;
-              {neighborhood.borough}
+              {neighborhood.borough}&nbsp;
+              <button
+                type="button"
+                onClick={() =>
+                  this.props.selectPreferredNeighborhood(
+                    neighborhood.neighborhood
+                  )
+                }
+              >
+                Add to your preferences
+              </button>
             </div>
           ))}
         </div>
@@ -49,7 +63,17 @@ class MapQuestionnaireAnswer extends Component {
 const mapStateToProps = state => ({
   mapData: state.map.mapData
 })
-const ConnectedMapQuestionnaireAnswer = connect(mapStateToProps)(
-  MapQuestionnaireAnswer
-)
+
+const mapDispatchToProps = dispatch => {
+  return {
+    selectPreferredNeighborhood: neighborhood =>
+      dispatch(selectPreferredNeighborhood(neighborhood))
+  }
+}
+
+const ConnectedMapQuestionnaireAnswer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MapQuestionnaireAnswer)
+
 export default ConnectedMapQuestionnaireAnswer
