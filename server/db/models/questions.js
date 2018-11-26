@@ -14,26 +14,15 @@ const Questions = db.define('questions', {
     type: Sequelize.INTEGER,
     allowNull: false
   },
-  location1: {
-    type: Sequelize.STRING
-  },
-  location2: {
-    type: Sequelize.STRING
-  },
   locationPrior: {
     type: Sequelize.INTEGER,
     allowNull: false
   },
   // can change this to integer/string or whatever
-  moveInTime: {
-    type: Sequelize.DATE
-  },
+
   moveInPrior: {
     type: Sequelize.INTEGER,
     allowNull: false
-  },
-  duration: {
-    type: Sequelize.INTEGER
   },
   duraPrior: {
     type: Sequelize.INTEGER,

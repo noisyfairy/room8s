@@ -7,7 +7,6 @@ class Algo extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      bestMatch: 0,
       top3: []
     }
   }
@@ -18,15 +17,13 @@ class Algo extends React.Component {
 
   compBudget = (user, roomie) => {
     let matchScore = 0
-    let maxScore = 10
-    console.log(user)
-    console.log(roomie)
+    const maxScore = Math.pow(2, Number(user.question.budgetPrior) + 1)
     const budget1 = user.question.budgetMin
     const budget2 = roomie.question.budgetMin
     if (budget1 === budget2) {
-      matchScore = 10
-    } else if (Math.abs(budget1 - budget2) === 500) {
-      matchScore = 5
+      matchScore = maxScore
+    } else if (Math.abs(budget1 - budget2) <= 500) {
+      matchScore = maxScore / 2
     }
 
     return {
@@ -37,19 +34,9 @@ class Algo extends React.Component {
 
   compLocation = (user, roomie) => {
     let matchScore = 0
-    let maxScore = 10
-    const roomieLoc1 = roomie.question.location1
-    const roomieLoc2 = roomie.question.location2
-    const userLoc1 = user.question.location1
-    const userLoc2 = user.question.location2
-    if (userLoc1 === roomieLoc1) {
-      matchScore = 10
-    } else if (userLoc1 === roomieLoc2) {
-      matchScore = 8
-    } else if (userLoc2 === roomieLoc1) {
-      matchScore = 7
-    } else if (userLoc2 === roomieLoc2) {
-      matchScore = 5
+    const maxScore = Math.pow(2, Number(user.question.locationPrior) + 1)
+    if (user.location === roomie.location) {
+      matchScore = maxScore
     }
 
     return {
@@ -58,57 +45,49 @@ class Algo extends React.Component {
     }
   }
 
-  // compMonth = (user, roomie) => {
-  //   let matchScore = 0
-  //   let maxScore = 10
-  //   const userDate = user.question.moveInTime.getDate()
-  //   const userMonth = user.question.moveInTime.getMonth()
-  //   const roomieDate = roomie.question.moveInTime.getDate()
-  //   const roomieMonth = roomie.question.moveInTime.getMonth()
+  compMonth = (user, roomie) => {
+    let matchScore = 0
+    const maxScore = Math.pow(2, Number(user.question.moveInPrior) + 1)
+    const userDate = user.moveInTime.split('-')
+    const roomieDate = roomie.moveInTime.split('-')
 
-  //   if (userMonth === roomieMonth) {
-  //     const dateDiff = Math.abs(userDate - roomieDate)
-  //     if (dateDiff <= 7) {
-  //       matchScore = 10
-  //     } else if (dateDiff <= 14) {
-  //       matchScore = 9
-  //     } else if (dateDiff <= 21) {
-  //       matchScore = 8
-  //     } else if (dateDiff <= 28) {
-  //       matchScore = 7
-  //     }
-  //   } else {
-  //     const monthDiff = Math.abs(userMonth - roomieMonth)
-  //     if (monthDiff === 1) {
-  //       matchScore = 6
-  //     } else if (monthDiff === 2) {
-  //       matchScore = 4
-  //     } else if (monthDiff === 3) {
-  //       matchScore = 3
-  //     }
-  //   }
+    if (userDate[1] === roomieDate[1]) {
+      const dateDiff = Math.abs(userDate[2] - roomieDate[2])
+      if (dateDiff <= 14) {
+        matchScore = maxScore
+      } else if (dateDiff <= 21) {
+        matchScore = maxScore * 0.9
+      } else if (dateDiff <= 28) {
+        matchScore = maxScore * 0.75
+      }
+    } else {
+      const monthDiff = Math.abs(userDate[1] - roomieDate[1])
+      if (monthDiff === 1) {
+        matchScore = maxScore * 0.6
+      } else if (monthDiff === 2) {
+        matchScore = maxScore * 0.3
+      }
+    }
 
-  //   return {
-  //     matchScore: matchScore,
-  //     maxScore: maxScore
-  //   }
-  // }
+    return {
+      matchScore: matchScore,
+      maxScore: maxScore
+    }
+  }
 
   compDuration = (user, roomie) => {
     let matchScore = 0
-    let maxScore = 10
-    const userDura = user.question.duration
-    const roomieDura = roomie.question.duration
-    const duraDiff = Math.abs(userDura - roomieDura)
+    const maxScore = Math.pow(2, Number(user.question.duraPrior) + 1)
+    const duraDiff = Math.abs(user.duration - roomie.duration)
 
     if (duraDiff === 0) {
-      matchScore = 10
+      matchScore = maxScore
     } else if (duraDiff === 1) {
-      matchScore = 8
+      matchScore = maxScore * 0.8
     } else if (duraDiff === 2) {
-      matchScore = 6
+      matchScore = maxScore * 0.5
     } else if (duraDiff === 3) {
-      matchScore = 4
+      matchScore = maxScore * 0.3
     }
 
     return {
@@ -119,7 +98,7 @@ class Algo extends React.Component {
 
   compPet = (user, roomie) => {
     let matchScore = 0
-    let maxScore = Number(user.question.petPrior)
+    const maxScore = Math.pow(2, Number(user.question.petPrior))
     if (user.question.pet === roomie.question.pet) {
       matchScore = maxScore
     }
@@ -132,7 +111,7 @@ class Algo extends React.Component {
 
   compSmoke = (user, roomie) => {
     let matchScore = 0
-    let maxScore = user.question.smokePrior
+    const maxScore = Math.pow(2, Number(user.question.smokePrior))
     if (user.question.smoke === roomie.question.smoke) {
       matchScore = maxScore
     }
@@ -145,7 +124,7 @@ class Algo extends React.Component {
 
   compInOut = (user, roomie) => {
     let matchScore = 0
-    let maxScore = user.question.introPrior
+    const maxScore = Math.pow(2, Number(user.question.introPrior))
     if (user.question.introvert === roomie.introvert) {
       matchScore = maxScore
     }
@@ -158,7 +137,7 @@ class Algo extends React.Component {
 
   compSex = (user, roomie) => {
     let matchScore = 0
-    let maxScore = user.question.sexPrior
+    const maxScore = Math.pow(2, Number(user.question.sexPrior))
     if (user.question.sex === roomie.sex) {
       matchScore = maxScore
     }
@@ -171,7 +150,7 @@ class Algo extends React.Component {
 
   compAge = (user, roomie) => {
     let matchScore = 0
-    let maxScore = user.question.agePrior
+    let maxScore = Math.pow(2, Number(user.question.agePrior))
     const userAgeMin = user.question.ageMin
     const userAgeMax = user.question.ageMax
     const ageDiffmin = userAgeMin - roomie.age
@@ -199,7 +178,7 @@ class Algo extends React.Component {
 
   compClean = (user, roomie) => {
     let matchScore = 0
-    let maxScore = user.question.cleanPrior
+    let maxScore = Math.pow(2, Number(user.question.cleanPrior))
     const cleanDiff = Math.abs(user.question.clean - roomie.question.clean)
     if (cleanDiff === 0) {
       matchScore = maxScore
@@ -221,7 +200,7 @@ class Algo extends React.Component {
 
   compGuests = (user, roomie) => {
     let matchScore = 0
-    let maxScore = user.question.guestPrior
+    let maxScore = Math.pow(2, Number(user.question.guestPrior))
     const guestDiff = Math.abs(user.question.guests - roomie.question.guests)
     if (guestDiff === 0) {
       matchScore = maxScore
@@ -243,7 +222,7 @@ class Algo extends React.Component {
 
   compMOrN = (user, roomie) => {
     let matchScore = 0
-    let maxScore = user.question.todPrior
+    let maxScore = Math.pow(2, Number(user.question.todPrior))
     if (user.question.tod === roomie.tod) {
       matchScore = maxScore
     }
@@ -258,7 +237,7 @@ class Algo extends React.Component {
     let arrOfFx = []
     arrOfFx.push(this.compBudget)
     arrOfFx.push(this.compLocation)
-    // arrOfFx.push(this.compMonth())
+    arrOfFx.push(this.compMonth)
     arrOfFx.push(this.compDuration)
     arrOfFx.push(this.compPet)
     arrOfFx.push(this.compSmoke)
@@ -278,105 +257,103 @@ class Algo extends React.Component {
       const results = func(user, roomie)
       matchScore += results.matchScore
       maxScore += results.maxScore
+      // console.log('matchscore:', matchScore)
+      // console.log('maxscore:', maxScore)
     })
 
     return Number(matchScore / maxScore)
   }
 
   matchRoommate = (userlist, userId) => {
-    let results = {}
-    userlist.map(user => {
-      if (user.id !== userId) {
-        console.log('running algo')
-        results[user.id] = this.matchingalgo(
-          userlist[userId - 1],
-          user,
-          this.allCompFx()
-        )
+    let results = []
+    let user = {}
+    for (let i = 0; i < userlist.length; i++) {
+      if (userlist[i].id === userId) {
+        user = userlist[i]
+      }
+    }
+
+    userlist.map(roomie => {
+      let instance = {}
+      if (roomie.id !== userId) {
+        instance[roomie.id] = this.matchingalgo(user, roomie, this.allCompFx())
+        results.push(instance)
       }
     })
+
     return results
   }
 
   bestmatches = async userId => {
-    let top3results = {}
-    let bestResultId = 0
-    let bestResuiltScore = 0
-
     const userListData = await Axios.get('./api/users')
     const userList = userListData.data
     const userInfoData = await Axios.get(`./api/users/${userId}`)
     const userInfo = userInfoData.data
-
     const userMatchScores = this.matchRoommate(userList, userId)
 
-    const sortedMatchScores = Object.values(userMatchScores)
-    sortedMatchScores.sort((a, b) => {
-      if (a > b) return -1
-      if (a < b) return 1
+    userMatchScores.sort((a, b) => {
+      if (Object.values(a)[0] > Object.values(b)[0]) return -1
+      if (Object.values(a)[0] < Object.values(b)[0]) return 1
       return 0
     })
 
-    const matchScoreKeys = Object.keys(userMatchScores)
-    matchScoreKeys.map(roomieId => {
-      if (userMatchScores[roomieId] === sortedMatchScores[0]) {
-        top3results[roomieId] = sortedMatchScores[0]
-      } else if (userMatchScores[roomieId] === sortedMatchScores[1]) {
-        top3results[roomieId] = sortedMatchScores[1]
-      } else if (userMatchScores[roomieId] === sortedMatchScores[2]) {
-        top3results[roomieId] = sortedMatchScores[2]
+    let top3results = userMatchScores.slice(0, 4)
+
+    let top3Counter = []
+    top3results.map(roomie => {
+      let counterMatch = 0
+      for (let i = 0; i < userList.length; i++) {
+        if (userList[i].id == Object.keys(roomie)[0]) {
+          const roomieInfo = userList[i]
+          counterMatch = this.matchingalgo(
+            roomieInfo,
+            userInfo,
+            this.allCompFx()
+          )
+        }
       }
+      const twoWay = {
+        [Object.keys(roomie)[0]]: (Object.values(roomie)[0] + counterMatch) / 2
+      }
+
+      top3Counter.push(twoWay)
     })
 
-    const top3roomieId = Object.keys(top3results)
-
-    const counterMatch1 = this.matchingalgo(
-      userList[top3roomieId[0] - 1],
-      userInfo,
-      this.allCompFx()
-    )
-
-    top3results[top3roomieId[0]] =
-      (top3results[top3roomieId[0]] + counterMatch1) / 2
-
-    const counterMatch2 = this.matchingalgo(
-      userList[top3roomieId[1] - 1],
-      userInfo,
-      this.allCompFx()
-    )
-
-    top3results[top3roomieId[1]] =
-      (top3results[top3roomieId[1]] + counterMatch2) / 2
-
-    const counterMatch3 = this.matchingalgo(
-      userList[top3roomieId[2] - 1],
-      userInfo,
-      this.allCompFx()
-    )
-
-    top3results[top3roomieId[2]] =
-      (top3results[top3roomieId[2]] + counterMatch3) / 2
-
-    top3roomieId.map(roomieId => {
-      if (top3results[roomieId] > bestResuiltScore) {
-        bestResultId = roomieId
-      }
+    top3Counter.sort((a, b) => {
+      if (Object.values(a)[0] > Object.values(b)[0]) return -1
+      if (Object.values(a)[0] < Object.values(b)[0]) return 1
+      return 0
     })
 
     this.setState({
-      bestMatch: bestResultId,
-      top3: top3roomieId
+      top3: top3Counter
     })
-    this.props.getMatchUsers(top3roomieId)
   }
 
   render() {
     return (
       <div>
-        <h1>bestMatch Id: {this.state.bestMatch}</h1>
-        <h1>1st Id: {this.state.top3[0]}</h1>
-        <h1>2nd Id: {this.state.top3[1]}</h1>
-        <h1>3rd Id: {this.state.top3[2]}</h1>
+        {this.state.top3.length > 0 ? (
+          <div>
+            <h1>
+              1st Id: {Object.keys(this.state.top3[0])}, score:{Math.round(
+                Object.values(this.state.top3[0]) * 100
+              )}{' '}
+            </h1>
+            <h1>
+              2nd Id: {Object.keys(this.state.top3[1])}, score:{Math.round(
+                Object.values(this.state.top3[1]) * 100
+              )}{' '}
+            </h1>
+            <h1>
+              3rd Id: {Object.keys(this.state.top3[2])}, score:{Math.round(
+                Object.values(this.state.top3[2]) * 100
+              )}{' '}
+            </h1>
+          </div>
+        ) : (
+          <div />
+        )}
       </div>
     )
   }

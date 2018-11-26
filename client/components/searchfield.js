@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField'
 import Paper from '@material-ui/core/Paper'
 import MenuItem from '@material-ui/core/MenuItem'
 import {withStyles} from '@material-ui/core/styles'
+import {connect} from 'react-redux'
 
 const suggestions = [
   {label: 'Melrose'},
@@ -427,9 +428,16 @@ const styles = theme => ({
 })
 
 class IntegrationAutosuggest extends React.Component {
-  state = {
-    neighbourhood: '',
-    suggestions: []
+  constructor(props) {
+    super(props)
+    this.state = {
+      neighborhood: '',
+      suggestions: []
+    }
+  }
+
+  async componentDidMount() {
+    this.setState({neighborhood: this.props.userInfo.location})
   }
 
   handleSuggestionsFetchRequested = ({value}) => {
@@ -449,6 +457,7 @@ class IntegrationAutosuggest extends React.Component {
       [name]: newValue
     })
     this.props.handleChangeComponent(this.props.fieldKey, newValue)
+    console.log('location:', this.state)
   }
 
   render() {
@@ -463,28 +472,37 @@ class IntegrationAutosuggest extends React.Component {
     }
 
     return (
-      <Autosuggest
-        {...autosuggestProps}
-        inputProps={{
-          label: this.props.label,
-          classes,
-          placeholder: 'Search for a neighbourhood',
-          value: this.state.neighbourhood,
-          onChange: this.handleChange('neighbourhood')
-        }}
-        theme={{
-          container: classes.container,
-          suggestionsContainerOpen: classes.suggestionsContainerOpen,
-          suggestionsList: classes.suggestionsList,
-          suggestion: classes.suggestion
-        }}
-        renderSuggestionsContainer={options => (
-          <Paper {...options.containerProps} square>
-            {options.children}
-          </Paper>
-        )}
-      />
+      <div className={classes.root}>
+        <Autosuggest
+          {...autosuggestProps}
+          inputProps={{
+            label: this.props.label,
+            classes,
+            placeholder: 'Search for a neighborhood',
+            value: this.state.neighborhood,
+            onChange: this.handleChange('neighborhood')
+          }}
+          theme={{
+            container: classes.container,
+            suggestionsContainerOpen: classes.suggestionsContainerOpen,
+            suggestionsList: classes.suggestionsList,
+            suggestion: classes.suggestion
+          }}
+          renderSuggestionsContainer={options => (
+            <Paper {...options.containerProps} square>
+              {options.children}
+            </Paper>
+          )}
+        />
+      </div>
     )
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    userId: state.user.id,
+    userInfo: state.user
   }
 }
 
@@ -492,4 +510,6 @@ IntegrationAutosuggest.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(IntegrationAutosuggest)
+export default connect(mapStateToProps)(
+  withStyles(styles)(IntegrationAutosuggest)
+)
