@@ -112,7 +112,7 @@ const styles = theme => ({
 
 class NavBar extends React.Component {
   constructor(props) {
-    super()
+    super(props)
     this.state = {
       open: false,
       anchor: 'left',
@@ -173,11 +173,11 @@ class NavBar extends React.Component {
         </div>
         <Divider />
         <List>
-          {isLoggedIn && (
-            <ListItem button onClick={() => history.push('profile')}>
-              <ListItemText primary="Profile" />
-            </ListItem>
-          )}
+          {/* {isLoggedIn && ( */}
+          <ListItem button onClick={() => history.push('profile')}>
+            <ListItemText primary="Profile" />
+          </ListItem>
+          {/* )} */}
           <ListItem button onClick={() => history.push('/map')}>
             <ListItemText primary="Map" />
           </ListItem>
@@ -187,11 +187,11 @@ class NavBar extends React.Component {
           {/* <ListItem button onClick={() => history.push('/users')}>
             <ListItemText primary="Users" />
           </ListItem> */}
-          {isLoggedIn && (
-            <ListItem button onClick={() => history.push('/matchUsers')}>
-              <ListItemText primary="Match Users" />
-            </ListItem>
-          )}
+          {/* {isLoggedIn && ( */}
+          <ListItem button onClick={() => history.push('/matchUsers')}>
+            <ListItemText primary="Match Users" />
+          </ListItem>
+          {/* )} */}
           {/* <ListItem button onClick={() => history.push('/FavoriteUsers')}>
             <ListItemText primary="Favorite Users" />
           </ListItem> */}
@@ -265,8 +265,12 @@ NavBar.propTypes = {
   theme: PropTypes.object.isRequired
 }
 
-const mapState = state => ({
-  isLoggedIn: !!state.user.id
-})
+// const mapState = state => ({
+//   isLoggedIn: !!state.user.id
+// })
+
+// export default withStyles(styles, {withTheme: true})(
+//   connect(mapState, null)(NavBar)
+// )
 
 export default withStyles(styles, {withTheme: true})(NavBar)
