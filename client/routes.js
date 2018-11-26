@@ -58,16 +58,16 @@ class Routes extends Component {
             <Route exact path="/matchUsers" component={MatchUsers} />
             <Route exact path="/favoriteUsers" component={FavoriteUsers} />
             <Route exact path="/users/:userId" component={SingleUser} />
-            <Route exact path="/questionform" component={QuestionsForm} />
-            <Route exact path="/userinfoform" component={UserInfoForm} />
+            <Route exact path="/room8pref" component={QuestionsForm} />
+            <Route exact path="/userinfo" component={UserInfoForm} />
             <Route exact path="/home" component={UserHome} />
 
             <Route exact path="/users" component={Users} />
           </Switch>
         )}
         {/* Displays our main {Login} component as a fallback */}
-        {/* <Route component={Main} /> */}
-        <Redirect to="/main" />
+        <Route component={Main} />
+        {/* <Redirect to="/main" /> */}
       </Switch>
     )
   }

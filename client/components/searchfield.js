@@ -7,44 +7,329 @@ import parse from 'autosuggest-highlight/parse'
 import TextField from '@material-ui/core/TextField'
 import Paper from '@material-ui/core/Paper'
 import MenuItem from '@material-ui/core/MenuItem'
-import Popper from '@material-ui/core/Popper'
 import {withStyles} from '@material-ui/core/styles'
+import {connect} from 'react-redux'
 
 const suggestions = [
-  {label: 'Afghanistan'},
-  {label: 'Aland Islands'},
-  {label: 'Albania'},
-  {label: 'Algeria'},
-  {label: 'American Samoa'},
-  {label: 'Andorra'},
-  {label: 'Angola'},
-  {label: 'Anguilla'},
-  {label: 'Antarctica'},
-  {label: 'Antigua and Barbuda'},
-  {label: 'Argentina'},
-  {label: 'Armenia'},
-  {label: 'Aruba'},
-  {label: 'Australia'},
-  {label: 'Austria'},
-  {label: 'Azerbaijan'},
-  {label: 'Bahamas'},
-  {label: 'Bahrain'},
-  {label: 'Bangladesh'},
-  {label: 'Barbados'},
-  {label: 'Belarus'},
-  {label: 'Belgium'},
-  {label: 'Belize'},
-  {label: 'Benin'},
-  {label: 'Bermuda'},
-  {label: 'Bhutan'},
-  {label: 'Bolivia, Plurinational State of'},
-  {label: 'Bonaire, Sint Eustatius and Saba'},
-  {label: 'Bosnia and Herzegovina'},
-  {label: 'Botswana'},
-  {label: 'Bouvet Island'},
-  {label: 'Brazil'},
-  {label: 'British Indian Ocean Territory'},
-  {label: 'Brunei Darussalam'}
+  {label: 'Melrose'},
+  {label: 'Mott Haven'},
+  {label: 'Port Morris'},
+  {label: 'Hunts Point'},
+  {label: 'Longwood'},
+  {label: 'Claremont'},
+  {label: 'Concourse Village'},
+  {label: 'Crotona Park'},
+  {label: 'Morrisania'},
+  {label: 'Concourse'},
+  {label: 'High Bridge'},
+  {label: 'Fordham'},
+  {label: 'Morris Heights'},
+  {label: 'Mount Hope'},
+  {label: 'University Heights'},
+  {label: 'Bathgate'},
+  {label: 'Belmont'},
+  {label: 'East Tremont'},
+  {label: 'West Farms'},
+  {label: 'Bedford Park'},
+  {label: 'University Heights'},
+  {label: 'Fieldston'},
+  {label: 'Kingsbridge'},
+  {label: 'Kingsbridge Heights'},
+  {label: 'Marble Hill'},
+  {label: 'Riverdale'},
+  {label: 'Spuyten Duyvil'},
+  {label: 'Van Cortlandt Village'},
+  {label: 'Bronx River'},
+  {label: 'Bruckner'},
+  {label: 'Castle Hill'},
+  {label: 'Clason Point'},
+  {label: 'Harding Park'},
+  {label: 'Parkchester'},
+  {label: 'Soundview'},
+  {label: 'Unionport'},
+  {label: 'City Island'},
+  {label: 'Co-op City'},
+  {label: 'Locust Point'},
+  {label: 'Pelham Bay'},
+  {label: 'Silver Beach'},
+  {label: 'Throgs Neck'},
+  {label: 'Westchester Square'},
+  {label: 'Allerton'},
+  {label: 'Bronxdale'},
+  {label: 'Indian Village'},
+  {label: 'Laconia'},
+  {label: 'Morris Park'},
+  {label: 'Pelham Gardens'},
+  {label: 'Pelham Parkway'},
+  {label: 'Van Nest'},
+  {label: 'Baychester'},
+  {label: 'Edenwald'},
+  {label: 'Eastchester'},
+  {label: 'Fish Bay'},
+  {label: 'Olinville'},
+  {label: 'Wakefield'},
+  {label: 'Williamsbridge'},
+  {label: 'Woodlawn'},
+  {label: 'Greenpoint'},
+  {label: 'Williamsburg'},
+  {label: 'Boerum Hill'},
+  {label: 'Brooklyn Heights'},
+  {label: 'Brooklyn Navy Yard'},
+  {label: 'Clinton Hill'},
+  {label: 'DUMBO'},
+  {label: 'Fort Greene'},
+  {label: 'Fulton Ferry'},
+  {label: 'Fulton Mall'},
+  {label: 'Vinegar Hill'},
+  {label: 'Bedford-Stuyvesant'},
+  {label: 'Ocean Hill'},
+  {label: 'Stuyvesant Heights'},
+  {label: 'Bushwick'},
+  {label: 'City Line'},
+  {label: 'Cypress Hills'},
+  {label: 'East New York'},
+  {label: 'Highland Park'},
+  {label: 'New Lots'},
+  {label: 'Starrett City'},
+  {label: 'Carroll Gardens'},
+  {label: 'Cobble Hill'},
+  {label: 'Gowanus'},
+  {label: 'Park Slope'},
+  {label: 'Red Hook'},
+  {label: 'Greenwood Heights'},
+  {label: 'Sunset Park'},
+  {label: 'Windsor Terrace'},
+  {label: 'Crown Heights'},
+  {label: 'Prospect Heights'},
+  {label: 'Weeksville'},
+  {label: 'Prospect Lefferts Gardens'},
+  {label: 'Wingate'},
+  {label: 'Bay Ridge'},
+  {label: 'Dyker Heights'},
+  {label: 'Fort Hamilton'},
+  {label: 'Bath Beach'},
+  {label: 'Bensonhurst'},
+  {label: 'Gravesend'},
+  {label: 'Mapleton'},
+  {label: 'Borough Park'},
+  {label: 'Kensington'},
+  {label: 'Midwood'},
+  {label: 'Ocean Parkway'},
+  {label: 'Bensonhurst'},
+  {label: 'Brighton BeachSoundview'},
+  {label: 'Coney Island'},
+  {label: 'Gravesend'},
+  {label: 'Sea Gate'},
+  {label: 'Flatbush'},
+  {label: 'Kensington'},
+  {label: 'Midwood'},
+  {label: 'Ocean Parkway'},
+  {label: 'East Gravesend'},
+  {label: 'Gerritsen Beach'},
+  {label: 'Homecrest'},
+  {label: 'Kings Bay'},
+  {label: 'Kings Highway'},
+  {label: 'Madison'},
+  {label: 'Manhattan Beach'},
+  {label: 'Plum Beach'},
+  {label: 'Sheepshead Bay'},
+  {label: 'Brownsville'},
+  {label: 'Ocean Hill'},
+  {label: 'Ditmas Village'},
+  {label: 'East FlatbushSoundview'},
+  {label: 'Erasmus'},
+  {label: 'Farragut'},
+  {label: 'Remsen Village'},
+  {label: 'Rugby'},
+  {label: 'Bergen Beach'},
+  {label: 'Canarsie'},
+  {label: 'Flatlands'},
+  {label: 'Georgetown'},
+  {label: 'Marine Park'},
+  {label: 'Mill Basin'},
+  {label: 'Mill Island'},
+  {label: 'Battery Park City'},
+  {label: 'Financial District'},
+  {label: 'TriBeCa'},
+  {label: 'Chinatown'},
+  {label: 'Greenwich Village'},
+  {label: 'Little Italy'},
+  {label: 'Lower East Side'},
+  {label: 'NoHo'},
+  {label: 'SoHo'},
+  {label: 'West Village'},
+  {label: 'Alphabet City'},
+  {label: 'East Village'},
+  {label: 'Two Bridges'},
+  {label: 'Chelsea'},
+  {label: 'Clinton'},
+  {label: 'Midtown'},
+  {label: 'Gramercy Park'},
+  {label: 'Kips Bay'},
+  {label: 'Murray Hill'},
+  {label: 'Peter Cooper Village'},
+  {label: 'Stuyvesant Town'},
+  {label: 'Sutton Place'},
+  {label: 'Tudor City'},
+  {label: 'Turtle Bay'},
+  {label: 'Waterside Plaza'},
+  {label: 'Lincoln Square'},
+  {label: 'Manhattan Valley'},
+  {label: 'Upper West Side'},
+  {label: 'Lenox Hill'},
+  {label: 'Roosevelt Island'},
+  {label: 'Upper East Side'},
+  {label: 'Yorkville'},
+  {label: 'Hamilton Heights'},
+  {label: 'Manhattanville'},
+  {label: 'Morningside Heights'},
+  {label: 'Harlem'},
+  {label: 'Polo Grounds'},
+  {label: 'East Harlem'},
+  {label: 'Randall’s Island'},
+  {label: 'Spanish Harlem'},
+  {label: 'Wards Island'},
+  {label: 'Inwood'},
+  {label: 'Washington Heights'},
+  {label: 'Astoria'},
+  {label: 'Ditmars'},
+  {label: 'Garden Bay'},
+  {label: 'Long Island City'},
+  {label: 'Old Astoria'},
+  {label: 'Queensbridge'},
+  {label: 'Ravenswood'},
+  {label: 'Steinway'},
+  {label: 'Woodside'},
+  {label: 'Hunters Point'},
+  {label: 'Sunnyside'},
+  {label: 'East Elmhurst'},
+  {label: 'Jackson Heights'},
+  {label: 'North Corona'},
+  {label: 'Corona'},
+  {label: 'Elmhurst'},
+  {label: 'Fresh Pond'},
+  {label: 'Glendale'},
+  {label: 'Maspeth'},
+  {label: 'Middle Village'},
+  {label: 'Liberty Park'},
+  {label: 'Ridgewood'},
+  {label: 'Forest Hills'},
+  {label: 'Rego Park'},
+  {label: 'Bay Terrace'},
+  {label: 'Beechhurst'},
+  {label: 'College Point'},
+  {label: 'Flushing'},
+  {label: 'Linden Hill'},
+  {label: 'Malba'},
+  {label: 'Queensboro Hill'},
+  {label: 'Whitestone'},
+  {label: 'Willets Point'},
+  {label: 'Briarwood'},
+  {label: 'Cunningham Heights'},
+  {label: 'Flushing South'},
+  {label: 'Fresh Meadows'},
+  {label: 'Hilltop Village'},
+  {label: 'Holliswood'},
+  {label: 'Jamaica Estates'},
+  {label: 'Kew Gardens Hills'},
+  {label: 'Pomonok Houses'},
+  {label: 'Utopia'},
+  {label: 'Kew Gardens'},
+  {label: 'Ozone Park'},
+  {label: 'Richmond Hill'},
+  {label: 'Woodhaven'},
+  {label: 'Howard Beach'},
+  {label: 'Lindenwood'},
+  {label: 'South Ozone Park'},
+  {label: 'Tudor Village'},
+  {label: 'Auburndale'},
+  {label: 'Bayside'},
+  {label: 'Douglaston'},
+  {label: 'East Flushing'},
+  {label: 'Hollis Hills'},
+  {label: 'Little Neck'},
+  {label: 'Oakland Gardens'},
+  {label: 'Baisley Park'},
+  {label: 'Jamaica'},
+  {label: 'Hollis'},
+  {label: 'Rochdale Village'},
+  {label: 'St. Albans'},
+  {label: 'South Jamaica'},
+  {label: 'Springfield Gardens'},
+  {label: 'Bellerose'},
+  {label: 'Brookville'},
+  {label: 'Cambria Heights'},
+  {label: 'Floral Park'},
+  {label: 'Glen Oaks'},
+  {label: 'Laurelton'},
+  {label: 'Meadowmere'},
+  {label: 'New Hyde Park'},
+  {label: 'Queens Village'},
+  {label: 'Rosedale'},
+  {label: 'Arverne'},
+  {label: 'Bayswater'},
+  {label: 'Belle Harbor'},
+  {label: 'Breezy Point'},
+  {label: 'Edgemere'},
+  {label: 'Far Rockaway'},
+  {label: 'Neponsit'},
+  {label: 'Rockaway Park'},
+  {label: 'Arlington'},
+  {label: 'Castleton Corners'},
+  {label: 'Clifton'},
+  {label: 'Concord'},
+  {label: 'Elm Park'},
+  {label: 'Fort Wadsworth'},
+  {label: 'Graniteville'},
+  {label: 'Grymes Hill'},
+  {label: 'Livingston'},
+  {label: 'Mariners Harbor'},
+  {label: 'Meiers Corners'},
+  {label: 'New Brighton'},
+  {label: 'Port Ivory'},
+  {label: 'Port Richmond'},
+  {label: 'Randall Manor'},
+  {label: 'Rosebank'},
+  {label: 'St. George'},
+  {label: 'Shore Acres'},
+  {label: 'Silver Lake'},
+  {label: 'Stapleton'},
+  {label: 'Sunnyside'},
+  {label: 'Tompkinsville'},
+  {label: 'West Brighton'},
+  {label: 'Westerleigh'},
+  {label: 'Arrochar'},
+  {label: 'Bloomfield'},
+  {label: 'Bulls Head'},
+  {label: 'Chelsea (Staten Island'},
+  {label: 'Dongan Hills'},
+  {label: 'Egbertville'},
+  {label: 'Emerson Hill'},
+  {label: 'Grant City'},
+  {label: 'Grasmere'},
+  {label: 'Midland Beach'},
+  {label: 'New Dorp'},
+  {label: 'New Springville'},
+  {label: 'Oakwood'},
+  {label: 'Ocean Breeze'},
+  {label: 'Old Town'},
+  {label: 'South Beach'},
+  {label: 'Todt Hill'},
+  {label: 'Travis'},
+  {label: 'Annadale'},
+  {label: 'Arden Heights'},
+  {label: 'Bay Terrace'},
+  {label: 'Charleston'},
+  {label: 'Eltingville'},
+  {label: 'Great Kills'},
+  {label: 'Greenridge'},
+  {label: 'Huguenot'},
+  {label: 'Pleasant Plains'},
+  {label: 'Prince’s Bay'},
+  {label: 'Richmond Valley'},
+  {label: 'Rossville'},
+  {label: 'Tottenville'},
+  {label: 'Woodrow'}
 ]
 
 function renderInputComponent(inputProps) {
@@ -143,10 +428,16 @@ const styles = theme => ({
 })
 
 class IntegrationAutosuggest extends React.Component {
-  state = {
-    single: '',
-    popper: '',
-    suggestions: []
+  constructor(props) {
+    super(props)
+    this.state = {
+      neighborhood: '',
+      suggestions: []
+    }
+  }
+
+  async componentDidMount() {
+    this.setState({neighborhood: this.props.userInfo.location})
   }
 
   handleSuggestionsFetchRequested = ({value}) => {
@@ -165,11 +456,12 @@ class IntegrationAutosuggest extends React.Component {
     this.setState({
       [name]: newValue
     })
+    this.props.handleChangeComponent(this.props.fieldKey, newValue)
+    console.log('location:', this.state)
   }
 
   render() {
     const {classes} = this.props
-
     const autosuggestProps = {
       renderInputComponent,
       suggestions: this.state.suggestions,
@@ -184,10 +476,11 @@ class IntegrationAutosuggest extends React.Component {
         <Autosuggest
           {...autosuggestProps}
           inputProps={{
+            label: this.props.label,
             classes,
-            placeholder: 'Search a country (start with a)',
-            value: this.state.single,
-            onChange: this.handleChange('single')
+            placeholder: 'Search for a neighborhood',
+            value: this.state.neighborhood,
+            onChange: this.handleChange('neighborhood')
           }}
           theme={{
             container: classes.container,
@@ -201,42 +494,15 @@ class IntegrationAutosuggest extends React.Component {
             </Paper>
           )}
         />
-        <div className={classes.divider} />
-        <Autosuggest
-          {...autosuggestProps}
-          inputProps={{
-            classes,
-            label: 'Label',
-            placeholder: 'With Popper',
-            value: this.state.popper,
-            onChange: this.handleChange('popper'),
-            inputRef: node => {
-              this.popperNode = node
-            },
-            InputLabelProps: {
-              shrink: true
-            }
-          }}
-          theme={{
-            suggestionsList: classes.suggestionsList,
-            suggestion: classes.suggestion
-          }}
-          renderSuggestionsContainer={options => (
-            <Popper anchorEl={this.popperNode} open={Boolean(options.children)}>
-              <Paper
-                square
-                {...options.containerProps}
-                style={{
-                  width: this.popperNode ? this.popperNode.clientWidth : null
-                }}
-              >
-                {options.children}
-              </Paper>
-            </Popper>
-          )}
-        />
       </div>
     )
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    userId: state.user.id,
+    userInfo: state.user
   }
 }
 
@@ -244,4 +510,6 @@ IntegrationAutosuggest.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(IntegrationAutosuggest)
+export default connect(mapStateToProps)(
+  withStyles(styles)(IntegrationAutosuggest)
+)
