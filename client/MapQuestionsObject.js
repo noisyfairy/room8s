@@ -54,19 +54,20 @@ const questionList = {
     ]
   },
   4: {
-    question: 'Do you get around by subway?',
+    question: 'What do you like to do on the weekend?',
     answers: [
       {
-        displayedAnswer: 'Love NYC subway - best in the world',
+        displayedAnswer: 'I am going to party until dawn',
         neighborhoods: '1'
       },
       {
         displayedAnswer:
-          'Sometimes, but dont expect to take it very frequently',
+          'Depends, sometimes I go out with friends, but i stay in majority of the times',
         neighborhoods: '2'
       },
       {
-        displayedAnswer: 'Nah, driving is my thing',
+        displayedAnswer:
+          'I see enough people during the week - just want to hangout with my dogs on the weekend',
         neighborhoods: '3'
       }
     ]
