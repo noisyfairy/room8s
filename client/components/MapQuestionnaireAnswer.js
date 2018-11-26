@@ -42,7 +42,11 @@ class MapQuestionnaireAnswer extends Component {
     return this.state.whereYouShouldLive !== null ? (
       <div>
         <div className="mapAndQuestions">
-          <MapWrapper color={color} data={this.props.mapData} />
+          <MapWrapper
+            color={color}
+            data={this.props.mapData}
+            shouldRender={this.props.shouldRender}
+          />
           <div className="answerBox">
             You should consider living in the following neighborhoods<br />
             {answer.map(neighborhood => (
@@ -91,7 +95,8 @@ class MapQuestionnaireAnswer extends Component {
 
 const mapStateToProps = state => ({
   mapData: state.map.mapData,
-  isLoggedIn: !!state.user.id
+  isLoggedIn: !!state.user.id,
+  shouldRender: state.map.shouldRender
 })
 
 const mapDispatchToProps = dispatch => {
