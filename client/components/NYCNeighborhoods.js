@@ -49,7 +49,10 @@ export default class NYCNeighborhoods extends Component {
           .text(d.properties.neighborhood)
       })
       .on('mouseleave', function(d) {
-        d3.select(this).style('stroke-width', 0.5)
+        d3
+          .select(this)
+          .style('stroke-width', 0.5)
+          .text(null)
       })
 
     // .on('click', function(d) {

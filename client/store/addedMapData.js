@@ -71,12 +71,10 @@ export const getSubwayMapData = () => async dispatch => {
 
 export const getArrestMapData = () => async dispatch => {
   try {
-    const {data} = await axios.get(
-      'https://data.cityofnewyork.us/resource/m25r-ji2e.json'
-    )
-    const arrestData = data.map(obj => {
-      return [obj.longitude, obj.latitude]
-    })
+    const {data} = await axios.get('/api/arrest')
+    const arrestData = data
+
+    d3.json('')
 
     d3.json('nycmap.geojson', mapData => {
       for (let location of mapData.features) {

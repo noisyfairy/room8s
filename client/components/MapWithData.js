@@ -19,19 +19,14 @@ class MapWithData extends Component {
   }
 
   render() {
-    console.log('this is state', this.state)
+    // console.log('this is state', this.state)
     const color = d3
       .scaleThreshold()
       .domain([1, 2, 3, 4])
       .range(['white', 'blue', 'green', 'yellow', 'red'])
     // .style('opacity', 0.8)
     // .opacity = .4
-    console.log('this is state', this.state.dataSet)
-    console.log(
-      'this is data going into map wrapper',
-      this.props[this.state.dataSet]
-    )
-    console.log('this should be going into map wrapper', this.props.arrestData)
+
     return (
       <div>
         <form>
@@ -40,6 +35,7 @@ class MapWithData extends Component {
             <option value="arrestData"> ARREST DATA </option>
             <option value="subwayData"> SUBWAY DATA</option>
           </select>
+          {console.log(this.props.arrestData)}
           {this.state.dataSet === 'arrestData' && (
             <MapWrapper
               // data={this.props[this.state.dataSet]}

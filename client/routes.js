@@ -86,8 +86,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    async loadInitialData() {
-      await dispatch(me())
+    loadInitialData() {
+      dispatch(me())
       dispatch(getMapData())
       dispatch(getSubwayMapData())
       dispatch(getArrestMapData())
