@@ -9,7 +9,7 @@ const GET_MAP = 'GET_MAP'
 const UPDATE_MAP = 'UPDATE_MAP'
 const UPDATE_RENDER = 'UPDATE_RENDER'
 const GET_IDX = 'GET_IDX'
-const PREFERRED_NEIGHBORHOOD = 'REFERRED_NEIGHBORHOOD'
+const PREFERRED_NEIGHBORHOOD = 'PREFERRED_NEIGHBORHOOD'
 
 /**
  * INITIAL STATE
@@ -115,6 +115,7 @@ export default function(state = defaultState, action) {
       case UPDATE_RENDER:
         return {...state, shouldRender: !state.shouldRender}
       case PREFERRED_NEIGHBORHOOD:
+        console.log(action)
         return {...state, preferredNeighborhood: action.neighborhood}
     }
   })
