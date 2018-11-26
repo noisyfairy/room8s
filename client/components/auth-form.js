@@ -1,46 +1,152 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
+import {auth, clearError} from '../store'
 import PropTypes from 'prop-types'
-import {auth} from '../store'
+import classNames from 'classnames'
+import {withStyles} from '@material-ui/core/styles'
+import TextField from '@material-ui/core/TextField'
+import Grid from '@material-ui/core/Grid'
+import Button from '@material-ui/core/Button'
+import {Typography, FormGroup} from '@material-ui/core'
 
+const styles = theme => ({
+  button: {
+    margin: theme.spacing.unit,
+    width: '100px',
+    height: '30px'
+  },
+  input: {
+    display: 'none'
+  },
+  root: {
+    flexGrow: 1
+  },
+  container: {
+    display: 'flex',
+    flexWrap: 'no-wrap',
+    alignItems: 'baseline'
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    backgroundColor: 'transparent'
+  },
+  dense: {
+    marginTop: 16
+  },
+  menu: {
+    width: 200
+  },
+  authLabel: {
+    color: '#424242',
+    fontSize: '1.25rem',
+    margin: '8px'
+  },
+  authGroup: {
+    alignItems: 'baseline'
+  },
+  link: {
+    color: theme.palette.secondary.main,
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'underline'
+    },
+    '&visited': {
+      color: theme.palette.secondary.main
+    },
+    '&active': {
+      color: theme.palette.secondary.main
+    },
+    '&focus': {
+      color: theme.palette.secondary.main
+    }
+  }
+})
 /**
  * COMPONENT
  */
-const AuthForm = props => {
-  const {name, displayName, handleSubmit, error} = props
+class AuthForm extends Component {
+  render() {
+    let {name, displayName, handleSubmit, error, classes} = this.props
+    console.log('AuthForm hits inside auth-form')
 
-  return (
-    <div>
-      <form onSubmit={handleSubmit} name={name}>
+    return (
+      <div>
         <div>
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input name="email" type="text" />
+          <Typography variant="display1">
+            {name === 'login' ? 'Log in' : 'Create an account'}
+          </Typography>
+          <Typography variant="subheading">
+            or{' '}
+            {name === 'login' ? (
+              <Link
+                className={classes.link}
+                to="/signup"
+                onClick={() => this.props.removingError()}
+              >
+                create an account
+              </Link>
+            ) : (
+              <Link
+                to="/"
+                className={classes.link}
+                onClick={() => this.props.removingError()}
+              >
+                log in
+              </Link>
+            )}
+          </Typography>
         </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
-      </form>
-      <a href="/auth/google">{displayName} with Google</a>
-    </div>
-  )
+        <form
+          className={classes.container}
+          autoComplete="off"
+          onSubmit={handleSubmit}
+          name={name}
+        >
+          <FormGroup row={true} className={classes.authGroup}>
+            <TextField
+              required
+              id="outlined-email-input"
+              label="Email"
+              className={classes.textField}
+              type="email"
+              name="email"
+              autoComplete="email"
+              margin="normal"
+              size="small"
+            />
+            <TextField
+              required
+              id="outlined-password-input"
+              label="Password"
+              className={classes.textField}
+              type="password"
+              name="password"
+              autoComplete="current-password"
+              margin="normal"
+              size="small"
+            />
+            <Button
+              className={classes.button}
+              type="submit"
+              name=""
+              variant="outlined"
+              color="secondary"
+            >
+              {displayName}
+            </Button>
+          </FormGroup>
+        </form>
+        <a href="/auth/google">{displayName} with Google</a>
+        <Typography variant="caption" color="secondary">
+          {error && error.response && <div> {error.response.data} </div>}
+        </Typography>
+      </div>
+    )
+  }
 }
 
-/**
- * CONTAINER
- *   Note that we have two different sets of 'mapStateToProps' functions -
- *   one for Login, and one for Signup. However, they share the same 'mapDispatchToProps'
- *   function, and share the same Component. This is a good example of how we
- *   can stay DRY with interfaces that are very similar to each other!
- */
 const mapLogin = state => {
   return {
     name: 'login',
@@ -65,19 +171,26 @@ const mapDispatch = dispatch => {
       const email = evt.target.email.value
       const password = evt.target.password.value
       dispatch(auth(email, password, formName))
+    },
+    removingError: () => {
+      dispatch(clearError())
     }
   }
 }
 
-export const Login = connect(mapLogin, mapDispatch)(AuthForm)
-export const Signup = connect(mapSignup, mapDispatch)(AuthForm)
+export const Login = withStyles(styles)(
+  connect(mapLogin, mapDispatch)(AuthForm)
+)
+export const Signup = withStyles(styles)(
+  connect(mapSignup, mapDispatch)(AuthForm)
+)
 
 /**
  * PROP TYPES
  */
-AuthForm.propTypes = {
-  name: PropTypes.string.isRequired,
-  displayName: PropTypes.string.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  error: PropTypes.object
-}
+// AuthForm.propTypes = {
+//   name: PropTypes.string.isRequired,
+//   displayName: PropTypes.string.isRequired,
+//   handleSubmit: PropTypes.func.isRequired,
+//   error: PropTypes.object
+// }
