@@ -19,13 +19,19 @@ import {
   MapWithData
 } from './components'
 import {me, getMapData, getSubwayMapData, getArrestMapData} from './store'
+import axios from 'axios'
 
 /**
  * COMPONENT
  */
 class Routes extends Component {
-  componentDidMount() {
+  async componentDidMount() {
     this.props.loadInitialData()
+    console.log('waiting for arrest data to load')
+    await this.props.loadArrestData()
+    console.log('arrest data has loaded')
+    console.log('this is arrest data', this.props.arrestData)
+    // axios.post('/api/arrestSave', this.props.arrestData)
   }
 
   render() {
@@ -80,7 +86,8 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    arrestData: state.arrestData
   }
 }
 
@@ -90,7 +97,9 @@ const mapDispatch = dispatch => {
       dispatch(me())
       dispatch(getMapData())
       dispatch(getSubwayMapData())
-      dispatch(getArrestMapData())
+    },
+    async loadArrestData() {
+      await dispatch(getArrestMapData())
     }
   }
 }

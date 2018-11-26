@@ -73,18 +73,24 @@ export const getArrestMapData = () => async dispatch => {
   try {
     const {data} = await axios.get('/api/arrest')
     const arrestData = data
+    // get the json.strigify data and put it in the function
+    // get it from the window with window.arrestData = mapData
+    // window.arrestData  =
 
-    d3.json('')
+    //require axios on the back end
+    // require point-in-polygon on the back end
+    // create an api route of all the scores
 
     d3.json('nycmap.geojson', mapData => {
       for (let location of mapData.features) {
-        location.properties.score = 0
+        // location.properties.score = 0
         arrestData.map(coord => {
           if (inside(coord, location.geometry.coordinates[0])) {
             location.properties.score++
           }
         })
       }
+      // await axios.post('/api/arrestSave', mapData)
       dispatch(getArrest(mapData))
     })
   } catch (err) {
