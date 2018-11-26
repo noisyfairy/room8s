@@ -1,12 +1,12 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {selectPreferredNeighborhood} from '../store/index'
 import MapWrapper from './MapWrapper'
 import {Link} from 'react-router-dom'
+import axios from 'axios'
 
 class MapQuestionnaireAnswer extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       whereYouShouldLive: null
     }
@@ -32,13 +32,23 @@ class MapQuestionnaireAnswer extends Component {
     }
   }
 
+  handleClick = async neighborhood => {
+    await axios.put(`./api/users/${this.props.userId}`, {
+      location: neighborhood.neighborhood
+    })
+    alert(
+      `${
+        neighborhood.neighborhood
+      } has been saved to your profile as your preferred location`
+    )
+  }
+
   render() {
     const answer = this.state.whereYouShouldLive
     const color = d3
       .scaleThreshold()
       .domain([1, 2, 3, 4])
       .range(['white', '#D1F2EB', '#76D7C4', '#17A589'])
-    console.log(this.props)
     return this.state.whereYouShouldLive !== null ? (
       <div>
         <div className="mapAndQuestions">
@@ -53,16 +63,8 @@ class MapQuestionnaireAnswer extends Component {
               <div key={answer.indexOf(neighborhood)}>
                 {this.props.isLoggedIn && (
                   <button
-                    type="button"
                     onClick={() => {
-                      alert(
-                        `${
-                          neighborhood.neighborhood
-                        } has been saved to your profile as your preferred location`
-                      )
-                      this.props.selectPreferredNeighborhood(
-                        neighborhood.neighborhood
-                      )
+                      this.handleClick(neighborhood)
                     }}
                   >
                     Save to preference
@@ -96,19 +98,12 @@ class MapQuestionnaireAnswer extends Component {
 const mapStateToProps = state => ({
   mapData: state.map.mapData,
   isLoggedIn: !!state.user.id,
-  shouldRender: state.map.shouldRender
+  shouldRender: state.map.shouldRender,
+  userId: state.user.id
 })
 
-const mapDispatchToProps = dispatch => {
-  return {
-    selectPreferredNeighborhood: neighborhood =>
-      dispatch(selectPreferredNeighborhood(neighborhood))
-  }
-}
-
-const ConnectedMapQuestionnaireAnswer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MapQuestionnaireAnswer)
+const ConnectedMapQuestionnaireAnswer = connect(mapStateToProps)(
+  MapQuestionnaireAnswer
+)
 
 export default ConnectedMapQuestionnaireAnswer

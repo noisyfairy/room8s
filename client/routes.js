@@ -92,7 +92,7 @@ const mapDispatch = dispatch => {
       await dispatch(me())
       dispatch(getMapData())
       dispatch(getSubwayMapData())
-      dispatch(getArrestMapData())
+      // dispatch(getArrestMapData())
     }
   }
 }
