@@ -40,7 +40,7 @@ class UserInfoForm extends React.Component {
       introvert: '',
       guest: '',
       tod: '',
-      location: 'Chelsea',
+      location: '',
       moveInTime: '',
       duration: ''
     }
