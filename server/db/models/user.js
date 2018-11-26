@@ -48,6 +48,10 @@ const User = db.define('user', {
   tod: {
     type: Sequelize.ENUM('Morning', 'Night')
   },
+  location: {
+    type: Sequelize.STRING,
+    defaultValue: ''
+  },
   salt: {
     type: Sequelize.STRING,
     // Making `.salt` act like a function hides it when serializing to JSON.
