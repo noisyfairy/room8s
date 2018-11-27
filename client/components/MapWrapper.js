@@ -13,10 +13,10 @@ class MapWrapper extends Component {
     } else {
       if (data.features && this.props.shouldRender === true) {
         return (
-          <svg key="first" width="720" height="720">
+          <svg key="first" width="500" height="600">
             <NYCNeighborhoods
-              width={720}
-              height={720}
+              width={500}
+              height={600}
               mapData={data}
               color={color}
             />
@@ -24,10 +24,10 @@ class MapWrapper extends Component {
         )
       }
       return (
-        <svg key="second" width="720" height="720">
+        <svg key="second" width="500" height="600">
           <NYCNeighborhoods
-            width={720}
-            height={720}
+            width={500}
+            height={600}
             mapData={data}
             color={color}
           />
