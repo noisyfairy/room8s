@@ -22,9 +22,6 @@ const User = db.define('user', {
   lastName: {
     type: Sequelize.STRING
   },
-  location: {
-    type: Sequelize.STRING
-  },
   duration: {
     type: Sequelize.INTEGER
   },
@@ -51,6 +48,11 @@ const User = db.define('user', {
   location: {
     type: Sequelize.STRING,
     defaultValue: ''
+  },
+  imgUrl: {
+    type: Sequelize.STRING,
+    defaultValue:
+      'https://www.qualiscare.com/wp-content/uploads/2017/08/default-user.png'
   },
   salt: {
     type: Sequelize.STRING,
