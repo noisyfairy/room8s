@@ -44,7 +44,6 @@ class Routes extends Component {
         <Route exact path="/home" component={UserHome} />
         <Route exact path="/map" component={ConnectedMapAndQuestions} />
         {/* // personal info & link to {questions,AllMatchUsers, FavoriteUsers}  view */}
-        <Route exact path="/questions" component={Questions} />
         {/* // should prepopulate with answers upon signIn; empy upon signUp, & link to AllMatchUsers view */}
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
@@ -64,10 +63,9 @@ class Routes extends Component {
             <Route exact path="/matchUsers" component={MatchUsers} />
             <Route exact path="/favoriteUsers" component={FavoriteUsers} />
             <Route exact path="/users/:userId" component={SingleUser} />
-            <Route exact path="/room8pref" component={QuestionsForm} />
+            <Route exact path="/preferences" component={QuestionsForm} />
             <Route exact path="/userinfo" component={UserInfoForm} />
             <Route exact path="/home" component={UserHome} />
-
             <Route exact path="/users" component={Users} />
           </Switch>
         )}
