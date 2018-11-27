@@ -4,13 +4,13 @@ import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {
   Login,
-  SignupPage,
+  Signup,
   UserHome,
   Main,
   Questions,
-  Profile,
   Users,
   MatchUsers,
+  FavoriteUsers,
   SingleUser,
   ConnectedMapAndQuestions,
   UserInfoForm,
@@ -19,28 +19,35 @@ import {
   MapWithData
 } from './components'
 import {me, getMapData, getSubwayMapData, getArrestMapData} from './store'
+import axios from 'axios'
 
 /**
  * COMPONENT
  */
 class Routes extends Component {
-  componentDidMount() {
+  async componentDidMount() {
     this.props.loadInitialData()
+    console.log('waiting for arrest data to load')
+    await this.props.loadArrestData()
+    // console.log('arrest data has loaded')
+    // console.log('this is arrest data', this.props.arrestData)
+    // axios.post('/api/arrestSave', this.props.arrestData)
   }
 
   render() {
     const {isLoggedIn} = this.props
     console.log(isLoggedIn)
-    console.log('routes hit')
     return (
       <Switch>
         <Route exact path="/" component={Main} />
-        <Route exact path="/signup" component={SignupPage} />
-        {/* <Route exact path="/main" component={Main} /> */}
-        {/* <Route exact path="/home" component={UserHome} /> */}
+        <Route exact path="/main" component={Main} />
+        <Route exact path="/home" component={UserHome} />
         <Route exact path="/map" component={ConnectedMapAndQuestions} />
+        {/* // personal info & link to {questions,AllMatchUsers, FavoriteUsers}  view */}
         <Route exact path="/questions" component={Questions} />
+        {/* // should prepopulate with answers upon signIn; empy upon signUp, & link to AllMatchUsers view */}
         <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} />
         <Route
           exact
           path="/answer"
@@ -53,18 +60,18 @@ class Routes extends Component {
         <Route exact path="/users" component={Users} />
         {isLoggedIn && (
           <Switch>
-            <Route exact path="/home" component={UserHome} />
-            <Route exact path="/profile" component={Profile} />
+            {/* {/* Routes placed here are only available after logging in */}
             <Route exact path="/matchUsers" component={MatchUsers} />
-            {/* <Route exact path="/users" component={Users} /> */}
+            <Route exact path="/favoriteUsers" component={FavoriteUsers} />
             <Route exact path="/users/:userId" component={SingleUser} />
-            <Route exact path="/preference" component={QuestionsForm} />
+            <Route exact path="/room8pref" component={QuestionsForm} />
             <Route exact path="/userinfo" component={UserInfoForm} />
             <Route exact path="/home" component={UserHome} />
-            {/* <Route exact path="/favoriteUsers" component={FavoriteUsers} /> */}
+
             <Route exact path="/users" component={Users} />
           </Switch>
         )}
+        {/* Displays our main {Login} component as a fallback */}
         <Route component={Main} />
         {/* <Redirect to="/main" /> */}
       </Switch>
@@ -79,17 +86,20 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    arrestData: state.arrestData
   }
 }
 
 const mapDispatch = dispatch => {
   return {
-    async loadInitialData() {
-      await dispatch(me())
+    loadInitialData() {
+      dispatch(me())
       dispatch(getMapData())
       dispatch(getSubwayMapData())
-      dispatch(getArrestMapData())
+    },
+    async loadArrestData() {
+      await dispatch(getArrestMapData())
     }
   }
 }
