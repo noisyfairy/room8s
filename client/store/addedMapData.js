@@ -75,7 +75,6 @@ export const getArrestMapData = () => async dispatch => {
     d3.json('nycmap.geojson', mapData => {
       let scoreObj = {4: [], 5: [], 6: []}
       for (let loc of mapData.features) {
-        // console.log('this is addedmapdata', loc)
         if (arrestData[loc.properties.neighborhood]) {
           loc.properties.score = arrestData[loc.properties.neighborhood]
         } else loc.properties.score = 0
@@ -93,7 +92,6 @@ export const getArrestMapData = () => async dispatch => {
       }
       dispatch(mapScore(scoreObj))
     })
-    console.log('thing from jmapdata', arrestData)
   } catch (err) {
     console.error(err)
   }
@@ -112,7 +110,6 @@ export default function(state = initialState, action) {
         })
         break
       case GET_ARREST:
-        console.log(action.arrestData)
         return {...state, arrestMapData: action.arrestData}
     }
   })

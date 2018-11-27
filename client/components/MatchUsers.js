@@ -55,7 +55,6 @@ class MatchUsers extends Component {
         Favorite User:
         {this.props.favUsers.length > 0 && (
           <ul>
-            {console.log(this.props.favUsers)}
             {this.props.favUsers.map(user => {
               return (
                 <li>

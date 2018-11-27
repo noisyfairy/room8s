@@ -53,13 +53,11 @@ class MapQuestionnaire extends React.Component {
     } else {
       this.setState({value: '', question: this.state.question + 1})
     }
-    console.log(this.props.mapData)
   }
 
   render() {
     const {classes} = this.props
 
-    console.log(`PROPS HERE: `, this.props)
     return (
       <div className={classes.root}>
         <form className="questionBox" onSubmit={this.handleSubmit}>
