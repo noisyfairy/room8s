@@ -1,6 +1,7 @@
 const User = require('./user')
 const Nbhd = require('./neighborhoods')
 const Questions = require('./questions')
+const Favorite = require('./favorite')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -11,6 +12,8 @@ const Questions = require('./questions')
 
 Questions.belongsTo(User)
 User.hasOne(Questions)
+User.hasMany(Favorite)
+Favorite.belongsTo(User)
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
@@ -21,5 +24,6 @@ User.hasOne(Questions)
 module.exports = {
   User,
   Questions,
-  Nbhd
+  Nbhd,
+  Favorite
 }

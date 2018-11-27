@@ -258,7 +258,6 @@ class UserInfoForm extends React.Component {
                 <MenuItem value={10}>10 Months</MenuItem>
                 <MenuItem value={11}>11 Months</MenuItem>
                 <MenuItem value={12}>12 Months</MenuItem>
-                <MenuItem value={13}>12+ Months</MenuItem>
               </TextField>
             </div>
             <div>
