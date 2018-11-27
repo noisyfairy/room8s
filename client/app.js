@@ -4,7 +4,7 @@ import Routes from './routes'
 // import {CssBaseline} from '@material-ui/core/'
 // import {connect} from 'react-redux'
 
-const App = props => {
+const App = () => {
   return (
     <div>
       <Navbar />
