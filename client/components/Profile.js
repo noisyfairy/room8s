@@ -11,7 +11,7 @@ import {me} from '../store/user'
 // helper functions
 
 const priorityNumToString = num => {
-  switch(num){
+  switch (num) {
     case '1':
       return 'Never'
     case '2':
@@ -28,8 +28,12 @@ const priorityNumToString = num => {
 }
 
 const booleanToString = bool => {
-  if(bool === 'true'){return 'Ok'}
-  if(bool === 'false'){return 'Not Ok'}
+  if (bool === 'true') {
+    return 'Ok'
+  }
+  if (bool === 'false') {
+    return 'Not Ok'
+  }
 }
 
 class Profile extends Component {
@@ -42,7 +46,7 @@ class Profile extends Component {
 
   async componentDidMount() {
     try {
-      await this.props.getUser();
+      await this.props.getUser()
       const userId = Number(this.props.user.id)
       const response = await axios.get(`/api/users/${userId}`)
       const singleUser = response.data
@@ -112,7 +116,9 @@ class Profile extends Component {
             </tr>
             <tr>
               <td> Budget Range</td>
-              <td>{question.budgetMin} - {question.budgetMax}</td>
+              <td>
+                {question.budgetMin} - {question.budgetMax}
+              </td>
               <td>{question.budgetPrior}</td>
             </tr>
             <tr>
@@ -132,7 +138,9 @@ class Profile extends Component {
             </tr>
             <tr>
               <td>Age Range</td>
-              <td>{question.ageMin} - {question.ageMax} </td>
+              <td>
+                {question.ageMin} - {question.ageMax}{' '}
+              </td>
               <td>{question.sexPrior} </td>
             </tr>
             <tr>
@@ -152,12 +160,12 @@ class Profile extends Component {
             </tr>
             <tr>
               <td>Clean</td>
-              <td> { priorityNumToString(`${question.clean}`) } </td>
+              <td> {priorityNumToString(`${question.clean}`)} </td>
               <td>{question.cleanPrior} </td>
             </tr>
             <tr>
               <td>Guest</td>
-              <td> { priorityNumToString(`${question.guest}`) } </td>
+              <td> {priorityNumToString(`${question.guest}`)} </td>
               <td>{question.guestPrior} </td>
             </tr>
             <tr>
@@ -185,7 +193,7 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-      getUser: () => dispatch(me())
+  getUser: () => dispatch(me())
 })
 
 export default connect(mapState, mapDispatch)(Profile)
