@@ -259,8 +259,6 @@ class Algo extends React.Component {
       const results = func(user, roomie)
       matchScore += results.matchScore
       maxScore += results.maxScore
-      // console.log('matchscore:', matchScore)
-      // console.log('maxscore:', maxScore)
     })
 
     return Number(matchScore / maxScore)
