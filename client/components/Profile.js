@@ -106,7 +106,7 @@ class Profile extends Component {
             Preferences{' '}
             <span className="edit">
               {' '}
-              <Link to="/preference"> Edit </Link>{' '}
+              <Link to="/preferences"> Edit </Link>{' '}
             </span>{' '}
           </h4>
           <hr />
