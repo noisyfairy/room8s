@@ -60,11 +60,13 @@ path {
 .questionBox {
   min-width: 200px;
   padding: 100px auto;
+  max-width: 400px;
 }
 
 .answerBox {
-  min-width: 200px;
+  min-width: 400px;
   padding: 100px auto;
+  max-width: 400px;
 }
 
 #users {
@@ -150,7 +152,7 @@ path {
 
 table {
   border-collapse: collapse;
-  width: 60%;
+  width: 80%;
 }
 
 th,

@@ -4,21 +4,18 @@ import classNames from 'classnames'
 import Logout from './Logout'
 import Routes from '../routes'
 import history from '../history'
-import {connect} from 'react-redux'
+import MenuBar from './MenuBar'
 
 import {withStyles} from '@material-ui/core/styles'
 import Drawer from '@material-ui/core/Drawer'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
-import List from '@material-ui/core/List'
 import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
 
 const drawerWidth = 240
 
@@ -172,30 +169,7 @@ class NavBar extends React.Component {
           </IconButton>
         </div>
         <Divider />
-        <List>
-          {/* {isLoggedIn && ( */}
-          <ListItem button onClick={() => history.push('profile')}>
-            <ListItemText primary="Profile" />
-          </ListItem>
-          {/* )} */}
-          <ListItem button onClick={() => history.push('/map')}>
-            <ListItemText primary="Map" />
-          </ListItem>
-          <ListItem button onClick={() => history.push('/knowledge-map')}>
-            <ListItemText primary="Knowledge Map" />
-          </ListItem>
-          {/* <ListItem button onClick={() => history.push('/users')}>
-            <ListItemText primary="Users" />
-          </ListItem> */}
-          {/* {isLoggedIn && ( */}
-          <ListItem button onClick={() => history.push('/matchUsers')}>
-            <ListItemText primary="Match Users" />
-          </ListItem>
-          {/* )} */}
-          {/* <ListItem button onClick={() => history.push('/FavoriteUsers')}>
-            <ListItemText primary="Favorite Users" />
-          </ListItem> */}
-        </List>
+        <MenuBar handleDrawerClose={this.handleDrawerClose} />
       </Drawer>
     )
 
@@ -264,13 +238,5 @@ NavBar.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired
 }
-
-// const mapState = state => ({
-//   isLoggedIn: !!state.user.id
-// })
-
-// export default withStyles(styles, {withTheme: true})(
-//   connect(mapState, null)(NavBar)
-// )
 
 export default withStyles(styles, {withTheme: true})(NavBar)
