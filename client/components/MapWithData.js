@@ -70,6 +70,15 @@ class MapWithData extends Component {
               color={color}
             />
           )}
+          {this.state.dataSet === 'housingViolations' &&
+            (console.log(this.props.violationData),
+            (
+              <MapWrapper
+                data={this.props.violationData}
+                shouldRender={this.props.shouldRender}
+                color={color}
+              />
+            ))}
         </form>
       </div>
     )
@@ -80,6 +89,7 @@ const mapStateToProps = state => ({
   mapData: state.map.mapData,
   arrestData: state.addedMap.arrestMapData,
   subwayData: state.addedMap.subwayMapData,
+  violationData: state.addedMap.violationMapData,
   shouldRender: state.map.shouldRender
 })
 

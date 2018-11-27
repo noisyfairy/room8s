@@ -104,10 +104,18 @@ export const getArrestMapData = () => async dispatch => {
 }
 
 export const getHousingViolationsData = () => async dispatch => {
-  let newData = {}
   try {
     const {data} = await axios.get('/api/housingViolations')
-
+    const violationData = data
+    d3.json('nycmap.geojson', mapData => {
+      for (let loc of mapData.features) {
+        if (violationData[loc.properties.neighborhood]) {
+          console.log('working')
+          loc.properties.score = violationData[loc.properties.neighborhood]
+        } else loc.properties.score = 0
+      }
+      dispatch(getViolations(mapData))
+    })
     // d3.json('nycmap.geojson', mapData => {
     //   for (let loc of mapData.features) {
     //     data.map(coords => {
@@ -177,6 +185,8 @@ export default function(state = initialState, action) {
       case GET_ARREST:
         // console.log(action.arrestData)
         return {...state, arrestMapData: action.arrestData}
+      case GET_VIOLATIONS:
+        return {...state, violationMapData: action.violationsData}
     }
   })
 }
