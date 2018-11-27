@@ -140,35 +140,16 @@ export const getHousingViolationsData = () => async dispatch => {
     console.log(err)
   }
 }
-// get the json.strigify data and put it in the function
-// get it from the window with window.arrestData = mapData
-// window.arrestData  =
 
-//require axios on the back end
-// require point-in-polygon on the back end
-// create an api route of all the scores
-// const arrestObj = {}
-// d3.json('nycmap.geojson', mapData => {
-//   for (let loc of mapData.features) {
-//     // loc.properties.score = 0
-//     arrestData.map(coord => {
-//       if (inside(coord, loc.geometry.coordinates[0])) {
-//         loc.properties.score++
-//         if (!arrestObj[loc.properties.neighborhood]) {
-//           arrestObj[loc.properties.neighborhood] = 1
-//         } else arrestObj[loc.properties.neighborhood]++
-//       }
-//     })
-//   }
-//   axios.post('/api/arrestSave', arrestObj).then()
-// const shortData = {}
-// try{
-//   await axios.post('/api/arrestSave', arrestObj)
-// } catch (err){
-//   console.log(err)
-// }
-
-// dispatch(getArrest(arrestData))
+export const getTreeData = () => async dispatfh => {
+  try {
+    const {data} = await axios.get(
+      '/https://data.cityofnewyork.us/resource/5rq2-4hqu.json'
+    )
+  } catch (err) {
+    console.log(err)
+  }
+}
 
 //REDUCER
 
@@ -190,3 +171,22 @@ export default function(state = initialState, action) {
     }
   })
 }
+
+// d3.json('nycmap.geojson', mapData => {
+//   for (let loc of mapData.features) {
+//     data.map(coords => {
+//       if (inside(coords, loc.geometry.coordinates[0])) {
+//         // console.log('true')
+//         if (!newData[loc.properties.neighborhood]) {
+//           // console.log('hasnoprops')
+//           newData[loc.properties.neighborhood] = 1
+//           // console.log('newData', newData)
+//         } else {
+//           // console.log('hasprops')
+//           newData[loc.properties.neighborhood]++
+//         }
+//       }
+//     })
+//   }
+//   axios.post('/api/save', newData).then()
+// })
