@@ -2,8 +2,15 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import MapWrapper from './MapWrapper'
 import ConnectedMapQuestionnaire from './MapQuestionnaire'
+import {Link} from 'react-router-dom'
+import {getMapData, updateMapRender} from '../store'
 
 class MapAndQuestions extends Component {
+  componentDidMount() {
+    this.props.mapRefresh()
+    this.props.renderRefresh()
+    console.log('componentdidmount?')
+  }
   render() {
     const color = d3
       .scaleThreshold()
@@ -13,6 +20,7 @@ class MapAndQuestions extends Component {
       <div>
         <h2>Want to know where you belong in this big city?</h2>
         <h3>Find out by taking this 4-question quiz!</h3>
+
         <div className="mapAndQuestions">
           <ConnectedMapQuestionnaire />
           <MapWrapper
@@ -33,6 +41,15 @@ const mapStateToProps = state => ({
   subwayData: state.addedMap.subwayMapData
 })
 
-const connectedMapAndQuestions = connect(mapStateToProps)(MapAndQuestions)
+const mapDispatchToPros = dispatch => {
+  return {
+    mapRefresh: () => dispatch(getMapData),
+    renderRefresh: () => dispatch(updateMapRender)
+  }
+}
+
+const connectedMapAndQuestions = connect(mapStateToProps, mapDispatchToPros)(
+  MapAndQuestions
+)
 
 export default connectedMapAndQuestions

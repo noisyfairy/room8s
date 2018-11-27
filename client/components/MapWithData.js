@@ -13,20 +13,6 @@ class MapWithData extends Component {
 
   componentDidMount() {
     console.log('compnonent mounting')
-    // const arrestData = function() {
-    //   for (let keys in this.props.arrestData) {
-    //     this.props.mapData.features.find(nbhd => {
-    //       if (nbhd.properties.neibhgorhood === keys) {
-    //         return (nbhd.properties.score = arrestData[keys])
-    //       }
-    //       console.log('WORKING IN MOUNT', this.props.mapData.features)
-    //     })
-    //   }
-    // return this.props.mapData.features.map(nbhd =>{
-    // })
-    // }
-    // console.log(this.props.mapData)
-    // console.log('this is arrest data WORK PLS', arrestData())
   }
 
   handleChange = evt => {
@@ -38,7 +24,6 @@ class MapWithData extends Component {
   }
 
   render() {
-    // console.log('this is state', this.state)
     const color = d3
       .scaleThreshold()
       .domain([1, 2, 3, 4])

@@ -41,9 +41,7 @@ class MapQuestionnaire extends React.Component {
   handleSubmit = evt => {
     evt.preventDefault()
 
-    const neighborhoodsArray = this.props.subwayMapData[
-      Number(this.state.value)
-    ]
+    const neighborhoodsArray = this.props.mapScore[Number(this.state.value)]
     for (let neighborhood of neighborhoodsArray) {
       let idx = this.props.idx[neighborhood]
       this.props.updateMapScore(Number(idx))
@@ -51,19 +49,15 @@ class MapQuestionnaire extends React.Component {
     this.props.updateMapRender()
 
     if (this.state.question === Math.max(...Object.keys(questionList))) {
-      setTimeout(function() {
-        history.push('/answer')
-      }, 2000)
+      history.push('/answer')
     } else {
       this.setState({value: '', question: this.state.question + 1})
     }
-    console.log(this.props.mapData)
   }
 
   render() {
     const {classes} = this.props
 
-    console.log(`PROPS HERE: `, this.props)
     return (
       <div className={classes.root}>
         <form className="questionBox" onSubmit={this.handleSubmit}>
@@ -111,7 +105,7 @@ MapQuestionnaire.propTypes = {
 const mapStateToProps = state => ({
   mapData: state.map.mapData,
   idx: state.map.neighborhoodIdxObj,
-  subwayMapData: state.addedMap.getSubwayScore
+  mapScore: state.addedMap.mapScore
 })
 
 const mapDispatchToProps = dispatch => {
