@@ -1,7 +1,7 @@
 import Axios from 'axios'
 import React from 'react'
-import {getMatchUsers} from '../store'
 import {connect} from 'react-redux'
+import {MatchUsers} from '../components'
 
 class Algo extends React.Component {
   constructor(props) {
@@ -12,7 +12,7 @@ class Algo extends React.Component {
   }
 
   componentDidMount() {
-    this.bestmatches(this.props.id)
+    this.bestmatches(this.props.userId)
   }
 
   compBudget = (user, roomie) => {
@@ -261,7 +261,7 @@ class Algo extends React.Component {
       maxScore += results.maxScore
     })
 
-    return Number(matchScore / maxScore)
+    return Math.round(Number(matchScore / maxScore) * 100)
   }
 
   matchRoommate = (userlist, userId) => {
@@ -297,7 +297,7 @@ class Algo extends React.Component {
       return 0
     })
 
-    let top3results = userMatchScores.slice(0, 4)
+    let top3results = userMatchScores.slice(0, 3)
 
     let top3Counter = []
     top3results.map(roomie => {
@@ -331,27 +331,11 @@ class Algo extends React.Component {
   }
 
   render() {
-    console.log('this.state for algo', this.state.top3)
+    console.log(this.state.top3)
     return (
       <div>
         {this.state.top3.length > 0 ? (
-          <div>
-            <h1>
-              1st Id: {Object.keys(this.state.top3[0])}, score:{Math.round(
-                Object.values(this.state.top3[0]) * 100
-              )}{' '}
-            </h1>
-            <h1>
-              2nd Id: {Object.keys(this.state.top3[1])}, score:{Math.round(
-                Object.values(this.state.top3[1]) * 100
-              )}{' '}
-            </h1>
-            <h1>
-              3rd Id: {Object.keys(this.state.top3[2])}, score:{Math.round(
-                Object.values(this.state.top3[2]) * 100
-              )}{' '}
-            </h1>
-          </div>
+          <MatchUsers matchUserList={this.state.top3} />
         ) : (
           <div />
         )}
@@ -362,14 +346,9 @@ class Algo extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    userPref: state.singleUser.user.question
+    userPref: state.singleUser.user.question,
+    userId: state.user.id
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getMatchUsers: matchedUser => dispatch(getMatchUsers(matchedUser))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Algo)
+export default connect(mapStateToProps, null)(Algo)
