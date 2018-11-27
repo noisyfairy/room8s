@@ -10,13 +10,18 @@ class MapAndQuestions extends Component {
       .domain([1, 2, 3, 4])
       .range(['white', '#D1F2EB', '#76D7C4', '#17A589'])
     return (
-      <div className="mapAndQuestions">
-        <MapWrapper
-          data={this.props.data}
-          shouldRender={this.props.shouldRender}
-          color={color}
-        />
-        <ConnectedMapQuestionnaire />
+      <div>
+        <h2>Want to know where you belong in this big city?</h2>
+        <h3>Find out by taking this 4-question quiz!</h3>
+        <div className="mapAndQuestions">
+          <ConnectedMapQuestionnaire />
+          <MapWrapper
+            className="flexMapBox"
+            data={this.props.data}
+            shouldRender={this.props.shouldRender}
+            color={color}
+          />
+        </div>
       </div>
     )
   }

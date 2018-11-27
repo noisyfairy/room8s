@@ -169,7 +169,7 @@ class NavBar extends React.Component {
           </IconButton>
         </div>
         <Divider />
-        <MenuBar />
+        <MenuBar handleDrawerClose={this.handleDrawerClose} />
       </Drawer>
     )
 

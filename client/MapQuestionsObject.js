@@ -1,6 +1,6 @@
 const questionList = {
   1: {
-    question: 'Do you get around by subway?',
+    question: 'Question #1 - Do you get around by subway?',
     answers: [
       {
         displayedAnswer: 'Love NYC subway - best in the world',
@@ -18,25 +18,25 @@ const questionList = {
     ]
   },
   2: {
-    question: 'Is Safety a huge concern to you?',
+    question: 'Question #2 - Is Safety a huge concern to you?',
     answers: [
       {
         displayedAnswer:
           'Yes! Safety is the most important consideration when it comes to neighborhood',
-        neighborhoods: '1'
+        neighborhoods: '4'
       },
       {
         displayedAnswer: 'I am concern but not my top priority',
-        neighborhoods: '2'
+        neighborhoods: '5'
       },
       {
         displayedAnswer: 'I am safe everywhere I go - does not matter to me',
-        neighborhoods: '3'
+        neighborhoods: '6'
       }
     ]
   },
   3: {
-    question: 'Do you prefer eating out or cooking at home?',
+    question: 'Question #3 - Do you prefer eating out or cooking at home?',
     answers: [
       {
         displayedAnswer: 'Cooking? What is that',
@@ -54,7 +54,7 @@ const questionList = {
     ]
   },
   4: {
-    question: 'What do you like to do on the weekend?',
+    question: 'Question #4 - What do you like to do on the weekend?',
     answers: [
       {
         displayedAnswer: 'I am going to party until dawn',

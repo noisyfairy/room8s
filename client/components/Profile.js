@@ -3,11 +3,39 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
-// import {me} from '../store/user'
+import {me} from '../store/user'
 
 /**
  * COMPONENT
  */
+// helper functions
+
+const priorityNumToString = num => {
+  switch (num) {
+    case '1':
+      return 'Never'
+    case '2':
+      return 'Rarely'
+    case '3':
+      return 'Sometimes'
+    case '4':
+      return 'Often'
+    case '5':
+      return 'Very Often'
+    default:
+      return 'Sometimes'
+  }
+}
+
+const booleanToString = bool => {
+  if (bool === 'true') {
+    return 'Ok'
+  }
+  if (bool === 'false') {
+    return 'Not Ok'
+  }
+}
+
 class Profile extends Component {
   constructor() {
     super()
@@ -18,7 +46,7 @@ class Profile extends Component {
 
   async componentDidMount() {
     try {
-      // await this.props.getUser();
+      await this.props.getUser()
       const userId = Number(this.props.user.id)
       const response = await axios.get(`/api/users/${userId}`)
       const singleUser = response.data
@@ -84,50 +112,71 @@ class Profile extends Component {
             <tr>
               <th>Question</th>
               <th>Answer</th>
+              <th>Priority</th>
             </tr>
             <tr>
-              <td> budgetMin </td>
-              <td>{question.budgetMin} </td>
+              <td> Budget Range</td>
+              <td>
+                {question.budgetMin} - {question.budgetMax}
+              </td>
+              <td>{question.budgetPrior}</td>
             </tr>
             <tr>
-              <td> budgetMax </td>
-              <td>{question.budgetMax} </td>
+              <td> Location </td>
+              <td>{user.location} </td>
+              <td>{question.locationPrior} </td>
             </tr>
             <tr>
-              <td> budgetPrior </td>
-              <td>{question.budgetPrior} </td>
+              <td> Move in Time </td>
+              <td>{user.moveInTime} </td>
+              <td>{question.moveInPrior} </td>
             </tr>
             <tr>
-              <td> location1 </td>
-              <td>{question.location1} </td>
+              <td> Duration </td>
+              <td>{user.duration} </td>
+              <td>{question.duraPrior} </td>
             </tr>
             <tr>
-              <td> location2 </td>
-              <td>{question.location2} </td>
-            </tr>
-            <tr>
-              <td>pet</td>
-              <td>{question.pet} </td>
-            </tr>
-            <tr>
-              <td>Max age</td>
-              <td>{question.ageMax} </td>
-            </tr>
-            <tr>
-              <td>Min age</td>
-              <td>{question.ageMin} </td>
+              <td>Age Range</td>
+              <td>
+                {question.ageMin} - {question.ageMax}{' '}
+              </td>
+              <td>{question.sexPrior} </td>
             </tr>
             <tr>
               <td>Smoke</td>
-              <td>{question.smoke} </td>
+              <td> {booleanToString(`${question.smoke}`)} </td>
+              <td>{question.smokePrior} </td>
+            </tr>
+            <tr>
+              <td>Pet</td>
+              <td>{booleanToString(`${question.pet}`)} </td>
+              <td>{question.petPrior} </td>
             </tr>
             <tr>
               <td>Sex</td>
               <td>{question.sex} </td>
+              <td>{question.sexPrior} </td>
             </tr>
             <tr>
-              <td>tod</td>
+              <td>Clean</td>
+              <td> {priorityNumToString(`${question.clean}`)} </td>
+              <td>{question.cleanPrior} </td>
+            </tr>
+            <tr>
+              <td>Guest</td>
+              <td> {priorityNumToString(`${question.guest}`)} </td>
+              <td>{question.guestPrior} </td>
+            </tr>
+            <tr>
+              <td>Introvert</td>
+              <td>{question.introvert} </td>
+              <td>{question.introPrior} </td>
+            </tr>
+            <tr>
+              <td>Tod</td>
               <td>{question.tod} </td>
+              <td>{question.todPrior} </td>
             </tr>
           </table>
         </div>
@@ -143,11 +192,11 @@ const mapState = state => ({
   user: state.user
 })
 
-// const mapDispatch = dispatch => ({
-//       getUser: () => dispatch(me())
-// })
+const mapDispatch = dispatch => ({
+  getUser: () => dispatch(me())
+})
 
-export default connect(mapState, null)(Profile)
+export default connect(mapState, mapDispatch)(Profile)
 
 /**
  * PROP TYPES
