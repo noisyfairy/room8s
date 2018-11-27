@@ -31,8 +31,6 @@ router.put('/:id', async (req, res, next) => {
       }
     })
 
-    console.log(answer)
-
     if (!answer[1]) {
       const updatedAnswers = await Questions.update(
         {...req.body},

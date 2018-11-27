@@ -18,7 +18,6 @@ export const getMatchUsers = matchUsers => ({
 //Thunk creator
 export const fetchMatchUsers = userList => {
   return async dispatch => {
-    console.log(userList)
     try {
       const user1 = axios.get(`./api/users/${Object.keys(userList[0])[0]}`)
       const user2 = axios.get(`./api/users/${Object.keys(userList[1])[0]}`)
