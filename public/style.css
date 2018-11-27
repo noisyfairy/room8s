@@ -48,7 +48,6 @@ path {
   pointer-events: none;
   opacity: 0;
   z-index: 3;
-  /* position: relative; */
 }
 
 /* D3 styling */
@@ -62,6 +61,12 @@ path {
   min-width: 200px;
   padding: 100px auto;
 }
+
+.answerBox {
+  min-width: 200px;
+  padding: 100px auto;
+}
+
 #users {
   max-width: 90%;
   max-height: 90%;
@@ -163,3 +168,8 @@ th {
   background-color: #4caf50;
   color: white;
 }
+
+/* .answers {
+  display: flex;
+  flex-direction: row;
+} */
