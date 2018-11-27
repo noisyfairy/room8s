@@ -53,8 +53,8 @@ class MapWithData extends Component {
             <option value="">SELECT</option>
             <option value="arrestData"> ARREST DATA </option>
             <option value="subwayData"> SUBWAY DATA</option>
+            <option value="housingViolations">MAINTENANCE VIOLATIONS</option>
           </select>
-          {/* {console.log('arrest data in mapwithdata', this.props.arrestData)} */}
           {this.state.dataSet === 'arrestData' && (
             <MapWrapper
               // data={this.props[this.state.dataSet]}
