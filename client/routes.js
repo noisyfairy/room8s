@@ -17,7 +17,13 @@ import {
   ConnectedMapQuestionnaireAnswer,
   MapWithData
 } from './components'
-import {me, getMapData, getSubwayMapData, getArrestMapData} from './store'
+import {
+  me,
+  getMapData,
+  getSubwayMapData,
+  getArrestMapData,
+  getHousingViolationsData
+} from './store'
 import axios from 'axios'
 
 /**
@@ -94,6 +100,7 @@ const mapDispatch = dispatch => {
       dispatch(me())
       dispatch(getMapData())
       dispatch(getSubwayMapData())
+      dispatch(getHousingViolationsData())
     },
     async loadArrestData() {
       await dispatch(getArrestMapData())

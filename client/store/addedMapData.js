@@ -7,14 +7,15 @@ import * as d3 from 'd3'
 const GET_SUBWAY = 'GET_SUBWAY'
 const GET_SUBWAY_SCORE = 'GET_SUBWAY_SCORE'
 const GET_ARREST = 'GET_ARREST'
+const GET_VIOLATIONS = 'GET_VIOLATIONS'
 
 //INITIAL STATE
 
 const initialState = {
-  allMapData: {},
   subwayMapData: {},
   getSubwayScore: {},
-  arrestMapData: {}
+  arrestMapData: {},
+  violationMapData: {}
 }
 
 //ACTION CREATORS
@@ -31,6 +32,10 @@ const getSubwayScore = subwayScoreData => ({
 const getArrest = arrestData => ({
   type: GET_ARREST,
   arrestData
+})
+const getViolations = violationsData => ({
+  type: GET_VIOLATIONS,
+  violationsData
 })
 
 //THUNK CREATORS
@@ -93,11 +98,77 @@ export const getArrestMapData = () => async dispatch => {
       }
       dispatch(getSubwayScore(subwayObjScore))
     })
-    console.log('thing from jmapdata', arrestData)
   } catch (err) {
     console.error(err)
   }
 }
+
+export const getHousingViolationsData = () => async dispatch => {
+  try {
+    const {data} = await axios.get('/api/housingViolations')
+    const violationData = data
+    d3.json('nycmap.geojson', mapData => {
+      for (let loc of mapData.features) {
+        if (violationData[loc.properties.neighborhood]) {
+          console.log('working')
+          loc.properties.score = violationData[loc.properties.neighborhood]
+        } else loc.properties.score = 0
+      }
+      dispatch(getViolations(mapData))
+    })
+    // d3.json('nycmap.geojson', mapData => {
+    //   for (let loc of mapData.features) {
+    //     data.map(coords => {
+    //       if (inside(coords, loc.geometry.coordinates[0])) {
+    //         // console.log('true')
+    //         if (!newData[loc.properties.neighborhood]) {
+    //           // console.log('hasnoprops')
+    //           newData[loc.properties.neighborhood] = 1
+    //           // console.log('newData', newData)
+    //         } else {
+    //           // console.log('hasprops')
+    //           newData[loc.properties.neighborhood]++
+    //         }
+    //       }
+    //     })
+    //   }
+    //   axios.post('/api/save', newData).then()
+    // })
+
+    // console.log(data)
+  } catch (err) {
+    console.log(err)
+  }
+}
+// get the json.strigify data and put it in the function
+// get it from the window with window.arrestData = mapData
+// window.arrestData  =
+
+//require axios on the back end
+// require point-in-polygon on the back end
+// create an api route of all the scores
+// const arrestObj = {}
+// d3.json('nycmap.geojson', mapData => {
+//   for (let loc of mapData.features) {
+//     // loc.properties.score = 0
+//     arrestData.map(coord => {
+//       if (inside(coord, loc.geometry.coordinates[0])) {
+//         loc.properties.score++
+//         if (!arrestObj[loc.properties.neighborhood]) {
+//           arrestObj[loc.properties.neighborhood] = 1
+//         } else arrestObj[loc.properties.neighborhood]++
+//       }
+//     })
+//   }
+//   axios.post('/api/arrestSave', arrestObj).then()
+// const shortData = {}
+// try{
+//   await axios.post('/api/arrestSave', arrestObj)
+// } catch (err){
+//   console.log(err)
+// }
+
+// dispatch(getArrest(arrestData))
 
 //REDUCER
 
@@ -112,8 +183,10 @@ export default function(state = initialState, action) {
         })
         break
       case GET_ARREST:
-        console.log(action.arrestData)
+        // console.log(action.arrestData)
         return {...state, arrestMapData: action.arrestData}
+      case GET_VIOLATIONS:
+        return {...state, violationMapData: action.violationsData}
     }
   })
 }
