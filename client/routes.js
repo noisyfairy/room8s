@@ -29,8 +29,8 @@ class Routes extends Component {
     this.props.loadInitialData()
     console.log('waiting for arrest data to load')
     await this.props.loadArrestData()
-    console.log('arrest data has loaded')
-    console.log('this is arrest data', this.props.arrestData)
+    // console.log('arrest data has loaded')
+    // console.log('this is arrest data', this.props.arrestData)
     // axios.post('/api/arrestSave', this.props.arrestData)
   }
 

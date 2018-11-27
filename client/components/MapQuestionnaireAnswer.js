@@ -1,10 +1,15 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import history from '../history'
+import MapWrapper from './MapWrapper'
+import {Link} from 'react-router-dom'
+import axios from 'axios'
 
 class MapQuestionnaireAnswer extends Component {
-  state = {
-    whereYouShouldLive: null
+  constructor(props) {
+    super(props)
+    this.state = {
+      whereYouShouldLive: null
+    }
   }
 
   componentDidMount() {
@@ -20,36 +25,85 @@ class MapQuestionnaireAnswer extends Component {
       }
       const MaxScore = Math.max(...Object.keys(mapScore))
       const neighborhoodForYou = mapScore[MaxScore]
-      console.log(neighborhoodForYou)
+
       this.setState({
         whereYouShouldLive: neighborhoodForYou
       })
     }
   }
 
+  handleClick = async neighborhood => {
+    await axios.put(`./api/users/${this.props.userId}`, {
+      location: neighborhood.neighborhood
+    })
+    alert(
+      `${
+        neighborhood.neighborhood
+      } has been saved to your profile as your preferred location`
+    )
+  }
+
   render() {
     const answer = this.state.whereYouShouldLive
-    return (
-      this.state.whereYouShouldLive !== null && (
-        <div>
-          "based on your preferences, looks like you should considering living
-          in the following areas!"
-          {answer.map(neighborhood => (
-            <div key={answer.indexOf(neighborhood)}>
-              {neighborhood.neighborhood},&nbsp;
-              {neighborhood.borough}
-            </div>
-          ))}
+    const color = d3
+      .scaleThreshold()
+      .domain([1, 2, 3, 4])
+      .range(['white', '#D1F2EB', '#76D7C4', '#17A589'])
+    return this.state.whereYouShouldLive !== null ? (
+      <div>
+        <div className="mapAndQuestions">
+          <MapWrapper
+            color={color}
+            data={this.props.mapData}
+            shouldRender={this.props.shouldRender}
+          />
+          <div className="answerBox">
+            You should consider living in the following neighborhoods<br />
+            {answer.map(neighborhood => (
+              <div key={answer.indexOf(neighborhood)}>
+                {this.props.isLoggedIn && (
+                  <button
+                    onClick={() => {
+                      this.handleClick(neighborhood)
+                    }}
+                  >
+                    Save to preference
+                  </button>
+                )}&nbsp;
+                {neighborhood.neighborhood},&nbsp;
+                {neighborhood.borough}
+              </div>
+            ))}
+            <br />
+          </div>
         </div>
-      )
+        {!this.props.isLoggedIn && (
+          <div>
+            Want to find a roommate in NYC?
+            <Link to="/signup">Sign up for an account</Link> and our algorithm
+            will match you up with a roommate based on your preferences!
+          </div>
+        )}
+      </div>
+    ) : (
+      <div>
+        <br />
+        <br />
+        Please make sure to fill out the <Link to="/map">questionnaire!</Link>
+      </div>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  mapData: state.map.mapData
+  mapData: state.map.mapData,
+  isLoggedIn: !!state.user.id,
+  shouldRender: state.map.shouldRender,
+  userId: state.user.id
 })
+
 const ConnectedMapQuestionnaireAnswer = connect(mapStateToProps)(
   MapQuestionnaireAnswer
 )
+
 export default ConnectedMapQuestionnaireAnswer

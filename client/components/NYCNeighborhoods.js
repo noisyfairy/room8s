@@ -42,17 +42,16 @@ export default class NYCNeighborhoods extends Component {
           .style('stroke-dasharray', 0)
         d3
           .select('#neighborhoodPopover')
-          .transition()
+          .style('display', 'block')
           .style('opacity', 1)
+          .style('z-index', 2)
           .style('left', d3.event.pageX + 'px')
           .style('top', d3.event.pageY + 'px')
           .text(d.properties.neighborhood)
       })
       .on('mouseleave', function(d) {
-        d3
-          .select(this)
-          .style('stroke-width', 0.5)
-          .text(null)
+        d3.select(this).style('stroke-width', 0.5)
+        d3.select('#neighborhoodPopover').style('display', 'none')
       })
 
     // .on('click', function(d) {
