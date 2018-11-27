@@ -23,15 +23,15 @@ const questionList = {
       {
         displayedAnswer:
           'Yes! Safety is the most important consideration when it comes to neighborhood',
-        neighborhoods: '1'
+        neighborhoods: '4'
       },
       {
         displayedAnswer: 'I am concern but not my top priority',
-        neighborhoods: '2'
+        neighborhoods: '5'
       },
       {
         displayedAnswer: 'I am safe everywhere I go - does not matter to me',
-        neighborhoods: '3'
+        neighborhoods: '6'
       }
     ]
   },
