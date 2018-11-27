@@ -172,7 +172,13 @@ class NavBar extends React.Component {
         </div>
         <Divider />
         <List>
-          <ListItem button onClick={() => history.push('profile')}>
+          <ListItem
+            button
+            onClick={() => {
+              history.push('profile')
+              this.handleDrawerClose()
+            }}
+          >
             <ListItemText primary="Profile" />
           </ListItem>
           <ListItem button onClick={() => history.push('/map')}>

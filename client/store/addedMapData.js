@@ -41,26 +41,24 @@ export const getSubwayMapData = () => async dispatch => {
     const subwayData = data
     d3.json('nycmap.geojson', mapData => {
       let subwayObjScore = {1: [], 2: [], 3: []}
-      for (let location of mapData.features) {
-        location.properties.score = 0
+      for (let loc of mapData.features) {
+        loc.properties.score = 0
         subwayData.map(coord => {
-          if (inside(coord, location.geometry.coordinates[0])) {
-            location.properties.score++
+          if (inside(coord, loc.geometry.coordinates[0])) {
+            loc.properties.score++
           }
         })
       }
       dispatch(getSubway(mapData))
-      for (let location of mapData.features) {
-        if (location.properties.score >= 6) {
-          if (!subwayObjScore[1].includes(location.properties.neighborhood))
-            subwayObjScore[1].push(location.properties.neighborhood)
-        } else if (location.properties.score >= 1) {
-          if (!subwayObjScore[2].includes(location.properties.neighborhood))
-            subwayObjScore[2].push(location.properties.neighborhood)
-        } else if (
-          !subwayObjScore[3].includes(location.properties.neighborhood)
-        )
-          subwayObjScore[3].push(location.properties.neighborhood)
+      for (let loc of mapData.features) {
+        if (loc.properties.score >= 6) {
+          if (!subwayObjScore[1].includes(loc.properties.neighborhood))
+            subwayObjScore[1].push(loc.properties.neighborhood)
+        } else if (loc.properties.score >= 1) {
+          if (!subwayObjScore[2].includes(loc.properties.neighborhood))
+            subwayObjScore[2].push(loc.properties.neighborhood)
+        } else if (!subwayObjScore[3].includes(loc.properties.neighborhood))
+          subwayObjScore[3].push(loc.properties.neighborhood)
       }
       dispatch(getSubwayScore(subwayObjScore))
     })
@@ -71,8 +69,18 @@ export const getSubwayMapData = () => async dispatch => {
 
 export const getArrestMapData = () => async dispatch => {
   try {
-    const {data} = await axios.get('/api/arrest')
+    const {data} = await axios.get('/api/arrestSave')
     const arrestData = data
+
+    d3.json('nycmap.geojson', mapData => {
+      for (let loc of mapData.features) {
+        // console.log('this is addedmapdata', loc)
+        if (arrestData[loc.properties.neighborhood]) {
+          loc.properties.score = arrestData[loc.properties.neighborhood]
+        } else loc.properties.score = 0
+      }
+      dispatch(getArrest(mapData))
+    })
     // get the json.strigify data and put it in the function
     // get it from the window with window.arrestData = mapData
     // window.arrestData  =
@@ -80,19 +88,29 @@ export const getArrestMapData = () => async dispatch => {
     //require axios on the back end
     // require point-in-polygon on the back end
     // create an api route of all the scores
+    // const arrestObj = {}
+    // d3.json('nycmap.geojson', mapData => {
+    //   for (let loc of mapData.features) {
+    //     // loc.properties.score = 0
+    //     arrestData.map(coord => {
+    //       if (inside(coord, loc.geometry.coordinates[0])) {
+    //         loc.properties.score++
+    //         if (!arrestObj[loc.properties.neighborhood]) {
+    //           arrestObj[loc.properties.neighborhood] = 1
+    //         } else arrestObj[loc.properties.neighborhood]++
+    //       }
+    //     })
+    //   }
+    //   axios.post('/api/arrestSave', arrestObj).then()
+    // const shortData = {}
+    // try{
+    //   await axios.post('/api/arrestSave', arrestObj)
+    // } catch (err){
+    //   console.log(err)
+    // }
 
-    d3.json('nycmap.geojson', mapData => {
-      for (let location of mapData.features) {
-        // location.properties.score = 0
-        arrestData.map(coord => {
-          if (inside(coord, location.geometry.coordinates[0])) {
-            location.properties.score++
-          }
-        })
-      }
-      // await axios.post('/api/arrestSave', mapData)
-      dispatch(getArrest(mapData))
-    })
+    // dispatch(getArrest(arrestData))
+    console.log('thing from jmapdata', arrestData)
   } catch (err) {
     console.error(err)
   }
