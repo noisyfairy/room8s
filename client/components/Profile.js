@@ -71,7 +71,7 @@ class Profile extends Component {
 
     return (
       <div>
-        <h3> Welcome to your profile { firstName ? firstName : email } </h3>
+        <h3> Welcome to your profile {firstName ? firstName : email} </h3>
         <br />
         <div>
           <h4>
@@ -111,7 +111,6 @@ class Profile extends Component {
           </h4>
           <hr />
           <table>
-
             <thead>
               <tr>
                 <th>Question</th>
@@ -122,7 +121,9 @@ class Profile extends Component {
             <tbody>
               <tr>
                 <td> Budget Range</td>
-                <td>{question.budgetMin} - {question.budgetMax}</td>
+                <td>
+                  {question.budgetMin} - {question.budgetMax}
+                </td>
                 <td>{question.budgetPrior}</td>
               </tr>
               <tr>
@@ -142,7 +143,9 @@ class Profile extends Component {
               </tr>
               <tr>
                 <td>Age Range</td>
-                <td>{question.ageMin} - {question.ageMax} </td>
+                <td>
+                  {question.ageMin} - {question.ageMax}{' '}
+                </td>
                 <td>{question.sexPrior} </td>
               </tr>
               <tr>
@@ -162,12 +165,12 @@ class Profile extends Component {
               </tr>
               <tr>
                 <td>Clean</td>
-                <td> { priorityNumToString(`${question.clean}`) } </td>
+                <td> {priorityNumToString(`${question.clean}`)} </td>
                 <td>{question.cleanPrior} </td>
               </tr>
               <tr>
                 <td>Guest</td>
-                <td> { priorityNumToString(`${question.guest}`) } </td>
+                <td> {priorityNumToString(`${question.guest}`)} </td>
                 <td>{question.guestPrior} </td>
               </tr>
               <tr>
@@ -181,7 +184,6 @@ class Profile extends Component {
                 <td>{question.todPrior} </td>
               </tr>
             </tbody>
-
           </table>
         </div>
       </div>
