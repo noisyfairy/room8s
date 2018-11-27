@@ -7,8 +7,7 @@ import {
   Signup,
   UserHome,
   Main,
-  Questions,
-  Users,
+  Profile,
   MatchUsers,
   FavoriteUsers,
   SingleUser,
@@ -66,7 +65,7 @@ class Routes extends Component {
             <Route exact path="/preferences" component={QuestionsForm} />
             <Route exact path="/userinfo" component={UserInfoForm} />
             <Route exact path="/home" component={UserHome} />
-            <Route exact path="/users" component={Users} />
+            <Route exact path="/profile" component={Profile} />
           </Switch>
         )}
         {/* Displays our main {Login} component as a fallback */}
