@@ -21,7 +21,7 @@ async function seed() {
       tod: 'Night',
       location: 'Midtown',
       moveInTime: '2018-12-02',
-      duration: 13,
+      duration: 11,
       imgUrl:
         'https://m.media-amazon.com/images/M/MV5BMTQ2MjMwNDA3Nl5BMl5BanBnXkFtZTcwMTA2NDY3NQ@@._V1_.jpg'
     }),
@@ -151,7 +151,7 @@ async function seed() {
       tod: 'Morning',
       location: 'Chelsea',
       moveInTime: '2018-12-05',
-      duration: 13,
+      duration: 10,
       imgUrl:
         'https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Matt_Damon_TIFF_2015.jpg/220px-Matt_Damon_TIFF_2015.jpg'
     }),

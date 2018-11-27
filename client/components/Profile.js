@@ -57,7 +57,7 @@ class Profile extends Component {
   }
 
   render() {
-    const {firstName, lastName, sex, age} = this.props.user
+    const {firstName, lastName, sex, age, email} = this.props.user
     const {user} = this.props
     console.log('user in profile: ', user)
 
@@ -67,9 +67,11 @@ class Profile extends Component {
     const question = singleUser.question || {}
     console.log('question in profile: ', question)
 
+    console.log('is it hit profile')
+
     return (
       <div>
-        <h3>Welcome to your profile {user.email}</h3>
+        <h3> Welcome to your profile {firstName ? firstName : email} </h3>
         <br />
         <div>
           <h4>
@@ -85,7 +87,7 @@ class Profile extends Component {
             <div className="clearfix">
               <img
                 className="img2"
-                src="roommates.jpg"
+                src="placeholder.png"
                 alt="Pineapple"
                 width="170"
                 height="170"
@@ -109,75 +111,79 @@ class Profile extends Component {
           </h4>
           <hr />
           <table>
-            <tr>
-              <th>Question</th>
-              <th>Answer</th>
-              <th>Priority</th>
-            </tr>
-            <tr>
-              <td> Budget Range</td>
-              <td>
-                {question.budgetMin} - {question.budgetMax}
-              </td>
-              <td>{question.budgetPrior}</td>
-            </tr>
-            <tr>
-              <td> Location </td>
-              <td>{user.location} </td>
-              <td>{question.locationPrior} </td>
-            </tr>
-            <tr>
-              <td> Move in Time </td>
-              <td>{user.moveInTime} </td>
-              <td>{question.moveInPrior} </td>
-            </tr>
-            <tr>
-              <td> Duration </td>
-              <td>{user.duration} </td>
-              <td>{question.duraPrior} </td>
-            </tr>
-            <tr>
-              <td>Age Range</td>
-              <td>
-                {question.ageMin} - {question.ageMax}{' '}
-              </td>
-              <td>{question.sexPrior} </td>
-            </tr>
-            <tr>
-              <td>Smoke</td>
-              <td> {booleanToString(`${question.smoke}`)} </td>
-              <td>{question.smokePrior} </td>
-            </tr>
-            <tr>
-              <td>Pet</td>
-              <td>{booleanToString(`${question.pet}`)} </td>
-              <td>{question.petPrior} </td>
-            </tr>
-            <tr>
-              <td>Sex</td>
-              <td>{question.sex} </td>
-              <td>{question.sexPrior} </td>
-            </tr>
-            <tr>
-              <td>Clean</td>
-              <td> {priorityNumToString(`${question.clean}`)} </td>
-              <td>{question.cleanPrior} </td>
-            </tr>
-            <tr>
-              <td>Guest</td>
-              <td> {priorityNumToString(`${question.guest}`)} </td>
-              <td>{question.guestPrior} </td>
-            </tr>
-            <tr>
-              <td>Introvert</td>
-              <td>{question.introvert} </td>
-              <td>{question.introPrior} </td>
-            </tr>
-            <tr>
-              <td>Tod</td>
-              <td>{question.tod} </td>
-              <td>{question.todPrior} </td>
-            </tr>
+            <thead>
+              <tr>
+                <th>Question</th>
+                <th>Answer</th>
+                <th>Priority</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td> Budget Range</td>
+                <td>
+                  {question.budgetMin} - {question.budgetMax}
+                </td>
+                <td>{question.budgetPrior}</td>
+              </tr>
+              <tr>
+                <td> Location </td>
+                <td>{user.location} </td>
+                <td>{question.locationPrior} </td>
+              </tr>
+              <tr>
+                <td> Move in Time </td>
+                <td>{user.moveInTime} </td>
+                <td>{question.moveInPrior} </td>
+              </tr>
+              <tr>
+                <td> Duration </td>
+                <td>{user.duration} </td>
+                <td>{question.duraPrior} </td>
+              </tr>
+              <tr>
+                <td>Age Range</td>
+                <td>
+                  {question.ageMin} - {question.ageMax}{' '}
+                </td>
+                <td>{question.sexPrior} </td>
+              </tr>
+              <tr>
+                <td>Smoke</td>
+                <td> {booleanToString(`${question.smoke}`)} </td>
+                <td>{question.smokePrior} </td>
+              </tr>
+              <tr>
+                <td>Pet</td>
+                <td>{booleanToString(`${question.pet}`)} </td>
+                <td>{question.petPrior} </td>
+              </tr>
+              <tr>
+                <td>Sex</td>
+                <td>{question.sex} </td>
+                <td>{question.sexPrior} </td>
+              </tr>
+              <tr>
+                <td>Clean</td>
+                <td> {priorityNumToString(`${question.clean}`)} </td>
+                <td>{question.cleanPrior} </td>
+              </tr>
+              <tr>
+                <td>Guest</td>
+                <td> {priorityNumToString(`${question.guest}`)} </td>
+                <td>{question.guestPrior} </td>
+              </tr>
+              <tr>
+                <td>Introvert</td>
+                <td>{question.introvert} </td>
+                <td>{question.introPrior} </td>
+              </tr>
+              <tr>
+                <td>Tod</td>
+                <td>{question.tod} </td>
+                <td>{question.todPrior} </td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </div>

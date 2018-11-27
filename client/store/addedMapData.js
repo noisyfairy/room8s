@@ -78,6 +78,7 @@ export const getArrestMapData = () => async dispatch => {
     const arrestData = data
 
     d3.json('nycmap.geojson', mapData => {
+      let subwayObjScore = {4: [], 5: [], 6: []}
       for (let loc of mapData.features) {
         // console.log('this is addedmapdata', loc)
         if (arrestData[loc.properties.neighborhood]) {
@@ -85,6 +86,17 @@ export const getArrestMapData = () => async dispatch => {
         } else loc.properties.score = 0
       }
       dispatch(getArrest(mapData))
+      for (let loc of mapData.features) {
+        if (loc.properties.score < 5) {
+          if (!subwayObjScore[4].includes(loc.properties.neighborhood))
+            subwayObjScore[4].push(loc.properties.neighborhood)
+        } else if (loc.properties.score < 15) {
+          if (!subwayObjScore[5].includes(loc.properties.neighborhood))
+            subwayObjScore[5].push(loc.properties.neighborhood)
+        } else if (!subwayObjScore[6].includes(loc.properties.neighborhood))
+          subwayObjScore[6].push(loc.properties.neighborhood)
+      }
+      dispatch(getSubwayScore(subwayObjScore))
     })
   } catch (err) {
     console.error(err)
@@ -158,7 +170,10 @@ export default function(state = initialState, action) {
       case GET_SUBWAY:
         return {...state, subwayMapData: action.subwayData}
       case GET_SUBWAY_SCORE:
-        return {...state, getSubwayScore: action.subwayScoreData}
+        Object.keys(action.subwayScoreData).forEach(key => {
+          draft.getSubwayScore[key] = action.subwayScoreData[key]
+        })
+        break
       case GET_ARREST:
         // console.log(action.arrestData)
         return {...state, arrestMapData: action.arrestData}

@@ -59,7 +59,13 @@ class MenuBar extends Component {
           {/* <ListItem button onClick={() => history.push('/FavoriteUsers')}>
           <ListItemText primary="Favorite Users" />
         </ListItem> */}
-          <ListItem button onClick={() => history.push('/')}>
+          <ListItem
+            button
+            onClick={() => {
+              history.push('/')
+              this.props.handleDrawerClose()
+            }}
+          >
             <ListItemText primary="Home" />
           </ListItem>
         </List>
