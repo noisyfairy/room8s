@@ -12,6 +12,10 @@ const Questions = require('./questions')
 Questions.belongsTo(User)
 User.hasOne(Questions)
 
+// User.hasMany(User, {through: 'FavoriteUser'})
+// User.hasMany(User, {as: 'FavoriteUser'})
+// User.belongsToMany(User, {through: 'BestUser'})
+
 /**
  * We'll export all of our models here, so that any time a module needs a model,
  * we can just require it from 'db/models'
