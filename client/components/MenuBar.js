@@ -13,27 +13,55 @@ class MenuBar extends Component {
       <div>
         <List>
           {isLoggedIn && (
-            <ListItem button onClick={() => history.push('profile')}>
+            <ListItem
+              button
+              onClick={() => {
+                history.push('profile')
+                this.props.handleDrawerClose()
+              }}
+            >
               <ListItemText primary="Profile" />
             </ListItem>
           )}
-          <ListItem button onClick={() => history.push('/map')}>
-            <ListItemText primary="Map" />
+          {isLoggedIn && (
+            <ListItem
+              button
+              onClick={() => {
+                history.push('/matchUsers')
+                this.props.handleDrawerClose()
+              }}
+            >
+              <ListItemText primary="Potential roommates" />
+            </ListItem>
+          )}
+          <ListItem
+            button
+            onClick={() => {
+              history.push('/map')
+              this.props.handleDrawerClose()
+            }}
+          >
+            <ListItemText primary="Quiz" />
           </ListItem>
-          <ListItem button onClick={() => history.push('/knowledge-map')}>
-            <ListItemText primary="Knowledge Map" />
+          <ListItem
+            button
+            onClick={() => {
+              history.push('/knowledge-map')
+              this.props.handleDrawerClose()
+            }}
+          >
+            <ListItemText primary="Neighborhood Info" />
           </ListItem>
           {/* <ListItem button onClick={() => history.push('/users')}>
           <ListItemText primary="Users" />
         </ListItem> */}
-          {isLoggedIn && (
-            <ListItem button onClick={() => history.push('/matchUsers')}>
-              <ListItemText primary="Match Users" />
-            </ListItem>
-          )}
+
           {/* <ListItem button onClick={() => history.push('/FavoriteUsers')}>
           <ListItemText primary="Favorite Users" />
         </ListItem> */}
+          <ListItem button onClick={() => history.push('/')}>
+            <ListItemText primary="Home" />
+          </ListItem>
         </List>
       </div>
     )
