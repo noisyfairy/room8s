@@ -34,7 +34,6 @@ export const fetchFavoriteUsers = userId => {
       let favUserData = []
       const response = await axios.get(`/api/favorite/${userId}`)
       const favoriteUsers = response.data
-      console.log(favoriteUsers)
       favoriteUsers.map(user => {
         const data = axios.get(`/api/users/${user.favoriteId}`)
         favUserData.push(data)
@@ -44,7 +43,6 @@ export const fetchFavoriteUsers = userId => {
       favUserList.map(user => {
         finalData.push(user.data)
       })
-      console.log(finalData)
       dispatch(getFavoriteUsers(finalData))
     } catch (err) {
       console.log(err)
@@ -60,7 +58,6 @@ export const createFavoriteUser = (userId, favId) => {
         userId: userId
       })
       const favoriteUser = data
-      console.log(favoriteUser)
       let favUser = await axios.get(`/api/users/${favoriteUser.favoriteId}`)
       favUser = favUser.data
       dispatch(addFavoriteUser(favUser))
@@ -76,7 +73,6 @@ export const removeFavoriteUser = (userId, favId) => {
       const data = await axios.delete(`/api/favorite/${userId}`, {
         data: {favoriteId: favId}
       })
-      console.log(data)
       dispatch(deleteFavoriteUser(favId))
     } catch (err) {
       console.log(err)
@@ -97,7 +93,6 @@ const favoriteUsersReducer = (state = defaultFavoriteUsersList, action) => {
       const newFavUsers = state.favoriteUsers.filter(
         user => user.id !== action.deleteId
       )
-      console.log(newFavUsers)
       return {...state, favoriteUsers: newFavUsers}
 
     default:
