@@ -51,14 +51,23 @@ class MapQuestionnaireAnswer extends Component {
       .range(['white', '#D1F2EB', '#76D7C4', '#17A589'])
     return this.state.whereYouShouldLive !== null ? (
       <div>
+        <h3>
+          You should consider living in one of the following neighborhoods 🏠
+        </h3>
+        <h4>
+          Find out more about each of these neighborhoods by visiting
+          <Link to="knowledge-map"> Neighborhood Info</Link>!
+          {!this.props.isLoggedIn && (
+            <h4>
+              Want to find a roommate in NYC?
+              <Link to="/signup"> Sign up for an account</Link> and our
+              algorithm will match you up with a roommate based on your
+              preferences!
+            </h4>
+          )}
+        </h4>
         <div className="mapAndQuestions">
-          <MapWrapper
-            color={color}
-            data={this.props.mapData}
-            shouldRender={this.props.shouldRender}
-          />
           <div className="answerBox">
-            You should consider living in the following neighborhoods<br />
             {answer.map(neighborhood => (
               <div key={answer.indexOf(neighborhood)}>
                 {this.props.isLoggedIn && (
@@ -74,22 +83,20 @@ class MapQuestionnaireAnswer extends Component {
                 {neighborhood.borough}
               </div>
             ))}
-            <br />
           </div>
+          <MapWrapper
+            color={color}
+            data={this.props.mapData}
+            shouldRender={this.props.shouldRender}
+          />
         </div>
-        {!this.props.isLoggedIn && (
-          <div>
-            Want to find a roommate in NYC?
-            <Link to="/signup">Sign up for an account</Link> and our algorithm
-            will match you up with a roommate based on your preferences!
-          </div>
-        )}
       </div>
     ) : (
       <div>
         <br />
         <br />
-        Please make sure to fill out the <Link to="/map">questionnaire!</Link>
+        Fill out the <Link to="/map">questionnaire!</Link> to find out where you
+        should live!
       </div>
     )
   }

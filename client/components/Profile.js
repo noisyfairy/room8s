@@ -11,7 +11,7 @@ import {me} from '../store/user'
 // helper functions
 
 const priorityNumToString = num => {
-  switch(num){
+  switch (num) {
     case '1':
       return 'Never'
     case '2':
@@ -28,8 +28,12 @@ const priorityNumToString = num => {
 }
 
 const booleanToString = bool => {
-  if(bool === 'true'){return 'Ok'}
-  if(bool === 'false'){return 'Not Ok'}
+  if (bool === 'true') {
+    return 'Ok'
+  }
+  if (bool === 'false') {
+    return 'Not Ok'
+  }
 }
 
 class Profile extends Component {
@@ -42,7 +46,7 @@ class Profile extends Component {
 
   async componentDidMount() {
     try {
-      await this.props.getUser();
+      await this.props.getUser()
       const userId = Number(this.props.user.id)
       const response = await axios.get(`/api/users/${userId}`)
       const singleUser = response.data
@@ -107,6 +111,7 @@ class Profile extends Component {
           </h4>
           <hr />
           <table>
+
             <thead>
               <tr>
                 <th>Question</th>
@@ -176,6 +181,7 @@ class Profile extends Component {
                 <td>{question.todPrior} </td>
               </tr>
             </tbody>
+
           </table>
         </div>
       </div>
@@ -191,7 +197,7 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-      getUser: () => dispatch(me())
+  getUser: () => dispatch(me())
 })
 
 export default connect(mapState, mapDispatch)(Profile)
