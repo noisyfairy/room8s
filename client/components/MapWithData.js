@@ -75,44 +75,55 @@ class MapWithData extends Component {
 
     return (
       <div>
-        <h3>CURRENT MAP: {this.state.dataSet}</h3>
+        {this.state.dataSet.length > 1 ? (
+          <h3>Currently Showing {this.state.dataSet} Map</h3>
+        ) : (
+          <h3>Pick a map to display below</h3>
+        )}
         <form>
-          <select type="select" value={this.state} onChange={this.handleChange}>
-            <option value="">SELECT</option>
-            <option value="arrestData"> ARREST DATA </option>
-            <option value="subwayData"> SUBWAY DATA</option>
-            <option value="housingViolations">MAINTENANCE VIOLATIONS</option>
-            <option value="treeData">TREE DATA</option>
-          </select>
-          {this.state.dataSet === 'arrestData' && (
-            <MapWrapper
-              // data={this.props[this.state.dataSet]}
-              data={this.props.arrestData}
-              shouldRender={this.props.shouldRender}
-              color={ArrestColor}
-            />
-          )}
-          {this.state.dataSet === 'subwayData' && (
-            <MapWrapper
-              data={this.props.subwayData}
-              shouldRender={this.props.shouldRender}
-              color={subwayColor}
-            />
-          )}
-          {this.state.dataSet === 'housingViolations' && (
-            <MapWrapper
-              data={this.props.violationData}
-              shouldRender={this.props.shouldRender}
-              color={housingColor}
-            />
-          )}
-          {this.state.dataSet === 'treeData' && (
-            <MapWrapper
-              data={this.props.treeData}
-              shouldRender={this.props.shouldRender}
-              color={treeColor}
-            />
-          )}
+          <div className="mapAndQuestions">
+            <select
+              type="select"
+              value={this.state}
+              onChange={this.handleChange}
+            >
+              <option value="">SELECT</option>
+              <option value="Crime"> Crime </option>
+              <option value="Subway Stations"> Subway Stations</option>
+              <option value="Housing Violations">Housing Violations</option>
+              <option value="Trees">Trees</option>
+            </select>
+          </div>
+          <div>
+            {this.state.dataSet === 'Crime' && (
+              <MapWrapper
+                data={this.props.arrestData}
+                shouldRender={this.props.shouldRender}
+                color={ArrestColor}
+              />
+            )}
+            {this.state.dataSet === 'Subway Stations' && (
+              <MapWrapper
+                data={this.props.subwayData}
+                shouldRender={this.props.shouldRender}
+                color={subwayColor}
+              />
+            )}
+            {this.state.dataSet === 'Housing Violations' && (
+              <MapWrapper
+                data={this.props.violationData}
+                shouldRender={this.props.shouldRender}
+                color={housingColor}
+              />
+            )}
+            {this.state.dataSet === 'Trees' && (
+              <MapWrapper
+                data={this.props.treeData}
+                shouldRender={this.props.shouldRender}
+                color={treeColor}
+              />
+            )}
+          </div>
         </form>
       </div>
     )
