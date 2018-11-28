@@ -19,6 +19,7 @@ const RadioFields = props => {
             checked={state[fieldKey1] === value}
             onChange={handleChange(fieldKey1, fieldKey2, rangeitr)}
             value={value}
+            color="primary"
             name="radio-button-demo"
             aria-label="A"
           />
