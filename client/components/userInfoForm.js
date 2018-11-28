@@ -83,6 +83,17 @@ class UserInfoForm extends React.Component {
     this.routeChange()
   }
 
+  formEmpty = obj => {
+    const values = Object.values(obj)
+    let boolean = true
+    values.map(arg => {
+      if (!arg) {
+        boolean = false
+      }
+    })
+    return boolean
+  }
+
   routeChange() {
     let path = `/profile`
     this.props.history.push(path)
@@ -182,7 +193,7 @@ class UserInfoForm extends React.Component {
                 <MenuItem value={2}>Rarely</MenuItem>
                 <MenuItem value={3}>Sometimes</MenuItem>
                 <MenuItem value={4}>Often</MenuItem>
-                <MenuItem value={5}>very Often</MenuItem>
+                <MenuItem value={5}>Very Often</MenuItem>
               </TextField>
 
               <TextField
@@ -257,6 +268,7 @@ class UserInfoForm extends React.Component {
                 variant="contained"
                 className={classes.button}
                 type="submit"
+                disabled={!this.formEmpty(this.state)}
               >
                 Submit
               </Button>
