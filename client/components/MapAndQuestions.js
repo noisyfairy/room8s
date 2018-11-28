@@ -2,12 +2,11 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import MapWrapper from './MapWrapper'
 import ConnectedMapQuestionnaire from './MapQuestionnaire'
-import {getMapData, updateMapRender} from '../store'
+import {getMapData, updateMapRender} from '../store/index'
 
 class MapAndQuestions extends Component {
-  componentDidMount() {
-    this.props.mapRefresh()
-    this.props.renderRefresh()
+  async componentDidMount() {
+    await this.props.mapRefresh()
     console.log('componentdidmount?')
   }
   render() {
@@ -42,8 +41,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToPros = dispatch => {
   return {
-    mapRefresh: () => dispatch(getMapData),
-    renderRefresh: () => dispatch(updateMapRender)
+    mapRefresh: () => dispatch(getMapData()),
+    renderRefresh: () => dispatch(updateMapRender())
   }
 }
 
