@@ -70,9 +70,9 @@ class MapQuestionnaireAnswer extends Component {
                   >
                     Save to preference
                   </button>
-                )}&nbsp;
+                )}&nbsp;&nbsp;
                 {neighborhood.neighborhood},&nbsp;
-                {neighborhood.borough}
+                {neighborhood.borough}<br/>
               </div>
             ))}
             <br />
