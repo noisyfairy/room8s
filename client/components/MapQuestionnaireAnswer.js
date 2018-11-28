@@ -54,18 +54,15 @@ class MapQuestionnaireAnswer extends Component {
         <h3>
           You should consider living in one of the following neighborhoods 🏠
         </h3>
-        <h4>
-          Find out more about each of these neighborhoods by visiting
-          <Link to="knowledge-map"> Neighborhood Info</Link>!
-          {!this.props.isLoggedIn && (
-            <h4>
-              Want to find a roommate in NYC?
-              <Link to="/signup"> Sign up for an account</Link> and our
-              algorithm will match you up with a roommate based on your
-              preferences!
-            </h4>
-          )}
-        </h4>
+        <h4>Find out more about each of these neighborhoods by visiting </h4>
+        <Link to="knowledge-map"> Neighborhood Info</Link>!
+        {!this.props.isLoggedIn && (
+          <h4>
+            Want to find a roommate in NYC?
+            <Link to="/signup"> Sign up for an account</Link> and our algorithm
+            will match you up with a roommate based on your preferences!
+          </h4>
+        )}
         <div className="mapAndQuestions">
           <div className="answerBox">
             {answer.map(neighborhood => (
