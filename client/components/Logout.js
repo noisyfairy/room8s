@@ -4,6 +4,8 @@ import {logout} from '../store/user'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import {withStyles} from '@material-ui/core/styles'
+import {Link, Redirect} from 'react-router-dom'
+// import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 
 const styles = theme => ({
   button: {
@@ -27,9 +29,9 @@ const Logout = props => {
     <Button
       color={classes.button.color}
       className={classes.button}
-      onClick={handleClick}
+      // onClick={handleClick}
     >
-      Login
+      <Link to="/login"> Login </Link>
     </Button>
   )
 }
@@ -46,6 +48,10 @@ const mapDispatchToProps = dispatch => {
       dispatch(logout())
     }
   }
+}
+
+{
+  /* <Redirect to="/" /> */
 }
 
 export default withStyles(styles)(
