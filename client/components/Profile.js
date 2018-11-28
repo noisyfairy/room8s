@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
 import {me} from '../store/user'
+import {TwoWayFav} from '../components'
 
 /**
  * COMPONENT
@@ -94,12 +95,21 @@ class Profile extends Component {
               />
               <p>
                 {' '}
-                {firstName} {lastName} {sex} {age}{' '}
+                Name: {firstName} {lastName}
+                <br />
+                Sex: {sex}
+                <br />
+                Age: {age} <br />
               </p>
             </div>
           </div>
         </div>
         <br /> <br /> <br /> <br />
+        <div>
+          <h4> Mutual Favorites </h4>
+          <hr />
+          <TwoWayFav />
+        </div>
         <div>
           <h4>
             {' '}
