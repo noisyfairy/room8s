@@ -17,7 +17,6 @@ const initialState = {
   getSubwayScore: {},
   arrestMapData: {},
   violationMapData: {}
-
 }
 
 //ACTION CREATORS
@@ -76,7 +75,7 @@ export const getSubwayMapData = () => async dispatch => {
 
 export const getArrestMapData = () => async dispatch => {
   try {
-    const {data} = await axios.get('/api/arrestSave')
+    const {data} = await axios.get('/api/arrest')
     const arrestData = data
 
     d3.json('nycmap.geojson', mapData => {
@@ -142,11 +141,28 @@ export const getHousingViolationsData = () => async dispatch => {
   }
 }
 
-export const getTreeData = () => async dispatfh => {
+export const getTreeData = () => async dispatch => {
   try {
     const {data} = await axios.get(
-      '/https://data.cityofnewyork.us/resource/5rq2-4hqu.json'
+      'https://data.cityofnewyork.us/resource/5rq2-4hqu.json'
     )
+    let treeData = {}
+    d3.json('nycmap.geojson', mapData => {
+      for (let loc of mapData.features) {
+        data.map(treeStuff => {
+          const coords = treeStuff.the_geom.coordinates
+          if (inside(coords, loc.geometry.coordinates[0])) {
+            if (!treeData[loc.properties.neighborhood]) {
+              treeData[loc.properties.neighborhood] = 1
+            } else {
+              treeData[loc.properties.neighborhood]++
+            }
+          }
+        })
+      }
+      // axios.post('/api/save', treeData).then()
+    })
+    // console.log(data)
   } catch (err) {
     console.log(err)
   }
@@ -165,7 +181,6 @@ export default function(state = initialState, action) {
         })
         break
       case GET_ARREST:
-
         return {...state, arrestMapData: action.arrestData}
       case GET_VIOLATIONS:
         return {...state, violationMapData: action.violationsData}
