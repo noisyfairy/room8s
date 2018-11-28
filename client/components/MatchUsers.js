@@ -63,6 +63,8 @@ class MatchUsers extends Component {
   render() {
     const {classes} = this.props
     let idx = -1
+    let key1 = 0
+    let key2 = 0
     return (
       <div>
         <Typography variant="h6" className={classes.title}>
@@ -72,8 +74,9 @@ class MatchUsers extends Component {
         {this.props.favUsers.length > 0 && (
           <div>
             {this.props.favUsers.map(user => {
+              key1++
               return (
-                <List dense="dense">
+                <List dense="dense" key={key1 + key2}>
                   <ListItem>
                     <ListItemAvatar>
                       <Avatar style={{width: '75px', height: '75px'}}>
@@ -125,8 +128,9 @@ class MatchUsers extends Component {
             {console.log(this.props.matchScores)}
             {this.props.matchUsers.map(user => {
               idx++
+              key2++
               return (
-                <List dense="dense">
+                <List dense="dense" key={key1 + key2}>
                   <ListItem>
                     <ListItemAvatar>
                       <Avatar style={{width: '75px', height: '75px'}}>
