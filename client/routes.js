@@ -22,7 +22,8 @@ import {
   getMapData,
   getSubwayMapData,
   getArrestMapData,
-  getHousingViolationsData
+  getHousingViolationsData,
+  getTreeData
 } from './store'
 
 /**
@@ -98,6 +99,7 @@ const mapDispatch = dispatch => {
       dispatch(getMapData())
       dispatch(getSubwayMapData())
       dispatch(getHousingViolationsData())
+      dispatch(getTreeData())
     },
     async loadArrestData() {
       await dispatch(getArrestMapData())

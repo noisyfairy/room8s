@@ -39,6 +39,7 @@ class MapWithData extends Component {
             <option value="arrestData"> ARREST DATA </option>
             <option value="subwayData"> SUBWAY DATA</option>
             <option value="housingViolations">MAINTENANCE VIOLATIONS</option>
+            <option value="treeData">TREE DATA</option>
           </select>
           {this.state.dataSet === 'arrestData' && (
             <MapWrapper
@@ -55,15 +56,20 @@ class MapWithData extends Component {
               color={color}
             />
           )}
-          {this.state.dataSet === 'housingViolations' &&
-            (console.log(this.props.violationData),
-            (
-              <MapWrapper
-                data={this.props.violationData}
-                shouldRender={this.props.shouldRender}
-                color={color}
-              />
-            ))}
+          {this.state.dataSet === 'housingViolations' && (
+            <MapWrapper
+              data={this.props.violationData}
+              shouldRender={this.props.shouldRender}
+              color={color}
+            />
+          )}
+          {this.state.dataSet === 'treeData' && (
+            <MapWrapper
+              data={this.props.treeData}
+              shouldRender={this.props.shouldRender}
+              color={color}
+            />
+          )}
         </form>
       </div>
     )
@@ -75,7 +81,8 @@ const mapStateToProps = state => ({
   arrestData: state.addedMap.arrestMapData,
   subwayData: state.addedMap.subwayMapData,
   violationData: state.addedMap.violationMapData,
-  shouldRender: state.map.shouldRender
+  shouldRender: state.map.shouldRender,
+  treeData: state.addedMap.treeMapData
 })
 
 export default connect(mapStateToProps, null)(MapWithData)
