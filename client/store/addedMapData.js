@@ -8,6 +8,7 @@ const GET_SUBWAY = 'GET_SUBWAY'
 const GET_MAP_SCORE = 'GET_MAP_SCORE'
 const GET_ARREST = 'GET_ARREST'
 const GET_VIOLATIONS = 'GET_VIOLATIONS'
+const GET_TREES = 'GET_TREES'
 
 //INITIAL STATE
 
@@ -16,7 +17,8 @@ const initialState = {
   mapScore: {},
   getSubwayScore: {},
   arrestMapData: {},
-  violationMapData: {}
+  violationMapData: {},
+  treeMapData: {}
 }
 
 //ACTION CREATORS
@@ -37,6 +39,11 @@ const getArrest = arrestData => ({
 const getViolations = violationsData => ({
   type: GET_VIOLATIONS,
   violationsData
+})
+
+const getTrees = treeData => ({
+  type: GET_TREES,
+  treeData
 })
 
 //THUNK CREATORS
@@ -143,23 +150,17 @@ export const getHousingViolationsData = () => async dispatch => {
 
 export const getTreeData = () => async dispatch => {
   try {
-    const {data} = await axios.get(
-      'https://data.cityofnewyork.us/resource/5rq2-4hqu.json'
-    )
-    let treeData = {}
+    const {data} = await axios.get('/api/trees')
     d3.json('nycmap.geojson', mapData => {
       for (let loc of mapData.features) {
-        data.map(treeStuff => {
-          const coords = treeStuff.the_geom.coordinates
-          if (inside(coords, loc.geometry.coordinates[0])) {
-            if (!treeData[loc.properties.neighborhood]) {
-              treeData[loc.properties.neighborhood] = 1
-            } else {
-              treeData[loc.properties.neighborhood]++
-            }
-          }
-        })
+        if (!data[loc.properties.neighborhood]) {
+          loc.properties.score = 0
+        } else {
+          loc.properties.score = data[loc.properties.neighborhood]
+        }
       }
+      console.log('map data in added map tree', mapData)
+      dispatch(getTrees(mapData))
       // axios.post('/api/save', treeData).then()
     })
     // console.log(data)
@@ -184,6 +185,8 @@ export default function(state = initialState, action) {
         return {...state, arrestMapData: action.arrestData}
       case GET_VIOLATIONS:
         return {...state, violationMapData: action.violationsData}
+      case GET_TREES:
+        return {...state, treeMapData: action.treeData}
     }
   })
 }
