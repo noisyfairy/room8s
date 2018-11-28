@@ -10,7 +10,7 @@ const RadioFields = props => {
   const fieldValues = Object.keys(field)
   const handleChange = props.handleChange
   const state = props.state
-  let key = 0;
+  let key = 0
   return fieldValues.map(value => {
     key++
     return (
