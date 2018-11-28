@@ -8,7 +8,7 @@ import {withStyles} from '@material-ui/core/styles'
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
-    color: theme.palette.primary.dark
+    color: theme.palette.primary.red
   }
 })
 
@@ -24,7 +24,13 @@ const Logout = props => {
       Logout
     </Button>
   ) : (
-    ''
+    <Button
+      color={classes.button.color}
+      className={classes.button}
+      onClick={handleClick}
+    >
+      Login
+    </Button>
   )
 }
 

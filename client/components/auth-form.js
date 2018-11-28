@@ -69,7 +69,6 @@ const styles = theme => ({
 class AuthForm extends Component {
   render() {
     let {name, displayName, handleSubmit, error, classes} = this.props
-    console.log('AuthForm hits inside auth-form')
 
     return (
       <div>
