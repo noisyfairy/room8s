@@ -28,6 +28,23 @@ const priorityNumToString = num => {
   }
 }
 
+const priorityLevelToString = num => {
+  switch (num) {
+    case '1':
+      return 'Very Low'
+    case '2':
+      return 'Low'
+    case '3':
+      return 'Average'
+    case '4':
+      return 'High'
+    case '5':
+      return 'Very High'
+    default:
+      return 'Average'
+  }
+}
+
 const booleanToString = bool => {
   if (bool === 'true') {
     return 'Ok'
@@ -132,24 +149,25 @@ class Profile extends Component {
               <tr>
                 <td> Budget Range</td>
                 <td>
-                  {question.budgetMin} - {question.budgetMax}
+                  {' '}
+                  {question.budgetMin} - {question.budgetMax}{' '}
                 </td>
-                <td>{question.budgetPrior}</td>
+                <td> {priorityLevelToString(`${question.budgetPrior}`)} </td>
               </tr>
               <tr>
                 <td> Location </td>
                 <td>{user.location} </td>
-                <td>{question.locationPrior} </td>
+                <td> {priorityLevelToString(`${question.locationPrior}`)} </td>
               </tr>
               <tr>
                 <td> Move in Time </td>
                 <td>{user.moveInTime} </td>
-                <td>{question.moveInPrior} </td>
+                <td> {priorityLevelToString(`${question.moveInPrior}`)} </td>
               </tr>
               <tr>
                 <td> Duration </td>
                 <td>{user.duration} </td>
-                <td>{question.duraPrior} </td>
+                <td> {priorityLevelToString(`${question.duraPrior}`)} </td>
               </tr>
               <tr>
                 <td>Age Range</td>

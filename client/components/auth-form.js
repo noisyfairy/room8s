@@ -84,15 +84,15 @@ class AuthForm extends Component {
                 to="/signup"
                 onClick={() => this.props.removingError()}
               >
-                create an account
+                Create an account
               </Link>
             ) : (
               <Link
-                to="/"
+                to="/login"
                 className={classes.link}
                 onClick={() => this.props.removingError()}
               >
-                log in
+                Login
               </Link>
             )}
           </Typography>
