@@ -28,6 +28,23 @@ const priorityNumToString = num => {
   }
 }
 
+const priorityLevelToString = num => {
+  switch (num) {
+    case '1':
+      return 'Very Low'
+    case '2':
+      return 'Low'
+    case '3':
+      return 'Average'
+    case '4':
+      return 'High'
+    case '5':
+      return 'Very High'
+    default:
+      return 'Average'
+  }
+}
+
 const booleanToString = bool => {
   if (bool === 'true') {
     return 'Ok'
@@ -132,66 +149,65 @@ class Profile extends Component {
               <tr>
                 <td> Budget Range</td>
                 <td>
-                  {question.budgetMin} - {question.budgetMax}
+                  {' '}
+                  {question.budgetMin} - {question.budgetMax}{' '}
                 </td>
-                <td>{question.budgetPrior}</td>
+                <td> {priorityLevelToString(`${question.budgetPrior}`)} </td>
               </tr>
               <tr>
                 <td> Location </td>
                 <td>{user.location} </td>
-                <td>{question.locationPrior} </td>
+                <td> {priorityLevelToString(`${question.locationPrior}`)} </td>
               </tr>
               <tr>
                 <td> Move in Time </td>
                 <td>{user.moveInTime} </td>
-                <td>{question.moveInPrior} </td>
+                <td> {priorityLevelToString(`${question.moveInPrior}`)} </td>
               </tr>
               <tr>
                 <td> Duration </td>
                 <td>{user.duration} </td>
-                <td>{question.duraPrior} </td>
+                <td> {priorityLevelToString(`${question.duraPrior}`)} </td>
               </tr>
               <tr>
                 <td>Age Range</td>
-                <td>
-                  {question.ageMin} - {question.ageMax}{' '}
-                </td>
-                <td>{question.sexPrior} </td>
+                <td> {question.ageMin} - {question.ageMax}{' '} </td>
+                <td> {priorityLevelToString(`${question.agePrior}`)} </td>
               </tr>
               <tr>
                 <td>Smoke</td>
                 <td> {booleanToString(`${question.smoke}`)} </td>
-                <td>{question.smokePrior} </td>
+                <td> {priorityLevelToString(`${question.smokePrior}`)} </td>
               </tr>
               <tr>
                 <td>Pet</td>
                 <td>{booleanToString(`${question.pet}`)} </td>
-                <td>{question.petPrior} </td>
+                <td> {priorityLevelToString(`${question.petPrior}`)} </td>
               </tr>
               <tr>
                 <td>Sex</td>
                 <td>{question.sex} </td>
-                <td>{question.sexPrior} </td>
+                <td> {priorityLevelToString(`${question.sexPrior}`)} </td>
               </tr>
               <tr>
                 <td>Clean</td>
                 <td> {priorityNumToString(`${question.clean}`)} </td>
-                <td>{question.cleanPrior} </td>
+                <td> {priorityLevelToString(`${question.cleanPrior}`)} </td>
               </tr>
               <tr>
                 <td>Guest</td>
                 <td> {priorityNumToString(`${question.guest}`)} </td>
-                <td>{question.guestPrior} </td>
+                <td> {priorityLevelToString(`${question.guestPrior}`)} </td>
               </tr>
               <tr>
                 <td>Introvert</td>
                 <td>{question.introvert} </td>
-                <td>{question.introPrior} </td>
+                <td> {priorityLevelToString(`${question.introPrior}`)} </td>
               </tr>
               <tr>
                 <td>Tod</td>
                 <td>{question.tod} </td>
-                <td>{question.todPrior} </td>
+                <td> {priorityLevelToString(`${question.todPrior}`)} </td>
               </tr>
             </tbody>
           </table>

@@ -114,10 +114,8 @@ class NavBar extends React.Component {
       open: false,
       anchor: 'left',
       pageSelected: '',
-      redirect: false,
-      bg: history.location.pathname.includes('map/')
-        ? "url('/NYCview.jpg')"
-        : "url('/roommates.jpg')"
+      redirect: false
+      // bg: "url('/nyc.png')"
     }
   }
 
@@ -137,11 +135,9 @@ class NavBar extends React.Component {
 
   changeBackground = () => {
     history.listen((location, action) => {
-      this.setState({
-        bg: location.pathname.includes('map/')
-          ? "url('/roommates.jpg')"
-          : "url('/NYCview.jpg')"
-      })
+      // this.setState({
+      //   bg: "url('/nyc.png')"
+      // })
     })
   }
 

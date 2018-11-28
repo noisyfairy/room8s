@@ -2,7 +2,7 @@ import Axios from 'axios'
 import React from 'react'
 import {connect} from 'react-redux'
 import {MatchUsers} from '../components'
-import {fetchMatchUsers} from '../store/matchUsers'
+import {fetchMatchUsers, getMatchScores} from '../store/matchUsers'
 
 class Algo extends React.Component {
   constructor(props) {
@@ -12,7 +12,7 @@ class Algo extends React.Component {
     }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.bestmatches(this.props.userId)
   }
 
@@ -331,10 +331,11 @@ class Algo extends React.Component {
     })
 
     this.props.fetchMatchUsers(this.state.top3)
+    this.props.getMatchScores(this.state.top3)
   }
 
   render() {
-    return <MatchUsers matchScores={this.state.top3} />
+    return <MatchUsers />
   }
 }
 
@@ -347,7 +348,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchMatchUsers: matchUserList => dispatch(fetchMatchUsers(matchUserList))
+    fetchMatchUsers: matchUserList => dispatch(fetchMatchUsers(matchUserList)),
+    getMatchScores: matchScores => {
+      dispatch(getMatchScores(matchScores))
+    }
   }
 }
 

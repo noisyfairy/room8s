@@ -20,7 +20,8 @@ import {
 const mapStateToProps = state => ({
   matchUsers: state.matchUsers.matchUsers,
   favUsers: state.favoriteUsers.favoriteUsers,
-  userId: state.user.id
+  userId: state.user.id,
+  matchScores: state.matchUsers.matchScores
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -62,6 +63,8 @@ class MatchUsers extends Component {
   render() {
     const {classes} = this.props
     let idx = -1
+    let key1 = 0
+    let key2 = 0
     return (
       <div>
         <Typography variant="h6" className={classes.title}>
@@ -71,8 +74,9 @@ class MatchUsers extends Component {
         {this.props.favUsers.length > 0 && (
           <div>
             {this.props.favUsers.map(user => {
+              key1++
               return (
-                <List dense="dense">
+                <List dense="dense" key={key1 + key2}>
                   <ListItem>
                     <ListItemAvatar>
                       <Avatar style={{width: '75px', height: '75px'}}>
@@ -84,13 +88,13 @@ class MatchUsers extends Component {
                     </ListItemAvatar>
                     <ListItemText
                       primary={
-                        <h7>
+                        <h6>
                           {`${user.firstName} ${user.lastName}`}
                           <br />
                           {`Preferences - ${user.location}, ${
                             user.moveInTime
                           }, ${user.duration} Months`}
-                        </h7>
+                        </h6>
                       }
                     />
                     <ListItemSecondaryAction>
@@ -121,10 +125,12 @@ class MatchUsers extends Component {
         <hr />
         {this.props.matchUsers.length > 0 && (
           <div>
+            {console.log(this.props.matchScores)}
             {this.props.matchUsers.map(user => {
               idx++
+              key2++
               return (
-                <List dense="dense">
+                <List dense="dense" key={key1 + key2}>
                   <ListItem>
                     <ListItemAvatar>
                       <Avatar style={{width: '75px', height: '75px'}}>
@@ -136,17 +142,18 @@ class MatchUsers extends Component {
                     </ListItemAvatar>
                     <ListItemText
                       primary={
-                        <h7>
+                        <h6>
                           {`${user.firstName} ${user.lastName}`}
                           <br />
                           {`Preferences - ${user.location}, ${
                             user.moveInTime
                           }, ${user.duration} Months`}
                           <br />
-                          {`Compatibility score - ${
-                            Object.values(this.props.matchScores[idx])[0]
-                          }`}
-                        </h7>
+                          {this.props.matchScores.length > 0 &&
+                            `Compatibility score - ${
+                              Object.values(this.props.matchScores[idx])[0]
+                            }`}
+                        </h6>
                       }
                     />
                     <ListItemSecondaryAction>
