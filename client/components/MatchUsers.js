@@ -20,7 +20,8 @@ import {
 const mapStateToProps = state => ({
   matchUsers: state.matchUsers.matchUsers,
   favUsers: state.favoriteUsers.favoriteUsers,
-  userId: state.user.id
+  userId: state.user.id,
+  matchScores: state.matchUsers.matchScores
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -84,13 +85,13 @@ class MatchUsers extends Component {
                     </ListItemAvatar>
                     <ListItemText
                       primary={
-                        <h7>
+                        <h6>
                           {`${user.firstName} ${user.lastName}`}
                           <br />
                           {`Preferences - ${user.location}, ${
                             user.moveInTime
                           }, ${user.duration} Months`}
-                        </h7>
+                        </h6>
                       }
                     />
                     <ListItemSecondaryAction>
@@ -121,6 +122,7 @@ class MatchUsers extends Component {
         <hr />
         {this.props.matchUsers.length > 0 && (
           <div>
+            {console.log(this.props.matchScores)}
             {this.props.matchUsers.map(user => {
               idx++
               return (
@@ -136,17 +138,18 @@ class MatchUsers extends Component {
                     </ListItemAvatar>
                     <ListItemText
                       primary={
-                        <h7>
+                        <h6>
                           {`${user.firstName} ${user.lastName}`}
                           <br />
                           {`Preferences - ${user.location}, ${
                             user.moveInTime
                           }, ${user.duration} Months`}
                           <br />
-                          {`Compatibility score - ${
-                            Object.values(this.props.matchScores[idx])[0]
-                          }`}
-                        </h7>
+                          {this.props.matchScores.length > 0 &&
+                            `Compatibility score - ${
+                              Object.values(this.props.matchScores[idx])[0]
+                            }`}
+                        </h6>
                       }
                     />
                     <ListItemSecondaryAction>
