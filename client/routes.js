@@ -31,14 +31,11 @@ class Routes extends Component {
 
   render() {
     const {isLoggedIn} = this.props
-    console.log(isLoggedIn)
-    console.log('routes hit')
     return (
       <Switch>
         <Route exact path="/" component={Main} />
         <Route exact path="/signup" component={SignupPage} />
         <Route exact path="/login" component={Login} />
-        {/* <Route exact path="/home" component={UserHome} /> */}
         <Route exact path="/map" component={ConnectedMapAndQuestions} />
         <Route exact path="/questions" component={Questions} />
         <Route exact path="/answer" component={ConnectedMapQuestionnaireAnswer} />
@@ -51,7 +48,6 @@ class Routes extends Component {
             <Route exact path="/users/:userId" component={SingleUser} />
             <Route exact path="/preference" component={QuestionsForm} />
             <Route exact path="/userinfo" component={UserInfoForm} />
-            {/* <Route exact path="/home" component={UserHome} /> */}
             {/* <Route exact path="/favoriteUsers" component={FavoriteUsers} /> */}
           </Switch>
         )}
