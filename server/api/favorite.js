@@ -32,6 +32,20 @@ router.post('/', async (req, res, next) => {
   }
 })
 
+router.put('/', async (req, res, next) => {
+  try {
+    const existingUser = await Favorite.findOne({
+      where: {
+        ...req.body
+      }
+    })
+
+    res.json(existingUser)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.delete('/:id', async (req, res, next) => {
   try {
     const answer = await Favorite.destroy({
