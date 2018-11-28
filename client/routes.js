@@ -4,7 +4,7 @@ import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {
   Login,
-  Signup,
+  SignupPage,
   UserHome,
   Main,
   Profile,
@@ -47,7 +47,7 @@ class Routes extends Component {
         <Route exact path="/signup" component={SignupPage} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/map" component={ConnectedMapAndQuestions} />
-        <Route exact path="/questions" component={Questions} />
+        {/* <Route exact path="/questions" component={Questions} /> */}
         <Route
           exact
           path="/answer"
@@ -56,6 +56,7 @@ class Routes extends Component {
         <Route exact path="/knowledge-map" component={MapWithData} />
         {isLoggedIn && (
           <Switch>
+            <Route exact path="/home" component={UserHome} />
             <Route exact path="/matchUsers" component={Algo} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/favoriteUsers" component={FavoriteUsers} />
