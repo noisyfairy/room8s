@@ -57,14 +57,6 @@ class MapQuestionnaireAnswer extends Component {
         <h4>
           Find out more about each of these neighborhoods by visiting
           <Link to="knowledge-map"> Neighborhood Info</Link>!
-          {!this.props.isLoggedIn && (
-            <h4>
-              Want to find a roommate in NYC?
-              <Link to="/signup"> Sign up for an account</Link> and our
-              algorithm will match you up with a roommate based on your
-              preferences!
-            </h4>
-          )}
         </h4>
         <div className="mapAndQuestions">
           <div className="answerBox">
@@ -83,6 +75,25 @@ class MapQuestionnaireAnswer extends Component {
                 {neighborhood.borough}
               </div>
             ))}
+            <br />
+            <br />
+            <br />
+
+            {!this.props.isLoggedIn && (
+              <div>
+                Want to find a roommate in NYC?
+                <Link to="/signup"> Sign up for an account</Link> and our
+                algorithm will match you up with a roommate based on your
+                preferences!
+              </div>
+            )}
+            <div>
+              <div>
+                <br />Not liking the results?
+              </div>
+              <Link to="/map">Click me </Link>
+              to take the test again
+            </div>
           </div>
           <MapWrapper
             color={color}
