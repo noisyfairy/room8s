@@ -44,6 +44,7 @@ class Routes extends Component {
     return (
       <Switch>
         <Route exact path="/" component={Main} />
+        {/* <Route exact path="/home" component={Main} /> */}
         <Route exact path="/signup" component={SignupPage} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/map" component={ConnectedMapAndQuestions} />
