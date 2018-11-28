@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
+import {getMapData, updateMapRender} from '../store/index'
 
 class MenuBar extends Component {
   render() {
@@ -78,4 +79,4 @@ const mapState = state => ({
   isLoggedIn: !!state.user.id
 })
 
-export default connect(mapState, null)(MenuBar)
+export default connect(mapState)(MenuBar)

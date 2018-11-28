@@ -16,6 +16,7 @@ export {default as SignupPage} from './SignupPage'
 export {default as MatchUsers} from './MatchUsers'
 // export {default as FavoriteUsers} from './FavoriteUsers'
 export {default as SingleUser} from './SingleUser'
+export {default as TwoWayFav} from './TwoWayFav'
 
 //Forms
 export {default as QuestionsForm} from './questionsForm'

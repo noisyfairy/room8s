@@ -5,10 +5,13 @@ import axios from 'axios'
 const GET_FAVORITE_USERS = 'GET_FAVORITE_USERS'
 const ADD_FAV_USER = 'ADD_FAV_USER'
 const DELETE_FAV_USER = 'DELETE_FAV_USER'
+const GET_MUTUAL_USERS = 'GET_MUTUAL_USERS'
+const DELETE_MUTUAL_USER = 'DELETE_MUTUAL_USER'
 
 // Initial State
 const defaultFavoriteUsersList = {
-  favoriteUsers: []
+  favoriteUsers: [],
+  mutualUsers: []
 }
 
 // Action creator
@@ -22,8 +25,18 @@ const addFavoriteUser = favUser => ({
   favUser
 })
 
-const deleteFavoriteUser = deleteId => ({
+export const deleteFavoriteUser = deleteId => ({
   type: DELETE_FAV_USER,
+  deleteId
+})
+
+const getMutualUsers = mutualUsers => ({
+  type: GET_MUTUAL_USERS,
+  mutualUsers
+})
+
+export const deleteMutualUser = deleteId => ({
+  type: DELETE_MUTUAL_USER,
   deleteId
 })
 
@@ -34,7 +47,6 @@ export const fetchFavoriteUsers = userId => {
       let favUserData = []
       const response = await axios.get(`/api/favorite/${userId}`)
       const favoriteUsers = response.data
-      console.log(favoriteUsers)
       favoriteUsers.map(user => {
         const data = axios.get(`/api/users/${user.favoriteId}`)
         favUserData.push(data)
@@ -44,7 +56,6 @@ export const fetchFavoriteUsers = userId => {
       favUserList.map(user => {
         finalData.push(user.data)
       })
-      console.log(finalData)
       dispatch(getFavoriteUsers(finalData))
     } catch (err) {
       console.log(err)
@@ -60,7 +71,6 @@ export const createFavoriteUser = (userId, favId) => {
         userId: userId
       })
       const favoriteUser = data
-      console.log(favoriteUser)
       let favUser = await axios.get(`/api/users/${favoriteUser.favoriteId}`)
       favUser = favUser.data
       dispatch(addFavoriteUser(favUser))
@@ -76,8 +86,70 @@ export const removeFavoriteUser = (userId, favId) => {
       const data = await axios.delete(`/api/favorite/${userId}`, {
         data: {favoriteId: favId}
       })
-      console.log(data)
       dispatch(deleteFavoriteUser(favId))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
+export const getTWoWayUser = userId => {
+  return async dispatch => {
+    try {
+      const response = await axios.get(`/api/favorite/${userId}`)
+      const favoriteUsers = response.data
+
+      let favUserProms = []
+      favoriteUsers.map(user => {
+        const res = axios.put(`/api/favorite`, {
+          favoriteId: user.userId,
+          userId: user.favoriteId
+        })
+        favUserProms.push(res)
+      })
+      let favUserList = await Promise.all(favUserProms)
+
+      let favUserData = []
+      favUserList.map(user => {
+        favUserData.push(user.data)
+      })
+
+      let twoWayList = []
+      favUserData.map(user => {
+        if (user) {
+          twoWayList.push(user)
+        }
+      })
+
+      let mutualProms = []
+      twoWayList.map(user => {
+        const data = axios.get(`/api/users/${user.userId}`)
+        mutualProms.push(data)
+      })
+
+      let mutualList = await Promise.all(mutualProms)
+
+      let mutualData = []
+      mutualList.map(user => {
+        mutualData.push(user.data)
+      })
+
+      console.log(mutualData)
+
+      dispatch(getMutualUsers(mutualData))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
+export const removeMutualUser = (userId, favId) => {
+  return async dispatch => {
+    try {
+      const data = await axios.delete(`/api/favorite/${userId}`, {
+        data: {favoriteId: favId}
+      })
+      dispatch(deleteMutualUser(favId))
     } catch (err) {
       console.log(err)
     }
@@ -97,8 +169,16 @@ const favoriteUsersReducer = (state = defaultFavoriteUsersList, action) => {
       const newFavUsers = state.favoriteUsers.filter(
         user => user.id !== action.deleteId
       )
-      console.log(newFavUsers)
       return {...state, favoriteUsers: newFavUsers}
+
+    case GET_MUTUAL_USERS:
+      return {...state, mutualUsers: action.mutualUsers}
+
+    case DELETE_MUTUAL_USER:
+      const newMutualUsers = state.mutualUsers.filter(
+        user => user.id !== action.deleteId
+      )
+      return {...state, mutualUsers: newMutualUsers}
 
     default:
       return state

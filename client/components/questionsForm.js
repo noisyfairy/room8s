@@ -54,15 +54,14 @@ class QuestionsForm extends React.Component {
         budgetPrior: `${userPref.budgetPrior}`,
         locationPrior: `${userPref.locationPrior}`,
         moveInPrior: `${userPref.moveInPrior}`,
-        duration: `${userPref.duration}`,
         duraPrior: `${userPref.duraPrior}`,
-        pet: userPref.pet,
+        pet: `${userPref.pet}`,
         petPrior: `${userPref.petPrior}`,
-        smoke: userPref.smoke,
+        smoke: `${userPref.smoke}`,
         smokePrior: `${userPref.smokePrior}`,
         introvert: userPref.introvert,
         introPrior: `${userPref.introPrior}`,
-        sex: userPref.sex,
+        sex: `${userPref.sex}`,
         sexPrior: `${userPref.sexPrior}`,
         ageMin: `${userPref.ageMin}`,
         ageMax: `${userPref.ageMax}`,
@@ -71,7 +70,7 @@ class QuestionsForm extends React.Component {
         cleanPrior: `${userPref.cleanPrior}`,
         guest: `${userPref.guest}`,
         guestPrior: `${userPref.guestPrior}`,
-        tod: userPref.tod,
+        tod: `${userPref.tod}`,
         todPrior: `${userPref.todPrior}`
       })
     }
@@ -85,14 +84,10 @@ class QuestionsForm extends React.Component {
       [fieldKey1]: event.target.value,
       [fieldKey2]: Number(event.target.value) + Number(rangeitr)
     })
-    console.log(this.state)
   }
 
   handleSubmit = async event => {
     event.preventDefault()
-    console.log('updating')
-    console.log(this.props.userId)
-    console.log(this.state)
     await Axios.put(`./api/questions/${this.props.userId}`, this.state)
     this.routeChange()
   }
@@ -122,7 +117,7 @@ class QuestionsForm extends React.Component {
               state={this.state}
             />
           </FormGroup>
-          Budget:
+          Rent Budget:
           <FormGroup row>
             <RadioFields
               field={{
@@ -169,22 +164,7 @@ class QuestionsForm extends React.Component {
               state={this.state}
             />
           </FormGroup>
-          Stay Duration:
-          <FormGroup row>
-            <RadioFields
-              field={{
-                8: '8 months',
-                9: '9 months',
-                10: '10 months',
-                11: '11 months',
-                12: '12 months'
-              }}
-              fieldKey1="duration"
-              handleChange={this.handleChange.bind(this)}
-              state={this.state}
-            />
-          </FormGroup>
-          Duration Priority:
+          Lease Duration Priority:
           <FormGroup row>
             <RadioFields
               field={{
@@ -199,12 +179,12 @@ class QuestionsForm extends React.Component {
               state={this.state}
             />
           </FormGroup>
-          Okay with Pet? :
+          Want Roomate to be Okay with Pets? :
           <FormGroup row>
             <RadioFields
               field={{
-                false: 'Not okay with pets',
-                true: 'Okay with pets'
+                true: 'Okay with pets',
+                false: 'Not okay with pets'
               }}
               fieldKey1="pet"
               handleChange={this.handleChange.bind(this)}
@@ -226,12 +206,12 @@ class QuestionsForm extends React.Component {
               state={this.state}
             />
           </FormGroup>
-          Okay with Smoking? :
+          Want Roomate to be Okay with Smoking? :
           <FormGroup row>
             <RadioFields
               field={{
-                false: 'Not okay with smoking',
-                true: 'Okay with smoking'
+                true: 'Okay with smoking',
+                false: 'Not okay with smoking'
               }}
               fieldKey1="smoke"
               handleChange={this.handleChange.bind(this)}
@@ -253,19 +233,19 @@ class QuestionsForm extends React.Component {
               state={this.state}
             />
           </FormGroup>
-          Are you introverted? :
+          Want Roommate to be extroverted? :
           <FormGroup row>
             <RadioFields
               field={{
-                extrovert: 'No',
-                introvert: 'Yes'
+                extrovert: 'Yes',
+                introvert: 'No'
               }}
               fieldKey1="introvert"
               handleChange={this.handleChange.bind(this)}
               state={this.state}
             />
           </FormGroup>
-          extrovert Priority:
+          Roomate extroverted Priority:
           <FormGroup row>
             <RadioFields
               field={{
@@ -324,7 +304,7 @@ class QuestionsForm extends React.Component {
               state={this.state}
             />
           </FormGroup>
-          Age Priority:
+          Roommate Age Priority:
           <FormGroup row>
             <RadioFields
               field={{
@@ -354,7 +334,7 @@ class QuestionsForm extends React.Component {
               state={this.state}
             />
           </FormGroup>
-          Dishes Priority:
+          Roommate Cleanliness Priority:
           <FormGroup row>
             <RadioFields
               field={{
@@ -379,12 +359,12 @@ class QuestionsForm extends React.Component {
                 4: 'Often',
                 5: 'Very Often'
               }}
-              fieldKey1="guests"
+              fieldKey1="guest"
               handleChange={this.handleChange.bind(this)}
               state={this.state}
             />
           </FormGroup>
-          Dishes Priority:
+          Roommate Guests Priority:
           <FormGroup row>
             <RadioFields
               field={{
@@ -446,7 +426,6 @@ const mapDispatchToProps = dispatch => {
   return {
     getUserInfo: async userId => {
       dispatch(await fetchSingleUser(userId))
-      // dispatch(fetchSingleUser(userId))
     }
   }
 }

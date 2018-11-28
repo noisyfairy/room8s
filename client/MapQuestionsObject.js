@@ -36,39 +36,40 @@ const questionList = {
     ]
   },
   3: {
-    question: 'Question #3 - Do you prefer eating out or cooking at home?',
+    question:
+      'Question #3 - How important is quality of life to you? Would you be willing to pay more for an apartment in better condition?',
     answers: [
       {
-        displayedAnswer: 'Cooking? What is that',
-        neighborhoods: '1'
-      },
-      {
-        displayedAnswer: 'I like going out, but do cook sometimes',
-        neighborhoods: '2'
+        displayedAnswer:
+          'Not my highest concern, would rather save money for going out',
+        neighborhoods: '7'
       },
       {
         displayedAnswer:
-          'The more restaurant around me the more critters there are - I am ok with eating homecook food',
-        neighborhoods: '3'
+          'Probably cannot afford an expensive apartment but I still care about quality of life',
+        neighborhoods: '8'
+      },
+      {
+        displayedAnswer:
+          'Since I plan on staying home, I need my apartment to be in prestine condition',
+        neighborhoods: '9'
       }
     ]
   },
   4: {
-    question: 'Question #4 - What do you like to do on the weekend?',
+    question: 'Question #4 - How much do you like trees in your neighborhood?',
     answers: [
       {
-        displayedAnswer: 'I am going to party until dawn',
-        neighborhoods: '1'
+        displayedAnswer: 'Trees are not for me',
+        neighborhoods: '10'
       },
       {
-        displayedAnswer:
-          'Depends, sometimes I go out with friends, but i stay in majority of the times',
-        neighborhoods: '2'
+        displayedAnswer: 'Trees are ok, dont particularly care',
+        neighborhoods: '11'
       },
       {
-        displayedAnswer:
-          'I see enough people during the week - just want to hangout with my dogs on the weekend',
-        neighborhoods: '3'
+        displayedAnswer: 'The more the merrier!',
+        neighborhoods: '12'
       }
     ]
   }

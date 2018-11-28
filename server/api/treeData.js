@@ -1,7 +1,7 @@
 const router = require('express').Router()
-const savedData = require('../db/models/arrestSaved')
 module.exports = router
+const treeData = require('../db/models/treeData')
 
 router.get('/', (req, res, next) => {
-  res.json(savedData)
+  res.json(treeData)
 })

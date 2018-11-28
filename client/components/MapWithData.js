@@ -13,20 +13,6 @@ class MapWithData extends Component {
 
   componentDidMount() {
     console.log('compnonent mounting')
-    // const arrestData = function() {
-    //   for (let keys in this.props.arrestData) {
-    //     this.props.mapData.features.find(nbhd => {
-    //       if (nbhd.properties.neibhgorhood === keys) {
-    //         return (nbhd.properties.score = arrestData[keys])
-    //       }
-    //       console.log('WORKING IN MOUNT', this.props.mapData.features)
-    //     })
-    //   }
-    // return this.props.mapData.features.map(nbhd =>{
-    // })
-    // }
-    // console.log(this.props.mapData)
-    // console.log('this is arrest data WORK PLS', arrestData())
   }
 
   handleChange = evt => {
@@ -38,7 +24,6 @@ class MapWithData extends Component {
   }
 
   render() {
-    // console.log('this is state', this.state)
     const color = d3
       .scaleThreshold()
       .domain([1, 2, 3, 4])
@@ -53,8 +38,9 @@ class MapWithData extends Component {
             <option value="">SELECT</option>
             <option value="arrestData"> ARREST DATA </option>
             <option value="subwayData"> SUBWAY DATA</option>
+            <option value="housingViolations">MAINTENANCE VIOLATIONS</option>
+            <option value="treeData">TREE DATA</option>
           </select>
-          {/* {console.log('arrest data in mapwithdata', this.props.arrestData)} */}
           {this.state.dataSet === 'arrestData' && (
             <MapWrapper
               // data={this.props[this.state.dataSet]}
@@ -70,6 +56,20 @@ class MapWithData extends Component {
               color={color}
             />
           )}
+          {this.state.dataSet === 'housingViolations' && (
+            <MapWrapper
+              data={this.props.violationData}
+              shouldRender={this.props.shouldRender}
+              color={color}
+            />
+          )}
+          {this.state.dataSet === 'treeData' && (
+            <MapWrapper
+              data={this.props.treeData}
+              shouldRender={this.props.shouldRender}
+              color={color}
+            />
+          )}
         </form>
       </div>
     )
@@ -80,7 +80,9 @@ const mapStateToProps = state => ({
   mapData: state.map.mapData,
   arrestData: state.addedMap.arrestMapData,
   subwayData: state.addedMap.subwayMapData,
-  shouldRender: state.map.shouldRender
+  violationData: state.addedMap.violationMapData,
+  shouldRender: state.map.shouldRender,
+  treeData: state.addedMap.treeMapData
 })
 
 export default connect(mapStateToProps, null)(MapWithData)

@@ -7,9 +7,8 @@ import {
   Signup,
   UserHome,
   Main,
-  Questions,
-  Users,
-  MatchUsers,
+  Profile,
+  Algo,
   FavoriteUsers,
   SingleUser,
   ConnectedMapAndQuestions,
@@ -18,8 +17,14 @@ import {
   ConnectedMapQuestionnaireAnswer,
   MapWithData
 } from './components'
-import {me, getMapData, getSubwayMapData, getArrestMapData} from './store'
-import axios from 'axios'
+import {
+  me,
+  getMapData,
+  getSubwayMapData,
+  getArrestMapData,
+  getHousingViolationsData,
+  getTreeData
+} from './store'
 
 /**
  * COMPONENT
@@ -44,7 +49,6 @@ class Routes extends Component {
         <Route exact path="/home" component={UserHome} />
         <Route exact path="/map" component={ConnectedMapAndQuestions} />
         {/* // personal info & link to {questions,AllMatchUsers, FavoriteUsers}  view */}
-        <Route exact path="/questions" component={Questions} />
         {/* // should prepopulate with answers upon signIn; empy upon signUp, & link to AllMatchUsers view */}
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
@@ -56,19 +60,16 @@ class Routes extends Component {
         {/* // <Route exact path="/neighborhoods" component={ NYCNeighborhoods } /> */}
         <Route exact path="/knowledge-map" component={MapWithData} />
         {/* // <Route exact path="/neighborhoods" component={ NYCNeighborhoods } /> */}
-
-        <Route exact path="/users" component={Users} />
         {isLoggedIn && (
           <Switch>
             {/* {/* Routes placed here are only available after logging in */}
-            <Route exact path="/matchUsers" component={MatchUsers} />
+            <Route exact path="/matchUsers" component={Algo} />
             <Route exact path="/favoriteUsers" component={FavoriteUsers} />
             <Route exact path="/users/:userId" component={SingleUser} />
-            <Route exact path="/room8pref" component={QuestionsForm} />
+            <Route exact path="/preferences" component={QuestionsForm} />
             <Route exact path="/userinfo" component={UserInfoForm} />
             <Route exact path="/home" component={UserHome} />
-
-            <Route exact path="/users" component={Users} />
+            <Route exact path="/profile" component={Profile} />
           </Switch>
         )}
         {/* Displays our main {Login} component as a fallback */}
@@ -97,6 +98,8 @@ const mapDispatch = dispatch => {
       dispatch(me())
       dispatch(getMapData())
       dispatch(getSubwayMapData())
+      dispatch(getHousingViolationsData())
+      dispatch(getTreeData())
     },
     async loadArrestData() {
       await dispatch(getArrestMapData())

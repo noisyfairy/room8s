@@ -457,7 +457,6 @@ class IntegrationAutosuggest extends React.Component {
       [name]: newValue
     })
     this.props.handleChangeComponent(this.props.fieldKey, newValue)
-    console.log('location:', this.state)
   }
 
   render() {
