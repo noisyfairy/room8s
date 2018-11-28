@@ -8,6 +8,7 @@ const GET_SUBWAY = 'GET_SUBWAY'
 const GET_MAP_SCORE = 'GET_MAP_SCORE'
 const GET_ARREST = 'GET_ARREST'
 const GET_VIOLATIONS = 'GET_VIOLATIONS'
+const GET_TREES = 'GET_TREES'
 
 //INITIAL STATE
 
@@ -15,7 +16,8 @@ const initialState = {
   subwayMapData: {},
   mapScore: {},
   arrestMapData: {},
-  violationMapData: {}
+  violationMapData: {},
+  treeMapData: {}
 }
 
 //ACTION CREATORS
@@ -36,6 +38,11 @@ const getArrest = arrestData => ({
 const getViolations = violationsData => ({
   type: GET_VIOLATIONS,
   violationsData
+})
+
+const getTrees = treeData => ({
+  type: GET_TREES,
+  treeData
 })
 
 //THUNK CREATORS
@@ -74,7 +81,7 @@ export const getSubwayMapData = () => async dispatch => {
 
 export const getArrestMapData = () => async dispatch => {
   try {
-    const {data} = await axios.get('/api/arrestSave')
+    const {data} = await axios.get('/api/arrest')
     const arrestData = data
 
     d3.json('nycmap.geojson', mapData => {
@@ -150,35 +157,37 @@ export const getHousingViolationsData = () => async dispatch => {
     console.log(err)
   }
 }
-// get the json.strigify data and put it in the function
-// get it from the window with window.arrestData = mapData
-// window.arrestData  =
 
-//require axios on the back end
-// require point-in-polygon on the back end
-// create an api route of all the scores
-// const arrestObj = {}
-// d3.json('nycmap.geojson', mapData => {
-//   for (let loc of mapData.features) {
-//     // loc.properties.score = 0
-//     arrestData.map(coord => {
-//       if (inside(coord, loc.geometry.coordinates[0])) {
-//         loc.properties.score++
-//         if (!arrestObj[loc.properties.neighborhood]) {
-//           arrestObj[loc.properties.neighborhood] = 1
-//         } else arrestObj[loc.properties.neighborhood]++
-//       }
-//     })
-//   }
-//   axios.post('/api/arrestSave', arrestObj).then()
-// const shortData = {}
-// try{
-//   await axios.post('/api/arrestSave', arrestObj)
-// } catch (err){
-//   console.log(err)
-// }
-
-// dispatch(getArrest(arrestData))
+export const getTreeData = () => async dispatch => {
+  try {
+    const {data} = await axios.get('/api/trees')
+    d3.json('nycmap.geojson', mapData => {
+      let scoreObj = {10: [], 11: [], 12: []}
+      for (let loc of mapData.features) {
+        if (!data[loc.properties.neighborhood]) {
+          loc.properties.score = 0
+        } else {
+          loc.properties.score = data[loc.properties.neighborhood]
+        }
+      }
+      dispatch(getTrees(mapData))
+      for (let loc of mapData.features) {
+        if (loc.properties.score < 10) {
+          if (!scoreObj[10].includes(loc.properties.neighborhood))
+            scoreObj[10].push(loc.properties.neighborhood)
+        } else if (loc.properties.score < 20) {
+          if (!scoreObj[11].includes(loc.properties.neighborhood))
+            scoreObj[11].push(loc.properties.neighborhood)
+        } else if (!scoreObj[12].includes(loc.properties.neighborhood))
+          scoreObj[12].push(loc.properties.neighborhood)
+      }
+      dispatch(mapScore(scoreObj))
+    })
+    // console.log(data)
+  } catch (err) {
+    console.log(err)
+  }
+}
 
 //REDUCER
 
@@ -196,6 +205,27 @@ export default function(state = initialState, action) {
         return {...state, arrestMapData: action.arrestData}
       case GET_VIOLATIONS:
         return {...state, violationMapData: action.violationsData}
+      case GET_TREES:
+        return {...state, treeMapData: action.treeData}
     }
   })
 }
+
+// d3.json('nycmap.geojson', mapData => {
+//   for (let loc of mapData.features) {
+//     data.map(coords => {
+//       if (inside(coords, loc.geometry.coordinates[0])) {
+//         // console.log('true')
+//         if (!newData[loc.properties.neighborhood]) {
+//           // console.log('hasnoprops')
+//           newData[loc.properties.neighborhood] = 1
+//           // console.log('newData', newData)
+//         } else {
+//           // console.log('hasprops')
+//           newData[loc.properties.neighborhood]++
+//         }
+//       }
+//     })
+//   }
+//   axios.post('/api/save', newData).then()
+// })
