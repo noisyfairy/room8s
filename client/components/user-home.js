@@ -19,12 +19,10 @@ export const UserHome = props => {
       <br />
       <h4> New user </h4>
       <p>
-        {' '}
         Please go to your <Link to="/userinfo"> User Information Form </Link>and
         complete your personal information
       </p>
       <p>
-        {' '}
         You should also go to <Link to="/preference"> Question Form </Link> and
         choose your preferences
       </p>

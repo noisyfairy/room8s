@@ -10,6 +10,11 @@ class MapWithData extends Component {
       dataSet: ''
     }
   }
+
+  componentDidMount() {
+    console.log('compnonent mounting')
+  }
+
   handleChange = evt => {
     console.log('receiving event:', evt)
     this.setState({
@@ -19,19 +24,13 @@ class MapWithData extends Component {
   }
 
   render() {
-    console.log('this is state', this.state)
     const color = d3
       .scaleThreshold()
       .domain([1, 2, 3, 4])
       .range(['white', 'blue', 'green', 'yellow', 'red'])
     // .style('opacity', 0.8)
     // .opacity = .4
-    console.log('this is state', this.state.dataSet)
-    console.log(
-      'this is data going into map wrapper',
-      this.props[this.state.dataSet]
-    )
-    console.log('this should be going into map wrapper', this.props.arrestData)
+
     return (
       <div>
         <form>
@@ -39,6 +38,8 @@ class MapWithData extends Component {
             <option value="">SELECT</option>
             <option value="arrestData"> ARREST DATA </option>
             <option value="subwayData"> SUBWAY DATA</option>
+            <option value="housingViolations">MAINTENANCE VIOLATIONS</option>
+            <option value="treeData">TREE DATA</option>
           </select>
           {this.state.dataSet === 'arrestData' && (
             <MapWrapper
@@ -55,6 +56,20 @@ class MapWithData extends Component {
               color={color}
             />
           )}
+          {this.state.dataSet === 'housingViolations' && (
+            <MapWrapper
+              data={this.props.violationData}
+              shouldRender={this.props.shouldRender}
+              color={color}
+            />
+          )}
+          {this.state.dataSet === 'treeData' && (
+            <MapWrapper
+              data={this.props.treeData}
+              shouldRender={this.props.shouldRender}
+              color={color}
+            />
+          )}
         </form>
       </div>
     )
@@ -62,9 +77,12 @@ class MapWithData extends Component {
 }
 
 const mapStateToProps = state => ({
+  mapData: state.map.mapData,
   arrestData: state.addedMap.arrestMapData,
   subwayData: state.addedMap.subwayMapData,
-  shouldRender: state.map.shouldRender
+  violationData: state.addedMap.violationMapData,
+  shouldRender: state.map.shouldRender,
+  treeData: state.addedMap.treeMapData
 })
 
 export default connect(mapStateToProps, null)(MapWithData)

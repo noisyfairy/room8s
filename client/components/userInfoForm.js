@@ -8,7 +8,6 @@ import Button from '@material-ui/core/Button'
 import Axios from 'axios'
 import {fetchSingleUser} from '../store'
 import IntegrationAutosuggest from './searchfield'
-import Divider from '@material-ui/core/Divider'
 
 const styles = theme => ({
   container: {
@@ -40,13 +39,13 @@ class UserInfoForm extends React.Component {
       introvert: '',
       guest: '',
       tod: '',
-      location: 'Chelsea',
+      location: '',
       moveInTime: '',
       duration: ''
     }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.setState({
       firstName: this.props.userInfo.firstName,
       lastName: this.props.userInfo.lastName,
@@ -64,22 +63,35 @@ class UserInfoForm extends React.Component {
         location: this.props.userInfo.location
       })
     }
+
+    await Axios.put(`./api/questions/${this.props.userId}`, {
+      userId: this.props.userId
+    })
   }
 
   handleChange = name => event => {
     this.setState({[name]: event.target.value})
-    console.log(this.state)
   }
 
   handleChangeComponent = (name, value) => {
     this.setState({[name]: value})
-    console.log(this.state)
   }
 
   handleSubmit = async event => {
     event.preventDefault()
     await Axios.put(`./api/users/${this.props.userId}`, this.state)
     this.routeChange()
+  }
+
+  formEmpty = obj => {
+    const values = Object.values(obj)
+    let boolean = true
+    values.map(arg => {
+      if (!arg) {
+        boolean = false
+      }
+    })
+    return boolean
   }
 
   routeChange() {
@@ -92,7 +104,6 @@ class UserInfoForm extends React.Component {
 
     return (
       <div>
-        {console.log(this.state)}
         {Object.keys(this.props.userInfo).length > 0 ? (
           <form
             className={classes.container}
@@ -102,20 +113,18 @@ class UserInfoForm extends React.Component {
             <div>
               <TextField
                 id="firstName input"
-                label="First Name"
+                label="*First Name"
                 className={classes.textField}
                 margin="normal"
-                helperText="Required"
                 value={this.state.firstName}
                 onChange={this.handleChange('firstName')}
               />
 
               <TextField
                 id="last name input"
-                label="Last Name"
+                label="*Last Name"
                 className={classes.textField}
                 margin="normal"
-                helperText="Required"
                 value={this.state.lastName}
                 onChange={this.handleChange('lastName')}
               />
@@ -123,10 +132,9 @@ class UserInfoForm extends React.Component {
               <TextField
                 id="Age input"
                 type="number"
-                label="Age"
+                label="*Age"
                 className={classes.textField}
                 margin="normal"
-                helperText="Required"
                 value={this.state.age}
                 onChange={this.handleChange('age')}
               />
@@ -134,7 +142,7 @@ class UserInfoForm extends React.Component {
               <TextField
                 id="sex input"
                 select
-                label="Select"
+                label="*Select your sex"
                 className={classes.textField}
                 value={this.state.sex}
                 onChange={this.handleChange('sex')}
@@ -143,7 +151,6 @@ class UserInfoForm extends React.Component {
                     className: classes.menu
                   }
                 }}
-                helperText="Please select sex"
                 margin="normal"
               >
                 <MenuItem value="M">Male</MenuItem>
@@ -153,7 +160,7 @@ class UserInfoForm extends React.Component {
               <TextField
                 id="introvert input"
                 select
-                label="Select"
+                label="*Are you extroverted or introverted?"
                 className={classes.textField}
                 value={this.state.introvert}
                 onChange={this.handleChange('introvert')}
@@ -162,7 +169,6 @@ class UserInfoForm extends React.Component {
                     className: classes.menu
                   }
                 }}
-                helperText="Please select sex"
                 margin="normal"
               >
                 <MenuItem value="introvert">introvert</MenuItem>
@@ -172,7 +178,7 @@ class UserInfoForm extends React.Component {
               <TextField
                 id="guest input"
                 select
-                label="Select"
+                label="*How often you have guests over?"
                 className={classes.textField}
                 value={this.state.guest}
                 onChange={this.handleChange('guest')}
@@ -181,20 +187,19 @@ class UserInfoForm extends React.Component {
                     className: classes.menu
                   }
                 }}
-                helperText="Please select how often you have quests over"
                 margin="normal"
               >
                 <MenuItem value={1}>Never</MenuItem>
                 <MenuItem value={2}>Rarely</MenuItem>
                 <MenuItem value={3}>Sometimes</MenuItem>
                 <MenuItem value={4}>Often</MenuItem>
-                <MenuItem value={5}>very Often</MenuItem>
+                <MenuItem value={5}>Very Often</MenuItem>
               </TextField>
 
               <TextField
                 id="tod input"
                 select
-                label="Select"
+                label="*Are you a Morning or Night person?"
                 className={classes.textField}
                 value={this.state.tod}
                 onChange={this.handleChange('tod')}
@@ -203,7 +208,6 @@ class UserInfoForm extends React.Component {
                     className: classes.menu
                   }
                 }}
-                helperText="Are you a morning or night person"
                 margin="normal"
               >
                 <MenuItem value="Morning">Morning</MenuItem>
@@ -212,7 +216,7 @@ class UserInfoForm extends React.Component {
 
               <TextField
                 id="MoveIn input "
-                label="Move in date"
+                label="*Move in date"
                 className={classes.textField}
                 type="date"
                 margin="normal"
@@ -234,7 +238,7 @@ class UserInfoForm extends React.Component {
               <TextField
                 id="duration input"
                 select
-                label="Select"
+                label="*Lease duration perference"
                 className={classes.textField}
                 value={this.state.duration}
                 onChange={this.handleChange('duration')}
@@ -243,7 +247,6 @@ class UserInfoForm extends React.Component {
                     className: classes.menu
                   }
                 }}
-                helperText="Please select how often you have quests over"
                 margin="normal"
               >
                 <MenuItem value={1}>1 Month</MenuItem>
@@ -258,7 +261,6 @@ class UserInfoForm extends React.Component {
                 <MenuItem value={10}>10 Months</MenuItem>
                 <MenuItem value={11}>11 Months</MenuItem>
                 <MenuItem value={12}>12 Months</MenuItem>
-                <MenuItem value={13}>12+ Months</MenuItem>
               </TextField>
             </div>
             <div>
@@ -266,6 +268,7 @@ class UserInfoForm extends React.Component {
                 variant="contained"
                 className={classes.button}
                 type="submit"
+                disabled={!this.formEmpty(this.state)}
               >
                 Submit
               </Button>

@@ -38,10 +38,11 @@ const setPreferredNeighborhood = neighborhood => ({
  * THUNK CREATORS
  */
 
-export const getMapData = () => dispatch => {
+export const getMapData = () => async dispatch => {
   try {
+    console.log(`STORE new map`)
     const neighborhoodIdxObj = {}
-    d3.json('nycmap.geojson', mapData => {
+    await d3.json('nycmap.geojson', mapData => {
       for (let location of mapData.features) {
         location.properties.score = 0
       }
@@ -51,6 +52,7 @@ export const getMapData = () => dispatch => {
         ] = mapData.features.indexOf(location).toString()
       }
       dispatch(getMap(mapData))
+      dispatch(updateMapRender())
       dispatch(getNeighborhoodIdx(neighborhoodIdxObj))
     })
   } catch (error) {
@@ -68,6 +70,7 @@ export const updateMapScore = idx => dispatch => {
 
 export const updateMapRender = () => dispatch => {
   try {
+    console.log(`STORE MAP RE-RENDER`)
     dispatch(updateRender())
   } catch (error) {
     console.log(error)
@@ -106,6 +109,7 @@ export default function(state = defaultState, action) {
   return produce(state, draft => {
     switch (action.type) {
       case GET_MAP:
+        console.log(action.mapData)
         return {...state, mapData: action.mapData}
       case UPDATE_MAP:
         draft.mapData.features[action.idx].properties.score++

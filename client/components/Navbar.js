@@ -169,7 +169,7 @@ class NavBar extends React.Component {
           </IconButton>
         </div>
         <Divider />
-        <MenuBar />
+        <MenuBar handleDrawerClose={this.handleDrawerClose} />
       </Drawer>
     )
 
@@ -203,8 +203,8 @@ class NavBar extends React.Component {
 
               <Typography variant="title" className={classes.title}>
                 Room8s
-              </Typography >
-              <Logout className={classes.title}/>
+              </Typography>
+              <Logout className={classes.title} />
             </Toolbar>
           </AppBar>
           {before}

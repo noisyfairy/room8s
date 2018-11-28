@@ -10,12 +10,13 @@ export {Login, Signup} from './auth-form'
 
 export {default as Main} from './Main'
 export {default as SignupPage} from './SignupPage'
-export {default as Questions} from './Questions'
+// export {default as Questions} from './Questions'
 
 // export {default as Users} from './Users'
 export {default as MatchUsers} from './MatchUsers'
 // export {default as FavoriteUsers} from './FavoriteUsers'
 export {default as SingleUser} from './SingleUser'
+export {default as TwoWayFav} from './TwoWayFav'
 
 //Forms
 export {default as QuestionsForm} from './questionsForm'

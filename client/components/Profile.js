@@ -11,7 +11,7 @@ import {me} from '../store/user'
 // helper functions
 
 const priorityNumToString = num => {
-  switch(num){
+  switch (num) {
     case '1':
       return 'Never'
     case '2':
@@ -28,8 +28,12 @@ const priorityNumToString = num => {
 }
 
 const booleanToString = bool => {
-  if(bool === 'true'){return 'Ok'}
-  if(bool === 'false'){return 'Not Ok'}
+  if (bool === 'true') {
+    return 'Ok'
+  }
+  if (bool === 'false') {
+    return 'Not Ok'
+  }
 }
 
 class Profile extends Component {
@@ -42,7 +46,7 @@ class Profile extends Component {
 
   async componentDidMount() {
     try {
-      await this.props.getUser();
+      await this.props.getUser()
       const userId = Number(this.props.user.id)
       const response = await axios.get(`/api/users/${userId}`)
       const singleUser = response.data
@@ -53,7 +57,7 @@ class Profile extends Component {
   }
 
   render() {
-    const {firstName, lastName, sex, age, email} = this.props.user
+    const {firstName, lastName, sex, age, email, imgUrl} = this.props.user
     const {user} = this.props
     console.log('user in profile: ', user)
 
@@ -67,7 +71,7 @@ class Profile extends Component {
 
     return (
       <div>
-        <h3> Welcome to your profile { firstName ? firstName : email } </h3>
+        <h3> Welcome to your profile {firstName ? firstName : email} </h3>
         <br />
         <div>
           <h4>
@@ -83,7 +87,7 @@ class Profile extends Component {
             <div className="clearfix">
               <img
                 className="img2"
-                src="placeholder.png"
+                src={imgUrl}
                 alt="Pineapple"
                 width="170"
                 height="170"
@@ -102,7 +106,7 @@ class Profile extends Component {
             Preferences{' '}
             <span className="edit">
               {' '}
-              <Link to="/preference"> Edit </Link>{' '}
+              <Link to="/preferences"> Edit </Link>{' '}
             </span>{' '}
           </h4>
           <hr />
@@ -117,7 +121,9 @@ class Profile extends Component {
             <tbody>
               <tr>
                 <td> Budget Range</td>
-                <td>{question.budgetMin} - {question.budgetMax}</td>
+                <td>
+                  {question.budgetMin} - {question.budgetMax}
+                </td>
                 <td>{question.budgetPrior}</td>
               </tr>
               <tr>
@@ -137,7 +143,9 @@ class Profile extends Component {
               </tr>
               <tr>
                 <td>Age Range</td>
-                <td>{question.ageMin} - {question.ageMax} </td>
+                <td>
+                  {question.ageMin} - {question.ageMax}{' '}
+                </td>
                 <td>{question.sexPrior} </td>
               </tr>
               <tr>
@@ -157,12 +165,12 @@ class Profile extends Component {
               </tr>
               <tr>
                 <td>Clean</td>
-                <td> { priorityNumToString(`${question.clean}`) } </td>
+                <td> {priorityNumToString(`${question.clean}`)} </td>
                 <td>{question.cleanPrior} </td>
               </tr>
               <tr>
                 <td>Guest</td>
-                <td> { priorityNumToString(`${question.guest}`) } </td>
+                <td> {priorityNumToString(`${question.guest}`)} </td>
                 <td>{question.guestPrior} </td>
               </tr>
               <tr>
@@ -191,7 +199,7 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-      getUser: () => dispatch(me())
+  getUser: () => dispatch(me())
 })
 
 export default connect(mapState, mapDispatch)(Profile)

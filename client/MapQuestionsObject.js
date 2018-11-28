@@ -1,6 +1,6 @@
 const questionList = {
   1: {
-    question: 'Do you get around by subway?',
+    question: 'Question #1 - Do you get around by subway?',
     answers: [
       {
         displayedAnswer: 'Love NYC subway - best in the world',
@@ -18,57 +18,58 @@ const questionList = {
     ]
   },
   2: {
-    question: 'Is Safety a huge concern to you?',
+    question: 'Question #2 - Is Safety a huge concern to you?',
     answers: [
       {
         displayedAnswer:
           'Yes! Safety is the most important consideration when it comes to neighborhood',
-        neighborhoods: '1'
+        neighborhoods: '4'
       },
       {
         displayedAnswer: 'I am concern but not my top priority',
-        neighborhoods: '2'
+        neighborhoods: '5'
       },
       {
         displayedAnswer: 'I am safe everywhere I go - does not matter to me',
-        neighborhoods: '3'
+        neighborhoods: '6'
       }
     ]
   },
   3: {
-    question: 'Do you prefer eating out or cooking at home?',
+    question:
+      'Question #3 - How important is quality of life to you? Would you be willing to pay more for an apartment in better condition?',
     answers: [
       {
-        displayedAnswer: 'Cooking? What is that',
-        neighborhoods: '1'
-      },
-      {
-        displayedAnswer: 'I like going out, but do cook sometimes',
-        neighborhoods: '2'
+        displayedAnswer:
+          'Not my highest concern, would rather save money for going out',
+        neighborhoods: '7'
       },
       {
         displayedAnswer:
-          'The more restaurant around me the more critters there are - I am ok with eating homecook food',
-        neighborhoods: '3'
+          'Probably cannot afford an expensive apartment but I still care about quality of life',
+        neighborhoods: '8'
+      },
+      {
+        displayedAnswer:
+          'Since I plan on staying home, I need my apartment to be in prestine condition',
+        neighborhoods: '9'
       }
     ]
   },
   4: {
-    question: 'What do you like to do on the weekend?',
+    question: 'Question #4 - How much do you like trees in your neighborhood?',
     answers: [
       {
-        displayedAnswer: 'I am going to party until dawn',
-        neighborhoods: '1'
+        displayedAnswer: 'Trees are not for me',
+        neighborhoods: '10'
       },
       {
-        displayedAnswer:
-          'Depends, sometimes I go out with friends, but i stay in majority of the times',
-        neighborhoods: '2'
+        displayedAnswer: 'Trees are ok, dont particularly care',
+        neighborhoods: '11'
       },
       {
-        displayedAnswer:
-          'I see enough people during the week - just want to hangout with my dogs on the weekend',
-        neighborhoods: '3'
+        displayedAnswer: 'The more the merrier!',
+        neighborhoods: '12'
       }
     ]
   }
