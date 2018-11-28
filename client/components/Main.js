@@ -1,22 +1,22 @@
 import React from 'react'
-import {Login} from './auth-form'
+// import {Login} from './auth-form'
+import {connect} from 'react-redux'
+import UserHome from './user-home'
+import Welcome from './Welcome'
 
-const Main = () => {
+const Main = props => {
+  const {isLoggedIn} = props
   return (
     <div className="main">
-      <div>
-        <Login />
-      </div>
+      <div>{isLoggedIn ? <UserHome /> : <Welcome />} </div>
     </div>
   )
 }
 
-export default Main
+const mapStateToProps = state => {
+  return {
+    isLoggedIn: !!state.user.id
+  }
+}
 
-//  {/* <div id="about">
-//         <h4> New to NYC and want to know where you should live? </h4>
-//         <h4> Want to know more about each neighborgood </h4>
-//         <h4>
-//           <i> Find out more here </i> <Link to="map"> Map </Link>
-//         </h4>
-//       </div> */}
+export default connect(mapStateToProps, null)(Main)
