@@ -9,8 +9,15 @@ import Axios from 'axios'
 import {fetchSingleUser} from '../store'
 
 const styles = {
-  root: {},
-  checked: {}
+  button: {
+    position: 'absolute',
+    bottom: '20px',
+    right: '20px',
+    width: '10%',
+    height: '8%',
+    transition: 'all 2s ease-in-out',
+    zIndex: 1
+  }
 }
 
 class QuestionsForm extends React.Component {
@@ -383,8 +390,8 @@ class QuestionsForm extends React.Component {
           <FormGroup row>
             <RadioFields
               field={{
-                morning: 'Morning',
-                night: 'Night'
+                Morning: 'Morning',
+                Night: 'Night'
               }}
               fieldKey1="tod"
               handleChange={this.handleChange.bind(this)}
