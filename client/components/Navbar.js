@@ -115,9 +115,7 @@ class NavBar extends React.Component {
       anchor: 'left',
       pageSelected: '',
       redirect: false,
-      bg: history.location.pathname.includes('map/')
-        ? "url('/NYCview.jpg')"
-        : "url('/roommates.jpg')"
+      bg: "url('/nyc.png')"
     }
   }
 
@@ -138,9 +136,7 @@ class NavBar extends React.Component {
   changeBackground = () => {
     history.listen((location, action) => {
       this.setState({
-        bg: location.pathname.includes('map/')
-          ? "url('/roommates.jpg')"
-          : "url('/NYCview.jpg')"
+        bg: "url('/nyc.png')"
       })
     })
   }
@@ -217,12 +213,12 @@ class NavBar extends React.Component {
                 [classes[`contentShift-${anchor}`]]: open
               }
             )}
-            // style={{
-            //   backgroundImage: `
-            // linear-gradient(to bottom, rgba(89, 155, 163, 0.65) 0%, rgba(89, 155, 163, 0.65) 30%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0) 100%), ${
-            //   this.state.bg
-            // }`
-            // }}
+            style={{
+              backgroundImage: `
+            linear-gradient(to bottom, rgba(89, 155, 163, 0.65) 0%, rgba(89, 155, 163, 0.65) 30%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0) 100%), ${
+              this.state.bg
+            }`
+            }}
           >
             <div className={classes.drawerHeader} />
             <Routes style={styles.drawerPaper} />

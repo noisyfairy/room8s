@@ -27,10 +27,6 @@ export default class NYCNeighborhoods extends Component {
       .enter()
       .append('path')
       .attr('d', path)
-      .style('fill-opacity', d => {
-        if (d.properties.score >= 1) return d.properties.score / 50 + 0.5
-        else return 1
-      })
       .style('stroke', 'black')
       .style('fill', function(d) {
         return d.properties ? color(d.properties.score) : 'black'
