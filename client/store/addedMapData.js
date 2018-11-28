@@ -15,7 +15,6 @@ const GET_TREES = 'GET_TREES'
 const initialState = {
   subwayMapData: {},
   mapScore: {},
-  getSubwayScore: {},
   arrestMapData: {},
   violationMapData: {},
   treeMapData: {}
@@ -115,13 +114,24 @@ export const getHousingViolationsData = () => async dispatch => {
     const {data} = await axios.get('/api/housingViolations')
     const violationData = data
     d3.json('nycmap.geojson', mapData => {
+      let scoreObj = {7: [], 8: [], 9: []}
       for (let loc of mapData.features) {
         if (violationData[loc.properties.neighborhood]) {
-          console.log('working')
           loc.properties.score = violationData[loc.properties.neighborhood]
         } else loc.properties.score = 0
       }
       dispatch(getViolations(mapData))
+      for (let loc of mapData.features) {
+        if (loc.properties.score < 10) {
+          if (!scoreObj[9].includes(loc.properties.neighborhood))
+            scoreObj[9].push(loc.properties.neighborhood)
+        } else if (loc.properties.score < 20) {
+          if (!scoreObj[8].includes(loc.properties.neighborhood))
+            scoreObj[8].push(loc.properties.neighborhood)
+        } else if (!scoreObj[7].includes(loc.properties.neighborhood))
+          scoreObj[7].push(loc.properties.neighborhood)
+      }
+      dispatch(mapScore(scoreObj))
     })
     // d3.json('nycmap.geojson', mapData => {
     //   for (let loc of mapData.features) {
@@ -152,6 +162,7 @@ export const getTreeData = () => async dispatch => {
   try {
     const {data} = await axios.get('/api/trees')
     d3.json('nycmap.geojson', mapData => {
+      let scoreObj = {10: [], 11: [], 12: []}
       for (let loc of mapData.features) {
         if (!data[loc.properties.neighborhood]) {
           loc.properties.score = 0
@@ -159,9 +170,18 @@ export const getTreeData = () => async dispatch => {
           loc.properties.score = data[loc.properties.neighborhood]
         }
       }
-      console.log('map data in added map tree', mapData)
       dispatch(getTrees(mapData))
-      // axios.post('/api/save', treeData).then()
+      for (let loc of mapData.features) {
+        if (loc.properties.score < 10) {
+          if (!scoreObj[10].includes(loc.properties.neighborhood))
+            scoreObj[10].push(loc.properties.neighborhood)
+        } else if (loc.properties.score < 20) {
+          if (!scoreObj[11].includes(loc.properties.neighborhood))
+            scoreObj[11].push(loc.properties.neighborhood)
+        } else if (!scoreObj[12].includes(loc.properties.neighborhood))
+          scoreObj[12].push(loc.properties.neighborhood)
+      }
+      dispatch(mapScore(scoreObj))
     })
     // console.log(data)
   } catch (err) {
