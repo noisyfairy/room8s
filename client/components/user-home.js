@@ -23,9 +23,7 @@ export const UserHome = props => {
         complete your personal information
       </p>
       <p>
-
         You should also go to <Link to="/preference"> Question Form </Link> and
-
         choose your preferences
       </p>
     </div>
