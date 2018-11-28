@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import MapWrapper from './MapWrapper'
 import ConnectedMapQuestionnaire from './MapQuestionnaire'
-import {Link} from 'react-router-dom'
 import {getMapData, updateMapRender} from '../store'
 
 class MapAndQuestions extends Component {
