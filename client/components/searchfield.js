@@ -411,6 +411,7 @@ const styles = theme => ({
     position: 'absolute',
     zIndex: 1,
     marginTop: theme.spacing.unit,
+    top: '40px',
     left: 0,
     right: 0
   },
