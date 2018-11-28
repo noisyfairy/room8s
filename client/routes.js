@@ -37,25 +37,14 @@ class Routes extends Component {
       <Switch>
         <Route exact path="/" component={Main} />
         <Route exact path="/signup" component={SignupPage} />
-        {/* <Route exact path="/main" component={Main} /> */}
+        <Route exact path="/login" component={Login} />
         {/* <Route exact path="/home" component={UserHome} /> */}
         <Route exact path="/map" component={ConnectedMapAndQuestions} />
         <Route exact path="/questions" component={Questions} />
-        <Route exact path="/login" component={Login} />
-        {/* <Route exact path="/signup" component={Signup} /> */}
-        <Route
-          exact
-          path="/answer"
-          component={ConnectedMapQuestionnaireAnswer}
-        />
-        {/* // <Route exact path="/neighborhoods" component={ NYCNeighborhoods } /> */}
+        <Route exact path="/answer" component={ConnectedMapQuestionnaireAnswer} />
         <Route exact path="/knowledge-map" component={MapWithData} />
-        {/* // <Route exact path="/neighborhoods" component={ NYCNeighborhoods } /> */}
-
-        <Route exact path="/users" component={Users} />
         {isLoggedIn && (
           <Switch>
-            {/* {/* Routes placed here are only available after logging in */}
             <Route exact path="/matchUsers" component={Algo} />
             <Route exact path="/home" component={UserHome} />
             <Route exact path="/profile" component={Profile} />
@@ -64,8 +53,6 @@ class Routes extends Component {
             <Route exact path="/userinfo" component={UserInfoForm} />
             {/* <Route exact path="/home" component={UserHome} /> */}
             {/* <Route exact path="/favoriteUsers" component={FavoriteUsers} /> */}
-
-            <Route exact path="/users" component={Users} />
           </Switch>
         )}
         <Route component={Main} />
