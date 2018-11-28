@@ -57,7 +57,7 @@ class Profile extends Component {
   }
 
   render() {
-    const {firstName, lastName, sex, age, email} = this.props.user
+    const {firstName, lastName, sex, age, email, imgUrl} = this.props.user
     const {user} = this.props
     console.log('user in profile: ', user)
 
@@ -87,7 +87,7 @@ class Profile extends Component {
             <div className="clearfix">
               <img
                 className="img2"
-                src="placeholder.png"
+                src={imgUrl}
                 alt="Pineapple"
                 width="170"
                 height="170"

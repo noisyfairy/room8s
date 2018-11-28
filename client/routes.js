@@ -8,7 +8,7 @@ import {
   UserHome,
   Main,
   Profile,
-  MatchUsers,
+  Algo,
   FavoriteUsers,
   SingleUser,
   ConnectedMapAndQuestions,
@@ -25,7 +25,6 @@ import {
   getHousingViolationsData,
   getTreeData
 } from './store'
-import axios from 'axios'
 
 /**
  * COMPONENT
@@ -61,13 +60,10 @@ class Routes extends Component {
         {/* // <Route exact path="/neighborhoods" component={ NYCNeighborhoods } /> */}
         <Route exact path="/knowledge-map" component={MapWithData} />
         {/* // <Route exact path="/neighborhoods" component={ NYCNeighborhoods } /> */}
-
-        {/* <Route exact path="/users" component={Users} />npm */}
-        {/* <Route exact path="/users" component={Users} /> */}
         {isLoggedIn && (
           <Switch>
             {/* {/* Routes placed here are only available after logging in */}
-            <Route exact path="/matchUsers" component={MatchUsers} />
+            <Route exact path="/matchUsers" component={Algo} />
             <Route exact path="/favoriteUsers" component={FavoriteUsers} />
             <Route exact path="/users/:userId" component={SingleUser} />
             <Route exact path="/preferences" component={QuestionsForm} />
