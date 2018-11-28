@@ -204,7 +204,7 @@ class NavBar extends React.Component {
               <Typography variant="title" className={classes.title}>
                 Room8s
               </Typography>
-              <Logout />
+              <Logout className={classes.title} />
             </Toolbar>
           </AppBar>
           {before}

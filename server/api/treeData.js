@@ -1,7 +1,7 @@
 const router = require('express').Router()
 module.exports = router
-const violations = require('../db/models/violations')
+const treeData = require('../db/models/treeData')
 
 router.get('/', (req, res, next) => {
-  res.json(violations)
+  res.json(treeData)
 })
