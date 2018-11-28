@@ -3,16 +3,23 @@ import axios from 'axios'
 
 // Actions
 const GET_MATCH_USERS = 'GET_MATCH_USERS'
+const GET_MATCH_SCORES = 'GET_MATCH_SCORES'
 
 // Initial State
 const defaultMatchUsersList = {
-  matchUsers: []
+  matchUsers: [],
+  matchScores: []
 }
 
 // Action creator
 export const getMatchUsers = matchUsers => ({
   type: GET_MATCH_USERS,
   matchUsers
+})
+
+export const getMatchScores = matchScores => ({
+  type: GET_MATCH_SCORES,
+  matchScores
 })
 
 //Thunk creator
@@ -36,6 +43,9 @@ const matchUsersReducer = (state = defaultMatchUsersList, action) => {
   switch (action.type) {
     case GET_MATCH_USERS:
       return {...state, matchUsers: action.matchUsers}
+
+    case GET_MATCH_SCORES:
+      return {...state, matchScores: action.matchScores}
 
     default:
       return state
