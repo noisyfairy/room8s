@@ -22,7 +22,8 @@ import {
   getMapData,
   getSubwayMapData,
   getArrestMapData,
-  getHousingViolationsData
+  getHousingViolationsData,
+  getTreeData
 } from './store'
 import axios from 'axios'
 
@@ -61,7 +62,7 @@ class Routes extends Component {
         <Route exact path="/knowledge-map" component={MapWithData} />
         {/* // <Route exact path="/neighborhoods" component={ NYCNeighborhoods } /> */}
 
-        <Route exact path="/users" component={Users} />
+        {/* <Route exact path="/users" component={Users} /> */}
         {isLoggedIn && (
           <Switch>
             {/* {/* Routes placed here are only available after logging in */}
@@ -101,6 +102,7 @@ const mapDispatch = dispatch => {
       dispatch(getMapData())
       dispatch(getSubwayMapData())
       dispatch(getHousingViolationsData())
+      dispatch(getTreeData())
     },
     async loadArrestData() {
       await dispatch(getArrestMapData())
