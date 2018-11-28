@@ -14,10 +14,8 @@ const GET_VIOLATIONS = 'GET_VIOLATIONS'
 const initialState = {
   subwayMapData: {},
   mapScore: {},
-  getSubwayScore: {},
   arrestMapData: {},
   violationMapData: {}
-
 }
 
 //ACTION CREATORS
@@ -109,13 +107,24 @@ export const getHousingViolationsData = () => async dispatch => {
     const {data} = await axios.get('/api/housingViolations')
     const violationData = data
     d3.json('nycmap.geojson', mapData => {
+      let scoreObj = {7: [], 8: [], 9: []}
       for (let loc of mapData.features) {
         if (violationData[loc.properties.neighborhood]) {
-          console.log('working')
           loc.properties.score = violationData[loc.properties.neighborhood]
         } else loc.properties.score = 0
       }
       dispatch(getViolations(mapData))
+      for (let loc of mapData.features) {
+        if (loc.properties.score < 10) {
+          if (!scoreObj[9].includes(loc.properties.neighborhood))
+            scoreObj[9].push(loc.properties.neighborhood)
+        } else if (loc.properties.score < 20) {
+          if (!scoreObj[8].includes(loc.properties.neighborhood))
+            scoreObj[8].push(loc.properties.neighborhood)
+        } else if (!scoreObj[7].includes(loc.properties.neighborhood))
+          scoreObj[7].push(loc.properties.neighborhood)
+      }
+      dispatch(mapScore(scoreObj))
     })
     // d3.json('nycmap.geojson', mapData => {
     //   for (let loc of mapData.features) {
@@ -184,7 +193,6 @@ export default function(state = initialState, action) {
         })
         break
       case GET_ARREST:
-
         return {...state, arrestMapData: action.arrestData}
       case GET_VIOLATIONS:
         return {...state, violationMapData: action.violationsData}

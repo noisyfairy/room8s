@@ -36,20 +36,23 @@ const questionList = {
     ]
   },
   3: {
-    question: 'Question #3 - Do you prefer eating out or cooking at home?',
+    question:
+      'Question #3 - How important is quality of life to you? Would you be willing to pay more for an apartment in better condition?',
     answers: [
       {
-        displayedAnswer: 'Cooking? What is that',
-        neighborhoods: '1'
-      },
-      {
-        displayedAnswer: 'I like going out, but do cook sometimes',
-        neighborhoods: '2'
+        displayedAnswer:
+          'Not my highest concern, would rather save money for going out',
+        neighborhoods: '7'
       },
       {
         displayedAnswer:
-          'The more restaurant around me the more critters there are - I am ok with eating homecook food',
-        neighborhoods: '3'
+          'Probably cannot afford an expensive apartment but I still care about quality of life',
+        neighborhoods: '8'
+      },
+      {
+        displayedAnswer:
+          'Since I plan on staying home, I need my apartment to be in prestine condition',
+        neighborhoods: '9'
       }
     ]
   },
