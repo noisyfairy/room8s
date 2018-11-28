@@ -57,21 +57,19 @@ const questionList = {
     ]
   },
   4: {
-    question: 'Question #4 - What do you like to do on the weekend?',
+    question: 'Question #4 - How much do you like trees in your neighborhood?',
     answers: [
       {
-        displayedAnswer: 'I am going to party until dawn',
-        neighborhoods: '1'
+        displayedAnswer: 'Trees are not for me',
+        neighborhoods: '10'
       },
       {
-        displayedAnswer:
-          'Depends, sometimes I go out with friends, but i stay in majority of the times',
-        neighborhoods: '2'
+        displayedAnswer: 'Trees are ok, dont particularly care',
+        neighborhoods: '11'
       },
       {
-        displayedAnswer:
-          'I see enough people during the week - just want to hangout with my dogs on the weekend',
-        neighborhoods: '3'
+        displayedAnswer: 'The more the merrier!',
+        neighborhoods: '12'
       }
     ]
   }

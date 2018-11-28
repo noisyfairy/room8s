@@ -61,7 +61,7 @@ class Routes extends Component {
         <Route exact path="/knowledge-map" component={MapWithData} />
         {/* // <Route exact path="/neighborhoods" component={ NYCNeighborhoods } /> */}
 
-        {/* <Route exact path="/users" component={Users} /> */}
+        {/* <Route exact path="/users" component={Users} />npm */}
         {isLoggedIn && (
           <Switch>
             {/* {/* Routes placed here are only available after logging in */}
