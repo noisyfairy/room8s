@@ -38,29 +38,23 @@ class MenuBar extends Component {
           <ListItem
             button
             onClick={() => {
-              history.push('/map')
-              this.props.handleDrawerClose()
-            }}
-          >
-            <ListItemText primary="Quiz" />
-          </ListItem>
-          <ListItem
-            button
-            onClick={() => {
               history.push('/knowledge-map')
               this.props.handleDrawerClose()
             }}
           >
             <ListItemText primary="Neighborhood Info" />
           </ListItem>
-          {/* <ListItem button onClick={() => history.push('/users')}>
-          <ListItemText primary="Users" />
-        </ListItem> */}
-
-          {/* <ListItem button onClick={() => history.push('/FavoriteUsers')}>
-          <ListItemText primary="Favorite Users" />
-        </ListItem> */}
           <ListItem
+            button
+            onClick={() => {
+              history.push('/map')
+              this.props.handleDrawerClose()
+            }}
+          >
+            <ListItemText primary="Neighborhood Quiz" />
+          </ListItem>
+
+          {/* <ListItem
             button
             onClick={() => {
               history.push('/')
@@ -68,7 +62,7 @@ class MenuBar extends Component {
             }}
           >
             <ListItemText primary="Home" />
-          </ListItem>
+          </ListItem> */}
         </List>
       </div>
     )

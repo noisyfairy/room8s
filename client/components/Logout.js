@@ -9,6 +9,8 @@ import {Link, Redirect} from 'react-router-dom'
 
 const styles = theme => ({
   button: {
+    position: 'absolute',
+    right: '20px',
     margin: theme.spacing.unit,
     color: theme.palette.primary.red
   }

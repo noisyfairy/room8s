@@ -178,3 +178,8 @@ th {
   display: flex;
   flex-direction: row;
 } */
+
+.title {
+  font-family: 'Lobster', cursive;
+  color: black;
+}
