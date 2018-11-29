@@ -36,7 +36,6 @@ class TwoWayFav extends Component {
 
   render() {
     const {classes} = this.props
-
     return (
       <React.Fragment>
         {this.props.mutualUsers.length > 0 && (
