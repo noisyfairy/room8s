@@ -10,9 +10,8 @@ const RadioFields = props => {
   const fieldValues = Object.keys(field)
   const handleChange = props.handleChange
   const state = props.state
-  let key = 0
+
   return fieldValues.map(value => {
-    key++
     return (
       <FormControlLabel
         control={
@@ -24,7 +23,6 @@ const RadioFields = props => {
             color="primary"
             name="radio-button-demo"
             aria-label="A"
-            key={key}
           />
         }
         label={field[value]}
