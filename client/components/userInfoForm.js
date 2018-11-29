@@ -190,7 +190,7 @@ class UserInfoForm extends React.Component {
                 </TextField>
               </Grid>
 
-              <Grid item xs={2.4}>
+              <Grid item xs={2}>
                 <TextField
                   id="introvert input"
                   select
@@ -210,7 +210,7 @@ class UserInfoForm extends React.Component {
                 </TextField>
               </Grid>
 
-              <Grid item xs={2.4}>
+              <Grid item xs={2}>
                 <TextField
                   id="guest input"
                   select
@@ -232,7 +232,7 @@ class UserInfoForm extends React.Component {
                   <MenuItem value={5}>Very Often</MenuItem>
                 </TextField>
               </Grid>
-              <Grid item xs={2.4}>
+              <Grid item xs={2}>
                 <TextField
                   id="tod input"
                   select
@@ -252,7 +252,7 @@ class UserInfoForm extends React.Component {
                 </TextField>
               </Grid>
 
-              <Grid item xs={2.4}>
+              <Grid item xs={2}>
                 <TextField
                   id="duration input"
                   select

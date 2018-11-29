@@ -36,15 +36,13 @@ class TwoWayFav extends Component {
 
   render() {
     const {classes} = this.props
-    let key = 0
     return (
       <React.Fragment>
         {this.props.mutualUsers.length > 0 && (
           <div>
             {this.props.mutualUsers.map(user => {
-              key++
               return (
-                <List dense="dense" key={key}>
+                <List dense="dense">
                   <ListItem>
                     <ListItemAvatar>
                       <Avatar style={{width: '75px', height: '75px'}}>

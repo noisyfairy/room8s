@@ -16,6 +16,7 @@ import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
+import {NavLink} from 'react-router-dom'
 
 const drawerWidth = 240
 
@@ -40,10 +41,11 @@ const styles = theme => ({
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
-    })
+    }),
+    // backgroundColor: '#ffffff'
   },
-  title: {
-    flexGrow: 1
+  logout: {
+    flexGrow: 1,
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -85,7 +87,8 @@ const styles = theme => ({
     }),
     overflow: 'auto',
     backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover'
+    backgroundSize: 'cover',
+    backgroundColor: '#EFEFEF',
   },
   'content-left': {
     marginLeft: -drawerWidth
@@ -186,6 +189,7 @@ class NavBar extends React.Component {
               [classes.appBarShift]: open,
               [classes[`appBarShift-${anchor}`]]: open
             })}
+            color='#ffffff'
           >
             <Toolbar disableGutters={!open}>
               <IconButton
@@ -197,10 +201,11 @@ class NavBar extends React.Component {
                 <MenuIcon />
               </IconButton>
 
-              <Typography variant="title" className={classes.title}>
-                Room8s
-              </Typography>
-              <Logout className={classes.title} />
+              <h1>
+               <NavLink className='title' to={''}>Room8s</NavLink>
+              </h1>
+
+              <Logout className={classes.logout} />
             </Toolbar>
           </AppBar>
           {before}
