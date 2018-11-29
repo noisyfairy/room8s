@@ -170,7 +170,7 @@ class UserInfoForm extends React.Component {
             </Grid>
 
             <Grid container spacing={16}>
-              <Grid item xs={2.4}>
+              <Grid item xs={2}>
                 <TextField
                   id="sex input"
                   select
