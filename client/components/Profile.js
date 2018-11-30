@@ -5,41 +5,42 @@ import {Link} from 'react-router-dom'
 import axios from 'axios'
 import {me} from '../store/user'
 import {TwoWayFav} from '../components'
+import {withStyles} from '@material-ui/core/styles'
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import Paper from '@material-ui/core/Paper'
 
 /**
  * COMPONENT
  */
 // helper functions
 
-const priorityNumToString = num => {
-  switch (num) {
-    case '1':
-      return 'Never'
-    case '2':
-      return 'Rarely'
-    case '3':
-      return 'Sometimes'
-    case '4':
-      return 'Often'
-    case '5':
-      return 'Very Often'
-    default:
-      return 'Sometimes'
+const styles = theme => ({
+  root: {
+    width: '100%',
+    marginTop: theme.spacing.unit * 3,
+    overflowX: 'auto'
+  },
+  table: {
+    minWidth: 700
   }
-}
+})
 
 const priorityLevelToString = num => {
   switch (num) {
     case '1':
-      return 'Very Low'
+      return 'Do not care'
     case '2':
-      return 'Low'
+      return 'Do not mind'
     case '3':
-      return 'Average'
+      return 'Important'
     case '4':
-      return 'High'
+      return 'Pretty important'
     case '5':
-      return 'Very High'
+      return 'Extremely important'
     default:
       return 'Average'
   }
@@ -47,10 +48,10 @@ const priorityLevelToString = num => {
 
 const booleanToString = bool => {
   if (bool === 'true') {
-    return 'Ok'
+    return 'Yes'
   }
   if (bool === 'false') {
-    return 'Not Ok'
+    return 'Prefer not'
   }
 }
 
@@ -77,51 +78,38 @@ class Profile extends Component {
   render() {
     const {firstName, lastName, sex, age, email, imgUrl} = this.props.user
     const {user} = this.props
-    console.log('user in profile: ', user)
-
+    const {classes} = this.props
     const singleUser = this.state.singleUser || {}
-    console.log('singleUser: ', singleUser)
-
     const question = singleUser.question || {}
-    console.log('question in profile: ', question)
-
-    console.log('is it hit profile')
 
     return (
       <div>
-        <h3> Welcome to your profile {firstName ? firstName : email} </h3>
-        <br />
+        <h1>Profile</h1>
+        <h4>
+          Personal Information
+          <span className="edit">
+            <Link to="/userinfo"> Edit </Link>
+          </span>
+        </h4>
+        <hr />
         <div>
-          <h4>
-            {' '}
-            Personal Information{' '}
-            <span className="edit">
-              {' '}
-              <Link to="/userinfo"> Edit </Link>{' '}
-            </span>{' '}
-          </h4>
-          <hr />
-          <div>
-            <div className="clearfix">
-              <img
-                className="img2"
-                src={imgUrl}
-                alt="Pineapple"
-                width="170"
-                height="170"
-              />
-              <p>
-                {' '}
-                Name: {firstName} {lastName}
-                <br />
-                Sex: {sex}
-                <br />
-                Age: {age} <br />
-              </p>
-            </div>
+          <div className="clearfix">
+            <img
+              className="img2"
+              src={imgUrl}
+              alt="Pineapple"
+              width="170"
+              height="170"
+            />
+            <p>
+              Name: {firstName} {lastName}
+              <br />
+              Sex: {sex}
+              <br />
+              Age: {age} <br /> Email: {email}
+            </p>
           </div>
         </div>
-        <br /> <br /> <br /> <br />
         <div>
           <h4> Mutual Favorites </h4>
           <hr />
@@ -129,97 +117,116 @@ class Profile extends Component {
         </div>
         <div>
           <h4>
-            {' '}
-            Preferences{' '}
+            Preferences
             <span className="edit">
-              {' '}
-              <Link to="/preferences"> Edit </Link>{' '}
-            </span>{' '}
+              <Link to="/preferences"> Edit </Link>
+            </span>
           </h4>
-          <hr />
-          <table>
-            <thead>
-              <tr>
-                <th>Question</th>
-                <th>Answer</th>
-                <th>Priority</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td> Budget Range</td>
-                <td>
-                  {' '}
-                  {question.budgetMin} - {question.budgetMax}{' '}
-                </td>
-                <td> {priorityLevelToString(`${question.budgetPrior}`)} </td>
-              </tr>
-              <tr>
-                <td> Location </td>
-                <td>{user.location} </td>
-                <td> {priorityLevelToString(`${question.locationPrior}`)} </td>
-              </tr>
-              <tr>
-                <td> Move in Time </td>
-                <td>{user.moveInTime} </td>
-                <td> {priorityLevelToString(`${question.moveInPrior}`)} </td>
-              </tr>
-              <tr>
-                <td> Duration </td>
-                <td>{user.duration} </td>
-                <td> {priorityLevelToString(`${question.duraPrior}`)} </td>
-              </tr>
-              <tr>
-                <td>Age Range</td>
-                <td> {question.ageMin} - {question.ageMax}{' '} </td>
-                <td> {priorityLevelToString(`${question.agePrior}`)} </td>
-              </tr>
-              <tr>
-                <td>Smoke</td>
-                <td> {booleanToString(`${question.smoke}`)} </td>
-                <td> {priorityLevelToString(`${question.smokePrior}`)} </td>
-              </tr>
-              <tr>
-                <td>Pet</td>
-                <td>{booleanToString(`${question.pet}`)} </td>
-                <td> {priorityLevelToString(`${question.petPrior}`)} </td>
-              </tr>
-              <tr>
-                <td>Sex</td>
-                <td>{question.sex} </td>
-                <td> {priorityLevelToString(`${question.sexPrior}`)} </td>
-              </tr>
-              <tr>
-                <td>Clean</td>
-                <td> {priorityNumToString(`${question.clean}`)} </td>
-                <td> {priorityLevelToString(`${question.cleanPrior}`)} </td>
-              </tr>
-              <tr>
-                <td>Guest</td>
-                <td> {priorityNumToString(`${question.guest}`)} </td>
-                <td> {priorityLevelToString(`${question.guestPrior}`)} </td>
-              </tr>
-              <tr>
-                <td>Introvert</td>
-                <td>{question.introvert} </td>
-                <td> {priorityLevelToString(`${question.introPrior}`)} </td>
-              </tr>
-              <tr>
-                <td>Tod</td>
-                <td>{question.tod} </td>
-                <td> {priorityLevelToString(`${question.todPrior}`)} </td>
-              </tr>
-            </tbody>
-          </table>
+          <Paper className={classes.root}>
+            <Table className={classes.table}>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Question</TableCell>
+                  <TableCell>Your answer</TableCell>
+                  <TableCell>Importance of each category</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow>
+                  <TableCell>Budget Range</TableCell>
+                  <TableCell>
+                    {question.budgetMin} - {question.budgetMax}
+                  </TableCell>
+                  <TableCell>
+                    {priorityLevelToString(`${question.budgetPrior}`)}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Preferred Location</TableCell>
+                  <TableCell>{user.location}</TableCell>
+                  <TableCell>
+                    {priorityLevelToString(`${question.locationPrior}`)}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>When do you want to move in?</TableCell>
+                  <TableCell>{user.moveInTime}</TableCell>
+                  <TableCell>
+                    {priorityLevelToString(`${question.duraPrior}`)}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Preferred roommate age range</TableCell>
+                  <TableCell>
+                    {question.ageMin} - {question.ageMax}
+                  </TableCell>
+                  <TableCell>
+                    {priorityLevelToString(`${question.agePrior}`)}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Living with a smoker?</TableCell>
+                  <TableCell>{booleanToString(`${question.smoke}`)}</TableCell>
+                  <TableCell>
+                    {priorityLevelToString(`${question.smokePrior}`)}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Can your roommate bring a pet?</TableCell>
+                  <TableCell>{booleanToString(`${question.pet}`)}</TableCell>
+                  <TableCell>
+                    {priorityLevelToString(`${question.petPrior}`)}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>
+                    Do you have a strong preference for your roommate's sex
+                  </TableCell>
+                  <TableCell>
+                    {question.sex ? 'Same sex' : 'No preference'}
+                  </TableCell>
+                  <TableCell>
+                    {priorityLevelToString(`${question.sexPrior}`)}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Your roommate's cleaniness Level?</TableCell>
+                  <TableCell>
+                    {question.clean
+                      ? 'Need my roommate to be clean'
+                      : 'No preference'}
+                  </TableCell>
+                  <TableCell>
+                    {priorityLevelToString(`${question.cleanPrior}`)}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>You prefer your roommate to be...</TableCell>
+                  <TableCell>
+                    {question.introvert === 'introvert'
+                      ? 'Introverted'
+                      : 'Extroverted'}
+                  </TableCell>
+                  <TableCell>
+                    {priorityLevelToString(`${question.introPrior}`)}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>You prefer your roommate to be...</TableCell>
+                  <TableCell>{question.tod} person</TableCell>
+                  <TableCell>
+                    {priorityLevelToString(`${question.todPrior}`)}
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </Paper>
         </div>
       </div>
     )
   }
 }
 
-/**
- * CONTAINER
- */
 const mapState = state => ({
   user: state.user
 })
@@ -228,11 +235,4 @@ const mapDispatch = dispatch => ({
   getUser: () => dispatch(me())
 })
 
-export default connect(mapState, mapDispatch)(Profile)
-
-/**
- * PROP TYPES
- */
-// UserHome.propTypes = {
-//   email: PropTypes.string
-// }
+export default connect(mapState, mapDispatch)(withStyles(styles)(Profile))
