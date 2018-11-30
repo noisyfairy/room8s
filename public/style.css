@@ -201,8 +201,6 @@ tr:nth-child {
 
 .mapWithKeys {
   display: flex;
-  /* flex: auto; */
-  /* right: 200px; */
   padding: 50px;
 }
 .leftNavBar {
