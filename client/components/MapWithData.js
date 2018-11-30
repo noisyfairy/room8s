@@ -2,6 +2,26 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import MapWrapper from './MapWrapper'
 import * as d3 from 'd3'
+import {
+  withStyles,
+  FormGroup,
+  Radio,
+  FormControl,
+  FormLabel,
+  RadioGroup
+} from '@material-ui/core'
+
+const styles = theme => ({
+  root: {
+    display: 'flex'
+  },
+  formControl: {
+    margin: theme.spacing.unit * 3
+  },
+  group: {
+    margin: `${theme.spacing.unit}px 0`
+  }
+})
 
 class MapWithData extends Component {
   constructor() {
@@ -36,8 +56,6 @@ class MapWithData extends Component {
         d3.rgb(126, 1, 1),
         d3.rgb(89, 1, 1)
       ])
-    // .style('opacity', 0.8)
-    // .opacity = .4
 
     const subwayColor = d3
       .scaleThreshold()
@@ -52,7 +70,7 @@ class MapWithData extends Component {
       ])
     const housingColor = d3
       .scaleThreshold()
-      .domain([1, 5, 10, 15, 20, 30])
+      .domain([1, 5, 10, 15, 20])
       .range([
         'white',
         d3.rgb(194, 194, 194),
@@ -72,7 +90,7 @@ class MapWithData extends Component {
         d3.rgb(0, 122, 51),
         d3.rgb(0, 80, 15)
       ])
-
+    const {classes} = this.props
     return (
       <div>
         {this.state.dataSet.length > 1 ? (
@@ -81,6 +99,10 @@ class MapWithData extends Component {
           <h3>Pick a map to display below</h3>
         )}
         <form>
+          {/* <FormControl component="fieldset" className={classes.formControl}>
+            <FormLabel component="legend">This is my question!</FormLabel>
+            <Radio aria-label="aria label" name="location" value="location" />
+          </FormControl> */}
           <div className="mapAndQuestions">
             <select
               type="select"
@@ -96,32 +118,109 @@ class MapWithData extends Component {
           </div>
           <div>
             {this.state.dataSet === 'Crime' && (
-              <MapWrapper
-                data={this.props.arrestData}
-                shouldRender={this.props.shouldRender}
-                color={ArrestColor}
-              />
+              <div>
+                <h4>
+                  These map shows crime data density for each neighborhood from
+                  November 2018.
+                </h4>
+
+                <MapWrapper
+                  data={this.props.arrestData}
+                  shouldRender={this.props.shouldRender}
+                  color={ArrestColor}
+                />
+                <div>
+                  <h3>1-4:</h3>
+                  <img src="/keysForMap/crimeMap/red1.png" />
+                  <h3>5-10:</h3>
+                  <img src="/keysForMap/crimeMap/red2.png" />
+                  <h3>11-15:</h3>
+                  <img src="/keysForMap/crimeMap/red3.png" />
+                  <h3>16-20:</h3>
+                  <img src="/keysForMap/crimeMap/red4.png" />
+                  <h3>20-25:</h3>
+                  <img src="/keysForMap/crimeMap/red5.png" />
+                  <h3>25+:</h3>
+                  <img src="/keysForMap/crimeMap/red6.png" />
+                </div>
+              </div>
             )}
             {this.state.dataSet === 'Subway Stations' && (
-              <MapWrapper
-                data={this.props.subwayData}
-                shouldRender={this.props.shouldRender}
-                color={subwayColor}
-              />
+              <div>
+                <h4>
+                  {' '}
+                  This map shows the subway station density for each
+                  neighborhood from September 2018.
+                </h4>
+                <MapWrapper
+                  data={this.props.subwayData}
+                  shouldRender={this.props.shouldRender}
+                  color={subwayColor}
+                />
+                <div>
+                  <h3>1-4:</h3>
+                  <img src="/keysForMap/subwayMap/yellow1.png" />
+                  <h3>5-8:</h3>
+                  <img src="/keysForMap/subwayMap/yellow2.png" />
+                  <h3>8-12:</h3>
+                  <img src="/keysForMap/subwayMap/yellow3.png" />
+                  <h3>12-16:</h3>
+                  <img src="/keysForMap/subwayMap/yellow4.png" />
+                  <h3>17-20:</h3>
+                  <img src="/keysForMap/subwayMap/yellow4.png" />
+                  <h3>20+:</h3>
+                  <img src="/keysForMap/subwayMap/yellow5.png" />
+                </div>
+              </div>
             )}
             {this.state.dataSet === 'Housing Violations' && (
-              <MapWrapper
-                data={this.props.violationData}
-                shouldRender={this.props.shouldRender}
-                color={housingColor}
-              />
+              <div>
+                <h4>
+                  This is a map of housing violations density for each
+                  neighborhood from November 2018.
+                </h4>
+                <MapWrapper
+                  data={this.props.violationData}
+                  shouldRender={this.props.shouldRender}
+                  color={housingColor}
+                />
+                <div>
+                  <h3>1-4:</h3>
+                  <img src="/keysForMap/violationMap/gray1.png" />
+                  <h3>5-10:</h3>
+                  <img src="/keysForMap/violationMap/gray2.png" />
+                  <h3>11-15:</h3>
+                  <img src="/keysForMap/violationMap/gray3.png" />
+                  <h3>16-20:</h3>
+                  <img src="/keysForMap/violationMap/gray4.png" />
+                  <h3>20+:</h3>
+                  <img src="/keysForMap/violationMap/gray5.png" />
+                </div>
+              </div>
             )}
             {this.state.dataSet === 'Trees' && (
-              <MapWrapper
-                data={this.props.treeData}
-                shouldRender={this.props.shouldRender}
-                color={treeColor}
-              />
+              <div>
+                <h4>
+                  This is a map of tree density for each neighborhood from 2015.
+                </h4>
+                <MapWrapper
+                  data={this.props.treeData}
+                  shouldRender={this.props.shouldRender}
+                  color={treeColor}
+                />
+                <div>
+                  <h3>1-4:</h3>
+                  <img src="/keysForMap/treeMap/green1.png" />
+                  <h3>5-10:</h3>
+                  <img src="/keysForMap/treeMap/green2.png" />
+                  <h3>11-15:</h3>
+                  <img src="/keysForMap/treeMap/green3.png" />
+                  <h3>16-20:</h3>
+                  <img src="/keysForMap/treeMap/green4.png" />
+                  <h3>20+:</h3>
+                  <img src="/keysForMap/treeMap/green5.png" />
+                </div>
+              </div>
             )}
           </div>
         </form>
@@ -139,4 +238,4 @@ const mapStateToProps = state => ({
   treeData: state.addedMap.treeMapData
 })
 
-export default connect(mapStateToProps, null)(MapWithData)
+export default connect(mapStateToProps, null)(withStyles(styles)(MapWithData))
