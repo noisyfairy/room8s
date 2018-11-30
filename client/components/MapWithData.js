@@ -32,12 +32,7 @@ class MapWithData extends Component {
     }
   }
 
-  componentDidMount() {
-    console.log('compnonent mounting')
-  }
-
   handleChange = evt => {
-    console.log('receiving event:', evt)
     this.setState({
       dataSet: evt.target.value
     })
@@ -94,61 +89,42 @@ class MapWithData extends Component {
     const {classes} = this.props
     return (
       <div>
-        {this.state.dataSet.length > 1 ? (
-          <h3>Currently Showing {this.state.dataSet} Map</h3>
-        ) : (
-          <h3>Pick a map to display below</h3>
-        )}
-        {/* <form> */}
+        {<h3>Pick a map to display below</h3>}
         <div className="mapAndQuestions">
           <form>
             <FormControl component="fieldset" className={classes.formControl}>
-              <FormLabel component="legend">
+              <FormLabel component="legend" color="primary">
                 Select what you want to look at
               </FormLabel>
               <RadioGroup
                 aria-label="aria label"
                 name="location"
-                value="location"
+                value={this.state.dataSet}
                 onChange={this.handleChange}
               >
                 <FormControlLabel
                   label="Crime"
-                  control={<Radio />}
+                  control={<Radio color="primary" />}
                   value="Crime"
                 />
                 <FormControlLabel
                   label="Subway Stations"
-                  control={<Radio />}
+                  control={<Radio color="primary" />}
                   value="Subway Stations"
                 />
                 <FormControlLabel
                   label="Housing Violations"
-                  control={<Radio />}
+                  control={<Radio color="primary" />}
                   value="Housing Violations"
                 />
                 <FormControlLabel
                   label="Trees"
-                  control={<Radio />}
+                  control={<Radio color="primary" />}
                   value="Trees"
                 />
               </RadioGroup>
             </FormControl>
           </form>
-
-          {/* <div className="mapAndQuestions">
-            <select
-              type="select"
-              value={this.state}
-              onChange={this.handleChange}
-            >
-              <option value="">SELECT</option>
-              <option value="Crime"> Crime </option>
-              <option value="Subway Stations"> Subway Stations</option>
-              <option value="Housing Violations">Housing Violations</option>
-              <option value="Trees">Trees</option>
-            </select>
-          </div> */}
           <div>
             {this.state.dataSet === 'Crime' && (
               <div>
@@ -261,7 +237,6 @@ class MapWithData extends Component {
               </div>
             )}
           </div>
-          {/* </form> */}
         </div>
       </div>
     )
