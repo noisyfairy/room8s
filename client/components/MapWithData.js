@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import MapWrapper from './MapWrapper'
 import * as d3 from 'd3'
@@ -89,12 +90,15 @@ class MapWithData extends Component {
     const {classes} = this.props
     return (
       <div>
-        {<h3>Pick a map to display below</h3>}
+        <h2>Play with the map to learn more about NYC</h2>
+        <h3>
+          If you get bored click here to go to <Link to="/map">Quiz</Link>
+        </h3>
         <div className="mapAndQuestions">
           <form>
             <FormControl component="fieldset" className={classes.formControl}>
               <FormLabel component="legend" color="primary">
-                Select what you want to look at
+                Pick a map to display:
               </FormLabel>
               <RadioGroup
                 aria-label="aria label"
