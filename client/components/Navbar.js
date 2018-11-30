@@ -41,11 +41,11 @@ const styles = theme => ({
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
-    }),
+    })
     // backgroundColor: '#ffffff'
   },
   logout: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -88,7 +88,7 @@ const styles = theme => ({
     overflow: 'auto',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
-    backgroundColor: '#EFEFEF',
+    backgroundColor: '#EFEFEF'
   },
   'content-left': {
     marginLeft: -drawerWidth
@@ -189,7 +189,7 @@ class NavBar extends React.Component {
               [classes.appBarShift]: open,
               [classes[`appBarShift-${anchor}`]]: open
             })}
-            color='#ffffff'
+            color="#ffffff"
           >
             <Toolbar disableGutters={!open}>
               <IconButton
@@ -202,7 +202,9 @@ class NavBar extends React.Component {
               </IconButton>
 
               <h1>
-               <NavLink className='title' to={''}>Room8s</NavLink>
+                <NavLink className="title" to="">
+                  Room8s
+                </NavLink>
               </h1>
 
               <Logout className={classes.logout} />
