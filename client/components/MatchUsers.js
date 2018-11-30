@@ -85,13 +85,13 @@ class MatchUsers extends Component {
                     </ListItemAvatar>
                     <ListItemText
                       primary={
-                        <h4>
+                        <h7>
                           {`${user.firstName} ${user.lastName}`}
                           <br />
                           {`Preferences - ${user.location}, ${
                             user.moveInTime
                           }, ${user.duration} Months`}
-                        </h4>
+                        </h7>
                       }
                     />
                     <ListItemSecondaryAction>
@@ -138,7 +138,7 @@ class MatchUsers extends Component {
                     </ListItemAvatar>
                     <ListItemText
                       primary={
-                        <h4>
+                        <h7>
                           {`${user.firstName} ${user.lastName}`}
                           <br />
                           {`Preferences - ${user.location}, ${
@@ -149,7 +149,7 @@ class MatchUsers extends Component {
                             `Compatibility score - ${
                               Object.values(this.props.matchScores[idx])[0]
                             }`}
-                        </h4>
+                        </h7>
                       }
                     />
                     <ListItemSecondaryAction>
