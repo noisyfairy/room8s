@@ -10,7 +10,7 @@ async function seed() {
 
   const users = await Promise.all([
     User.create({
-      email: 'cody@email.com',
+      email: 'Tom.Hanks@gmail.com',
       password: '123',
       firstName: 'Tom',
       lastName: 'Hanks',
@@ -27,7 +27,7 @@ async function seed() {
     }),
 
     User.create({
-      email: 'cody1@email.com',
+      email: 'Washing.Den@gmail.com',
       password: '123',
       firstName: 'Denzel ',
       lastName: 'Washington',
@@ -44,7 +44,7 @@ async function seed() {
     }),
 
     User.create({
-      email: 'cody2@email.com',
+      email: 'Emma.Stone@gmail.com',
       password: '123',
       firstName: 'Emma',
       lastName: 'Stone',
@@ -60,7 +60,7 @@ async function seed() {
         'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Emma_Stone_2014.jpg/220px-Emma_Stone_2014.jpg'
     }),
     User.create({
-      email: 'cody3@email.com',
+      email: 'The.Will.Smith@gmail.com',
       password: '123',
       firstName: 'Will',
       lastName: 'Smith',
@@ -76,7 +76,7 @@ async function seed() {
         'https://m.media-amazon.com/images/M/MV5BNTczMzk1MjU1MV5BMl5BanBnXkFtZTcwNDk2MzAyMg@@._V1_UY317_CR2,0,214,317_AL_.jpg'
     }),
     User.create({
-      email: 'cody4@email.com',
+      email: 'Jenn.Law@gmail.com',
       password: '123',
       firstName: 'Jennifer ',
       lastName: 'Lawrence',
@@ -92,7 +92,7 @@ async function seed() {
         'https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_auto:good%2Cw_300/MTQzMjgyNDgwNjIxODIzNTU5/jennifer-lawrence_gettyimages-626382596jpg.jpg'
     }),
     User.create({
-      email: 'cody5@email.com',
+      email: 'Black.Widow@gmail.com',
       password: '123',
       firstName: 'Scarlett',
       lastName: 'Johansson',
@@ -108,7 +108,7 @@ async function seed() {
         'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Goldene_Kamera_2012_-_Scarlett_Johansson_3_%28cropped%29.JPG/170px-Goldene_Kamera_2012_-_Scarlett_Johansson_3_%28cropped%29.JPG'
     }),
     User.create({
-      email: 'cody6@email.com',
+      email: 'Natalie.Portman@gmail.com',
       password: '123',
       firstName: 'Natalie',
       lastName: 'Portman',
@@ -124,7 +124,7 @@ async function seed() {
         'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Natalie_Portman_Cannes_2015_5_%28cropped%29.jpg/220px-Natalie_Portman_Cannes_2015_5_%28cropped%29.jpg'
     }),
     User.create({
-      email: 'cody7@email.com',
+      email: 'TCruise@gmail.com',
       password: '123',
       firstName: 'Tom',
       lastName: 'Cruise',
@@ -140,7 +140,7 @@ async function seed() {
         'https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Tom_Cruise_by_Gage_Skidmore.jpg/220px-Tom_Cruise_by_Gage_Skidmore.jpg'
     }),
     User.create({
-      email: 'cody8@email.com',
+      email: 'The.Marian@gmail.com',
       password: '123',
       firstName: 'Matt',
       lastName: 'Damon',
@@ -156,7 +156,7 @@ async function seed() {
         'https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Matt_Damon_TIFF_2015.jpg/220px-Matt_Damon_TIFF_2015.jpg'
     }),
     User.create({
-      email: 'cody9@email.com',
+      email: 'Dominick.Cobb@gmail.com',
       password: '123',
       firstName: 'Leonardo',
       lastName: 'DiCaprio',

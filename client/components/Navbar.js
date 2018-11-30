@@ -26,7 +26,8 @@ const styles = theme => ({
     height: '100vh',
     backgroundColor: 'white',
     backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover'
+    backgroundSize: 'cover',
+    justifyContent: 'center'
   },
   appFrame: {
     height: '100vh',
@@ -41,11 +42,11 @@ const styles = theme => ({
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
-    }),
+    })
     // backgroundColor: '#ffffff'
   },
   logout: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -85,10 +86,11 @@ const styles = theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     }),
+    justifyContent: 'center',
     overflow: 'auto',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
-    backgroundColor: '#EFEFEF',
+    backgroundColor: '#EFEFEF'
   },
   'content-left': {
     marginLeft: -drawerWidth
@@ -136,18 +138,9 @@ class NavBar extends React.Component {
     })
   }
 
-  changeBackground = () => {
-    history.listen((location, action) => {
-      // this.setState({
-      //   bg: "url('/nyc.png')"
-      // })
-    })
-  }
-
   render() {
     const {classes, theme, isLoggedIn} = this.props
     const {anchor, open} = this.state
-    this.changeBackground()
     const drawer = (
       <Drawer
         style={{height: '100%'}}
@@ -189,7 +182,7 @@ class NavBar extends React.Component {
               [classes.appBarShift]: open,
               [classes[`appBarShift-${anchor}`]]: open
             })}
-            color='#ffffff'
+            color="#ffffff"
           >
             <Toolbar disableGutters={!open}>
               <IconButton
@@ -202,8 +195,12 @@ class NavBar extends React.Component {
               </IconButton>
 
               <h1>
-               <NavLink className='title' to={''}>Room8s</NavLink>
+                <NavLink className="title" to={''}>
+                  Room8s
+                </NavLink>
               </h1>
+
+              <img className="barImg" src="/nycSkyline.jpg" />
 
               <Logout className={classes.logout} />
             </Toolbar>
