@@ -198,6 +198,12 @@ tr:nth-child {
   text-align: center;
 }
 
+.mapWithKeys {
+  display: flex;
+  /* flex: auto; */
+  /* right: 200px; */
+  padding: 50px;
+}
 .leftNavBar {
   background-color: black;
 }

@@ -196,7 +196,6 @@ class NavBar extends React.Component {
 
               <h1>
                 <NavLink className="title" to="">
-
                   Room8s
                 </NavLink>
               </h1>

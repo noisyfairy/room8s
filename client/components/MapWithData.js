@@ -8,7 +8,8 @@ import {
   Radio,
   FormControl,
   FormLabel,
-  RadioGroup
+  RadioGroup,
+  FormControlLabel
 } from '@material-ui/core'
 
 const styles = theme => ({
@@ -27,7 +28,7 @@ class MapWithData extends Component {
   constructor() {
     super()
     this.state = {
-      dataSet: ''
+      dataSet: 'Trees'
     }
   }
 
@@ -59,7 +60,7 @@ class MapWithData extends Component {
 
     const subwayColor = d3
       .scaleThreshold()
-      .domain([1, 4, 8, 12, 16, 20])
+      .domain([1, 5, 10, 15, 20])
       .range([
         'white',
         d3.rgb(254, 255, 204),
@@ -98,12 +99,44 @@ class MapWithData extends Component {
         ) : (
           <h3>Pick a map to display below</h3>
         )}
-        <form>
-          {/* <FormControl component="fieldset" className={classes.formControl}>
-            <FormLabel component="legend">This is my question!</FormLabel>
-            <Radio aria-label="aria label" name="location" value="location" />
-          </FormControl> */}
-          <div className="mapAndQuestions">
+        {/* <form> */}
+        <div className="mapAndQuestions">
+          <form>
+            <FormControl component="fieldset" className={classes.formControl}>
+              <FormLabel component="legend">
+                Select what you want to look at
+              </FormLabel>
+              <RadioGroup
+                aria-label="aria label"
+                name="location"
+                value="location"
+                onChange={this.handleChange}
+              >
+                <FormControlLabel
+                  label="Crime"
+                  control={<Radio />}
+                  value="Crime"
+                />
+                <FormControlLabel
+                  label="Subway Stations"
+                  control={<Radio />}
+                  value="Subway Stations"
+                />
+                <FormControlLabel
+                  label="Housing Violations"
+                  control={<Radio />}
+                  value="Housing Violations"
+                />
+                <FormControlLabel
+                  label="Trees"
+                  control={<Radio />}
+                  value="Trees"
+                />
+              </RadioGroup>
+            </FormControl>
+          </form>
+
+          {/* <div className="mapAndQuestions">
             <select
               type="select"
               value={this.state}
@@ -115,33 +148,34 @@ class MapWithData extends Component {
               <option value="Housing Violations">Housing Violations</option>
               <option value="Trees">Trees</option>
             </select>
-          </div>
+          </div> */}
           <div>
             {this.state.dataSet === 'Crime' && (
               <div>
                 <h4>
-                  These map shows crime data density for each neighborhood from
-                  November 2018.
+                  This map shows the number of arrests in each neighborhood from
+                  2018.
                 </h4>
-
-                <MapWrapper
-                  data={this.props.arrestData}
-                  shouldRender={this.props.shouldRender}
-                  color={ArrestColor}
-                />
-                <div>
-                  <h3>1-4:</h3>
-                  <img src="/keysForMap/crimeMap/red1.png" />
-                  <h3>5-10:</h3>
-                  <img src="/keysForMap/crimeMap/red2.png" />
-                  <h3>11-15:</h3>
-                  <img src="/keysForMap/crimeMap/red3.png" />
-                  <h3>16-20:</h3>
-                  <img src="/keysForMap/crimeMap/red4.png" />
-                  <h3>20-25:</h3>
-                  <img src="/keysForMap/crimeMap/red5.png" />
-                  <h3>25+:</h3>
-                  <img src="/keysForMap/crimeMap/red6.png" />
+                <div className="mapWithKeys">
+                  <MapWrapper
+                    data={this.props.arrestData}
+                    shouldRender={this.props.shouldRender}
+                    color={ArrestColor}
+                  />
+                  <div>
+                    <h3>1-4:</h3>
+                    <img src="/keysForMap/crimeMap/red1.png" />
+                    <h3>5-10:</h3>
+                    <img src="/keysForMap/crimeMap/red2.png" />
+                    <h3>11-15:</h3>
+                    <img src="/keysForMap/crimeMap/red3.png" />
+                    <h3>16-20:</h3>
+                    <img src="/keysForMap/crimeMap/red4.png" />
+                    <h3>20-25:</h3>
+                    <img src="/keysForMap/crimeMap/red5.png" />
+                    <h3>25+:</h3>
+                    <img src="/keysForMap/crimeMap/red6.png" />
+                  </div>
                 </div>
               </div>
             )}
@@ -152,24 +186,24 @@ class MapWithData extends Component {
                   This map shows the subway station density for each
                   neighborhood from September 2018.
                 </h4>
-                <MapWrapper
-                  data={this.props.subwayData}
-                  shouldRender={this.props.shouldRender}
-                  color={subwayColor}
-                />
-                <div>
-                  <h3>1-4:</h3>
-                  <img src="/keysForMap/subwayMap/yellow1.png" />
-                  <h3>5-8:</h3>
-                  <img src="/keysForMap/subwayMap/yellow2.png" />
-                  <h3>8-12:</h3>
-                  <img src="/keysForMap/subwayMap/yellow3.png" />
-                  <h3>12-16:</h3>
-                  <img src="/keysForMap/subwayMap/yellow4.png" />
-                  <h3>17-20:</h3>
-                  <img src="/keysForMap/subwayMap/yellow4.png" />
-                  <h3>20+:</h3>
-                  <img src="/keysForMap/subwayMap/yellow5.png" />
+                <div className="mapWithKeys">
+                  <MapWrapper
+                    data={this.props.subwayData}
+                    shouldRender={this.props.shouldRender}
+                    color={subwayColor}
+                  />
+                  <div>
+                    <h3>1-4:</h3>
+                    <img src="/keysForMap/subwayMap/yellow1.png" />
+                    <h3>5-10:</h3>
+                    <img src="/keysForMap/subwayMap/yellow2.png" />
+                    <h3>10-15:</h3>
+                    <img src="/keysForMap/subwayMap/yellow3.png" />
+                    <h3>15-20:</h3>
+                    <img src="/keysForMap/subwayMap/yellow4.png" />
+                    <h3>20+:</h3>
+                    <img src="/keysForMap/subwayMap/yellow5.png" />
+                  </div>
                 </div>
               </div>
             )}
@@ -179,22 +213,24 @@ class MapWithData extends Component {
                   This is a map of housing violations density for each
                   neighborhood from November 2018.
                 </h4>
-                <MapWrapper
-                  data={this.props.violationData}
-                  shouldRender={this.props.shouldRender}
-                  color={housingColor}
-                />
-                <div>
-                  <h3>1-4:</h3>
-                  <img src="/keysForMap/violationMap/gray1.png" />
-                  <h3>5-10:</h3>
-                  <img src="/keysForMap/violationMap/gray2.png" />
-                  <h3>11-15:</h3>
-                  <img src="/keysForMap/violationMap/gray3.png" />
-                  <h3>16-20:</h3>
-                  <img src="/keysForMap/violationMap/gray4.png" />
-                  <h3>20+:</h3>
-                  <img src="/keysForMap/violationMap/gray5.png" />
+                <div className="mapWithKeys">
+                  <MapWrapper
+                    data={this.props.violationData}
+                    shouldRender={this.props.shouldRender}
+                    color={housingColor}
+                  />
+                  <div>
+                    <h3>1-4:</h3>
+                    <img src="/keysForMap/violationMap/gray1.png" />
+                    <h3>5-10:</h3>
+                    <img src="/keysForMap/violationMap/gray2.png" />
+                    <h3>11-15:</h3>
+                    <img src="/keysForMap/violationMap/gray3.png" />
+                    <h3>16-20:</h3>
+                    <img src="/keysForMap/violationMap/gray4.png" />
+                    <h3>20+:</h3>
+                    <img src="/keysForMap/violationMap/gray5.png" />
+                  </div>
                 </div>
               </div>
             )}
@@ -203,27 +239,30 @@ class MapWithData extends Component {
                 <h4>
                   This is a map of tree density for each neighborhood from 2015.
                 </h4>
-                <MapWrapper
-                  data={this.props.treeData}
-                  shouldRender={this.props.shouldRender}
-                  color={treeColor}
-                />
-                <div>
-                  <h3>1-4:</h3>
-                  <img src="/keysForMap/treeMap/green1.png" />
-                  <h3>5-10:</h3>
-                  <img src="/keysForMap/treeMap/green2.png" />
-                  <h3>11-15:</h3>
-                  <img src="/keysForMap/treeMap/green3.png" />
-                  <h3>16-20:</h3>
-                  <img src="/keysForMap/treeMap/green4.png" />
-                  <h3>20+:</h3>
-                  <img src="/keysForMap/treeMap/green5.png" />
+                <div className="mapWithKeys">
+                  <MapWrapper
+                    data={this.props.treeData}
+                    shouldRender={this.props.shouldRender}
+                    color={treeColor}
+                  />
+                  <div>
+                    <h3>1-4:</h3>
+                    <img src="/keysForMap/treeMap/green1.png" />
+                    <h3>5-10:</h3>
+                    <img src="/keysForMap/treeMap/green2.png" />
+                    <h3>11-15:</h3>
+                    <img src="/keysForMap/treeMap/green3.png" />
+                    <h3>16-20:</h3>
+                    <img src="/keysForMap/treeMap/green4.png" />
+                    <h3>20+:</h3>
+                    <img src="/keysForMap/treeMap/green5.png" />
+                  </div>
                 </div>
               </div>
             )}
           </div>
-        </form>
+          {/* </form> */}
+        </div>
       </div>
     )
   }
