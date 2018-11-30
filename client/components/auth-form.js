@@ -1,14 +1,14 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { auth, clearError } from '../store'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
+import {auth, clearError} from '../store'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import { withStyles } from '@material-ui/core/styles'
+import {withStyles} from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
-import { Typography, FormGroup } from '@material-ui/core'
+import {Typography, FormGroup} from '@material-ui/core'
 
 const styles = theme => ({
   button: {
@@ -42,7 +42,7 @@ const styles = theme => ({
   authLabel: {
     color: '#3f51b5',
     fontSize: '1.25rem',
-    margin: '8px',
+    margin: '8px'
   },
   authGroup: {
     alignItems: 'baseline',
@@ -63,19 +63,19 @@ const styles = theme => ({
     '&focus': {
       color: theme.palette.secondary.main
     }
-  },
+  }
 })
 /**
  * COMPONENT
  */
 class AuthForm extends Component {
   render() {
-    let { name, displayName, handleSubmit, error, classes } = this.props
+    let {name, displayName, handleSubmit, error, classes} = this.props
 
     return (
-      <div className='loginPage'>
+      <div className="loginPage">
         <div>
-          <Typography variant="display1" className='centerContent'>
+          <Typography variant="display1" className="centerContent">
             {name === 'login' ? 'Log in' : 'Create an account'}
           </Typography>
           <Typography variant="subheading">
@@ -89,14 +89,14 @@ class AuthForm extends Component {
                 Create an account
               </Link>
             ) : (
-                <Link
-                  to="/login"
-                  className={classes.link}
-                  onClick={() => this.props.removingError()}
-                >
-                  Login
+              <Link
+                to="/login"
+                className={classes.link}
+                onClick={() => this.props.removingError()}
+              >
+                Login
               </Link>
-              )}
+            )}
           </Typography>
         </div>
         <form
@@ -139,8 +139,11 @@ class AuthForm extends Component {
             </Button>
           </FormGroup>
         </form>
-        <div style={{justifyContent:'center'}}>
-          <a href="/auth/google" style={{justifyContent:'center'}}> {displayName} with Google </a>
+        <div style={{justifyContent: 'center'}}>
+          <a href="/auth/google" style={{justifyContent: 'center'}}>
+            {' '}
+            {displayName} with Google{' '}
+          </a>
         </div>
         <Typography variant="caption" color="primary">
           {error && error.response && <div> {error.response.data} </div>}

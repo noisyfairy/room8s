@@ -75,7 +75,7 @@ class MapQuestionnaire extends React.Component {
               {questionList[this.state.question].answers.map(answer => (
                 <FormControlLabel
                   label={answer.displayedAnswer}
-                  control={<Radio color='primary'/>}
+                  control={<Radio color="primary" />}
                   value={answer.neighborhoods}
                   key={questionList[this.state.question].answers.indexOf(
                     answer

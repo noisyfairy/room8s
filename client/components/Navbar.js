@@ -6,7 +6,7 @@ import Routes from '../routes'
 import history from '../history'
 import MenuBar from './MenuBar'
 
-import { withStyles } from '@material-ui/core/styles'
+import {withStyles} from '@material-ui/core/styles'
 import Drawer from '@material-ui/core/Drawer'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -16,7 +16,7 @@ import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
-import { NavLink } from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 
 const drawerWidth = 240
 
@@ -86,7 +86,7 @@ const styles = theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     }),
-    justifyContent:'center',
+    justifyContent: 'center',
     overflow: 'auto',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
@@ -125,11 +125,11 @@ class NavBar extends React.Component {
   }
 
   handleDrawerOpen = () => {
-    this.setState({ open: true })
+    this.setState({open: true})
   }
 
   handleDrawerClose = () => {
-    this.setState({ open: false })
+    this.setState({open: false})
   }
 
   handleChangeAnchor = event => {
@@ -139,11 +139,11 @@ class NavBar extends React.Component {
   }
 
   render() {
-    const { classes, theme, isLoggedIn } = this.props
-    const { anchor, open } = this.state
+    const {classes, theme, isLoggedIn} = this.props
+    const {anchor, open} = this.state
     const drawer = (
       <Drawer
-        style={{ height: '100%' }}
+        style={{height: '100%'}}
         variant="persistent"
         anchor={anchor}
         open={open}
@@ -156,8 +156,8 @@ class NavBar extends React.Component {
             {theme.direction === 'rtl' ? (
               <ChevronRightIcon />
             ) : (
-                <ChevronLeftIcon />
-              )}
+              <ChevronLeftIcon />
+            )}
           </IconButton>
         </div>
         <Divider />
@@ -200,7 +200,7 @@ class NavBar extends React.Component {
                 </NavLink>
               </h1>
 
-              <img className='barImg' src='/nycSkyline.jpg'/>
+              <img className="barImg" src="/nycSkyline.jpg" />
 
               <Logout className={classes.logout} />
             </Toolbar>
@@ -215,12 +215,12 @@ class NavBar extends React.Component {
                 [classes[`contentShift-${anchor}`]]: open
               }
             )}
-          // style={{
-          //   backgroundImage: `
-          // linear-gradient(to bottom, rgba(89, 155, 163, 0.65) 0%, rgba(89, 155, 163, 0.65) 30%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0) 100%), ${
-          //   this.state.bg
-          // }`
-          // }}
+            // style={{
+            //   backgroundImage: `
+            // linear-gradient(to bottom, rgba(89, 155, 163, 0.65) 0%, rgba(89, 155, 163, 0.65) 30%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0) 100%), ${
+            //   this.state.bg
+            // }`
+            // }}
           >
             <div className={classes.drawerHeader} />
             <Routes style={styles.drawerPaper} />
@@ -237,4 +237,4 @@ NavBar.propTypes = {
   theme: PropTypes.object.isRequired
 }
 
-export default withStyles(styles, { withTheme: true })(NavBar)
+export default withStyles(styles, {withTheme: true})(NavBar)

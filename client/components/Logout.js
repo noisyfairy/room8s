@@ -24,7 +24,7 @@ const Logout = props => {
       color={classes.button.color}
       className={classes.button}
       onClick={handleClick}
-      color='primary'
+      color="primary"
     >
       Logout
     </Button>
