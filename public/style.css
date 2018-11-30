@@ -181,6 +181,21 @@ tr:nth-child {
 .title {
   font-family: 'Lobster', cursive;
   color: black;
+  z-index: 1;
+  position: absolute;
+  left: 90px;
+  top: 5px;
+}
+
+.barImg {
+  position: absolute;
+  bottom: 0px;
+  left: 65px;
+  z-index: -1;
+}
+
+.loginPage {
+  text-align: center;
 }
 
 .leftNavBar {

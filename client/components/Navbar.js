@@ -26,7 +26,8 @@ const styles = theme => ({
     height: '100vh',
     backgroundColor: 'white',
     backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover'
+    backgroundSize: 'cover',
+    justifyContent: 'center'
   },
   appFrame: {
     height: '100vh',
@@ -85,6 +86,7 @@ const styles = theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     }),
+    justifyContent: 'center',
     overflow: 'auto',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
@@ -136,18 +138,9 @@ class NavBar extends React.Component {
     })
   }
 
-  changeBackground = () => {
-    history.listen((location, action) => {
-      // this.setState({
-      //   bg: "url('/nyc.png')"
-      // })
-    })
-  }
-
   render() {
     const {classes, theme, isLoggedIn} = this.props
     const {anchor, open} = this.state
-    this.changeBackground()
     const drawer = (
       <Drawer
         style={{height: '100%'}}
@@ -203,9 +196,12 @@ class NavBar extends React.Component {
 
               <h1>
                 <NavLink className="title" to="">
+
                   Room8s
                 </NavLink>
               </h1>
+
+              <img className="barImg" src="/nycSkyline.jpg" />
 
               <Logout className={classes.logout} />
             </Toolbar>

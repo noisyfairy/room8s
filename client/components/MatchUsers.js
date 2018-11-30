@@ -72,7 +72,6 @@ class MatchUsers extends Component {
         {this.props.favUsers.length > 0 && (
           <div>
             {this.props.favUsers.map(user => {
-
               return (
                 <List dense="dense">
                   <ListItem>
@@ -86,13 +85,13 @@ class MatchUsers extends Component {
                     </ListItemAvatar>
                     <ListItemText
                       primary={
-                        <h6>
+                        <h4>
                           {`${user.firstName} ${user.lastName}`}
                           <br />
                           {`Preferences - ${user.location}, ${
                             user.moveInTime
                           }, ${user.duration} Months`}
-                        </h6>
+                        </h4>
                       }
                     />
                     <ListItemSecondaryAction>
@@ -127,7 +126,7 @@ class MatchUsers extends Component {
             {this.props.matchUsers.map(user => {
               idx++
               return (
-                <List dense="dense" >
+                <List dense="dense">
                   <ListItem>
                     <ListItemAvatar>
                       <Avatar style={{width: '75px', height: '75px'}}>
@@ -139,7 +138,7 @@ class MatchUsers extends Component {
                     </ListItemAvatar>
                     <ListItemText
                       primary={
-                        <h6>
+                        <h4>
                           {`${user.firstName} ${user.lastName}`}
                           <br />
                           {`Preferences - ${user.location}, ${
@@ -150,7 +149,7 @@ class MatchUsers extends Component {
                             `Compatibility score - ${
                               Object.values(this.props.matchScores[idx])[0]
                             }`}
-                        </h6>
+                        </h4>
                       }
                     />
                     <ListItemSecondaryAction>
