@@ -25,7 +25,8 @@ const styles = theme => ({
   container: {
     display: 'flex',
     flexWrap: 'no-wrap',
-    alignItems: 'baseline'
+    alignItems: 'baseline',
+    justifyContent: 'center'
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -39,15 +40,16 @@ const styles = theme => ({
     width: 200
   },
   authLabel: {
-    color: '#424242',
+    color: '#3f51b5',
     fontSize: '1.25rem',
     margin: '8px'
   },
   authGroup: {
-    alignItems: 'baseline'
+    alignItems: 'baseline',
+    justifyContent: 'center'
   },
   link: {
-    color: theme.palette.secondary.main,
+    color: '#3f51b5',
     textDecoration: 'none',
     '&:hover': {
       textDecoration: 'underline'
@@ -71,9 +73,9 @@ class AuthForm extends Component {
     let {name, displayName, handleSubmit, error, classes} = this.props
 
     return (
-      <div>
+      <div className="loginPage">
         <div>
-          <Typography variant="display1">
+          <Typography variant="display1" className="centerContent">
             {name === 'login' ? 'Log in' : 'Create an account'}
           </Typography>
           <Typography variant="subheading">
@@ -131,14 +133,19 @@ class AuthForm extends Component {
               type="submit"
               name=""
               variant="outlined"
-              color="secondary"
+              color="primary"
             >
               {displayName}
             </Button>
           </FormGroup>
         </form>
-        <a href="/auth/google">{displayName} with Google</a>
-        <Typography variant="caption" color="secondary">
+        <div style={{justifyContent: 'center'}}>
+          <a href="/auth/google" style={{justifyContent: 'center'}}>
+            {' '}
+            {displayName} with Google{' '}
+          </a>
+        </div>
+        <Typography variant="caption" color="primary">
           {error && error.response && <div> {error.response.data} </div>}
         </Typography>
       </div>

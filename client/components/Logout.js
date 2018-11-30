@@ -12,7 +12,7 @@ const styles = theme => ({
     position: 'absolute',
     right: '20px',
     margin: theme.spacing.unit,
-    color: theme.palette.primary.red
+    color: 'primary'
   }
 })
 
@@ -24,6 +24,7 @@ const Logout = props => {
       color={classes.button.color}
       className={classes.button}
       onClick={handleClick}
+      color="primary"
     >
       Logout
     </Button>
