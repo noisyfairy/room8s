@@ -57,6 +57,7 @@ path {
 .mapAndQuestions {
   display: flex;
   padding: 50px auto;
+  justify-content: center;
 }
 
 .questionBox {
