@@ -28,6 +28,7 @@ export default class NYCNeighborhoods extends Component {
       .append('path')
       .attr('d', path)
       .style('stroke', 'black')
+      .style('stroke-width', 1.5)
       .style('fill', function(d) {
         return d.properties ? color(d.properties.score) : 'black'
       })
@@ -35,6 +36,7 @@ export default class NYCNeighborhoods extends Component {
         d3
           .select(this)
           .style('stroke-width', 1.5)
+
           .style('stroke-dasharray', 0)
         d3
           .select('#neighborhoodPopover')
@@ -46,7 +48,7 @@ export default class NYCNeighborhoods extends Component {
           .text(d.properties.neighborhood)
       })
       .on('mouseleave', function(d) {
-        d3.select(this).style('stroke-width', 0.5)
+        d3.select(this).style('stroke-width', 1.5)
         d3.select('#neighborhoodPopover').style('display', 'none')
       })
 
